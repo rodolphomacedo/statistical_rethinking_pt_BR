@@ -1,3 +1,4 @@
 data/rethinking-master/
 *.pdf
 ./build/
+./__pycache__/
