@@ -16,6 +16,7 @@ class Models:
         return fit
 
 
+
 if __name__ == '__main__':
     m = Models()
     result = m.model1()
