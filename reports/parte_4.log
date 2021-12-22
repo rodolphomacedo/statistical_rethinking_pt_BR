@@ -17,14 +17,69 @@ Traceback (most recent call last):
     raise CellExecutionError.from_cell_and_msg(cell, exec_reply_content)
 nbclient.exceptions.CellExecutionError: An error occurred while executing the following cell:
 ------------------
-from sklearn.preprocessing import SplineTransformer
+# ==============================================================================================
+#       Construindo o Modelo de Regressão Parabólica de 3 Grau | Usando a Amostra Completa
+# ==============================================================================================
+
+weight_full = df.weight.values  # X_i
+height_full = df.height.values  # Y_i
+
+weight_full_mean = np.mean(weight_full)
+weight_full_std = np.std(weight_full)
+
+weight_full_std = (weight_full - weight_full_mean)/weight_full_std   # Padronizando as variáveis explicativa
+
+
+
+model_stan_regression_parabolic_3 = """
+data {
+    int N;
+    vector[N] weight;
+    vector[N] weight_2;
+    vector[N] weight_3;
+    vector[N] height;
+}
+
+parameters {
+    real alpha;
+    real beta_1;
+    real beta_2;
+    real beta_3;
+    real<lower=0, upper=50> sigma;  // Priori Uniform (0, 50)
+}
+
+model {
+    alpha ~ normal(178, 20);
+    beta_1 ~ lognormal(0, 1);
+    beta_2 ~ normal(0, 1);
+    beta_3 ~ normal(0, 1);
+    
+    height ~ normal(alpha + beta_1*weight + beta_2*weight_2 + beta_3*weight_3, sigma);
+}
+"""
+
+my_data = {
+    'N': len(weight_full_std),
+    'weight': weight_full_std ,
+    'weight_2': weight_full_std ** 2,
+    'weight_3': weight_full_std ** 3,
+    'height': height_full,
+}
+
+posteriori_p3 = stan.build(model_stan_regression_parabolic_3, data=my_data)
+
+fit_p3 = posteriori_p3.sample(num_chains=4, num_samples=1000)
+
+# rp := referênte ao modelo de Regressão Parabólica
+alpha_rp3 = fit_p3['alpha'].flatten()
+beta_1_rp3 = fit_p3['beta_1'].flatten()
+beta_2_rp3 = fit_p3['beta_2'].flatten()
+beta_3_rp3 = fit_p3['beta_3'].flatten()
+sigma_rp3 = fit_p3['sigma'].flatten()
+
+%%hide
 ------------------
 
-[0;31m---------------------------------------------------------------------------[0m
-[0;31mModuleNotFoundError[0m                       Traceback (most recent call last)
-[0;32m/tmp/ipykernel_7348/3000239018.py[0m in [0;36m<module>[0;34m[0m
-[0;32m----> 1[0;31m [0;32mfrom[0m [0msklearn[0m[0;34m.[0m[0mpreprocessing[0m [0;32mimport[0m [0mSplineTransformer[0m[0;34m[0m[0;34m[0m[0m
-[0m
-[0;31mModuleNotFoundError[0m: No module named 'sklearn'
-ModuleNotFoundError: No module named 'sklearn'
+
+UsageError: Line magic function `%%hide` not found.
 
