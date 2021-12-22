@@ -34,18 +34,25 @@ import nest_asyncio
 # In[2]:
 
 
+import logging
+logging.getLogger("pystan").propagate=False
+
+
+# In[3]:
+
+
 # Desbloqueio do asyncIO do jupyter
 nest_asyncio.apply()
 
 
-# In[3]:
+# In[4]:
 
 
 # Definindo o plano de fundo cinza claro para todos os gráficos feitos no matplotlib
 plt.rcParams['axes.facecolor'] = 'lightgray'
 
 
-# In[4]:
+# In[5]:
 
 
 # Lendo os dados
@@ -60,7 +67,7 @@ weight = df.loc[df.age >= 30, 'weight'].values  # Filtro para pessoas com 30 ano
 height = df.loc[df.age >= 30, 'height'].values  # Filtro para pessoas com 30 anos ou mais
 
 
-# In[5]:
+# In[6]:
 
 
 model_stan = """
@@ -85,7 +92,7 @@ model_stan = """
 """
 
 
-# In[6]:
+# In[7]:
 
 
 # Reescrevendo o modelo anterior - Estimativa da altura explicado com o peso.
@@ -108,7 +115,7 @@ beta = fit['beta'].flatten()
 sigma = fit['sigma'].flatten()
 
 
-# In[7]:
+# In[8]:
 
 
 # Parâmentros
@@ -137,7 +144,7 @@ plt.show()
 # 
 # Abaixo vamos ver as primeiras linhas do conjunto de dados da estimativa:
 
-# In[8]:
+# In[9]:
 
 
 print(pd.DataFrame({'alpha': alpha[:10], 'beta': beta[:10], 'sigma': sigma[:10]}))
@@ -160,7 +167,7 @@ print(pd.DataFrame({'alpha': alpha[:10], 'beta': beta[:10], 'sigma': sigma[:10]}
 # 
 # Para ficar mais claro, vamos simular a essa nossa estratégia e ver a diferenças dos **acúmulo das curvas**.
 
-# In[9]:
+# In[10]:
 
 
 def generate_parcial_stan_models_results(N):
@@ -187,7 +194,7 @@ def generate_parcial_stan_models_results(N):
     return alpha, beta, sigma
 
 
-# In[10]:
+# In[11]:
 
 
 
@@ -214,7 +221,7 @@ alpha, beta, sigma = generate_parcial_stan_models_results(N);
 
 # Uma das vantagens do gráfico gráfico de linhas (`gráfico de espaguetes`) é deixar claro que os limites  formados pelas retas não tem um significado.
 
-# In[11]:
+# In[12]:
 
 
 # =============================
@@ -309,7 +316,7 @@ plt.show()
 # 
 # $$ \mu_i = \alpha + \beta(50 - \bar{x}) $$
 
-# In[12]:
+# In[13]:
 
 
 # ===========================================================
@@ -331,7 +338,7 @@ plt.show()
 
 # #### Calculando a predição para todos os $\mu$
 
-# In[13]:
+# In[14]:
 
 
 def HPDI(posterior_samples, credible_mass):
@@ -354,7 +361,7 @@ def HPDI(posterior_samples, credible_mass):
     return(HDImin, HDImax)
 
 
-# In[14]:
+# In[15]:
 
 
 # =====================================
@@ -406,7 +413,7 @@ posterioris_HPDIs = np.array(posterioris_HPDIs)  # Apenas a transformação em u
 # 
 # Ao olhar para esse gráfico é fácil carimos na tentação de acharmos que os limites que escolhemos significa alguma coisa, ele não tem nenhum significado a não ser os limites de corte pelo HPDI. 
 
-# In[15]:
+# In[16]:
 
 
 # ==================================================
@@ -474,7 +481,7 @@ plt.show()
 
 # Até agora nós fizemos os gráficos apenas usando os parâmetros da média, mas podemos construir o gráfico de envelope para o sigma também. Iremos construir ambos utilizando toda a nossa amostra. 
 
-# In[16]:
+# In[17]:
 
 
 # ============================================================================
@@ -526,7 +533,7 @@ plt.show()
 # 
 # No nosso caso, nós usamos as variáveis *altura* e *peso*, porém apenas para indivíduos que tivessem $30$ anos ou mais. Se fossêmos usar todos os indivíduos a relação de peso e altura não mais seria uma linha reta, mas sim uma curva.
 
-# In[17]:
+# In[18]:
 
 
 plt.figure(figsize=(17, 9))
@@ -628,7 +635,7 @@ plt.show()
 # 
 # - Resultando: Média = 0 e Desvio Padrão = 1
 
-# In[18]:
+# In[19]:
 
 
 # =================================================================
@@ -689,7 +696,7 @@ beta_2_rp = fit['beta_2'].flatten()
 sigma_rp = fit['sigma'].flatten()
 
 
-# In[19]:
+# In[20]:
 
 
 # ===================================================
@@ -721,7 +728,7 @@ plt.show()
 # 
 # Lembre-se, ambos modelos, tanto os polinomiais quanto modelos com splines, são modelos *geocentricos*. 
 
-# In[20]:
+# In[21]:
 
 
 # Parâmentros
@@ -742,7 +749,7 @@ ax3.set_title('Posteriori $Beta_2$')
 plt.show()
 
 
-# In[21]:
+# In[22]:
 
 
 # ==================================================================================
@@ -799,7 +806,7 @@ beta_2_rp = fit['beta_2'].flatten()
 sigma_rp = fit['sigma'].flatten()
 
 
-# In[22]:
+# In[23]:
 
 
 # ===================================================
@@ -823,7 +830,7 @@ plt.grid(ls='--', color='white', linewidth=0.4)
 plt.show()
 
 
-# In[23]:
+# In[24]:
 
 
 # ============================================
@@ -861,7 +868,7 @@ plt.show()
 
 # #### Modelos Cúbicos
 
-# In[24]:
+# In[25]:
 
 
 # ==============================================================================================
@@ -924,8 +931,10 @@ beta_2_rp3 = fit_p3['beta_2'].flatten()
 beta_3_rp3 = fit_p3['beta_3'].flatten()
 sigma_rp3 = fit_p3['sigma'].flatten()
 
+%%hide
 
-# In[25]:
+
+# In[ ]:
 
 
 # ===================================================
@@ -950,7 +959,7 @@ plt.grid(ls='--', color='white', linewidth=0.4)
 plt.show()
 
 
-# In[26]:
+# In[ ]:
 
 
 # ============================================
@@ -986,7 +995,7 @@ plt.xlabel('Peso (weight)')
 plt.show()
 
 
-# In[27]:
+# In[ ]:
 
 
 # ==============================================================================
@@ -1032,7 +1041,7 @@ beta_p1 = fit_p1['beta'].flatten()
 sigma_p1 = fit_p1['sigma'].flatten()
 
 
-# In[28]:
+# In[ ]:
 
 
 posterioris_height_HPDIs_p1_mean = []
@@ -1050,7 +1059,7 @@ mu_HPDI_p1 = np.array(mu_HPDI_p1)
 posteriori_HPDI_p1 = np.array(posteriori_HPDI_p1)
 
 
-# In[29]:
+# In[ ]:
 
 
 # ==================================================
@@ -1184,14 +1193,14 @@ plt.plot()
 # 
 # Fique como exercício construir um modelo linear da `temperatura` explicando a `data do florecimento` (*doy*), existe um relacionamento muito forte e entenderemos o porque disso. 
 
-# In[30]:
+# In[ ]:
 
 
 cherry_df = pd.read_csv('./data/cherry_blossoms.csv', sep=';')
 cherry_df.describe()
 
 
-# In[31]:
+# In[ ]:
 
 
 plt.figure(figsize=(17, 9))
@@ -1213,7 +1222,7 @@ plt.show()
 # 
 # O que iremos fazer aqui é trabalhar com a ideia de obter alguma aproximação da série com alguma qualidade arbitrária. Nós iremos começar com uma aproximação bastante ruim para entender as *wiggly functions* e após isso iremos construir modelos mais complexos e com melhores aproximações usando uma *`B-splines`*.
 
-# In[32]:
+# In[ ]:
 
 
 # ===================================================
@@ -1249,7 +1258,7 @@ plt.show()
 # 
 # O que vamos propor é colocar um *knot* na mediana, um *knot* em cada extremidade e outros dois no centros, conforme mostrado no gráfico abaixo.
 
-# In[33]:
+# In[ ]:
 
 
 # Configurando a variável de tempo.
@@ -1266,7 +1275,7 @@ knots = np.quantile(year, knots_array)
 knots = [int(x) for x in knots]  # Convertendo os valores do Knots para inteiro
 
 
-# In[34]:
+# In[ ]:
 
 
 plt.figure(figsize=(17, 9))
@@ -1295,13 +1304,13 @@ plt.show()
 
 # Para a construção das splines, iremos usar a função disponível na biblioteca *SciKit Learn* e sua documentação pode ser acessada [clicando aqui.](https://scikit-learn.org/stable/modules/generated/sklearn.preprocessing.SplineTransformer.html#examples-using-)
 
-# In[35]:
+# In[ ]:
 
 
 from sklearn.preprocessing import SplineTransformer
 
 
-# In[36]:
+# In[ ]:
 
 
 # ======================================
@@ -1352,7 +1361,7 @@ plt.show()
 # 
 # O que buscamos com o modelo de splines é estimar **quais seriam os pesos mais plausíveis** que melhor descreve nossos dados. Parece muito estranho fazer isso, mais funciona muito bem! Vamos ver um exemplo de como isso acontece. 
 
-# In[37]:
+# In[ ]:
 
 
 plt.figure(figsize=(17, 6))
@@ -1381,7 +1390,7 @@ plt.show()
 # 
 # Essa notação matemática converte a equação acima para uma simples multiplicação de matrizes, conforme vimos no ensino médio, e assim, tanto evitamos reescrever todos os termos manualmente quanto conseguirmos otimizar os custos computacionais envolvidos nos cálculos. (*Geralmente é sempre uma boa ideia utilizar matrizes.*)
 
-# In[38]:
+# In[ ]:
 
 
 # ==================================
@@ -1437,7 +1446,7 @@ Bw_spline_1 = np.matmul(spline_1, w_spline_1)  # Fazendo a multiplicação das m
 # 
 # O resultado dessa operação pode ser visto no gráfico abaixo.
 
-# In[39]:
+# In[ ]:
 
 
 # ====================================================
@@ -1472,7 +1481,7 @@ plt.show()
 
 # <img src="./images/overffiting.jpg" alt="overffiting example" width=500>
 
-# In[40]:
+# In[ ]:
 
 
 # ======================================================
@@ -1500,7 +1509,7 @@ plt.text(1940, 7.5,'$Knot_5$', size=25, color='darkgray')
 plt.show()
 
 
-# In[41]:
+# In[ ]:
 
 
 # ==========================================================
@@ -1520,7 +1529,7 @@ HPDI_posteriori_spline_1 = np.array(HPDI_posteriori_spline_1)
 mean_posteriori_spline_1 = posteriori_spline_1.mean(axis=1)  # Média do HPDI por cada ano
 
 
-# In[42]:
+# In[ ]:
 
 
 # ===============================================
@@ -1552,7 +1561,7 @@ plt.text(1980, 8.0,'$Knot_5$', size=25, color='darkgray')
 plt.show()
 
 
-# In[43]:
+# In[ ]:
 
 
 # ======================================
@@ -1574,7 +1583,7 @@ plt.ylim((0, 1))
 plt.show()
 
 
-# In[44]:
+# In[ ]:
 
 
 # =======================================================
@@ -1625,7 +1634,7 @@ sigma_spline_3 = fit_spline_3['sigma'].flatten()
 Bw_spline_3 = np.matmul(spline_3, w_spline_3)  # Fazendo a multiplicação das matrizes B * w
 
 
-# In[45]:
+# In[ ]:
 
 
 # ====================================================
@@ -1644,7 +1653,7 @@ plt.grid(ls='--', color='white', alpha=0.6)
 plt.show()
 
 
-# In[46]:
+# In[ ]:
 
 
 # ==========================================================
@@ -1668,7 +1677,7 @@ HPDI_posteriori_spline_3 = np.array(HPDI_posteriori_spline_3)
 mean_posteriori_spline_3 = posteriori_spline_3.mean(axis=1)  # Média do HPDI por cada ano
 
 
-# In[47]:
+# In[ ]:
 
 
 # ===============================================
