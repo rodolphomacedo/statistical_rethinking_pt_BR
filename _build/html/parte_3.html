@@ -1040,7 +1040,7 @@
 </div>
 </div>
 </div>
-<div class="cell docutils container">
+<div class="cell tag_remove_output docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">primeiro_codigo_stan</span> <span class="o">=</span> <span class="s2">&quot;&quot;&quot;</span>
 <span class="s2">data {</span>
@@ -1067,105 +1067,6 @@
 <span class="n">posteriori_model</span> <span class="o">=</span> <span class="n">stan</span><span class="o">.</span><span class="n">build</span><span class="p">(</span><span class="n">primeiro_codigo_stan</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">meus_dados</span><span class="p">)</span>
 
 <span class="n">fit</span> <span class="o">=</span> <span class="n">posteriori_model</span><span class="o">.</span><span class="n">sample</span><span class="p">(</span><span class="n">num_chains</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span> <span class="n">num_samples</span><span class="o">=</span><span class="mi">1000</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Green">Building:</span> found in cache, done.
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Cyan">Messages from </span><span class=" -Color -Color-Bold -Color-Bold-Cyan">stanc</span><span class=" -Color -Color-Cyan">:</span>
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Warning: The parameter sigma has no priors.
-Warning: The parameter mu has no priors.
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Cyan">Sampling:</span>   0%
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Cyan">Sampling:</span>  25% (2000/8000)
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Cyan">Sampling:</span>  50% (4000/8000)
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Cyan">Sampling:</span>  75% (6000/8000)
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Cyan">Sampling:</span> 100% (8000/8000)
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Green">Sampling:</span> 100% (8000/8000), done.
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Cyan">Messages received during sampling:</span>
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  Gradient evaluation took 7e-06 seconds
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  1000 transitions using 10 leapfrog steps per transition would take 0.07 seconds.
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  Adjust your expectations accordingly!
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  Gradient evaluation took 6e-06 seconds
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  1000 transitions using 10 leapfrog steps per transition would take 0.06 seconds.
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  Adjust your expectations accordingly!
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  Gradient evaluation took 6e-06 seconds
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  1000 transitions using 10 leapfrog steps per transition would take 0.06 seconds.
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  Adjust your expectations accordingly!
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  Gradient evaluation took 6e-06 seconds
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  1000 transitions using 10 leapfrog steps per transition would take 0.06 seconds.
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  Adjust your expectations accordingly!
 </pre></div>
 </div>
 </div>
@@ -1203,8 +1104,8 @@ Warning: The parameter mu has no priors.
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>==============================
-  mu médio:  49.55
-  sigma médio:  12.36
+  mu médio:  49.94
+  sigma médio:  12.39
 ==============================
 </pre></div>
 </div>
@@ -1214,7 +1115,7 @@ Warning: The parameter mu has no priors.
 <div class="section" id="estimando-a-altura-usando-a-stan">
 <h4>Estimando a altura usando a Stan<a class="headerlink" href="#estimando-a-altura-usando-a-stan" title="Permalink to this headline">¶</a></h4>
 <p>De volta ao exemplo anterior, vamos estimar a altura <span class="math notranslate nohighlight">\(h_i\)</span> usando um modelo escrito em Stan.</p>
-<div class="cell docutils container">
+<div class="cell tag_remove_output docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">modelo_altura</span> <span class="o">=</span> <span class="s2">&quot;&quot;&quot;</span>
 <span class="s2">    data {</span>
@@ -1247,105 +1148,6 @@ Warning: The parameter mu has no priors.
 
 <span class="n">posteriori_model</span> <span class="o">=</span> <span class="n">stan</span><span class="o">.</span><span class="n">build</span><span class="p">(</span><span class="n">modelo_altura</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">dados</span><span class="p">)</span>
 <span class="n">fit_altura</span> <span class="o">=</span> <span class="n">posteriori_model</span><span class="o">.</span><span class="n">sample</span><span class="p">(</span><span class="n">num_chains</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span> <span class="n">num_samples</span><span class="o">=</span><span class="mi">1000</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Green">Building:</span> found in cache, done.
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Cyan">Messages from </span><span class=" -Color -Color-Bold -Color-Bold-Cyan">stanc</span><span class=" -Color -Color-Cyan">:</span>
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Warning: The parameter sigma has no priors.
-Warning: The parameter mu has no priors.
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Cyan">Sampling:</span>   0%
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Cyan">Sampling:</span>  25% (2000/8000)
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Cyan">Sampling:</span>  50% (4000/8000)
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Cyan">Sampling:</span>  75% (6000/8000)
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Cyan">Sampling:</span> 100% (8000/8000)
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Green">Sampling:</span> 100% (8000/8000), done.
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Cyan">Messages received during sampling:</span>
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  Gradient evaluation took 5e-06 seconds
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  1000 transitions using 10 leapfrog steps per transition would take 0.05 seconds.
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  Adjust your expectations accordingly!
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  Gradient evaluation took 5e-06 seconds
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  1000 transitions using 10 leapfrog steps per transition would take 0.05 seconds.
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  Adjust your expectations accordingly!
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  Gradient evaluation took 5e-06 seconds
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  1000 transitions using 10 leapfrog steps per transition would take 0.05 seconds.
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  Adjust your expectations accordingly!
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  Gradient evaluation took 3e-06 seconds
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  1000 transitions using 10 leapfrog steps per transition would take 0.03 seconds.
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  Adjust your expectations accordingly!
 </pre></div>
 </div>
 </div>
@@ -1423,8 +1225,8 @@ Warning: The parameter mu has no priors.
   mu amostrado:  138.26
   sigma amostrado:  27.6
 ==============================
-  mu médio:  138.27
-  sigma médio:  27.69
+  mu médio:  138.28
+  sigma médio:  27.67
 ==============================
 </pre></div>
 </div>
@@ -1659,7 +1461,7 @@ Mas se esse mesmo indivíduo, assim como todos na nossa amotras, nos informarem 
 <div class="section" id="aproximacao-da-posteriori">
 <h3>Aproximação da posteriori<a class="headerlink" href="#aproximacao-da-posteriori" title="Permalink to this headline">¶</a></h3>
 <p>Vamos fazer a aproximação da posteriori usando a Stan e verificar os resultados.</p>
-<div class="cell docutils container">
+<div class="cell tag_remove_output docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># =================================================================</span>
 <span class="c1">#   Aproximando a posteriori da altura usando o peso da pessoa</span>
@@ -1707,118 +1509,6 @@ Mas se esse mesmo indivíduo, assim como todos na nossa amotras, nos informarem 
 <span class="c1"># Rodando o modelo</span>
 <span class="n">posteriori_model_2</span> <span class="o">=</span> <span class="n">stan</span><span class="o">.</span><span class="n">build</span><span class="p">(</span><span class="n">modelo_altura_2</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">meus_dados_2</span><span class="p">)</span>
 <span class="n">fit_altura_2</span> <span class="o">=</span> <span class="n">posteriori_model_2</span><span class="o">.</span><span class="n">sample</span><span class="p">(</span><span class="n">num_chains</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span> <span class="n">num_samples</span><span class="o">=</span><span class="mi">1000</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Green">Building:</span> found in cache, done.
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Cyan">Messages from </span><span class=" -Color -Color-Bold -Color-Bold-Cyan">stanc</span><span class=" -Color -Color-Cyan">:</span>
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Warning: The parameter sigma has no priors.
-Warning: The parameter beta has no priors.
-Warning: The parameter alpha has no priors.
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Cyan">Sampling:</span>   0%
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Cyan">Sampling:</span>  25% (2000/8000)
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Cyan">Sampling:</span>  50% (4000/8000)
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Cyan">Sampling:</span>  75% (6000/8000)
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Cyan">Sampling:</span> 100% (8000/8000)
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Green">Sampling:</span> 100% (8000/8000), done.
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Cyan">Messages received during sampling:</span>
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  Gradient evaluation took 4.8e-05 seconds
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  1000 transitions using 10 leapfrog steps per transition would take 0.48 seconds.
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  Adjust your expectations accordingly!
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  Gradient evaluation took 5.9e-05 seconds
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  1000 transitions using 10 leapfrog steps per transition would take 0.59 seconds.
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  Adjust your expectations accordingly!
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  Gradient evaluation took 4.8e-05 seconds
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  1000 transitions using 10 leapfrog steps per transition would take 0.48 seconds.
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  Adjust your expectations accordingly!
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  Gradient evaluation took 0.000112 seconds
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  1000 transitions using 10 leapfrog steps per transition would take 1.12 seconds.
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  Adjust your expectations accordingly!
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  Informational Message: The current Metropolis proposal is about to be rejected because of the following issue:
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  Exception: normal_lpdf: Location parameter is inf, but must be finite! (in &#39;/tmp/httpstan_ycln97nd/model_r345qpqw.stan&#39;, line 21, column 12 to column 75)
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  If this warning occurs sporadically, such as for highly constrained variable types like covariance matrices, then the sampler is fine,
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  but if this warning occurs often then your model may be either severely ill-conditioned or misspecified.
 </pre></div>
 </div>
 </div>
@@ -1888,9 +1578,9 @@ Warning: The parameter alpha has no priors.
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Resumo das posterioris:
 ============================================================
-Media alpha:  154.6  - Desvio Padrão alpha:  0.274
-Média beta:   0.905  - Desvio Padrão beta:   0.043
-Média sigma:  5.102  - Desvio Padrão sigma:  0.196
+Media alpha:  154.6  - Desvio Padrão alpha:  0.278
+Média beta:   0.904  - Desvio Padrão beta:   0.042
+Média sigma:  5.107  - Desvio Padrão sigma:  0.199
 </pre></div>
 </div>
 <img alt="_images/parte_3_53_1.png" src="_images/parte_3_53_1.png" />
