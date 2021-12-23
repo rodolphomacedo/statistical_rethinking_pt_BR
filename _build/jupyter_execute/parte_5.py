@@ -285,34 +285,7 @@ for i in range(100):
     fig.add_trace(go.Scatter(x=range_divorces, 
                              y=divorce_marriage[i],
                              mode='lines',
-                             colors='blue'))
+                             marker_color='blue'))
 
 fig.show()
 
-
-# In[ ]:
-
-
-len(df.Divorce.values)
-
-
-# In[ ]:
-
-
-# fig = make_subplots(rows=1, cols=2)
-fig = go.Figure()
-fig.add_trace(go.Scatter(x=posteriori_divorce_alpha,
-                         y=,
-                         line_color='red'))
-
-
-# 
-
-# In[ ]:
-
-
-# 8:42 Colocar o gráfico de correlação entre as taxas de casamentos e divórcios e também mediana das idades e das taxas de divórcios.
-
-
-# Quais dessas correlações acimas implicam causalidade?
-# 
