@@ -38,7 +38,7 @@ fig.show()
 
 [0;31m---------------------------------------------------------------------------[0m
 [0;31mValueError[0m                                Traceback (most recent call last)
-[0;32m/tmp/ipykernel_5521/2258607416.py[0m in [0;36m<module>[0;34m[0m
+[0;32m/tmp/ipykernel_6244/2258607416.py[0m in [0;36m<module>[0;34m[0m
 [1;32m     10[0m [0mfig[0m [0;34m=[0m [0mgo[0m[0;34m.[0m[0mFigure[0m[0;34m([0m[0;34m)[0m[0;34m[0m[0;34m[0m[0m
 [1;32m     11[0m [0;32mfor[0m [0mi[0m [0;32min[0m [0mrange[0m[0;34m([0m[0;36m100[0m[0;34m)[0m[0;34m:[0m[0;34m[0m[0;34m[0m[0m
 [0;32m---> 12[0;31m     fig.add_trace(go.Scatter(x=range_divorces, 
