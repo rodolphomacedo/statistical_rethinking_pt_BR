@@ -159,6 +159,9 @@ import pandas as pd
 import stan
 import nest_asyncio
 
+import plotly.io as pio
+import plotly.offline as py
+
 import plotly.express as px  # Vamos usar Plotly ao invés do Matplolib
 import plotly.graph_objects as go  # Usado para colocar múltiplos gráficos no plotly
 from plotly.subplots import make_subplots  # Usado para gerar vários gráficos na mesma figura
