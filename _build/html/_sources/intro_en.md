@@ -22,5 +22,5 @@ Bayesian statistics is not related to the ability to choose a technique. Bayesia
 
 
 ```{note}
-Bayesian statistics is a way of seeing, thinking and understanding Nature.
+Bayesian Statistics is a tool that allows us to reason, think and understand some threads of wisdom within the complexity of Nature.
 ```

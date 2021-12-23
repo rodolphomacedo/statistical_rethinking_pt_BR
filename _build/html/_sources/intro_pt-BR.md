@@ -21,6 +21,6 @@ Tal como um pacote de arroz está no corredor de cereais de um supermercado, ess
 A estatística bayesiana não está relacionada com a capacidade de escolha de uma técnica. A estatística bayesiana não está nas prateleiras do supermercado. Ela é construída, sob medida, para cada problema. Da fábrica para o cliente.
 
 
-```{Note}
-Estatística bayesiana é uma forma de enxergar, pensar e entender a Natureza.
+```{note}
+Estatística bayesiana é uma ferramenta que nos permite raciocinar, pensar e entender alguns fios de sabedoria dentro da complexidade da Natureza.
 ```
