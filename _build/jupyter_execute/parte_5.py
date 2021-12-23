@@ -44,7 +44,7 @@
 # 
 # É estranho. É cômico. É intrigante. É uma Correlação Espúria!
 
-# ### Correlações Espúrias
+# # Correlações Espúrias
 # 
 # Essas são correlações espúrias, ou seja, correlações sem certeza; que não é verdadeira nem real; é hipotética!
 # 
@@ -52,15 +52,22 @@
 # 
 # Isso é a Natureza!
 # 
-# Por exemplo, se quisermos, por qualquer motivo que seja, arrumar um argumento para enfraquecer a imagem da rede Waffle House, podemos usar essas corelações espúrias com um dos argumento. Assim, iriamos expor na mídia que `...estudos indicam que o aumento do número de restaurantes da rede Waffle House na região aumentou drasticamente o número de divórcios na região.`
+# Por exemplo, se quisermos, por qualquer motivo que seja, arrumar um argumento para enfraquecer a imagem da rede Waffle House, podemos usar essas corelações espúrias com um dos argumento. Assim, iriamos expor na mídia algo como 
+# 
+# ```{admonition} Breaking News:
+# Pesquisadores indicam que o aumento do número de restaurantes da rede Waffle House na região implica o aumento drástico do número de divórcios na região!
+# ```
 # 
 # ----
 # 
-# Soa estranho, eu sei! Mas, lá no fundo, esse tipo de pensamento não soa tão estranho no dia a dia...
+# Isso soa estranho, eu sei! Esse é um exemplo extremo. Mas, lá no fundo, esse tipo de pensamento não soa tão estranho no dia a dia...
 
 # Existem diversas correlações espúrias no mundo. Muita coisa tem correlação com muitas outras coisas.
 # 
-# Entretanto, `essas correlações não implicam causalidade`.
+# 
+# ```{admonition} Entretanto:
+# Essas correlações não implicam causalidade.
+# ```
 
 # Mas para entendermos melhor, vamos ver mais alguns exemplos sobre essas correlações espúrias:
 # 
@@ -77,7 +84,9 @@
 # 
 # Se o consumo de frango diminuisse, a importação provavelmente não sofreria nenhum impacto por essa causa. Se o Nicolas Cage se aposentar das telas, os acidentes por afogamento continuarão constantes. E, caso o consumo de queijo diminuir, também não haverão uma diminuição nos acidentes fatais das pessoas que estão dormindo em suas camas.
 # 
-# `Correlação não implica causalidade!`
+# ```{tip} Dica:
+# Correlação não implica causalidade!
+# ```
 # 
 # O exemplo gráfico do Nicolas Cage.
 # 
@@ -89,7 +98,7 @@
 # 
 # 
 # ----
-# Mais correlações espúrias, tal como essas, podem ser vistas no site do [Tyler Vigen](https://www.tylervigen.com/spurious-correlations).
+# Para ver mais correlações espúrias, tal como essas mostradas acima, podem ser encontradas no site do [Tyler Vigen](https://www.tylervigen.com/spurious-correlations).
 
 # Entendido essa parte, vamos ao objetivo desse capítulo.
 # 
@@ -158,9 +167,6 @@ import numpy as np
 import pandas as pd
 import stan
 import nest_asyncio
-
-import plotly.io as pio
-import plotly.offline as py
 
 import plotly.express as px  # Vamos usar Plotly ao invés do Matplolib
 import plotly.graph_objects as go  # Usado para colocar múltiplos gráficos no plotly

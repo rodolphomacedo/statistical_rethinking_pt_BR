@@ -5,9 +5,15 @@
 
 # <img src="./images/cat_bow_tie.jpg" atl="cat with bow tie" width=1000>
 
+# ----
+
 # No capítulo anterior vimos como construir o nosso primeiro modelo de regressão linear, no qual estimamos a altura de uma pessoa usando a informação de seu peso como auxílio. Temos assim, como resultado do nosso modelo, a distribuição à posteriori dos parâmetros que foram estimados, $\alpha$, $\beta$ e o $\sigma$.
 # 
+# ```{admonition} Modelo Linear
+# 
 # $$ altura_i = \alpha + \beta (peso_i - peso\_medio) $$
+# 
+# ```
 # 
 # Dessas distribuições podemos pegar apenas os valores "precisos" desses parâmentros, ou seja, geralmente nós tendemos pensar em pegar os valores esperados (*valores médios*) da distribuição do $\alpha$ e do $\beta$ e, com isso, traçar uma linha reta com esses valores.
 # 

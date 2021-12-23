@@ -352,9 +352,13 @@
   <div class="tex2jax_ignore mathjax_ignore section" id="funcoes-wiggly">
 <h1>4 - Funções Wiggly<a class="headerlink" href="#funcoes-wiggly" title="Permalink to this headline">¶</a></h1>
 <a class="reference internal image-reference" href="_images/cat_bow_tie.jpg"><img alt="_images/cat_bow_tie.jpg" src="_images/cat_bow_tie.jpg" style="width: 1000px;" /></a>
+<hr class="docutils" />
 <p>No capítulo anterior vimos como construir o nosso primeiro modelo de regressão linear, no qual estimamos a altura de uma pessoa usando a informação de seu peso como auxílio. Temos assim, como resultado do nosso modelo, a distribuição à posteriori dos parâmetros que foram estimados, <span class="math notranslate nohighlight">\(\alpha\)</span>, <span class="math notranslate nohighlight">\(\beta\)</span> e o <span class="math notranslate nohighlight">\(\sigma\)</span>.</p>
+<div class="admonition-modelo-linear admonition">
+<p class="admonition-title">Modelo Linear</p>
 <div class="math notranslate nohighlight">
 \[ altura_i = \alpha + \beta (peso_i - peso\_medio) \]</div>
+</div>
 <p>Dessas distribuições podemos pegar apenas os valores “precisos” desses parâmentros, ou seja, geralmente nós tendemos pensar em pegar os valores esperados (<em>valores médios</em>) da distribuição do <span class="math notranslate nohighlight">\(\alpha\)</span> e do <span class="math notranslate nohighlight">\(\beta\)</span> e, com isso, traçar uma linha reta com esses valores.</p>
 <p>Olhando para os resultado das estimativas, quando o <strong>peso</strong> está em seu valor médio, temos que <span class="math notranslate nohighlight">\(\alpha\)</span> significa o valor médio da altura!</p>
 <p>Percebeu? Percebeu como isso é muito bonito! Agora temos uma interpretação decente para o <span class="math notranslate nohighlight">\(\alpha\)</span>.</p>
@@ -483,7 +487,7 @@
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/parte_4_10_0.png" src="_images/parte_4_10_0.png" />
+<img alt="_images/parte_4_11_0.png" src="_images/parte_4_11_0.png" />
 </div>
 </div>
 <div class="section" id="mostrando-a-nossa-incerteza">
@@ -499,16 +503,16 @@
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>        alpha      beta     sigma
-0  154.065462  0.876694  4.801234
-1  154.244940  0.810707  5.094835
-2  153.976114  0.840516  5.214484
-3  154.801853  0.881325  5.202690
-4  154.129842  0.879938  4.819762
-5  154.512002  0.849980  5.426373
-6  155.200189  0.975594  5.220246
-7  154.308374  0.852237  5.108562
-8  154.791468  0.968592  4.941346
-9  154.712860  0.910782  4.956718
+0  154.511112  0.853652  5.590693
+1  154.649766  0.884941  5.228722
+2  154.695799  0.949308  5.475289
+3  154.097940  0.983168  4.687726
+4  154.751904  0.891166  5.756219
+5  154.873640  0.906788  4.839137
+6  154.016300  0.875339  4.930823
+7  155.281855  0.811142  5.803651
+8  154.876038  0.830643  5.386348
+9  154.390561  0.893439  5.205315
 </pre></div>
 </div>
 </div>
@@ -655,7 +659,7 @@
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/parte_4_18_0.png" src="_images/parte_4_18_0.png" />
+<img alt="_images/parte_4_19_0.png" src="_images/parte_4_19_0.png" />
 </div>
 </div>
 <p>Essa divisão foi construída para conseguirmos percerber, de modo visual, que quando mais amostras tivermos coletado (isto é, um <em>quanto maior número de pontos azuis tivermos</em>), mais informações teremos e, portanto, teremos muito menos incerteza sobre o nosso objeto de estudo.</p>
@@ -691,7 +695,7 @@
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/parte_4_21_0.png" src="_images/parte_4_21_0.png" />
+<img alt="_images/parte_4_22_0.png" src="_images/parte_4_22_0.png" />
 </div>
 </div>
 <div class="section" id="calculando-a-predicao-para-todos-os-mu">
@@ -834,7 +838,7 @@
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/parte_4_26_0.png" src="_images/parte_4_26_0.png" />
+<img alt="_images/parte_4_27_0.png" src="_images/parte_4_27_0.png" />
 </div>
 </div>
 <p>Perceba que nos gráficos de borboletas nós usamos os cortes para os intervalos com <span class="math notranslate nohighlight">\(89%\)</span>. Isso é apenas para mostrar que não, isso mesmo, não existe nada especial nos cortes do HPDI. Mas os cortes mais usuais de <span class="math notranslate nohighlight">\(50%\)</span>, <span class="math notranslate nohighlight">\(80%\)</span> ou <span class="math notranslate nohighlight">\(95%\)</span>, corriqueiramente usados em outras escolas estatísticas, são apenas cortes que queremos visualizar. Nada mais!</p>
@@ -873,7 +877,7 @@
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/parte_4_29_0.png" src="_images/parte_4_29_0.png" />
+<img alt="_images/parte_4_30_0.png" src="_images/parte_4_30_0.png" />
 </div>
 </div>
 <p>Como podemos ver no gráfico acima, temos duas regiões de confiança. A região mais interna, azul escura, nos indica que esse trecho contém <span class="math notranslate nohighlight">\(89\%\)</span> de probabilidade da média estar ali dentro, para cada um dos pesos medidos.
@@ -914,7 +918,7 @@ Já a região mais externa, aquele azul mais clara, nos indica que, com <span cl
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/parte_4_33_0.png" src="_images/parte_4_33_0.png" />
+<img alt="_images/parte_4_34_0.png" src="_images/parte_4_34_0.png" />
 </div>
 </div>
 <p>Vamos ver dois modos de construir os modelos de <code class="docutils literal notranslate"><span class="pre">Regressão</span> <span class="pre">Aditivos</span></code>:</p>
@@ -1068,7 +1072,7 @@ Já a região mais externa, aquele azul mais clara, nos indica que, com <span cl
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/parte_4_41_0.png" src="_images/parte_4_41_0.png" />
+<img alt="_images/parte_4_42_0.png" src="_images/parte_4_42_0.png" />
 </div>
 </div>
 <p>Regressões Polinomiais tem esse tipo de anomalia implícita, dentro dentro da região dos pontos ela se comporta de modo aceitável, porém fora da região dos pontos, a função se torna descontrolada. Isso ocorre porque exitem muitas outras funcões de segundo grau que podem ser ajustadas nesse conjunto de pontos. Isso não ocorre com tanta intensidade nas regressões com splines.</p>
@@ -1097,7 +1101,7 @@ Já a região mais externa, aquele azul mais clara, nos indica que, com <span cl
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/parte_4_43_0.png" src="_images/parte_4_43_0.png" />
+<img alt="_images/parte_4_44_0.png" src="_images/parte_4_44_0.png" />
 </div>
 </div>
 <div class="cell tag_remove_output docutils container">
@@ -1183,7 +1187,7 @@ Já a região mais externa, aquele azul mais clara, nos indica que, com <span cl
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/parte_4_45_0.png" src="_images/parte_4_45_0.png" />
+<img alt="_images/parte_4_46_0.png" src="_images/parte_4_46_0.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -1223,7 +1227,7 @@ Já a região mais externa, aquele azul mais clara, nos indica que, com <span cl
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/parte_4_46_0.png" src="_images/parte_4_46_0.png" />
+<img alt="_images/parte_4_47_0.png" src="_images/parte_4_47_0.png" />
 </div>
 </div>
 </div>

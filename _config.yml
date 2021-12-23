@@ -36,6 +36,15 @@ parse:
     myst_enable_extensions:
         - html_image
         - dollarmath
+        - amsmath
+        - colon_fence
+        - deflist
+        - html_admonition
+        - linkify
+        - replacements
+        - smartquotes
+        - substitution
+        - tasklist
 
 sphinx:
     config:
