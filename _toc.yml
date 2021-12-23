@@ -2,8 +2,10 @@
 # Learn more at https://jupyterbook.org/customize/toc.html
 
 format: jb-book
-root: intro
+root: capa
 chapters:
+- file: intro_pt-BR
+- file: intro_en
 - file: parte_1
 - file: parte_2
 - file: parte_3
