@@ -4,7 +4,7 @@
 <img src='./images/Laplace.jpg' alt='Laplace' width=1000 class="center">
 
 
-```{Aviso}
+```{Warning}
 Estas são minhas pequenas notas sobre o maravilhoso curso de Statistical Rethinking | Richard McElreath. Escrito em português do Brasil (pt-BR) usando o notebook jupyter e disponível no github github pages.
 ```
 
@@ -21,6 +21,6 @@ Tal como um pacote de arroz está no corredor de cereais de um supermercado, ess
 A estatística bayesiana não está relacionada com a capacidade de escolha de uma técnica. A estatística bayesiana não está nas prateleiras do supermercado. Ela é construída, sob medida, para cada problema. Da fábrica para o cliente.
 
 
-```{Nota}
+```{Note}
 Estatística bayesiana é uma forma de enxergar, pensar e entender a Natureza.
 ```
