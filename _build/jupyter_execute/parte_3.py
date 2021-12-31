@@ -4,7 +4,7 @@
 # # 3- Modelos Geocêntricos
 # 
 
-# ### Distribuição Normal
+# ## Distribuição Normal
 
 # <img src="./images/Gauss.jpg" alt="gauss" />
 # 
@@ -19,7 +19,7 @@
 # São simples *golems* estatísticos.
 # 
 # 
-# - Modelo de média e variância de normalmente (Gaussiano) distribuído.
+# - Modelo de média e variância normalmente (Gaussiano) distribuído.
 # 
 # 
 # - Média como uma combinação aditiva dos pesos das varáveis que a compõem.
@@ -42,7 +42,7 @@
 # Docs Pystan: https://pystan.readthedocs.io/en/latest/index.html
 
 # -------------
-# Instalar nest_asyncio: pip install nest_asyncio
+# Instalar nest_asyncio: pip install nest_asyncio - Estára no requirements.txt
 # Versões 
 # python==3.8.0
 # numpy==1.21.1
@@ -67,7 +67,7 @@ from scipy import stats
 # In[3]:
 
 
-# Contruindo um passeio conforme a distribuição Bernoulli(0.5) em +1 ou -1
+# Construindo um passeio conforme a distribuição Bernoulli(0.5) em +1 ou -1
 n_linhas = 500  # Quantas linhas iremos simular
 n_passos = 30   # Quantidade de passos que iremos simular
 
@@ -76,14 +76,13 @@ corte_2 = 14  # Indica o segundo corte no passeio
 corte_3 = 26  # Indica o terceiro corte no passeio
 
 
-aleatorizar_grafico = True  # Para ver a simulação um pouco mais aleatorizada vizualmente, alternar para False para ver a diferênça.
+aleatorizar_grafico = True  # True para ver a simulação um pouco mais aleatorizada visualmente. False para ver sem efeito.
 
 passeios = []  # Armazenar todos os passeios gerados num array
 
 # Parâmetros da simulação
 plt.figure(figsize=(17, 9))
-plt.rcParams['axes.facecolor'] = 'lightgray'  # Alterando a cor de fundo, para ficar mais elegante.
-n_passos = n_passos - 1  # Descontando o primeiro passo, pois inicia-se sempre com zero! 
+plt.rcParams['axes.facecolor'] = 'lightgray'  # Alterando a cor de fundo, para ficar mais elegante. 
 
 for linha in range(n_linhas):  # Quantas linhas iremos plotar
     
@@ -102,7 +101,7 @@ for linha in range(n_linhas):  # Quantas linhas iremos plotar
         passeio.append(novo_ponto)
     
     passeios.append(passeio)  # Armazendo todas as linhas geradas
-    plt.plot(passeios[linha], color='blue', linewidth=0.2)  # Plotando a linha gerada
+    plt.plot(passeios[linha], color='darkblue', alpha=0.5, linewidth=0.1)  # Plotando a linha gerada
     
 # Retas horizontais dos cortes
 plt.vlines(corte_1, -15, 15, color='darkred', ls='--',  linewidth=3)
@@ -149,32 +148,47 @@ ax3.set_ylim(0, 0.25)
 plt.show()
 
 
-# Todas as flutuações geradas se equilibriam entre si, gerando assim uma curva simétrica. Porém cada uma delas individualmente não necessariamente se equilibram entre si. Isso é a normal! 
+# Todas as flutuações geradas se equilibriam entre si, gerando assim uma curva simétrica. Porém cada uma delas individualmente, e não necessariamente, se equilibram entre si. Isso é a $Normal$! 
 
-# #### Porque a Normal?
+# ### Porque a Normal?
 # 
-# O interessante e frustante ao mesmo tempo é que mesmo nós sabendo como cada uma das curvas são geradas, não temos acesso a como cada uma delas individualmente faz o seu percurso, pois muito pouca temos muito pouca informação sobre como é o processo gerador.
 # 
-# Assim, quando vimos um comportamento de um evento que é norrmalmente distribuído, não sabe o que tem la dentro, não temos um acesso intuitivo da informação contida no comportamento indivídual de cada passeio. 
+# O interessante, e frustrante ao mesmo tempo, é que mesmos nós sabendo como cada uma das curvas são geradas, não temos acesso a `como cada uma delas individualmente faz o seu percurso`, pois temos muito pouca informação sobre como é o processo gerador dessas curvas.
 # 
-# Mas sabendo que o processo como um todo tem o comportamento normalmente distribuído, podemos usar essa informação para falsificar ou não hipóteses de um estudo particular.
+# 
+# Assim, quando vimos um comportamento de um evento que é normalmente distribuído, por exemplo, não sabemos o que tem la dentro! Não temos um acesso intuitivo da informação contida no comportamento individual de cada passeio.
+# 
+# 
+# Mas sabendo que o processo como um todo tem o comportamento, aproximadamente, normalmente distribuído, podemos usar essa informação para falsificar ou não hipóteses de um estudo particular.
+# 
 # 
 # $$ x \sim normal(\mu, \sigma) $$
 # 
-# Isso é muito legal pois podemos descrever o processo como um todo apenas por dois números, pois toda a informação do funcionamento da maquinária subjcente do processo eliminado e tudo que foi presevado foi a média ($\mu$) e a variância($\sigma$), por isso por isso que precisamos apenas desses dois números para descrever uma distribuição normal. 
-# 
-# Essa é toda a informação que conseguimos extrair dessa máquinaria subjacente, a Natureza.
-# 
-# O mais terrível é que não podemos saber o processo a partir de um simples histograma, temos que realmente fazer ciência para isso, temos cavar mais fundo, medir coisas mais difíceis para só assim descobrir mais algumas coisas nas profundezas do mecanismo de geração do processo.
-# 
-# Isso é verdade não apenas para a normal, mas para muitas as distribuições! Todas as distribuições de máxima entropia tem essa mesma propriedade, que muitos processos diferente possuem a mesma distribuição de frequências.
-# 
-# ##### Persperctiva Ontológica
-# 
-# - Processo que adiciona flutuações amortecidas como resultado
 # 
 # 
-# - As flutuações amortecidas se aproximam de uma gaussiana
+# E isso é muito legal, pois podemos descrever o processo como um todo, com apenas por dois números, pois toda a informação do funcionamento da maquinaria subjacente do processo foi eliminada. E tudo que foi preservado foi a média ($\mu$) e o desvio padrão ($\sigma$), por isso que precisamos apenas desses dois números para descrever uma distribuição normal.
+# 
+# 
+# ```{note}
+# Essa é toda a informação que conseguimos extrair da maquinaria subjacente, a Natureza!
+# ```
+# 
+# 
+# O mais terrível é que não podemos saber o funcionamento do processo a partir de um simples histograma! Temos que realmente fazer ciência para isso, temos de *cavar mais fundo*, *medir coisas mais difíceis* para `só assim` descobrir mais algumas coisas nas profundezas do mecanismo de geração do processo.
+# 
+# 
+# Isso é verdade não apenas para a $Normal$, mas para muitas outras distribuições! Todas as distribuições de máxima entropia tem essa mesma propriedade, que muitos processos diferentes possuem a mesma distribuição de frequências.
+
+# 
+# ### Perspectiva Ontológica
+# 
+# Ontologia é o ramo da filosofia que `estuda a natureza do ser`, da existência e da própria realidade. Vamos observar a distribuição $Normal$ sobre uma perspectiva ontológia:
+# 
+# 
+# - Processo que adiciona flutuações amortecidas como resultado.
+# 
+# 
+# - As flutuações amortecidas se aproximam de uma gaussiana.
 # 
 # 
 # - Mas nenhuma informação sobrou do processo gerador, apenas a média e a variância.
@@ -183,31 +197,40 @@ plt.show()
 # - Não podemos inferir o processo a partir dessa distribuição.
 # 
 # 
-# Se quisermos construir um modelo visando responder de modo mais conservador possível, no qual tudo que estiver disposto a dizer sobre algum conjunto de medidas, como medida de alturas, é que eles tem variância finita e podemos usar a distribuição gaussiana. Mesmo se eles forem distorcidos ou alguma outra coisas a distribuição gaussiana cobrirá uma faixa mais ampla de valores do que qualquer outra com a mesma média e a mesma variância, essa é a distribuição mais conservadora que podemos assumir. Qualquer outra distribuição será mais restrita e por isso terá mais informação incorporada, por isso a opção mais conservadora que podemos porpor é a gaussiana, no qual tudo que precisamos para ela é a média a variância. (*Isso será demostrado mais para frente no curso*.)
+# Se quisermos construir um modelo visando responder de modo mais conservador possível, no qual tudo que estiver disposto a dizer sobre algum conjunto de medidas, como medida de alturas, é que eles têm variância finita e podemos usar a distribuição gaussiana. 
 # 
-# ##### Persperctiva Epistemologica
+# Mesmo se eles forem distorcidos ou alguma outras coisas, a distribuição gaussiana cobrirá uma faixa mais ampla de valores do que qualquer outra com a mesma média e a mesma variância! 
+# 
+# Essa é a distribuição mais é conservadora que podemos assumir. Qualquer outra distribuição será mais restrita por isso terá mais informação incorporada, por isso a opção mais conservadora que podemos propor é a `gaussiana`, no qual tudo que precisamos para ela é a média a variância. (*Isso será demostrado mais para frente no curso*.)
+# 
+
+# ### Perspectiva Epistemologica
+# 
+# Epistemologia, também conhecida como a Teoria do Conhecimento, é o ramo da filosofia que estuda como o ser humano ou a própria ciência adquire e justifica seus conhecimentos. Vamos observar a $Normal$ sobre essa perspectiva:
 # 
 # 
-# - Conhecemos apenas a média e a variância
+# - Conhecemos apenas a média e a variância.
 # 
 # 
-# - A menos surpreendente e mais conservadora (*máxima entropia*) distribuição gaussiana
+# - A menos surpreendente e mais conservadora (*máxima entropia*) distribuição gaussiana.
 # 
 # 
-# - A distribuição natural da máxima entropia.
+# - É a distribuição natural da máxima entropia.
 # 
 
 # ### Modelos Lineares
 # 
-# "**Modelo lineares generalizados**": teste *t*, regressão simples, regressão multipla, ANOVA, ANCOVA, MANOVA, MANCOVA, etc, etc, etc. Todos esses modelos são a mesma coisa, são todos modelos lineares.
+# "**Modelo lineares generalizados**": teste *t*, regressão simples, regressão multipla, ANOVA, ANCOVA, MANOVA, MANCOVA, etc, etc, etc. Todos esses modelos `são a mesma coisa, são todos modelos os lineares`.
 # 
-# A seguir iremos construir modelo lineares manualmente do zero para entendermos como é o processo de pensamento de construção de hipóteses e iremos construir um gráfico no qual iremos visualizar, pela primeira vez, nossa incerteza.
+# A seguir, iremos construir modelos lineares manualmente e do zero para entendermos como é o processo de pensamento de construção de hipóteses e, também, iremos construir um gráfico no qual iremos visualizar a nossa incerteza do sistema.
 # 
-# - Iremos aprender estratégias e não procedimentos.
+# ```{warning}
+# Iremos aprender estratégias e não procedimentos!
+# ```
 
 # #### Acordando a linguagem que iremos trabalhar
 # 
-# Relembrando o primeiro modelo que nós fizemos anteriormente, o lançamento do globo, tinhamos:
+# Relembrando o primeiro modelo que nós fizemos anteriormente, o lançamento do globo, nós tinhamos:
 # 
 # $$ w \sim Binomial(N, p) $$
 # 
@@ -223,7 +246,7 @@ plt.show()
 # 
 # 
 # 
-# - $Binomial( N, p)$: É a distribuição dos dados (verossimilhança, ou *likelihood* no inglês)
+# - $Binomial( N, p)$: É a função de distribuição de probabilidade dos dados (verossimilhança, ou *likelihood* no inglês)
 # 
 # 
 # 
@@ -236,28 +259,28 @@ plt.show()
 # 
 # 
 # 
-#  No exemplo do lançamento do globo, o que estavamos interessados em saber era proporcão de água na superfície ($p$) da Terra. O processo que usamos para coletar os dados, a amostragem, automaticamente nos propõe, de modo quase impositivo, a utilização da estrutura Binomial.
+#  No exemplo do lançamento do globo, o que estávamos interessados em saber era a proporção de água na superfície ($p$) da Terra. O processo que usamos para coletar os dados, a amostragem, automaticamente nos propõem, de modo quase impositivo, a utilização da estrutura Binomial.
 #  
-# A estrutura que distribui os dados binomialmente, nada mais é do que a contagem do número de vezes que é possível acontecer tal fato, dado que a proporção $p$ é fixa para todas as vezes $N$ que iremos retirarmos uma amostra. 
+# A estrutura que distribui os dados binominalmente, nada mais é do que a contagem do número de vezes que é possível acontecer tal fato, dado que a proporção $p$ é fixa para todas às vezes $N$ que iremos retirar uma amostra. 
 # 
 # ----
 # 
-# Essa é a linguagem que iremos usar nesse curso, é a notação matemática padrão, no qual consiste na maneira de comunicar a todos os colegas de trabalho o que foi pensado, quais foram as suposições, quais foram as hipóteses (isto é, as sugestões) e qual a estrutura proposta como um possível caminho para se entender o problema. 
+# Essa é a linguagem que iremos usar nesse curso. A notação matemática padrão, na qual consiste em uma maneira de comunicar a todos os nossos colegas de trabalho o que foi pensado, quais foram as suposições, quais foram as hipóteses (isto é, as sugestões) e, também, qual a estrutura foi proposta para um possível caminho para se entender o problema. 
 # 
+# ```{note}
+# A linguagem matemática será a forma de comunicar ao mundo sua forma de pensar!
+# ```
+
+# ### Linguagem da modelagem
 # 
-# *Será a forma de se comunicar ao mundo sua forma de pensar!*
+# Do mesmo modo que escrevemos o modelo acima iremos escrever todos os outros modelos, inclusive, a programação usando a linguagem probabilística `Stan`, o qual tem a sua sintaxe próxima a esse formato.
 # 
-# 
-# ##### Linguagem da modelagem
-# 
-# Do mesmo modo que escrevemos o modelo acima iremos escrever todos os outros modelo, inclusive, a programação em **Stan** será escrita dessa forma.
-# 
-# Para qualquer modelo que iremos elaborar, seja uma regressão linear simples ou modelo mais elaborados, temos que criar uma lista com todas as variáveis que irão participar desse modelo. Algumas coisas eu irei observar nos dados, como a contagem do número de vezes que o globo foi lançado. E também haverá outras coisas que não vamos poder observar, como a inclinação da uma reta de uma modelo linear simples, ou proporção de água no globo, pois elas não são entidades observáveis.
+# Para qualquer modelo que iremos elaborar, seja uma regressão linear simples ou modelos mais elaborados, temos que criar uma lista com todas as variáveis que irão participar desse modelo. Algumas `coisas que iremos observar nos dados`, como a contagem do número de vezes que o globo foi lançado. E também haverá outras `coisas que não vamos poder observar`, como a inclinação de uma reta de uma modelo linear simples, ou proporção de água no globo, pois elas não são entidades observáveis.
 # 
 # Por isso temos que listar todas as variáveis e então defini-las.
 # 
 # 
-# Definindo as variáveis:
+# Listando as variáveis:
 # 
 # $$ y_i $$
 # 
@@ -270,7 +293,7 @@ plt.show()
 # $$ x_i $$
 # 
 # 
-# Um modelo de regressão, assim como qualquer outro modelo, será escrito da mesma forma que o anterior, porém esse modelo terá muito mais simbolos pois temos muito mais variáveis participando da explicação, mas é a mesma coisa, apenas precisamos definir a cada um deles. 
+# Um modelo de regressão, assim como qualquer outro modelo, será escrito da mesma forma que vimos anteriormente, porém esse modelo terá muito mais símbolos pois temos muito mais variáveis participando da explicação, `mas é a mesma coisa`, apenas precisamos definir a cada um desses símbolos. 
 # 
 # O motor dos modelos de regressão linear é a segunda linha da definição abaixo (*a seguir iremos construir esse modelo desde o início*):
 # 
@@ -285,16 +308,15 @@ plt.show()
 # $$ x_i \sim Normal(0, 1) $$
 #  
 #  
-# Essa segunda linha,  $ \mu_i = \beta x_i $, geralmente a parte que é mais confusa para se entender (iremos ver um exemplo a seguir), mas ela significa que média da distribuição normal de cima (do $y_i$) é geralmente definida por uma equação, o que define em termos de alguma outra variável que observamos, $x_i$.
+# Essa segunda linha,  $ \mu_i = \beta x_i $, geralmente a parte que é mais confusa para se entender (iremos ver um exemplo a seguir), mas ela significa que média da distribuição normal de cima (média do $y_i$) é geralmente definida por uma equação, o que define em termos de alguma outra variável que observamos, $x_i$.
 # 
 # O $x_i$ é uma variável que ajuda a explicar o comportamento do $y_i$, ou seja, $x_i$ é uma variável explicativa.
 # 
-# Mas repare que $x_i$ também tem uma distribuição, nós normalmente não nos preocupamos em definir uma distribuição para as variáveis explicativas pois não iremos prevê-las, porém existe uma grande vantagem em fazer essas suposições de distribuições, pois podemos fazer coisas muito legais com esse fato, iremos ver essas coisas mais à frente, tais como `medidas de erros` e também `dados faltantes`.
+# Mas repare que $x_i$ também tem uma distribuição, nós normalmente não nos preocupamos em definir uma distribuição para as variáveis explicativas, pois não iremos prevê-las, `porém existe uma grande vantagem em fazer essas suposições de distribuição`, pois podemos fazer coisas muito legais com esse fato, iremos ver essas coisas mais à frente, tais como `medidas de erros` e também `dados faltantes`.
 # 
-# Assim, como todas as variáveis tem sua própria definição de distribuição, se você não sabe algo sobre algumas delas podemos colocar dentro do modelo e assim iremos ganhar automaticamente um poder inferêncial que estávamos perdendo antes.  
-# 
+# Assim, como todas as variáveis têm sua própria definição de distribuição, se você não sabe algo sobre algumas delas podemos colocar dentro do modelo e assim iremos ganhar automaticamente um poder inferencial do que estávamos perdendo antes.  
 
-# ##### Contruindo um modelo linear
+# ### Construíndo um Modelo Linear
 # 
 # Com um conjunto de dados amostrados de uma população, extraída do livro da *Nancy Howel*, Life history of the DOBE !KUNG, um novo clássico de demografia evolucionária, disponível no pacote R *rethinking* e suas versões variantes. (Nesse material temos uma cópia do link [Rethinking - R-library - GitHub](https://github.com/rmcelreath/rethinking).
 
