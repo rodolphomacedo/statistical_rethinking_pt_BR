@@ -68,8 +68,9 @@ from scipy import stats
 
 
 # Construindo um passeio conforme a distribuição Bernoulli(0.5) em +1 ou -1
-n_linhas = 500  # Quantas linhas iremos simular
-n_passos = 30   # Quantidade de passos que iremos simular
+
+n_linhas = 500  # Quantas linhas iremos simular?
+n_passos = 30   # Quantidade de passos que iremos simular?
 
 corte_1 = 3   # Indica o primeiro corte no passeio
 corte_2 = 14  # Indica o segundo corte no passeio
@@ -116,7 +117,6 @@ plt.ylabel('Valor')
 plt.grid(axis='y', ls='--', color='white')
 
 plt.show()
-
 
 passeios = np.array(passeios).T  # Transpondo os vetores de passeios para ajuste na plotagem.
 
@@ -316,53 +316,64 @@ plt.show()
 # 
 # Assim, como todas as variáveis têm sua própria definição de distribuição, se você não sabe algo sobre algumas delas podemos colocar dentro do modelo e assim iremos ganhar automaticamente um poder inferencial do que estávamos perdendo antes.  
 
-# ### Construíndo um Modelo Linear
+# # Construíndo um Modelo Linear
 # 
-# Com um conjunto de dados amostrados de uma população, extraída do livro da *Nancy Howel*, Life history of the DOBE !KUNG, um novo clássico de demografia evolucionária, disponível no pacote R *rethinking* e suas versões variantes. (Nesse material temos uma cópia do link [Rethinking - R-library - GitHub](https://github.com/rmcelreath/rethinking).
+# Com o conjunto de dados amostrados de uma população, extraída do livro da *Nancy Howel*, `Life history of the DOBE !KUNG`, um novo clássico de demografia evolucionária, disponível no pacote R *rethinking* e suas versões variantes. (Nesse material temos uma cópia do link [Rethinking - R-library - GitHub](https://github.com/rmcelreath/rethinking).
 
 # <img src="./images/dobe_kung.jpg" alt="Dobe !Kung">
+
+# ## Estudo Descritivo da Base de Dados
 
 # In[4]:
 
 
-df = pd.read_csv('data/Howell1.csv', sep=';')  # Banco de dados
-df.head(10)
+df = pd.read_csv('data/Howell1.csv', sep=';')  # Banco de dados do pacote Rethinking - Disponível no Github
+df.describe()  # Resumo do banco de dados
 
 
-# Temos uma amostra de $544$ indivíduos e abaixo temos uma histograma descritivo das quatro variáveis da base: 
+# Nosso conjunto de dados contém um total de $544$ indivíduos, abaixo temos um histograma descritivo das quatro variáveis da base: 
 # 
-# - Altura
 # 
-# - Peso
+# - Altura (*height*)
 # 
-# - Idade
 # 
-# - Gênero ($1$ para homem e $0$ para mulheres)
+# - Peso (*weight*)
+# 
+# 
+# - Idade (*Age*)
+# 
+# 
+# - Gênero (*male*) - Definido $1$ para homens e $0$ para mulheres
 
 # In[5]:
 
 
+# Plotando os histogramas
 plt.rcParams['axes.facecolor'] = 'lightgray'
 fig, [[ax1, ax2], [ax3, ax4]] = plt.subplots(2,2, figsize=(17, 12))
 
+# Histograma de todos os dados da altura (height)
 ax1.hist(df.height, bins=60, density=True, rwidth=0.8)
 ax1.set_title('Altura das Pessoas')
 ax1.set_xlabel('cm')
 ax1.set_ylabel('Probabilidade')
 ax1.grid(color='white', linewidth='0.3', ls='--')
 
+# Histograma de todos os dados do peso (weight)
 ax2.hist(df.weight, bins=70, density=True, rwidth=0.8)
 ax2.set_title('Peso das Pessoas')
 ax2.set_xlabel('Kg')
 ax2.set_ylabel('Probabilidade')
 ax2.grid(color='white', linewidth='0.3', ls='--')
 
+# Histograma de todos os dados da idade (age)
 ax3.hist(df.age, bins=45, density=True, rwidth=0.8)
 ax3.set_title('Idade das Pessoas')
 ax3.set_xlabel('Anos')
 ax3.set_ylabel('Probabilidade')
 ax3.grid(color='white', linewidth='0.3', ls='--')
 
+# Histograma de todos os dados da gênero (male)
 ax4.hist(df.male, bins=2, density=True,rwidth=0.9)
 ax4.set_title('Gênero das Pessoas')
 ax4.set_xlabel('Feminino       -      Masculino')
@@ -372,9 +383,9 @@ ax4.grid(color='white', linewidth='0.3', ls='--')
 plt.show()
 
 
-# ##### Modelos Gaussianos
+# ## Modelos Gaussianos
 # 
-# Um primeiro modelo
+# Vamos propor um primeiro modelo, abaixo temos a um modelo $Normal$: 
 # 
 # $$ h_i \sim Normal(\mu, \sigma) $$
 # 
@@ -382,15 +393,17 @@ plt.show()
 # 
 # -----
 # 
-# Estamos usando as letras gregas $\mu$ e $\sigma$, por conveção de linguagem, mas nada impede que use quaisquer outros simbolos. Não haverá nenhum problema, irá apenas irritar algum estatístico, mas isso será um bônus.
+# Estamos usando as letras gregas $\mu$ e $\sigma$, por convenção de linguagem, mas nada nos impede de usarmos quaisquer outros símbolos. Não haverá nenhum problema, `apenas iremos irritar alguns estatísticos`, mas isso será mais um *bônus*!
 # 
-# Aqui é necessário que você saiba ler e entender o que isso significa, assim você aprende o que está acontecendo. Lembre-se isso é apenas uma linguagem, isso não é um código. É apenas uma forma de comunicação, uma comunicação científica.
+# Aqui é necessário que você saiba ler e entender o que isso significa, só assim você aprenderá o que está acontecendo. Lembre-se isso é `apenas uma linguagem`, isso não é um código. É apenas uma forma de comunicação, ou seja, é uma comunicação científica.
 # 
 # -----
 # 
 # Aqui temos duas variáveis para estimar, $\mu$ e $\sigma$, e teremos que inferir a partir de $h$, das coisas que medimos, mas $\mu$ e $\sigma$ precisam de definições por que esse é um modelo bayesiano.
+
+# ## Adicionando prioris
 # 
-# ###### Adicionando prioris
+# Agora vamos definir uma priori para os parâmetros da $Normal$, o $\mu$ e o $\sigma$:
 # 
 # $$ h_i \sim Normal(\mu, \sigma) $$
 # 
@@ -401,6 +414,8 @@ plt.show()
 # In[6]:
 
 
+# Plotando a distribuição à priori do mu e do sigma
+
 plt.rcParams['axes.facecolor'] = 'lightgray'
 
 fig, [ax1, ax2] = plt.subplots(1, 2, figsize=(15, 8))
@@ -408,10 +423,12 @@ fig, [ax1, ax2] = plt.subplots(1, 2, figsize=(15, 8))
 x_mu = np.arange(90, 270, 1)
 x_sigma = np.arange(-10, 60)
 
+# Priori do mu
 ax1.plot(x_mu, stats.norm(178, 20).pdf(x_mu))
 ax1.set_title('Priori de $\mu$ \n Normal(178, 20)')
 ax1.grid(color='white', linewidth='0.3', ls='--')
 
+#Priori do Sigma
 ax2.plot(x_sigma, stats.uniform(0, 50).pdf(x_sigma))
 ax2.set_title('Priori de $\sigma$ \n Uniforme(0, 50)')
 ax2.grid(color='white', linewidth='0.3', ls='--')
@@ -421,15 +438,19 @@ plt.show()
 
 # Qual é a implicação de usar essas distribuições para $\mu$ e $\sigma$? 
 # 
-# O valor de $178$ escolhido para ser a média da distribuição normal (*à priori*) foi por achar que essa poderia ser a altura média da população com uma generosa incerteza (*incerteza da média*) de $20$.
+# O valor $178$ foi escolhido para ser a média da distribuição normal (*à priori*), esse valor foi escolhido por `acharmos` que poderia ser a altura média da população, e com isso adicionamos uma generosa incerteza (*incerteza da média*) de $20$ (gráfico da esquerda).
 # 
-# Para o $\sigma$ colocamos qualquer valor entre $0$ até $50$ tem igual probabilidade de ocorrer, esse é um range bastante razoável já que $50$ é um valor bem mais alto do que podemos esperar para o desvio padrão, pois não temos mais nenhuma informação razoavél colocar como a priori (no mundo real certamente saberiamos um pouco mais).
+# Para o $\sigma$ colocamos qualquer valor entre $0$ até $50$ (gráfico da direita), esses valores têm igual probabilidade de ocorrer, esse é um range bastante razoável já que $50$ é um valor bem mais alto do que podemos esperar para o desvio padrão, pois não temos uma nenhuma informação mais razoável para colocar como priori (no mundo real certamente saberíamos um pouco mais).
 
-# ##### Simulação a partir da priori
+# ## Simulação a partir da priori
 # 
-# O que essas prioris estão implicando sobre a estimativa da altura, antes de ver os dados ($h$)? Simularmos! `Distribuição à Priori Preditivo`.
+# O que essas `prioris` estão implicando sobre a estimativa da altura, antes de vermos os dados ($h$)? 
 # 
-# Simular os dados apenas das priori nos permitirá entender se do modo como estamos ensinando o modelo seu resultado está sendo satisfatório. Vamos simular!
+# Para saber, vamos Simular! `Distribuição à Priori Preditiva`.
+# 
+# Simular os dados apenas das prioris nos permitirá entender se, do modo como estamos *ensinando* o modelo, seu resultado está sendo satisfatório. 
+# 
+# Vamos simular!
 # 
 
 # In[7]:
@@ -463,16 +484,16 @@ plt.grid(color='white', linewidth='0.3', ls='--')
 plt.show()
 
 
-# Plotar o gráfico da `Distribiuição Preditiva da Priori` nos permite ver qual a probabilidade, por exemplo, de alguém ter a altura próxima de $0 cm$ é praticamente igual a *zero*, $P\{altura = 0\}$, e também a probabilidade de uma pessoa ser maior do que $272 cm$, $P\{altura >= 272\}$, que é a altura da pessoa mais alta no mundo já registrada, é bem baixa.
+# Plotar o gráfico da `Distribuição Preditiva da Priori` nos permite observar que a probabilidade, por exemplo, de alguém ter a altura próxima de $0 cm$ é praticamente igual a *zero*, $P\{altura = 0\}$, e ,também, a probabilidade de uma pessoa ser maior do que $272 cm$, $P\{altura >= 272\}$, que é a `altura da pessoa mais alta no mundo já registrada`, é bem baixa.
 # 
-# Imagine agora que colocaremos como priori valores muito absurdos para o $\sigma$, vejamos o que acontecerá:
+# Imagine agora que colocaremos como à priori valores muito absurdos para o $\sigma$, vamos ver o que acontece:
 
 # In[8]:
 
 
 # ========================================================================
 # Construindo o processo de amostragem da distribuição à priori preditiva.
-#                     Priori versão com dados absurdos
+#                *** Priori versão com dados absurdos  ***
 # ========================================================================
 
 # Amostragem
@@ -499,54 +520,64 @@ plt.grid(color='white', linewidth='0.3', ls='--')
 plt.show()
 
 
-# Os valores de probabilidade que está sendo atribuído pela priori e que estão para fora dos limites mais conservadores possível, não deveriam ter uma importancia tão grande, ou seja, sua probabilidade deveria tenter a *zero*!
+# Os valores de probabilidade que estão sendo atribuído pela distribuição à priori e que `estão para fora dos limites mais conservadores possíveis`, não deveriam ter uma importância tão grande, ou seja, sua probabilidade deveria `se aproximar` de *zero*!
 # 
-# Esse é um exemplo de escolha ruim para uma priori, colocando apenas com um valor enorme para $\sigma$ mas sem ter uma ligação mais intima com a natureza do problema. 
+# Esse é um exemplo de escolha ruim para uma priori, colocando apenas um valor enorme para $\sigma$ mas sem ter uma ligação mais íntima com a natureza do problema. 
 # 
-# Nesse caso, caso univariado, as distorções que podem ser geradas por usarmos uma priori dessa forma é praticamente nenhuma, o modelo provavelmente ajustará bem. Já para modelos mais complexos como modelo mistos ou modelos hieráquicos com muitos parâmentros, a utilizacão de prioris sem muito sentido podem causar sérias distorções nos resultados. 
+# Nesse caso, `o caso univariado`, as distorções que podem ser geradas por usarmos uma priori dessa forma é praticamente nula, o modelo provavelmente ajustará bem. Já para modelos mais complexos, como modelos mistos ou modelos hierárquicos com muitos parâmetros, a utilização de prioris sem muito sentido podem causar *sérias* distorções nos resultados. 
 # 
-# Por isso, sempre simule a priori para observar se o comportamento do modelo condiz com a realidade mais plausível. É essa a sua crença antes do modelo ver o dados!
+# Por isso, `sempre simule a priori` para observar se o comportamento do modelo condiz com a realidade mais plausível. 
 # 
+# ```{note}
+# Priori: é essa a nossa crença antes do modelo ver o dados!
+# ```
 
-# #### Calculando a posteriori
+# ## Calculando a Posteriori Conjunta
 # 
-# Nosso objetivo é estimar qual a distribuição conjunta dos parâmentros $\mu$ e $\sigma$, iremos fazer a estimativa via método da aproximação de grid.
+# Nosso objetivo é estimar a distribuição conjunta dos parâmetros $\mu$ e $\sigma$, para isto, iremos calcular a estimativa pelo método do *grid de aproximação*.
 # 
 # $$ p\{(\mu, \sigma) | h_i\} ∝ p\{h_i | \mu, \sigma \} p\{ \mu \} p\{ \sigma \} $$
 
 # In[9]:
 
 
-# Para visualização das multiplicações vamos deixar o sigma fixo, em 20 por exemplo, 
-#  e iremos variar o mu para três valores distintos de alturas (180, 155, 147).
+# Para visualização das multiplicações vamos deixar o 𝜎 fixo, em 20, por exemplo, 
+# e iremos variar o 𝜇 entre 100 e 300, para os três valores distintos de alturas (147, 155, 180).
 
-curva_1 = 0
-curva_2 = 0
-curva_3 = 0
+curva_1 = 0  # Resetando a variável curva_1 
+curva_2 = 0  # Resetando a variável curva_2
+curva_3 = 0  # Resetando a variável curva_3
 
 posteriori = np.array([])
 
 for mu in np.arange(100, 300, 1):
-    curva_1 = np.append(curva_1, stats.norm(mu, 20).pdf(180))
-    curva_2 = np.append(curva_2, stats.norm(mu, 20).pdf(155))
-    curva_3 = np.append(curva_3, stats.norm(mu, 20).pdf(147))
+    curva_1 = np.append(curva_1, stats.norm(mu, 20).pdf(147))  # Para todos os 𝜇, calcular a probabilidade de ocorrer 147 com sigma fixo.
+    curva_2 = np.append(curva_2, stats.norm(mu, 20).pdf(155))  # Para todos os 𝜇, calcular a probabilidade de ocorrer 155 com sigma fixo.
+    curva_3 = np.append(curva_3, stats.norm(mu, 20).pdf(180))  # Para todos os 𝜇, calcular a probabilidade de ocorrer 180 com sigma fixo.
     
 # Plot
 fig, [ax1, ax2] = plt.subplots(1, 2, figsize=(17, 7))
-ax1.plot(np.arange(100, 301), curva_1)
-ax1.plot(np.arange(100, 301), curva_2)
-ax1.plot(np.arange(100, 301), curva_3)
+ax1.plot(np.arange(100, 301), curva_1, color='darkgreen')
+ax1.plot(np.arange(100, 301), curva_2, color='darkorange')
+ax1.plot(np.arange(100, 301), curva_3, color='red')
+
 ax1.set_title('Normal \n Para as alturas ($h_i$): {147, 155, 180} \n com as hipóteses de mu [100, 300] para a média')
-ax1.set_xlabel('Altura (cm)')
+ax1.set_xlabel('$\mu$')
 ax1.set_ylabel('Probabilidade')
 ax1.grid(color='white', linewidth='0.5', ls='--')
+
 ax1.legend(['147', '155', '180'])
 
 posteriori_nao_normalizada = curva_1 * curva_2 * curva_3   # Essa multiplicação será feita ponto a ponto.
+
 posteriori = posteriori_nao_normalizada / np.sum(posteriori_nao_normalizada)  # Normalizando a posteriori
-ax2.plot(np.arange(100, 301), posteriori)  # Essa multiplicação será feita ponto a ponto.
+ax2.plot(np.arange(100, 301), posteriori, color='darkblue')  # Essa multiplicação será feita ponto a ponto.
+ax2.plot(np.arange(100, 301), curva_1, color='darkgreen', alpha=0.1)
+ax2.plot(np.arange(100, 301), curva_2, color='darkorange', alpha=0.1)
+ax2.plot(np.arange(100, 301), curva_3, color='red', alpha=0.1)
+
 ax2.set_title('Posteriori \n Usando os três valores da altura juntos ($h_i$): {147, 155, 180}')
-ax2.set_xlabel('Altura (cm)')
+ax2.set_xlabel('$\mu$')
 ax2.set_ylabel('Probabilidade')
 ax2.grid(color='white', linewidth='0.4', ls='--')
 ax2.legend(['posteriori'])
@@ -561,11 +592,12 @@ plt.show()
 #     Calculando a posteriori
 # ================================
 
-grid = 100  # Determina a precisão, valores maiores demanda maior custo computacional
+grid = 100  # Determina a precisão, para valores maiores demanda maior custo computacional!
 
-mu_ls = np.linspace(120, 170, grid)  
-sigma_ls = np.linspace(10, 40, grid)  
-mu, sigma = np.meshgrid(mu_ls, sigma_ls)
+mu_ls = np.linspace(120, 170, grid)  # Espaço do mu - Esses valores foram escolhidos para uma melhor visualização.
+sigma_ls = np.linspace(10, 40, grid)  # Espaço do sigma - Esses valores foram escolhidos para uma melhor visualização.
+
+mu, sigma = np.meshgrid(mu_ls, sigma_ls)  # Construindo um plano do 𝜇 vs 𝜎.
 
 mu = mu.flatten()
 sigma = sigma.flatten()
@@ -573,13 +605,13 @@ sigma = sigma.flatten()
 verossimilhanca = np.array([])
 
 for i in range(grid**2):
-    verossimilhanca_parcial = stats.norm(mu[i], sigma[i]).pdf(df.height)
-    verossimilhanca_parcial_log = np.log(verossimilhanca_parcial.flatten())
+    verossimilhanca_parcial = stats.norm(mu[i], sigma[i]).pdf(df.height) # Calcular a probabilidade para todos os 𝜇 e 𝜎, todas as alturas da amostra. 
+    verossimilhanca_parcial_log = np.log(verossimilhanca_parcial.flatten())  # Calculando o log da verssimilhança
     verossimilhanca = np.append(verossimilhanca, np.sum(verossimilhanca_parcial_log))
 
 # Adicionando a priori
-# P{x | mu, sigma} * P{mu} * P{sigma}
-# exp( log(P{x | mu, sigma}) + log(P{mu}) + log(P{sigma}) )
+# P{ altura | 𝜇, 𝜎} * P{𝜇} * P{𝜎}  ==  exp[ log(P{ altura | 𝜇, 𝜎}) + log(P{𝜇}) + log(P{𝜎}) ]
+
 posteriori_nao_normalizada = verossimilhanca +                              np.log(stats.norm(178, 20).pdf(mu.flatten())) +                              np.log(stats.uniform(0, 50).pdf(sigma.flatten()))   # Priori de sigma
     
 posteriori = np.exp(posteriori_nao_normalizada - max(posteriori_nao_normalizada))  # Por que isso? Está no livro, pg.85 - R code 4.16 
@@ -597,14 +629,18 @@ plt.title('Posteriori')
 plt.xlim(135, 142)
 plt.ylim(25, 30)
 
+plt.grid(ls='--', color='white', linewidth=0.4)
 plt.show()
 
 
 # In[11]:
 
 
-# Amostrando mu e sigma a partir da posteriori
+# =================================================================
+#     Amostrando 𝜇 e o 𝜎 a partir da distribuição à posteriori.
+# =================================================================
 
+# Escolhendo pontos 1000 pontos aleatórios dentro do grid com a probabilidade à posteriori
 amostras_posteriori_index = np.random.choice(np.arange(grid*grid), size=1000, replace=True, p=posteriori)
 
 mu_amostrado = mu[amostras_posteriori_index]
@@ -613,13 +649,13 @@ sigma_amostrado = sigma[amostras_posteriori_index]
 fig, [ax1, ax2] = plt.subplots(1, 2, figsize=(17, 9))
 
 ax1.hist(mu_amostrado, bins=10, rwidth=0.95, density=True)
-ax1.set_title('Amostra da posteriori \n $\mu$')
+ax1.set_title('Amostra da Posteriori \n $\mu$')
 ax1.set_xlabel('$\mu$')
 ax1.set_ylabel('Probabilidade')
 ax1.grid(color='white', ls='--', linewidth=0.5)
 
 ax2.hist(sigma_amostrado, bins=10, rwidth=0.95, density=True)
-ax2.set_title('Amostra da posteriori \n $\sigma$')
+ax2.set_title('Amostra da Posteriori \n $\sigma$')
 ax2.set_xlabel('$\sigma$')
 ax2.set_ylabel('Probabilidade')
 ax2.grid(color='white', ls='--', linewidth=0.5)
@@ -627,25 +663,30 @@ ax2.grid(color='white', ls='--', linewidth=0.5)
 plt.show()
 
 
-# #### Aproximação Quadrática
+# ## Aproximação Quadrática 
 # 
-# A partir de agora até a metade do curso iremos usar a `aproximação quadrática`. Se você fez os cálculos da posteriori para a altura, oque é sugerido fortemente, percebemos que a complexidade e o custo computacional envolvido para estimar as duas variáveis ($\mu$ e $\sigma$) são bastante significativos.
+# A partir de agora até a metade do curso iremos usar a `aproximação quadrática`. Se você fez os cálculos da posteriori para a altura, oque é sugerido fortemente, percebemos que a complexidade e o custo computacional envolvido para estimar às duas variáveis ($\mu$ e $\sigma$) são bastante significativos.
 # 
-# Para modelos que necessitem estimar mais parâmetros, 10 por exemplo, o custo computacional e a estrutura necessária para calcular essa estimativa com o método do grid de aproximação se torna inviável. Por isso temos que pensar em uma nova estrutura na qual podemos, **Laplace**, $1749-1827$, propõem usar a aproximação quadrática. Com essa estrutura mais exótica, nós poderemos calcular estimativas da posteriori em dimensões muito elevadas.
+# Para modelos que necessitem estimar mais parâmetros, $10$ parâmetros por exemplo, o custo computacional e a estrutura necessária para calcular essa estimativa com o método do *grid de aproximação* se torna inviável. Por isso temos que pensar em uma nova estrutura na qual podemos, **Laplace**, $1749-1827$, propor o uso da aproximação quadrática. Com essa estrutura mais exótica, nós poderemos calcular estimativas da posteriori em dimensões muito elevadas.
+# 
 # 
 # - Aproximação da posteriori como uma Gaussiana
 # 
-# - Podemos estimar com encontrando o valor de duas coisas:
+# 
+# - Podemos construir essa estimativa encontrando o valor das duas seguintes coisas:
 #     
-#     - Pelo "pico" da posteriori, *maximum a posteriori* (MAP)
 #     
+#     - Pelo "pico" da posteriori, maximum a posteriori (MAP)
+# 
 #     - Desvio Padrão e a correlação entre os parâmetros.
+#     
 #     
 # - As estimativas são bem parecidas com o que já fizemos, exceto que não temos prioris.
 #  
-# Para a primeira coisa, temos que, ao olhar para a posteriori (os histogramas acima) de $\mu$ e $\sigma$ e subir a colina até encontrar o pico. O computador pode começar a busca por qualquer local sem saber onde está o pico, mas ele sabe subir a colina e então pode simplismente subir a colina, usando o apenas o *gradiente descendentes* (ou melhor, usando o gradiente ascendente, pois iremos escalar a subida até o pico). Existem muitos algoritmos eficiêntes para fazer isso, e podemos dar a ele um espaço multidimensional muito alto (bem maior que 2, como no exemplo anterior) e iremos alcançar o pico.
+#  
+# A primeira coisa que temos que olhar é para a posteriori (*nos histogramas acima*) de $\mu$ e $\sigma$ e subir a colina até encontrar o pico da distribuição. O computador pode começar a busca por qualquer local sem saber onde está o pico, mas ele sabe subir a colina e então pode simplesmente subir usando o apenas o *gradientes descendentes* (ou melhor, usando o gradiente ascendente, pois iremos escalar a subida até o pico). Existem muitos algoritmos eficientes para fazer isso, e podemos dar a ele um espaço multidimensional muito alto (bem maior que 2, como no exemplo anterior) e iremos alcançar o pico.
 # 
-# Quando alçarmos o pico, só precismos medir a curvatura no pico para saber a largura da colina e isso é tudo que precisa ser feito para construirmos a `aproximação quadrática`. Também conhecida por `Aproximação de Laplace`, por ele ter utilizado o procedimento corretamente.
+# Quando alçarmos o pico, só precisamos medir a curvatura no pico para saber a largura da colina e isso é tudo que precisa ser feito para construímos a `aproximação quadrática`. Também conhecida por `Aproximação de Laplace`, por ele ter utilizado o procedimento corretamente.
 # 
 # <img src="./images/Laplace.jpg" alt="Laplace">
 # 
@@ -660,14 +701,12 @@ plt.show()
 # 
 # <img src="./images/stan-logo.png" alt="stan">
 
-# Obs2: a estimativa da posteriori feita pela Stan utiliza algumas técnicas mais robustas do que a aproximação quadrática, porém no curso, essa estimativa é realiza internamente na biblioteca rethinking e é invisível para o usuário, assim, o conteúdo dessas notas serão intimamente paralelas com o curso, sendo que se ocorrer um distânciamento entre ambas trajetórias, notas extras serão inseridas para minimizar esse longor.
-# 
-# 
+# Obs2: a estimativa da posteriori feita pela Stan utiliza algumas técnicas mais robustas do que a aproximação quadrática, porém no curso, essas estimativas são realizadas internamente na biblioteca rethinking e é invisível para o usuário, assim, o conteúdo dessas notas serão intimamente paralelas com o curso, sendo que se ocorrer um distanciamento entre ambas trajetórias, notas extras serão inseridas para minimizar esse longor.
 
 # In[12]:
 
 
-import stan
+import stan  # Importando a Stan - estamos usando a pystan
 
 
 # In[13]:
@@ -691,26 +730,27 @@ model {
     X ~ normal(mu, sigma);
 }
 """
+mu_nao_observavel = 50
+sigma_nao_observavel = 12
 
-X = np.random.normal(50, 12, 1000)  # Dados ~ Normal(50, 12)
-meus_dados = {'N': len(X), 'X': X}
+X = np.random.normal(mu_nao_observavel, sigma_nao_observavel, 1000)  # Gerando os dados amostrais ~ Normal(50, 12)
+meus_dados = {'N': len(X), 'X': X}  # Construíndo um dicionário com os dados
 
-posteriori_model = stan.build(primeiro_codigo_stan, data=meus_dados)
-
-fit = posteriori_model.sample(num_chains=4, num_samples=1000)
+posteriori_model = stan.build(primeiro_codigo_stan, data=meus_dados)  # Construíndo um modelo e anexando os dados
+fit = posteriori_model.sample(num_chains=4, num_samples=1000)  # Fazendo a amostragem da posteriori 
 
 
 # In[14]:
 
 
 # Recuperando os parâmetros
-mu_modelo_1 = fit['mu']
-sigma_modelo_1 = fit['sigma']
+mu_modelo_1 = fit['mu']  # Amostras da posteriori do 𝜇
+sigma_modelo_1 = fit['sigma']  # Amostras da posteriori do 𝜎
 
-print('='*30)
-print('  mu médio: ', round(mu_modelo_1.mean(), 2))
-print('  sigma médio: ', round(sigma_modelo_1.mean(), 2))
-print('='*30)
+print('='*70)
+print('  mu médio: ', round(mu_modelo_1.mean(), 2), ' \t mu original: ', mu_nao_observavel)
+print('  sigma médio: ', round(sigma_modelo_1.mean(), 2), ' \t sigma original: ', sigma_nao_observavel)
+print('='*70)
 
 fig, [ax1, ax2] = plt.subplots(1, 2, figsize=(17, 9))
 
@@ -731,9 +771,9 @@ ax2.set_ylabel('Frequências à Posteriori')
 plt.show()
 
 
-# ##### Estimando a altura usando a Stan
+# ## Estimando a altura usando a Stan
 # 
-# De volta ao exemplo anterior, vamos estimar a altura $h_i$ usando um modelo escrito em Stan.
+# De volta ao exemplo anterior, vamos estimar a altura $h$ usando um modelo escrito em Stan.
 
 # In[15]:
 
@@ -746,11 +786,11 @@ modelo_altura = """
 
     parameters {
         real mu;
-        real<lower=0> sigma;
+        real<lower=0, upper=50> sigma;  // Priori para sigma ~ Uniform(0, 50)
     }
 
     model {
-        // mu ~ normal(178, 20);   // Priori para mu
+        mu ~ normal(178, 20);   // Priori para mu
         // sigma ~ uniform(1, 50);  // Priori para sigma
 
         altura ~ normal(mu, sigma);
@@ -838,9 +878,9 @@ ax2.grid(color='white', ls='--', linewidth=0.5)
 plt.show()
 
 
-# #### Adicionando uma variável preditora
+# ## Adicionando uma variável preditora
 # 
-# Como a variável peso (*weight*) descreve a altura (*height*)?
+# Agora, iremos refazer a estimativa da altura, mas utulizaremos `mais uma variável` para nos ajudar explicar melhor a altura, assim teremos mais informações, usaremos o `peso` (*weight*) que nos ajudará a descrever a altura (*height*)?
 # 
 # *Obs: Iremos utilizar apenas pessoas que tenham acima de 18 anos de idade para todos os estudo seguintes, apenas simplesmente como efeito didático.*
 
@@ -849,8 +889,9 @@ plt.show()
 
 # Gráfico de dispersão - peso ajudar a identificar qual a altura.
 plt.figure(figsize=(17, 9))
-plt.scatter(df.loc[df.age >= 18, 'weight'],  # Filtro para todos as pessoas que tem acima de 30 kilos
-            df.loc[df.age >= 18, 'height'])
+plt.scatter(df.loc[df.age >= 18, 'weight'],  # Filtro para todos as pessoas que tem acima de 18 anos
+            df.loc[df.age >= 18, 'height'])  # Filtro para todos as pessoas que tem acima de 18 anos
+
 plt.title('Gráfico de Dispersão')
 plt.xlabel('Peso (weight)')
 plt.ylabel('Altura (height)')
@@ -875,23 +916,28 @@ plt.show()
 # 
 # $$  \sigma \sim Uniform(0, 50), \mbox{ [Priori de }\sigma \mbox{]} $$
 # 
-# Vamos agora ver uma reta, um modelo linear. Até agora o que nós fizemos foram inferências de 1 ou 2 parâmetros que podem ser aproximadas como uma gaussiana.
+# 
+# Vamos agora construir uma reta, `um modelo linear`. Até agora nós fizemos inferências de $1$ ou $2$ parâmetros e que podem ser aproximadas como uma gaussiana.
 # 
 # 
-# 
-# Mas o que significa fazer um modelo linear, ou utilizar um reta no modelo? Isso significa que podemos adicionar uma nova variável que irá nos ajudar a melhorar nosso entendimento da variável `altura`. Essa nova variável terá a função, dentro do nosso modelo, de predizer, ou seja, dizer antecipadamente, antever, advinhar, prever qual é a da altura do indivíduo, probabilisticamente. Chamamos todas essas variáveis que podemos nos ajudar como `variáveis preditoras`.
-# 
-# 
-# A principal ideia em adicionar uma variável preditora, assim como outras variáveis do nosso conjunto de dados, é que quando aprendemos, podemos fazer podemos fazer melhores previsões sobre o resultado de interesse, que nesse caso, é a `altura`.
+# Mas o que significa fazer um modelo linear, ou utilizar uma reta no modelo? Isso significa que podemos adicionar uma nova variável que irá nos ajudar a melhorar nosso entendimento da variável `altura`. Essa nova variável terá a função, dentro do nosso modelo, de predizer, ou seja, dizer antecipadamente, antever, adivinhar, prever qual é a da altura do indivíduo, probabilisticamente. Chamamos todas essas variáveis que podem nos ajudar de `variáveis preditoras`.
 # 
 # 
-# Para ficar mais claro, quando pretendemos saber a altura de uma pessoa sem termos nenhuma informação adicional sobre a pessoa, o melhor que podemos fazer é usar a estimativa da altura da população para estimar a altura desse indivíduo. É o máximo que podemos fazer com as informações que temos disponíveis.
-# Mas se esse mesmo indivíduo, assim como todos na nossa amotras, nos informarem uma característica a mais para nós estimarmos sua altura. Nesse exemplo, o peso é uma das informações adicionais, *preditoras*, para termos mais conhecimento sobre a altura. 
+# A principal ideia em adicionar uma variável preditora, assim como outras variáveis do nosso conjunto de dados, é que quando aprendemos, podemos fazer melhores previsões sobre o resultado de interesse que, nesse caso, é a `altura`.
 # 
 # 
-# ##### Explicando o modelo acima:
+# Para ficar mais claro, quando pretendemos saber a altura de uma pessoa sem termos nenhuma informação adicional, o melhor que podemos fazer é usar a estimativa da altura da população toda para estimar a altura desse indivíduo. É o máximo que podemos fazer com as informações que temos disponíveis.
 # 
-# Agora temos que $h_i$ também contínua distribuído como uma `Gaussiana` como no exemplo anterior, porém agora a média $\mu$ não é apenas distribuída normalmente com a média fixa em 178, dependerá de cada indivíduo $i$, assim $ \mu_i = \alpha + \beta(x_i + \bar{x}) $, $x_i$ representa uma pessoa em particular.
+# Mas se esse mesmo indivíduo, assim como todos da amostra, nos informar uma característica a mais para nós estimarmos sua altura? Nesse exemplo, o peso é uma dessas informações adicionais, `variável preditora`, assim teremos mais conhecimento para poder estimar a sua *altura*. 
+
+# 
+# ### Explicando o modelo acima:
+# 
+# Agora temos que $h_i$ também contínua distribuída como uma `Gaussiana` como no exemplo anterior, porém agora a média $\mu$ não é apenas distribuída normalmente com a média fixa em 178, dependerá de cada indivíduo $i$, assim: 
+# 
+# $$ \mu_i = \alpha + \beta(x_i + \bar{x}) $$
+# 
+# $x_i$ representa o peso de uma pessoa em particular.
 # 
 # Em instante iremos entender melhor o que significa todos os termos de $\mu$. O $\alpha$ e o $\sigma$ continuam com as mesmas prioris do exemplo anterior, e agora temos uma nova distribuição à priori para $\beta$, que é o responsável por descrever a relação entre `altura` e o `peso`.
 # 
@@ -908,26 +954,20 @@ plt.show()
 # 
 # 
 # 
-# - $\beta$ = taxa de mudança para $\mu$ cada unidade de mundaça de $x_i$, conhecido como a `inclinação`.
+# - $\beta$ = taxa de mudança para $\mu$ cada unidade de mudança de $x_i$, conhecido como a `inclinação`.
 # 
 # Se por acaso o $\beta$ for zero, estamos novamente no modelo anterior. Ou seja, estamos dizendo que não há relação  transmitida para o $\mu$ a partir do peso. Do contrário, cada número que o $x_i$ sobe, subimos $\beta$ o $\mu$.
 # 
 # Escrever nossos modelos lineares dessa forma nos permite entender e definir melhor os parâmetros e nossa prioris, mas nem todos os modelos devem ser escritos dessa forma e nesse caso deveremos ter uma boa justificativa.
 
-# #### Distribuição Priori Preditiva
+# ## Distribuição Priori Preditiva
 # 
 # Quais são as prioris desse modelo e o que essas prioris significam?
 # 
-# Como no exemplo anterior, vamos simular para entender e compreender as implicações do modelo.
+# Como, no exemplo anterior, vamos simular para entender e compreender as implicações do modelo.
 # 
 
 # In[18]:
-
-
-(65-30)/2
-
-
-# In[19]:
 
 
 # ===========================
@@ -942,7 +982,8 @@ beta_priori = np.random.normal(0, 10, N)
 plt.figure(figsize=(17, 9))
 
 for i in range(N):
-    plt.plot(np.linspace(30, 65, N), alpha_priori[i] + beta_priori[i] * (np.linspace(-17.5, 17.5, N)), # (x_i - x_bar)
+    plt.plot(np.linspace(30, 65, N), 
+             alpha_priori[i] + beta_priori[i] * (np.linspace(-17.5, 17.5, N)), # (x_i - x_bar)
              color='blue', linewidth=0.2)
 
 plt.ylim(-100, 400)
@@ -959,6 +1000,8 @@ plt.grid(color='white', ls='--', linewidth=0.4)
 plt.show()
 
 
+# # Continuar daqui a revisão
+# 
 # Analisando as retas, resultados da simulação da priori para $\alpha$ e $\beta$, podemos ver que muitas linhas estão superiores a altura de $272 cm$. Também podemos ver que existem linhas que indicam alturas menores que zero, o que naturalmente deveria estar errado. Ambos comportamentos são prioritariamente resutantes dos valores gerados pela distribuição dos $\beta$, a inclinação da reta. Assim, essas retas são nossas crenças à priori.
 # 
 # Agora que temos um pouco mais de intimidade com o comportamento das nossas prioris, podemos concluir que devemos diminuir nosso entusiasmos com relação ao $\beta$, pois essa é uma priori muito ruim. Haverá momentos, em situações reais, que será necessário verificar a compatibilidade com o mundo real. Faça alterações nas prioris para verificar a mudança no efeito.
@@ -1013,7 +1056,7 @@ plt.show()
 # 
 # $$ X \sim lognormal $$
 
-# In[20]:
+# In[19]:
 
 
 # =====================================
@@ -1052,7 +1095,7 @@ plt.show()
 # 
 # Assim como antes, vamos simular para entender o novo comportamento da nossa priori. 
 
-# In[21]:
+# In[20]:
 
 
 # ==========================================
@@ -1090,7 +1133,7 @@ plt.show()
 # 
 # Vamos fazer a aproximação da posteriori usando a Stan e verificar os resultados.
 
-# In[22]:
+# In[21]:
 
 
 # =================================================================
@@ -1141,7 +1184,7 @@ posteriori_model_2 = stan.build(modelo_altura_2, data=meus_dados_2)
 fit_altura_2 = posteriori_model_2.sample(num_chains=4, num_samples=1000)
 
 
-# In[23]:
+# In[22]:
 
 
 # =============================
