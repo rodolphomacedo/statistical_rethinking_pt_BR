@@ -7,25 +7,31 @@
 
 # ----
 
-# No capítulo anterior vimos como construir o nosso primeiro modelo de regressão linear, no qual estimamos a altura de uma pessoa usando a informação de seu peso como auxílio. Temos assim, como resultado do nosso modelo, a distribuição à posteriori dos parâmetros que foram estimados, $\alpha$, $\beta$ e o $\sigma$.
+# No capítulo anterior vimos como construir o nosso primeiro modelo de regressão linear, no qual estimamos a altura de uma pessoa usando a informação de seu próprio peso como um auxílio informativo. Temos, assim, como resultado do nosso modelo, a distribuição à posteriori dos parâmetros que foram estimados, $\alpha$, $\beta$ e o $\sigma$.
 # 
-# ```{admonition} Modelo Linear
+# ```{admonition} Modelo Linear Simples
 # 
 # $$ altura_i = \alpha + \beta (peso_i - peso\_medio) $$
 # 
 # ```
 # 
-# Dessas distribuições podemos pegar apenas os valores "precisos" desses parâmentros, ou seja, geralmente nós tendemos pensar em pegar os valores esperados (*valores médios*) da distribuição do $\alpha$ e do $\beta$ e, com isso, traçar uma linha reta com esses valores.
+# Das distribuições à posteriori dos parâmetros podemos pegar apenas os valores `"precisos"` desses parâmetros, ou seja, geralmente nós tendemos `pensar apenas com os valores esperados` (*`valores médios`*) da distribuição do $\alpha$ e do $\beta$ e, com isso, traçar uma linha reta com esses valores.
 # 
-# Olhando para os resultado das estimativas, quando o **peso** está em seu valor médio, temos que $\alpha$ significa o valor médio da altura! 
+# Olhando para os resultados das inferências dos parâmetros, quando o **peso** está em seu valor médio, temos que $\alpha$ significa o valor médio da altura! 
 # 
-# Percebeu? Percebeu como isso é muito bonito! Agora temos uma interpretação decente para o $\alpha$.
+# Percebeu? Percebeu como isso é muito bonito! Agora temos uma interpretação decente para o $\alpha$!
 # 
-# Agora, o que significa o nosso $\beta$? Temos que para cada unidade de $peso$ que aumentarmos a altura $h$ também aumentará em $\beta$ unidades. Assim, para nosso exemplo, cada kilo que aumentamos a altura tende a aumentar, em média, $0.90$.
+# Agora, o que significa o nosso $\beta$? Temos que para cada unidade de $peso$ que aumentarmos a altura $h$ também aumentará em $\beta$ unidades. Assim, para nosso exemplo, `cada kilo que aumentarmos, a altura também tende a aumentar`, em média, $0.90$cm.
 # 
 # 
 # 
-# Mas sabemos que isso é insuficiente, porque queremos obter a incerteza a partir desse gráfico. A estatística bayesiana não lhe dará uma única estimativa pontual, mas sim, dará a sua incerteza, que é comunicada a nós pela distribuição à posteriori, que contém *um número infinito linhas*, e cada uma dessas linhas é classificada pela sua plausibilidade relativa em comparação todas as outras linhas.
+# Mas sabemos que isso é insuficiente, porque queremos obter a incerteza a partir desse gráfico. A estatística bayesiana não lhe dará uma única estimativa pontual, mas sim, `dará a SUA incerteza, que é comunicada a nós pela distribuição à posteriori`. Essa incerteza é representada pelo *número infinito de linhas*, e cada uma dessas linhas são classificadas pela sua `plausibilidade relativa` (*sua probabilidade*) em comparação todas as outras linhas!
+
+# ```{warning}
+# OBS: A partir de agora irei definir as variáveis em Inglês, mas os comentários continuarão em português para facilitar o entendimento seguir com o propósito do material. 
+# 
+# Em ambientes profissionais é recomendado escrever tudo em inglês.
+# ```
 
 # In[1]:
 
@@ -63,9 +69,6 @@ plt.rcParams['axes.facecolor'] = 'lightgray'
 
 # Lendo os dados
 
-# OBS: A partir de agora irei definir as variáveis em Inglês, 
-#        mas os comentários continuarão no portuga para facilitar o entendimento.
-
 # Os dados podem serem obtidos em https://github.com/rmcelreath/rethinking/tree/master/data/Howell1.csv
 df = pd.read_csv('./data/Howell1.csv', sep=';')  
 
@@ -101,9 +104,12 @@ model_stan = """
 # In[7]:
 
 
-# Reescrevendo o modelo anterior - Estimativa da altura explicado com o peso.
+# =============================================================
+#    Estimativa da altura explicada com a variável peso.
+# =============================================================
+# Reescrevendo o modelo anterior 
 
-# Lembrando que estamos usando o (x_i - x_barra)
+# Lembrando que estamos usando o (x_i - x_barra) e não apenas x_i
 weight_adjust = weight - weight.mean() 
 
 my_data = {
@@ -124,17 +130,23 @@ sigma = fit['sigma'].flatten()
 # In[8]:
 
 
-# Parâmentros
+# ==========================================
+#  Plotando os histogramas dos Parâmentros
+# ==========================================
+
 fig, [ax1, ax2, ax3] = plt.subplots(1, 3, figsize=(17, 9))
 
+# Parâmetro: alpha
 ax1.hist(alpha, density=True, rwidth=0.9, bins=20)
 ax1.grid(ls='--', color='white', linewidth=0.4)
 ax1.set_title('Posteriori Alpha')
 
+# Parâmetro: beta
 ax2.hist(beta, density=True, rwidth=0.9, bins=20)
 ax2.grid(ls='--', color='white', linewidth=0.4)
 ax2.set_title('Posteriori Beta')
 
+# Parâmetro: sigma
 ax3.hist(sigma, density=True, rwidth=0.9, bins=20)
 ax3.grid(ls='--', color='white', linewidth=0.4)
 ax3.set_title('Posteriori Sigma')
@@ -142,13 +154,13 @@ ax3.set_title('Posteriori Sigma')
 plt.show()
 
 
-# ### Mostrando a nossa Incerteza
+# ## A observação da nossa Incerteza
 # 
-# Agora nós iremos fazer uma amostragem das posterioris. Uma das razões para usarmos esse procedimento de amostragem é que isso se torna mais fácil de se pensar e, também, esse procedimento pode ser aplicado a **todos** os tipos modelos que quisermos ajustar.
+# Agora nós iremos fazer a amostragem das *posterioris*. Uma das razões para usarmos esse procedimento de amostragem é que isso torna mais fácil de se pensar e, também, esse procedimento pode ser aplicado a **todos** os tipos de modelos possíveis bayesianos que quisermos ajustar.
 # 
 # Nossa distribuição à posteriori contém muitas linhas retas lá dentro, representadas pela amostragem dos valores da distribuição dos $\alpha$ e dos $\beta$ com o $\sigma$ informando o desvio padrão.
 # 
-# Abaixo vamos ver as primeiras linhas do conjunto de dados da estimativa:
+# Abaixo vamos ver as primeiras linhas do conjunto de dados dessas estimativas e as suas medidas de resumo:
 
 # In[9]:
 
@@ -156,31 +168,49 @@ plt.show()
 print(pd.DataFrame({'alpha': alpha[:10], 'beta': beta[:10], 'sigma': sigma[:10]}))
 
 
-# - Para cada linha do conjunto de dados acima é uma `linha reta`!
+# ```{note}
+# Para cada linha do conjunto de dados acima é uma linha reta no nosso modelo! 
+# ```
 # 
-# 
-# Temos muitas linhas, e as linhas mais plausíveis são as linhas que tem maior número de maneiras de reproduzir os dados que observamos. Essa plausabilidade é aprensentada para nós através do maior acúmulo de linhas retas que se sobrepõem. 
-# 
-# Atenção: Quanto mais as linhas se sobreporem entre si em uma certa região, maior será a plausabilidade dessas retas descreverem os dados que observamos. 
-# 
-# 
-# `O acúmulo dessas retas representa a nossa incerteza.`
-# 
-# 
-# É a primeira vez que conseguimos realmente ver nossa incerteza no gráfico. *Lindo demais*!!!
-
-# Para termos uma melhor compreensão nesse momento, nós vamos supor que ao invés de nossa amostra ter 251 indivíduos, vamos supor que temos apenas alguns subconjuntos. Nosso objetivo aqui é mostrar que quanto mais informações temos (*maior a nossa amostra*), menor será a nossa incerteza!
-# 
-# Para ficar mais claro, vamos simular a essa nossa estratégia e ver a diferenças dos **acúmulo das curvas**.
+# e o resumo dos dados:
 
 # In[10]:
 
 
+pd.DataFrame({'alpha': alpha[:10], 'beta': beta[:10], 'sigma': sigma[:10]}).describe()
+
+
+# Nós temos muitas linhas! E as linhas `mais plausíveis são as linhas que tem maior número de maneiras de reproduzir os dados que observamos`. Essa plausabilidade é apresentada para nós através do maior acúmulo de linhas retas que se sobrepõem. 
+# 
+# 
+# Quanto mais as linhas se sobreporem entre si em uma certa região, `maior será a plausabilidade dessas retas descreverem os dados que observamos`. 
+# 
+# 
+# ```{note}
+# `O acúmulo dessas retas representa a nossa incerteza.`
+# ```
+# 
+# Foi primeira vez que conseguimos realmente observar, conscientemente, a nossa incerteza em um gráfico. *Lindo demais*!!!
+
+# Para termos uma melhor compreensão nesse momento, nós vamos supor que ao invés de nossa amostra ter 251 indivíduos, vamos supor que temos apenas alguns subconjuntos. Nosso objetivo aqui é mostrar que quanto mais informações temos (isto é, quanto *maior a nossa amostra*), menor será a nossa incerteza!
+# 
+# Para ficar mais claro, vamos simular a essa nossa estratégia e ver as diferenças dos **acúmulos das linhas**.
+
+# In[11]:
+
+
 def generate_parcial_stan_models_results(N):
-    # ===============================================
-    #   Ajustando as estimativas para N indivíduos
-    # ===============================================
+    """
+    Ajustando as estimativas de um modelo linear 
+    usando os primeiros N indivíduos da amostra.
     
+    Parameters:
+        N: Quantidade de indivíduos que iremos 
+           utilizar na estimativa dos parâmetros.
+    
+    Return: 
+       Estimativas do alpha, beta e o sigma, dado os dados. 
+    """
     weight_adjust = weight - weight.mean() 
 
     my_data = {
@@ -200,14 +230,12 @@ def generate_parcial_stan_models_results(N):
     return alpha, beta, sigma
 
 
-# In[11]:
-
+# In[12]:
 
 
 # =====================================================
-#   Plotando as linhas de incerteza do nosso modelo
+#   Rodando o modelo anterior utilizando diferentes N
 # =====================================================
-# A saída desse modelo pode ser muito verbosa. Os resultados serão exibidos na célula abaixo.
 
 N_10 = 10     
 alpha_10, beta_10, sigma_10 = generate_parcial_stan_models_results(N_10);
@@ -225,17 +253,18 @@ N = len(weight) # Com toda amostra disponível
 alpha, beta, sigma = generate_parcial_stan_models_results(N);
 
 
-# Uma das vantagens do gráfico gráfico de linhas (`gráfico de espaguetes`) é deixar claro que os limites  formados pelas retas não tem um significado.
+# ```{note}
+# Uma das vantagens do gráfico gráfico de linhas (gráfico de espaguetes) é deixar claro que os limites formados pelas retas não tem significado algum.
+# ```
 
-# In[12]:
+# In[13]:
 
 
 # =============================
 #     Gráfico de Espaguete
 # =============================
-
-# Vamos estimar na célula de cima apenas para não poluir a saĩda com o gráfico
-# Vamos usar o weight_adjust igual para todos os pesos sem perda de generalidade
+# Vamos usar a variável weight_adjust igual para todos os 
+# pesos sem perda de generalidade para essa análise.
 
 # Plot dos dados altura x peso
 fig, [[ax1, ax2], [ax3, ax4]] = plt.subplots(2, 2, figsize=(19, 13))
@@ -305,28 +334,28 @@ ax4.set_ylabel('Altura (Height)')
 plt.show()
 
 
-# Essa divisão foi construída para conseguirmos percerber, de modo visual, que quando mais amostras tivermos coletado (isto é, um *quanto maior número de pontos azuis tivermos*), mais informações teremos e, portanto, teremos muito menos incerteza sobre o nosso objeto de estudo. 
+# A divisão dos gráficos acima foi construída para conseguirmos percerber, de modo visual, `que quando mais amostras tivermos coletado` (isto é, *quanto maior número de pontos azuis nós tivermos coletados como amostra*), mais informações teremos e, portanto, teremos muito `menos incerteza` sobre o nosso objeto de estudo. 
 # 
-# A nossa incerteza pode ser observada pela dispersão das curvas no gráfico, portanto quanto maior for a dispersão maior será a nossa incerteza sobre o que está acontecendo.
+# A nossa incerteza pode ser observada pela *dispersão* das curvas no gráfico, portanto `quanto maior for a dispersão maior será a nossa incerteza` sobre o que está acontecendo.
 
-# ### Construindo a Distribuição Preditiva de $\mu_i$ dado um peso específico  $x_i$
+# ## Construindo a Distribuição Preditiva de $\mu_i$, dado um peso $x_i$
 # 
-# Modelo linear para a altura média: 
+# Modelo linear para a altura média $\mu_i$ é: 
 # 
 # 
 # $$ \mu_i = \alpha + \beta(x_i - \bar{x}) $$
 # 
-# Agora a ideia básica é que para um valor específico do peso $x_i$ (*weight*) existe uma distribuição preditiva de $\mu_i$. Essa densidade preditiva nos informa quais as regiões de maior confiança que podemos esperar para a média da altura de uma pessoa com esse peso específico.
+# Agora, a ideia básica é que, dado um valor específico do peso de um indivíduo, $x_i$ (*weight*), podemos obter uma distribuição preditiva do $\mu_i$. Essa distribuição preditiva nos informa quais as regiões de maior confiança que podemos esperar para a média da altura, de uma pessoa com o peso $x_i$.
 # 
-# Para exemplificar, vamos supor que queremos estimar a altura (*height*) de uma pessoa com $50 kg$.
+# Para exemplificar, vamos supor que queremos estimar a altura (*height*) de uma pessoa com $50 kg$, então:
 # 
 # $$ \mu_i = \alpha + \beta(50 - \bar{x}) $$
 
-# In[13]:
+# In[14]:
 
 
 # ===========================================================
-#   Construindo a distribuição preditiva de mu | weight=50
+#    Construindo a distribuição preditiva de 𝜇 | x=50
 # ===========================================================
 
 mu_50_kg = alpha + beta * (50 - weight.mean())
@@ -342,9 +371,9 @@ plt.xlabel('$\mu | peso=50$')
 plt.show()
 
 
-# #### Calculando a predição para todos os $\mu$
+# ## Calculando a predição para todos os $\mu_i$
 
-# In[14]:
+# In[15]:
 
 
 def HPDI(posterior_samples, credible_mass):
@@ -367,7 +396,7 @@ def HPDI(posterior_samples, credible_mass):
     return(HDImin, HDImax)
 
 
-# In[15]:
+# In[16]:
 
 
 # =====================================
@@ -385,16 +414,19 @@ for weight_i in range(25, 71):
     posterioris_dict_100[weight_i] = alpha_100 + beta_100 * (weight_i - weight.mean())
     posterioris_dict[weight_i] = alpha + beta * (weight_i - weight.mean())
     
+# Gerando os dataframes
 posterioris_10 = pd.DataFrame(posterioris_dict_10)
 posterioris_50 = pd.DataFrame(posterioris_dict_50)
 posterioris_100 = pd.DataFrame(posterioris_dict_100)
 posterioris = pd.DataFrame(posterioris_dict)
 
+# Calculando as médias das posterioris
 posterioris_means_10 = posterioris_10.mean()
 posterioris_means_50 = posterioris_50.mean()
 posterioris_means_100 = posterioris_100.mean()
 posterioris_means = posterioris.mean()
 
+# Calculando os intervalos de HPDI das posterioris
 posterioris_HPDIs_10 = []
 posterioris_HPDIs_50 = []
 posterioris_HPDIs_100 = []
@@ -406,20 +438,23 @@ for weight_i in range(25, 71):
     posterioris_HPDIs_100.append(HPDI(posterioris_100[weight_i], 0.89))
     posterioris_HPDIs.append(HPDI(posterioris[weight_i], 0.89))
     
-posterioris_HPDIs_10 = np.array(posterioris_HPDIs_10)  # Apenas a transformação em um array numpy
-posterioris_HPDIs_50 = np.array(posterioris_HPDIs_50)  # Apenas a transformação em um array numpy
-posterioris_HPDIs_100 = np.array(posterioris_HPDIs_100)  # Apenas a transformação em um array numpy
-posterioris_HPDIs = np.array(posterioris_HPDIs)  # Apenas a transformação em um array numpy
+# Tranformando os dados em um array numpy    
+posterioris_HPDIs_10 = np.array(posterioris_HPDIs_10)  
+posterioris_HPDIs_50 = np.array(posterioris_HPDIs_50) 
+posterioris_HPDIs_100 = np.array(posterioris_HPDIs_100)
+posterioris_HPDIs = np.array(posterioris_HPDIs)
 
 
-# Agora, assim como nos gráficos anteriores acima, iremos replotar os mesmos 4 gráficos, mas agora usando o gráfico mostrando o intervalo de compatilidade (`estilo gravata borboleta`). 
+# ### A Compatibilidade da Gravata Borboleta
+# 
+# Conforme os quatro gráficos plotados acima, iremos replotá-los porém agora mostrando o `intervalo de compatibilidade` (*estilo gravata borboleta*). 
 # 
 # 
-# <img src="./images/bow_tie.jpg" alt="Bow Tie" width=400>
+# <img src="./images/bow_tie.jpg" alt="Bow Tie" width=1000>
 # 
-# Ao olhar para esse gráfico é fácil carimos na tentação de acharmos que os limites que escolhemos significa alguma coisa, ele não tem nenhum significado a não ser os limites de corte pelo HPDI. 
+# Ao olhar para esse gráfico é fácil cairmos na tentação de acharmos que os limites que escolhemos significa alguma coisa, `ele não tem nenhum significado` a não ser os limites de corte pelo HPDI que escolhemos. 
 
-# In[16]:
+# In[17]:
 
 
 # ==================================================
@@ -432,8 +467,8 @@ fig, [[ax1, ax2], [ax3, ax4]] = plt.subplots(2, 2, figsize=(19,12))
 #    Estimando as curvas usando 10 amostras
 # ===============================================
 ax1.plot(range(25, 71), posterioris_HPDIs_10, color='darkgray', linewidth=0.5)
-ax1.fill_between(range(25, 71), posterioris_HPDIs_10[:, 0], posterioris_HPDIs_10[:, 1], color='blue', alpha=0.4)
-ax1.scatter(weight[:N_10], height[:N_10], alpha=0.3)
+ax1.fill_between(range(25, 71), posterioris_HPDIs_10[:, 0], posterioris_HPDIs_10[:, 1], color='gray', alpha=0.4)
+ax1.scatter(weight[:N_10], height[:N_10], alpha=0.5)
 
 ax1.plot(range(25, 71), posterioris_means_10, color='black', linewidth=1)
 ax1.grid(ls='--', color='white', linewidth=0.3)
@@ -445,8 +480,8 @@ ax1.set_xlabel('Peso (weight)')
 #    Estimando as curvas usando 50 amostras
 # ===============================================
 ax2.plot(range(25, 71), posterioris_HPDIs_50, color='darkgray', linewidth=0.5)
-ax2.fill_between(range(25, 71), posterioris_HPDIs_50[:, 0], posterioris_HPDIs_50[:, 1], color='blue', alpha=0.4)
-ax2.scatter(weight[:N_50], height[:N_50], alpha=0.2)
+ax2.fill_between(range(25, 71), posterioris_HPDIs_50[:, 0], posterioris_HPDIs_50[:, 1], color='gray', alpha=0.4)
+ax2.scatter(weight[:N_50], height[:N_50], alpha=0.5)
 
 ax2.plot(range(25, 71), posterioris_means_50, color='black', linewidth=1)
 ax2.grid(ls='--', color='white', linewidth=0.3)
@@ -458,8 +493,8 @@ ax2.set_xlabel('Peso (weight)')
 #    Estimando as curvas usando 100 amostras
 # ===============================================
 ax3.plot(range(25, 71), posterioris_HPDIs_100, color='darkgray', linewidth=0.5)
-ax3.fill_between(range(25, 71), posterioris_HPDIs_100[:, 0], posterioris_HPDIs_100[:, 1], color='blue', alpha=0.4)
-ax3.scatter(weight[:N_100], height[:N_100], alpha=0.2)
+ax3.fill_between(range(25, 71), posterioris_HPDIs_100[:, 0], posterioris_HPDIs_100[:, 1], color='gray', alpha=0.4)
+ax3.scatter(weight[:N_100], height[:N_100], alpha=0.5)
 
 ax3.plot(range(25, 71), posterioris_means_100, color='black', linewidth=1)
 ax3.grid(ls='--', color='white', linewidth=0.3)
@@ -471,11 +506,11 @@ ax3.set_xlabel('Peso (weight)')
 #    Estimando as curvas usando todas as amostras
 # ==================================================
 ax4.plot(range(25, 71), posterioris_HPDIs, color='darkgray', linewidth=0.5)
-ax4.fill_between(range(25, 71), posterioris_HPDIs[:, 0], posterioris_HPDIs[:, 1], color='blue', alpha=0.4)
+ax4.fill_between(range(25, 71), posterioris_HPDIs[:, 0], posterioris_HPDIs[:, 1], color='gray', alpha=0.4)
 ax4.scatter(weight, height, alpha=0.2)
 
 ax4.plot(range(25, 71), posterioris_means, color='black', linewidth=1)
-ax4.grid(ls='--', color='white', linewidth=0.3)
+ax4.grid(ls='--', color='white', linewidth=0.5)
 ax4.set_title('Intervalos HPDI da posteriori da média altura com todos os pontos de amostras')
 ax4.set_ylabel('Altura (height)')
 ax4.set_xlabel('Peso (weight)')
@@ -483,19 +518,27 @@ ax4.set_xlabel('Peso (weight)')
 plt.show()
 
 
-# Perceba que nos gráficos de borboletas nós usamos os cortes para os intervalos com $89%$. Isso é apenas para mostrar que não, isso mesmo, não existe nada especial nos cortes do HPDI. Mas os cortes mais usuais de $50%$, $80%$ ou $95%$, corriqueiramente usados em outras escolas estatísticas, são apenas cortes que queremos visualizar. Nada mais! 
+# Perceba que nos gráficos de borboletas nós usamos os cortes para os intervalos com $89\%$. Isso é apenas para mostrar que não, isso mesmo, `não existe nada especial nos cortes do HPDI`. 
+# 
+# Porém existem alguns cortes que são mais usados como o de $50%$, $90%$ ou $95%$, corriqueiramente são usados em outras escolas estatísticas, são apenas cortes que queremos visualizar. **Nada mais!** 
 
-# Até agora nós fizemos os gráficos apenas usando os parâmetros da média, mas podemos construir o gráfico de envelope para o sigma também. Iremos construir ambos utilizando toda a nossa amostra. 
+# Até agora nós fizemos os gráficos apenas usando os parâmetros da média ($\mu_i$), mas podemos construir o gráfico de envelope para o sigma ($\sigma$). 
+# 
+# Iremos construir ambos utilizando toda a nossa amostra. 
 
-# In[17]:
+# In[18]:
 
 
 # ============================================================================
 #     Plotando o HPDI da distribuição preditiva da alutra e de sua média
 # ============================================================================
-posterioris_height_HPDIs = []
 
-HPDI_range = 0.93  # Define o tamanho do intervalo do HPDI. Altere o valor para ver a diferença.
+# ===========================================
+# Nota: Altere o valor para ver a diferença.
+# ===========================================
+HPDI_range = 0.93  # Define o tamanho do intervalo do HPDI. 
+
+posterioris_height_HPDIs = []
 
 for weight_i in range(25, 71):
     posteiori_height = np.random.normal(alpha + beta*(weight_i - weight.mean()), sigma)
@@ -520,37 +563,48 @@ plt.xlabel('Peso (weight)')
 plt.show()
 
 
-# Como podemos ver no gráfico acima, temos duas regiões de confiança. A região mais interna, azul escura, nos indica que esse trecho contém $89\%$ de probabilidade da média estar ali dentro, para cada um dos pesos medidos.
-# Já a região mais externa, aquele azul mais clara, nos indica que, com $93\%$ probabilidade, será a região mais provável para altura da pessoa que tenha um peso espefícico. 
+# Como podemos ver no gráfico acima, temos duas regiões de confiança. A região mais interna - *azul mais escura* - nos indica que esse trecho contém $89\%$ de probabilidade da `média estar ali dentro`, para cada um dos pesos.
 # 
-# Como teste para conseguir compreender melhor, faça o teste a altera a variável `HPDI_range` para valores bem altos, como por exemplo, $0.99$ e veja o quanto a faixa mais externa  cobre os dados. Para valores menores, isso também ocorre, como por exemplo, $0.7$.
+# Já a região mais externa - *aquela faixa azul mais clara* - nos indica que, com $93\%$ probabilidade, será a região mais provável da altura de um pessoa, dado um determinado peso. 
 # 
-# Obs: A utilização de valores muito baixos, demanda cálculos mais complexos e poor isso pode ser demorada.
+# Como teste para uma melhor compreensão, faça alterações na variável `HPDI_range` para valores bem altos, por exemplo, $0.99$ e veja o quanto a faixa mais externa cobrirá os dados (*os pontos vermelhos*). Para valores menores, isso também ocorre, por exemplo, $0.7$.
+# 
+# Verifique!
+# 
+# ```{warning}
+# A utilização de valores baixos, irá demandar cálculos mais complexos e por isso pode ser muito demorado.
+# ```
 
-# ### Curvas a partir das Linhas Retas
+# ## Curvas a partir das Linhas Retas
 # 
-# O interessante de modelos lineares é que eles não são apenas lineares, podem ser curvas também. Isso é uma coisa meio enloquecedora sobre o termo que é convencionalmente  usado para desenhar linhas retas em gráficos.
+# O interessante de modelos lineares é que eles `não são apenas lineares`, podem ser curvas também. Isso é uma coisa meio enlouquecedora sobre o termo que é convencionalmente usado para desenhar linhas retas em gráficos.
 # 
-# Mas uma regressão linear é aditiva, você vai ter essa equação para média que é a soma de alguns parâmetros vezes algumas variável observada. Com a soma de um monte de termos como esse. É uma equação aditiva e coisas aditivas são lineares na matemática.
+# Mas uma regressão linear é `aditiva`, vamos ter que essa equação para média será a `soma de alguns parâmetros vezes algumas variáveis observadas`. Assim teremos a soma de um monte de termos. 
 # 
-# Mas para nós as palavras "adtivo" e linear são diferentes, então chamaremos esses modelos de `Regressões Aditivas`. Por que podemos usar coisas que não parecem linhas retas. E de agora até o final do capítulo iremos fazer isso,  *desenhar curvas a partir de linhas retas*.
+# Temos uma equação aditiva e coisas aditivas são lineares na matemática.
+# 
+# Mas para nós, as palavras "adtiva" e "linear" são diferentes, então chamaremos esses modelos de `Regressões Aditivas`. Porque, podemos usar coisas que não parecem linhas retas. E, de agora até o final do capítulo, iremos fazer isso,  `desenhar curvas a partir de linhas retas`.
 
-# Mas antes de fazer, por que é interessante aprendermos a fazer esse tipo de modelagem? Simples, por que a Natureza não se limita a se manifestar por relações lineares entre  duas variáveis! Os nossos ranges podem ser aproximações úteis, mas geralmente são bobos.
+# Mas antes de continuar, gostaria de explicar o por que é interessante aprendermos a fazer esse tipo de modelagem?
 # 
-# No nosso caso, nós usamos as variáveis *altura* e *peso*, porém apenas para indivíduos que tivessem $30$ anos ou mais. Se fossêmos usar todos os indivíduos a relação de peso e altura não mais seria uma linha reta, mas sim uma curva.
+# Simples! Por que a `Natureza não se limita a se manifestar por relações lineares entre  duas variáveis!` Os nossos intervalos podem ser aproximações úteis, mas geralmente são bobos.
+# 
+# No nosso caso, nós usamos as variáveis $altura$ e $peso$, porém apenas para indivíduos que tivessem $30$ anos ou mais. Se fossêmos usar todos os indivíduos a relação do $peso$ e a $altura$ não mais seria uma linha reta, mas sim uma curva!
 
-# In[18]:
+# In[19]:
 
 
 plt.figure(figsize=(17, 9))
 
+# Indivíduos com menos de 18 anos de idade
 height_0_18 = df.loc[df.age < 18, 'height'].values
 weight_0_18 = df.loc[df.age < 18, 'weight'].values
 
+# Indivíduos maiores (ou iguais) de 18 anos de idade - Adultos
 height_18_ = df.loc[df.age >= 18, 'height'].values
 weight_18_ = df.loc[df.age >= 18, 'weight'].values
 
-
+# Plotando os gráficos
 plt.scatter(weight_0_18, height_0_18, label='De 0 a 17 anos de idade', color='red', alpha=0.4)
 plt.scatter(weight_18_, height_18_, label='(Adultos) 18+ anos de idade', color='blue', alpha=0.4)
 
@@ -563,16 +617,16 @@ plt.ylabel('Altura')
 plt.show()
 
 
-# Vamos ver dois modos de construir os modelos de `Regressão Aditivos`:
+# Vamos ver dois modos de construir os modelos de `Regressão Aditivas`:
 # 
 # - **Regressão Polinomial**
 #     
 #     - Usada de forma comum
 #     
-#     - Geralmente aprensenta um comportamento bem ruim
+#     - Geralmente apresenta um comportamento bem ruim
 #   
 # 
-# Esse é um tipo bem comum de regressão, mas também é um modelo bem ruim. Não há nada de errado usar esse tipo de regressão supondo que você entenda o que golem está fazendo e assim usar de forma responsável. Geralmente se utilizam sem uma devida atenção. Iremos ver o motivo dele serem mal comportados.
+# Esse é um tipo bem comum de regressão, mas também é um modelo bem ruim. Não há nada de errado usar esse tipo de regressão supondo que você entenda o que *golem* está fazendo e assim usar de forma responsável. Geralmente se utilizam esse tipo de modelo sem uma devida atenção. Iremos ver o motivo dele serem mal comportados em breve.
 # 
 # 
 # 
@@ -583,26 +637,25 @@ plt.show()
 #     - Altamente Geocêntrica
 #     
 # 
-# Existem muitos tipos de splines, mas nós iremos ver aqui as splines de base, que são provavélmente as mais comuns. Software de desenhos como `GIMP`, `Blender` e etc. que possuem a ferramenta *curvas de Bezier*, nada mais são do que splines de base.
+# Existem muitos tipos de splines, mas nós iremos ver apenas as `splines de base`, que são provavelmente as mais comuns. Software de desenhos como `GIMP`, `Blender` e etc. que possuem essa ferramenta com o nome de *curvas de Bezier*, que nada mais são do que splines de base.
 # 
 # 
-# As Splines são muito flexíveis, muito mais flexíveis do que as Regressões Polinomiais, porém não apresentam a patologia que os polinômios apresentam, e por isso são considerado na maioria dos casos melhores que as regressões polinômiais.
+# As Splines são muito flexíveis, muito mais flexíveis do que as Regressões Polinomiais, porém não apresentam a patologia que os polinômios apresentam e, por isso, são considerados, na maioria dos casos, melhores que as regressões polinômiais.
 # 
+# Porém, tanto as splines quantos as regressões polinomiais são `estratégias geocêntricas`, não há nada de científico nelas. São apenas aproximações como o * modelo de epiciclos de Ptolomeu*.
 # 
-# Porém tanto as splines quantos as regressões polinomiais são `estratégias geocêntrica`, não há nada de científico nelas, são apenas aproximações com epiciclos de Ptolomeu.
-# 
-# Extrapolações com esses modelos podem trazer desastres nas predições, por isso é necessário checar e entender o que está acontecendo com o modelo.
+# Extrapolações com esses modelos podem trazer `desastres nas predições`, por isso é necessário checar e entender o que está acontecendo com o modelo.
 
-# ### Regressão Polinomial
+# # Regressão Polinomial
 
-# Estratégia puramente descritiva (*geocêntrico*) usando uma variável com preditor polinomial.
+# Estratégia puramente descritiva (*geocêntrica*) usando uma variável como preditora polinomial.
 # 
 # - 1a Ordem (Linha): $ \mu_i = \alpha + \beta_1x_i $
 # 
 # 
 # - 2a Ordem (Parábola):  $\mu_i = \alpha + \beta_1x_i + \beta_2x^2_i$
 
-# #### Modelo Parabólico da Altura
+# ### Modelo Parabólico da Altura
 # 
 # O modelo parabólico pode ser definido da seguinte forma:
 # 
@@ -614,51 +667,54 @@ plt.show()
 # 
 # $$ \alpha \sim Normal(178, 20) $$
 # 
-# $$ \beta_1 \sim  Log-Normal(0, 1) $$
+# $$ \beta_1 \sim  LogNormal(0, 1) $$
 # 
 # $$ \beta_2  \sim  Normal(0,  1) $$
 # 
 # $$ \sigma \sim Uniform(0,  50) $$
 
-# O problema desse modelo é que os termo $\beta_1$ e $\beta_2$ não tem um significado biológico, é apenas um ajuste na curvatura da função. Por esse motivo nós temos que simular para entender oque está acontecendo com a priori. Se não entendermos o que são essas variáveis, as nossa posterioris não teram sentido interpretativo.
+# O problema desse modelo é que os termo $\beta_1$ e $\beta_2$ não tem um significado biológico, `isso é apenas um ajuste na curvatura da função`. Por esse motivo nós temos que simular para entender oque está acontecendo com à priori. Se não entendermos o que são essas variáveis, as nossas posterioris não teram sentido interpretativo.
 # 
-# Não é para não usar, mas usar com responsabilidade.
+# ```{note}
+# Não é para não usar! Apenas use com responsabilidade.
+# ```
 
-# #### Padronizar os Preditores
+# ### Padronizar os Preditores
 # 
-# - É muito útil padronizar as variáveis preditoras antes de ajustar o modelo.
+# - É muito útil padronizar as variáveis preditoras antes de ajustar o modelo, temos algumas vantagens tais como:
 #     
-#     - Torna a estimação mais simples
+#     - Torna o processo de estimação mais simples
 #     
-#     - Auxília na interpretação (*alguma vezes*)
+#     - Auxília na interpretação (*algumas vezes*)
 #     
 # 
-# Para padronizar siga os seguinte passos para todos os dados:
+# Para padronizar as variáveis preditoras, siga os seguinte passos para todos os dados:
 # 
-# - subtrair da média.
+# - subtrair cada valor da média da amostra.
 # 
-# - dividir pelo desvio padrão.
+# - dividir o valor obtido acima pelo desvio padrão da amostra.
 # 
-# - Resultando: Média = 0 e Desvio Padrão = 1
+# - Assim, essa operação resultará em: $Média = 0$ ; $Desvio Padrão = 1$
 
-# In[19]:
+# In[20]:
 
 
 # =================================================================
-#       Construindo o Modelo de Regressão Parabólica | Parcial
+#       Construindo um Modelo de Regressão Parabólica | Parcial
 # =================================================================
 
 weight_full = df.weight.values  # X_i
 height_full = df.height.values  # Y_i
 
-# Ajustando o modelo para pessoas acimas dos 18 anos - Teste de ajuste
-height_full_30 = df.loc[df.age >= 18, 'height'].head(10).values
-weight_full_30 = df.loc[df.age >= 18, 'weight'].head(10).values
+# Utilizando os 10 primeiros dados para pessoas acimas dos 18 anos - Teste de ajuste
+height_full_18 = df.loc[df.age >= 18, 'height'].head(10).values
+weight_full_18 = df.loc[df.age >= 18, 'weight'].head(10).values
 
+# Média e desvio padrão para todos os dados acima
 weight_full_mean = np.mean(weight_full)
 weight_full_std = np.std(weight_full)
 
-weight_full_std = (weight_full_30 - weight_full_mean)/weight_full_std   # Padronizando as variáveis explicativa
+weight_full_18_normalized = (weight_full_18 - weight_full_mean)/weight_full_std   # Padronizando as variáveis explicativa
 
 model_stan_regression_parabolic = """
 data {
@@ -684,29 +740,30 @@ model {
 }
 """
 
+# Construindo um dicionário com os dados
 my_data = {
-    'N': len(weight_full_std),
-    'weight': weight_full_std ,
-    'weight_2': weight_full_std ** 2,
-    'height': height_full_30,
+    'N': len(weight_full_18_normalized),
+    'weight': weight_full_18_normalized ,
+    'weight_2': weight_full_18_normalized ** 2,  # x_i^2
+    'height': height_full_18,
 }
 
+# Rodando o modelo na Stan
 posteriori = stan.build(model_stan_regression_parabolic, data=my_data)
-
 fit = posteriori.sample(num_chains=4, num_samples=1000)
 
-# rp := referênte ao modelo de Regressão Parabólica
+# O sufixo '_rp', usado abaixo, é referênte ao modelo de Regressão Parabólica.
 alpha_rp = fit['alpha'].flatten()
 beta_1_rp = fit['beta_1'].flatten()
 beta_2_rp = fit['beta_2'].flatten()
 sigma_rp = fit['sigma'].flatten()
 
 
-# In[20]:
+# In[21]:
 
 
 # ===================================================
-#   Probabilidade à Posteriori de mu
+#   Probabilidade à Posteriori de mu com N=10
 # ===================================================
 plt.figure(figsize=(17,9))
 
@@ -715,7 +772,7 @@ for i in range(200):
     plt.plot(np.arange(-2, 2, 0.1), mu_poli, color='blue', linewidth=0.1)
 
 # Pontos da amostra
-plt.scatter(weight_full_std, height_full_30, color='red', alpha=0.4)
+plt.scatter(weight_full_18_normalized, height_full_18, color='red', alpha=0.4)
     
 plt.title('Ajuste do modelo de Regressão Polinonimal com N='+str(len(weight_full))+' pontos da amostra.')
 plt.xlabel('Peso')
@@ -726,28 +783,34 @@ plt.grid(ls='--', color='white', linewidth=0.4)
 plt.show()
 
 
-# Regressões Polinomiais tem esse tipo de anomalia implícita, dentro dentro da região dos pontos ela se comporta de modo aceitável, porém fora da região dos pontos, a função se torna descontrolada. Isso ocorre porque exitem muitas outras funcões de segundo grau que podem ser ajustadas nesse conjunto de pontos. Isso não ocorre com tanta intensidade nas regressões com splines.
+# `Regressões Polinomiais` tem esse tipo de anomalia implícita que vimos no gráfico acima. Dentro da região dos pontos ela se comporta de modo aceitável, porém fora da região desses pontos, a função se torna descontrolada. Isso ocorre porque exitem muitas outras funções de segundo grau que podem ser ajustadas nesse conjunto de pontos. Isso não ocorre com tanta intensidade nas regressões com splines.
 # 
-# Perceba que para a esquerda do *zero* no eixo do peso (peso está normalizado) a funcão começa perder o controle e atinge valores que podem ser verdadeiros.
+# Perceba que para a `esquerda do zero` no eixo do peso (*peso está normalizado*) a função começa perder o controle e atinge valores que podem não ser verdadeiros.
 # 
-# Uma segundo incoveniente que ocorre com Regressões Polinomiais é sua própria estrutura matemática. Apenas três parâmetros, o $\alpha$, o $\beta_1$ e o $\beta_2$, controlam todo o comportamento da curva. Isso a torna um pouco mais rígida para situações que precisamos de mais flexibilildade. As splines padrões tem a sua construção baseada em uma estrutura que evita esse tipo de inconveniente.
+# Uma segundo inconveniente que ocorre com as Regressões Polinomiais é sua própria estrutura matemática. Apenas três parâmetros, o $\alpha$, o $\beta_1$ e o $\beta_2$, controlam todo o comportamento da curva. Isso a torna um pouco mais rígida para situações que precisamos de mais flexibilidade. As splines padrões têm, em sua construção, o pesamento de uma estrutura que evita esse tipo de inconveniente.
 # 
-# Lembre-se, ambos modelos, tanto os polinomiais quanto modelos com splines, são modelos *geocentricos*. 
+# Lembre-se, ambos modelos, tanto os polinomiais quanto modelos com splines, são modelos *geocêntricos*. 
 
-# In[21]:
+# In[22]:
 
 
-# Parâmentros
+# =============================================================
+#   Gráfico dos Histogramas das Posterioris dos Parâmentros
+# =============================================================
+
 fig, [ax1, ax2, ax3] = plt.subplots(1, 3, figsize=(17, 9))
 
+# Histograma da posteriori do alpha
 ax1.hist(alpha_rp, density=True, rwidth=0.9, bins=20)
 ax1.grid(ls='--', color='white', linewidth=0.4)
 ax1.set_title('Posteriori Alpha')
 
+# Histograma da posteriori do beta_1
 ax2.hist(beta_1_rp, density=True, rwidth=0.9, bins=20)
 ax2.grid(ls='--', color='white', linewidth=0.4)
 ax2.set_title('Posteriori $Beta_1$')
 
+# Histograma da posteriori do beta_2
 ax3.hist(beta_2_rp, density=True, rwidth=0.9, bins=20)
 ax3.grid(ls='--', color='white', linewidth=0.4)
 ax3.set_title('Posteriori $Beta_2$')
@@ -755,7 +818,7 @@ ax3.set_title('Posteriori $Beta_2$')
 plt.show()
 
 
-# In[22]:
+# In[23]:
 
 
 # ==================================================================================
@@ -802,7 +865,6 @@ my_data = {
 }
 
 posteriori = stan.build(model_stan_regression_parabolic, data=my_data)
-
 fit = posteriori.sample(num_chains=4, num_samples=1000)
 
 # rp := referênte ao modelo de Regressão Parabólica
@@ -812,7 +874,7 @@ beta_2_rp = fit['beta_2'].flatten()
 sigma_rp = fit['sigma'].flatten()
 
 
-# In[23]:
+# In[24]:
 
 
 # ===================================================
@@ -836,7 +898,7 @@ plt.grid(ls='--', color='white', linewidth=0.4)
 plt.show()
 
 
-# In[24]:
+# In[25]:
 
 
 # ============================================
@@ -872,9 +934,39 @@ plt.xlabel('Peso (weight)')
 plt.show()
 
 
-# #### Modelos Cúbicos
+# # Modelos Cúbicos
 
-# In[25]:
+# Seguindo o mesmo raciocínio acima, vamos implementar o modelo de Regressão Polinômial de grau 3. Abaixo temos a evolução dos modelos apresentados:
+# 
+# - 1a Ordem (Linha): $ \mu_i = \alpha + \beta_1x_i $
+# 
+# 
+# - 2a Ordem (Parábola):  $\mu_i = \alpha + \beta_1x_i + \beta_2x^2_i$
+# 
+# 
+# - 3a Ordem (Função Cúbica):  $\mu_i = \alpha + \beta_1x_i + \beta_2x^2_i + \beta_3x^3_i$
+
+# ## Modelo Regressão Cúbico para a Altura
+# 
+# O modelo para estimar a altura usando a função polinômial cúbica pode ser definida da seguinte forma:
+# 
+# $$ h_i \sim Normal(\mu_i, \sigma) $$
+# 
+# 
+# $$ \mu_i =  \alpha + \beta_1x_i + \beta_2x^2_i + \beta_3x^3_i$$
+# 
+# 
+# $$ \alpha \sim Normal(178, 20) $$
+# 
+# $$ \beta_1 \sim  LogNormal(0, 1) $$
+# 
+# $$ \beta_2  \sim  Normal(0,  1) $$
+# 
+# $$ \beta_3  \sim  Normal(0,  1) $$
+# 
+# $$ \sigma \sim Uniform(0,  50) $$
+
+# In[26]:
 
 
 # ==============================================================================================
@@ -888,8 +980,6 @@ weight_full_mean = np.mean(weight_full)
 weight_full_std = np.std(weight_full)
 
 weight_full_std = (weight_full - weight_full_mean)/weight_full_std   # Padronizando as variáveis explicativa
-
-
 
 model_stan_regression_parabolic_3 = """
 data {
@@ -937,15 +1027,13 @@ beta_2_rp3 = fit_p3['beta_2'].flatten()
 beta_3_rp3 = fit_p3['beta_3'].flatten()
 sigma_rp3 = fit_p3['sigma'].flatten()
 
-%%hide
+
+# In[27]:
 
 
-# In[ ]:
-
-
-# ===================================================
+# ======================================
 #   Probabilidade à Posteriori de mu
-# ===================================================
+# ======================================
 plt.figure(figsize=(17,9))
 
 for i in range(200):
@@ -965,7 +1053,7 @@ plt.grid(ls='--', color='white', linewidth=0.4)
 plt.show()
 
 
-# In[ ]:
+# In[28]:
 
 
 # ============================================
@@ -1001,12 +1089,12 @@ plt.xlabel('Peso (weight)')
 plt.show()
 
 
-# In[ ]:
+# In[29]:
 
 
-# ==============================================================================
-#     Construindo o modelo de 1 grau para a comparação | Regressão Linear
-# ==============================================================================
+# =====================================================================================
+#     Construindo o modelo de 1 grau (novamente) para a comparação | Regressão Linear
+# =====================================================================================
 
 height_p1 = df.height.values
 weight_p1 = df.weight.values
@@ -1047,8 +1135,12 @@ beta_p1 = fit_p1['beta'].flatten()
 sigma_p1 = fit_p1['sigma'].flatten()
 
 
-# In[ ]:
+# In[30]:
 
+
+# =========================================================
+#  Calculando os intervalos de HPDI para o modelo linear
+# =========================================================
 
 posterioris_height_HPDIs_p1_mean = []
 mu_HPDI_p1 = []
@@ -1065,14 +1157,16 @@ mu_HPDI_p1 = np.array(mu_HPDI_p1)
 posteriori_HPDI_p1 = np.array(posteriori_HPDI_p1)
 
 
-# In[ ]:
+# In[31]:
 
 
 # ==================================================
 #     Comparativo dos três modelos polinomiais 
+#             de 1º, 2º e 3º grau
+#         para estimativa das alturas!
 # ==================================================
 
-fig, [ax1, ax2, ax3] = plt.subplots(1, 3, figsize=(17, 12))
+fig, [ax1, ax2, ax3] = plt.subplots(3, 1, figsize=(15, 22))
 
 # ===============================================================================
 #     Plotando o gráfico de regressão polinomial de grau 1 - Modelo Linear
@@ -1104,7 +1198,7 @@ ax2.set_ylabel('Altura (height)')
 ax2.set_xlabel('Peso (weight)')
 
 # ===============================================================================
-#     Plotando o gráfico de regressão polinomial de grau 3
+#     Plotando o gráfico de regressão polinomial de grau 3 - Função Cúbica
 # ===============================================================================
 
 ax3.plot(np.arange(-2, 2, 0.1), posteriori_polinomial3_HPDI, color='darkgray', linewidth=0.5)
@@ -1121,18 +1215,24 @@ ax3.set_xlabel('Peso (weight)')
 plt.plot()
 
 
-# O que fizemos aqui foi escolher uma forma matemática (*um polinômio de primeiro, de segundo e de terceiro grau*) e ajustarmos a melhor forma de cada um deles nos dados.
+# O que fizemos aqui foi escolher uma forma matemática polinômial (*um polinômio de primeiro, de segundo ou de terceiro grau*) e ajustarmos a melhor estrutura em cada um deles usando os dados da amostra.
 # 
-# Como temos muitos dados, a nossa incerteza tende a ficar muito pequena o que pode nos levar a achar que o modelo está bem ajustado. As linhas não endossa o modelo, o que faz mais sentido é o modelo endossar as linhas.  
+# Como temos muitos dados, a nossa incerteza tende a ficar muito pequena, o que pode nos levar a achar que o modelo está bem ajustado. 
 # 
-# Por isso temos que saber ser críticos com os modelos e sobre a sua estrutura geral, por que o modelo nunca fará isso por si mesmo. Ele não tem responsabilidade e capacidade para fazer isso. É de nossa responsabilidade fazer essa crítica, senão iremos *destruir Praga*.
+# ```{note}
+# As linhas não endossam o modelo. O que faz mais sentido é que o modelo endosse as linhas!  
+# ```
+# 
+# Por isso temos que saber ser críticos com os modelos e sobre a sua estrutura geral, porque o modelo nunca fará isso por si mesmo. `Ele não tem responsabilidade e capacidade para fazer isso`. É de nossa responsabilidade fazer essa crítica, senão iremos *destruir Praga*.
 # 
 # 
-# Podemos perceber que essas linhas não se ajustam também aos dados de modo geral, mas também não há muita incerteza de onde elas estão. Isso é interessante, os intervalos de confiabilidade são minúsculos mas o ajuste  nos dados foi um ajuste ruim, o modelo tem pouca incerteza mas é um modelo ruim. 
+# Podemos perceber que essas linhas não se ajustam, de modo geral, tão bem assim aos dados, e também não há muita incerteza de onde elas estão. Isso é bem interessante, os intervalos de confiabilidade são minúsculos, mas o ajuste nos dados foi um ajuste ruim, o` modelo tem pouca incerteza, mas é um modelo ruim`. 
 # 
-# Outro problema dos polinômios é que ele não são monotônicos, ou seja, depois de certo estágio eles tendem a seguir indefinidamente até o infinito. Não há oscilações desse modelo.
+# Outro problema dos polinômios é que ele são monotônicos, ou seja, depois de certo estágio eles tendem a seguir indefinidamente até o infinito. 
+# 
+# Não há oscilações desse modelo! É um modelo mais duro de manipular!
 
-# #### Dores dos Polinômios
+# ## Dores dos Polinômios
 # 
 # - Polinômios fazem previsões absurdas fora do range dos dados.
 # 
@@ -1140,73 +1240,83 @@ plt.plot()
 # - Os parâmetros influenciam cada parte do corpo da curva, isso torna difícil de se entender.
 # 
 # 
-# - Não são muito flexíveis, não podem ter curvas monotônicas.
+# - Não são muito flexíveis, podem ter curvas monotônicas.
 # 
 # 
 # Essas perdas de estabilidade também podem ocorrer dentro do range dos dados, iremos ver bem mais para frente um exemplo disso. 
 
-# ### Splines
+# # Splines
 
 # <img src='./images/splines_boat.jpg' alt="splines in boat" width=1000>
 
-# Então, o que fazer agora? Existem muitas outras opções, a que vamos ver aqui é uma que bastante comum e realmente útil no dia-a-dia. Mas, ainda assim, contínua sendo um modelo *geocentrico*. Assim como todos os outros modelos! Por isso, precisamos responsabilidade ter com o modelo e não interpreta-lo demais.
+# Então, o que fazer agora para não precisarmos enfrentar os maus comportamentos dos polinômios?
 # 
-# As splines sugiram de uma motivação física. `Spline` é nome bastante estranho, mas é apenas a barra na foto acima.  Essa barra é recuada e fixada pontualmente (*pivot point*) pelos pesos de metal ao longo de seu comprimento. Vamos chamar esses pesos de `nós` (*`knots`*). Essa estrutura ainda hoje é usada por desenhistas para traçar a curvas de um casco de barco. 
+# Existem muitas outras opções. A que vamos ver aqui é uma bastante comum e realmente útil no dia-a-dia. Mas, ainda assim, contínua sendo um modelo *geocêntrico*. `Assim como todos os outros modelos!` Por isso, precisamos ter responsabilidades com o modelo e `não interpreta-lo demais`.
+# 
+# 
+# As splines sugiram de uma motivação física. `Spline` é nome bastante estranho, mas é apenas a *barrinha* (de madeira ou de aço), como na foto acima.  Essa barra é recuada e fixada pontualmente (*pivot point*) pelos pesos de metal ao longo de seu comprimento. Vamos chamar esses pesos de `nós` (*`knots`*). Essa estrutura ainda hoje é usada por desenhistas para traçar a curvas de cascos de barcos. 
 
-# ### Agindo Localmente - *B-splines*
+# ## Agindo Localmente - *B-splines*
 # 
-# `Splines de base`, ou no inglês *basis-splines*, naturalmente são chamadas de `B-splines`. São funções todos seus parâmetros tem efeitos apenas locais e não globalmente como nos polinômios. São funções *wiggly*. Essa classe de funções são construídas com outras funções *wigglys* locais. 
+# `Splines de base`, ou no inglês *basis-splines*, naturalmente são chamadas de `B-splines`. São funções que todos os seus parâmetros têm efeitos locais apenas e não globalmente como nos foi visto nos polinômios. São funções *wiggly*. Essa classe de funções é construída com outras funções *wigglys* locais. 
 # 
-# Vamos ver um exemplo, mas devemos sempre nos lembrar de que estamos construindo um modelo *geocêntrico*, e que este está apenas descrevendo o comportamento dos dados na estrutura do nosso modelo e não explicando eles. Iremos esses resultados para fazer previsões e, portanto, devemos ter responsabilidades sobre como funciona um modelo.
+# Vamos ver um exemplo, mas devemos sempre nos lembrar de que estamos construindo um modelo *geocêntrico*, e que este está apenas descrevendo o comportamento dos dados na estrutura do nosso modelo e não explicando eles. Iremos observar esses resultados para as fazer previsões, portanto, devemos ter `responsabilidades sobre como funciona um modelo`.
 # 
 # 
-# `Funções de base`são apenas funções locais, e toda a spline é construída com interpolações deslizando suavemente entre essas funções locais, ou seja, as funções de base (*basis functions*). 
+# `Funções de base` são apenas funções locais, e toda a spline é construída com interpolações, deslizando suavemente entre essas funções locais, ou seja, as funções de base (*basis functions*). 
 # 
-# Nós iremos construir uma grande *wiggly functions* a partir de outras *wiggly functions* menores. Mas cada uma dessas funções wiggly menores tem parâmetros locais que descrevem a sua importância, nós iremos ajustá-los e poderemos observar que não ocorrerá aquelas oscilações bruscas como ocorreu nas regressões polinomiais.
+# Para ficar mais claro, nós iremos construir uma grande *wiggly functions* a partir de outras *wiggly functions* menores. Mas cada uma dessas funções wiggly menores tem parâmetros locais que descrevem a sua própria importância. Nós iremos ajustá-los e poderemos observar que não ocorrerá aquelas oscilações bruscas como ocorreu nas regressões polinomiais.
 # 
-# Esses modelos são melhores do que os polinômios, mas igualmente *geocêntricos*.
+# ```{note}
+# Esses modelos são geralmente melhores do que os modelos polinômiais, mas igualmente *geocêntricos*!
+# ```
 # 
-# `B-Splines bayesianas` são geralmente chamadas de `P-splines`. É usado comumente em pessoas que usam machine learning. O `P` significa *penalidades* que a priori dá para os pesos, mas rotulado dessa forma em contexto não bayesianos.
+# `B-Splines bayesianas` são geralmente chamadas de `P-splines`. É usado comumente em pessoas que usam *Machine Learning*. O `P` significa *penalidades* que a priori dá para os pesos, mas foram rotulados dessa forma em contextos *não bayesianos*.
 # 
-# Mais para frente no curso iremos ver melhor os conceitos de penalidades e ficará bem mais claro o uso.
+# Mais para frente no curso iremos ver melhor os conceitos de penalidades e ficará bem mais claro o seu uso.
 
-# `B-splines` são apenas apenas uma variação dos modelos lineares que vimos anteriormente. É um modelo aditivo que tem algumas variáveis sintéticas estranhas (não observáveis):
+# `B-splines` são apenas uma variação dos modelos lineares que vimos anteriormente. Também é um `modelo aditivo` que tem algumas variáveis sintéticas estranhas (ou seja, *não observáveis*).
+# 
+# O modelo pode ser escrito da seguinte forma:
 # 
 # $$ \mu_i = \alpha + w_1B_{i, 1}+ w_2B_{i, 2}+ w_3B_{i, 3}+ ...  $$
 # 
-# Os pesos $w_i$ são como as inclinações. Isso é meio estranho por que o preditor de interesse não irá aparecer no modelo, no entanto, teremos uma aproximação fantástica da relação entre os preditores de interesse e o resultado. Parece estranho, mas funciona super bem.
+# Os pesos $w_i$ são como as inclinações. Isso é meio estranho porque o preditor de interesse não irá aparecer no modelo, no entanto, teremos uma aproximação fantástica da relação entre os preditores de interesse e o resultado. 
+# 
+# ```{warning}
+# Parece estranho, mas funciona super bem.
+# ```
 # 
 # As funções de bases (*basis functions*) $B$ são variáveis sintéticas. Internamente elas são termos quadráticos ou termos cúbicos. Mas note que os dados não foram usados para construir $B$. Os valores de $B$ associam pesos em diferentes regiões da variável $x$.
 # 
 # 
-# Vamos construir um exemplo, passo-a-passo, de como construir um modelos assim.
+# Vamos construir um exemplo, passo-a-passo, de como construir um modelos de tipo.
 # 
+# Para isso, vamos utilizar os dados do Milenar Festival de Flores de Cerejeira no Japão.
 
-# ### Festival das Flores de Cerejeira
-# 
-# #### *B-splines* do Clima
+# ## Festival das Flores de Cerejeira
 # 
 # <img src='./images/cherry_blossoms.jpg' alt='Cherry Blossoms' width=1000>
 # 
-# Cherry blossoms at Sugimura park, Hashimoto
+# *Cherry blossoms at Sugimura park, Hashimoto*
 # [Wikipedia](https://en.wikipedia.org/wiki/Cherry_blossom)
 
-# Agora iremos usar os dados do histórico festival japones das flores de cerejeiras. O primeiro registro da uma flor de cerejeira nesse festival foi registrada a mais de $1200$ anos atrás e, agora, nós temos esses dados abaixo para podermos explorar e entendê-los melhor.
+# Agora iremos usar os dados do histórico do festival japonês das flores de cerejeiras. O primeiro registro de uma flor de cerejeira nesse festival foi registrada a $1200$ anos atrás e, agora, nós temos esses dados para podermos explorar e entendê-los melhor.
 # 
-# Nos dados temos a variável de tempo, `year`, correspondente a cada ano de coleta dos dados. Temos os dados da época da floração e também a temperatura de Março. A temperatura influencia diretamente na floração das árvores pelo processo biológico natural.
+# Na nossa base de dados temos a variável tempo, `year`, correspondente a cada ano de coleta dos dados. Temos os dados da época da floração e também dados da temperatura. A temperatura tem influência direta na floração das árvores pelo natural processo biológico.
 # 
 # Como podemos imaginar, essa relação é afetada pelas oscilações dos processos climáticos ao longo dos anos. Por agora nós iremos olhar para os dados da temperatura ao longo dos anos. Mas para frente ao longo do curso, iremos relacionar mais variáveis.
 # 
-# Fique como exercício construir um modelo linear da `temperatura` explicando a `data do florecimento` (*doy*), existe um relacionamento muito forte e entenderemos o porque disso. 
+# Fique como exercício construir um modelo linear da `temperatura` explicando a `data do florecimento` (*doy*), existe um relacionamento muito forte e entenderemos o porquê disso. 
 
-# In[ ]:
+# In[32]:
 
 
 cherry_df = pd.read_csv('./data/cherry_blossoms.csv', sep=';')
 cherry_df.describe()
 
 
-# In[ ]:
+# In[33]:
 
 
 plt.figure(figsize=(17, 9))
@@ -1222,13 +1332,12 @@ plt.show()
 # Nosso objetivo aqui é construir uma tendência com esses registros de temperaturas, o que significa que queremos estimar uma spline para esses dados.
 # 
 # 
-# Se quisermos observar uma tendência em uma determinda escala para compará-lás a algum movimento, então iremos precisar contruir uma tendência em uma certa escala.
+# Se quisermos observar uma tendência em uma determida escala para compará-lás a algum movimento, então iremos precisar construir uma tendência em uma escala específica.
 # 
 # 
-# 
-# O que iremos fazer aqui é trabalhar com a ideia de obter alguma aproximação da série com alguma qualidade arbitrária. Nós iremos começar com uma aproximação bastante ruim para entender as *wiggly functions* e após isso iremos construir modelos mais complexos e com melhores aproximações usando uma *`B-splines`*.
+# O que iremos fazer aqui é trabalhar com a ideia de obter alguma aproximação da série com alguma qualidade arbitrária. Nós iremos começar com uma `aproximação bastante ruim` para entender as *wiggly functions* e após isso iremos construir modelos mais complexos e com melhores aproximações usando uma *`B-splines`*.
 
-# In[ ]:
+# In[34]:
 
 
 # ===================================================
@@ -1237,10 +1346,10 @@ plt.show()
 
 plt.figure(figsize=(17, 9))
 
-plt.scatter(cherry_df.year, cherry_df.doy, marker='o', alpha=0.5, s=7)
+plt.scatter(cherry_df.year, cherry_df.doy, marker='o', alpha=0.9, s=3)
 plt.title('Cherry Blossom \n Festival das Flores de Cerejeiras no Japão')
 plt.xlabel('Ano')
-plt.ylabel('Primeiro dia de Floração')
+plt.ylabel('Dia do Calendário Juliano da primeira Floração')
 plt.grid(ls='--', color='white', alpha=0.6)
 plt.show()
 
@@ -1250,21 +1359,23 @@ plt.show()
 # Aqui está um passo a passo de como construirmos uma splines.
 # 
 # 
-# - **Escolha alguns nós (*knots*)**: localização da variável preditora onde a spline é ancorada! Assim determinaremos o local onde aquelas peças pesadas irão estar ao longo da barra de aço. É as peças pesada matemáticas onde os pontos de base fazem o pivô e determinam as lacunas entre as splines de base. 
+# - **Escolha alguns nós (*knots*)**: localização da variável preditora onde a spline é ancorada! Assim determinaremos o local onde aquelas peças pesadas irão estar ao longo da barrinha. Matemáticamente são os pontos de base fazem o pivô e determinam as lacunas entre as splines de base. 
 # 
 # 
-# - **Escolha os graus da função de base**: O quanto é *wiggly*. Iremos demonstrar gráficamente esse a utilização dos graus no decorrer da explicação. 
+# - **Escolha os graus da função de base**: o quanto é *wiggly*. Iremos demonstrar graficamente esse conceito sobre a utilização dos graus no decorrer da explicação. 
 # 
 # 
-# - **Encontre a distribuição posteriori dos pesos**: Como anteriormente iremos fazer a estimativa bayesiana dos pesos, muito próximos como fizemos nos modelos de regressão.
+# - **Encontre a distribuição à posteriori dos pesos**: como anteriormente iremos fazer a estimativa bayesiana dos pesos, muito próximos como fizemos nos outos modelos de regressão.
 
-# #### Knots - Como escolher os pontos?
+# ### Knots - Como escolher os pontos?
 # 
-# Exite uma grande literatura de abordagens de como devemos escolhermos os pontos. Uma dos métodos mais comuns e eficientes são distribuí-los de acordo com seus *quantis*, pois assim podemos distribuir mais pontos onde há um acúmulo maior dos dados. Geralmente pacotes e livrarias computacionais já nos trazem esses dados de modo automático e de uma certa forma mágicos. Nós iremos construir todo esse modelo manualmente para que entendermos os detalhes de seu funcionamento. 
+# Exite uma ampla literatura sobre abordagens de como devemos escolher esses pontos. Uma dos métodos mais comuns e eficientes são distribuí-los de acordo com seus *quantis*, pois assim podemos distribuir mais pontos onde há um acúmulo maior dos dados. 
 # 
-# O que vamos propor é colocar um *knot* na mediana, um *knot* em cada extremidade e outros dois no centros, conforme mostrado no gráfico abaixo.
+# Geralmente pacotes e livrarias computacionais já nos trazem essas escolhas de modo automático e, de uma certa forma, mágicos! Nós iremos construir todo o modelo manualmente, para que possamos entender os seus detalhes de seu funcionamento. 
+# 
+# O que vamos propor é colocar um *knot* na mediana, um *knot* em cada extremidade e outros dois nos centros laterais, conforme mostrado no gráfico abaixo.
 
-# In[ ]:
+# In[35]:
 
 
 # Configurando a variável de tempo.
@@ -1280,10 +1391,7 @@ year = year[np.isfinite(year)]  # Removendo os elementos NaN's
 knots = np.quantile(year, knots_array)
 knots = [int(x) for x in knots]  # Convertendo os valores do Knots para inteiro
 
-
-# In[ ]:
-
-
+# Plotando os pontos dos nós - Knots.
 plt.figure(figsize=(17, 9))
 
 plt.scatter(cherry_df.year, cherry_df.temp, marker='o', alpha=0.5, s=7)
@@ -1296,27 +1404,23 @@ plt.grid(ls='--', color='white', alpha=0.6)
 plt.show()
 
 
-# Vamos agora construir as splines e os nós (*knots*). Iremos desenhar abaixo todas as variáveis sintéticas. Os valores das variáveis sintéticas são construídas ao longo de todo intervalo da variável `ano`. E então queremos interpolar os dados.
+# Vamos agora construir as splines em seus nós (*knots*). Iremos desenhar abaixo todas as variáveis sintéticas. Os valores das variáveis sintéticas são construídas ao longo de todo intervalo da variável `ano`. E então queremos interpolar os dados.
 # 
-# Uma das maneiras de pensar a respeito disso é pensar o ano como uma variável na qual nunca iremos usar novamente, usaremos apenas para definir os *knots* como âncoras sobre alguns anos específicos, mas nunca usaremos esses dados novamente.
+# Uma das maneiras de se pensar a respeito disso é pensar o ano como uma variável na qual nunca iremos usar novamente, usaremos apenas para definir os *knots* como âncoras sobre alguns anos específicos, mas nunca usaremos esses dados novamente.
 # 
-# Para começar iremos construir algumas funções de base (*basis functions*). Vamos começar com as funções de bases  mais simples, funções de base de grau 1, o que é uma linha reta. Com isso iremos contruir uma *wiggly functions* composta de várias funcões de base de primeiro grau que são as linhas retas.
+# Para começar, iremos construir algumas simples `funções de base` (*basis functions*). Vamos começar com as funções de bases  mais simples, funções de base de grau 1, o que é uma linha reta. Com isso iremos construir uma *wiggly functions* composta de várias funções de base de primeiro grau, que são a junções daquelas linhas retas.
 
 # <img src="./images/splines_2.jpg" alt="splines com pesos" width=500>
 
-# *Os comentários das funções também serão escritos em português, assim como os textos e comentários de linhas de códigos estão sendo feitos. O objetivo agora é facilitar a explicação e não colocar esses código em produção! Mas algumas coisas podem ficar estranhas escritas em 2 linguas. Portanto, tentarei deixar o mais harmonioso possível.*
-# :-) 
-# 
-
 # Para a construção das splines, iremos usar a função disponível na biblioteca *SciKit Learn* e sua documentação pode ser acessada [clicando aqui.](https://scikit-learn.org/stable/modules/generated/sklearn.preprocessing.SplineTransformer.html#examples-using-)
 
-# In[ ]:
+# In[36]:
 
 
 from sklearn.preprocessing import SplineTransformer
 
 
-# In[ ]:
+# In[37]:
 
 
 # ======================================
@@ -1355,19 +1459,21 @@ plt.ylim((0, 1.2))
 plt.show()
 
 
-# Assim como as splines para os desenhistas como na imagens acima, nós, estatísticos, usamos elas de modo semelhantes em matemática. No gráfico acima plotamos $5$ funções de bases (*basis-function*) tendo como ponto central os nós (*knots*) que definimos anteriormente.
+# Assim como as splines para os desenhistas, nós, estatísticos, usamos elas de modos semelhantes em matemática. No gráfico acima plotamos $5$ funções de bases (*basis-functions*) tendo como ponto central os nós (*knots*) que definimos anteriormente.
 # 
 # 
-# Para entendermos o funcionamento dessa estrutura, temos que perceber 2 coisas: Os dois pontos pretos que estão plotados no gráfico acima, esses pontos sempre estarão sobre 2 funcões de base, como por exemplo na função referente ao nó 2 *($knot_2$)* e ao nó 3 *($knot_3$)*. Isso sempre será verdade, exceto quando a posição do `eixo x` estiver exatamente sobre a posição de alguns do nós. 
+# Para entendermos o funcionamento dessa estrutura, temos que perceber 2 coisas: Os dois pontos pretos que estão plotados no gráfico acima, esses pontos sempre estarão sobre 2 funções de base, por exemplo na função referente ao nó 2 *($knot_2$)* e ao nó 3 *($knot_3$)*. Isso sempre será verdade, exceto quando a posição do `eixo x` estiver exatamente sobre a posição de alguns do nós. 
 # 
 # 
-# A próxima observação é que cada uma das funções de base será multiplicada por um número, esse número irá modificar a sua estrutura podendo aumenta-lá ou a encurtar. Esse peso, como veremos mais adiante, será rotulado de $w$. Assim, após essa modificação ser aplicada em todas as curvas, iremos somar todos os pontos pretos e obteremos a nossa *B-spline*, ou seja, uma nova curva que é a resultante da soma de todas as curvas multiplicada por ser respectivos pesos.
+# A próxima observação é que cada uma das funções de base será multiplicada por um número, esse número irá modificar a sua estrutura podendo aumenta-lá ou a encurtar. Esse peso, como veremos mais adiante, será rotulado de $w$. Assim, após essa modificação ser aplicada em todas as curvas, iremos somar todos os pontos pretos e obteremos a nossa *B-spline*, ou seja, uma nova curva que é a resultante da soma de todas as curvas multiplicadas por seus respectivos pesos.
 # 
-# O interessante que notamos aqui é que, na regressão polinomial usamos as variáveis explicativas (*$X$*) da nossa amostra com alguns ajustes, elevado ao quadrado ou elevado ao cubo, para construção do nosso modelo. No modelo de splines que iremos construir, a variável explicativa é uma variávei sintética, ou seja, uma variável que nós criamos e que não tem nenhuma relação com o modelo em si.
+# O interessante que notamos aqui é que, na regressão polinomial usamos as variáveis explicativas (*$X$*) da nossa amostra com alguns ajustes, elevado ao quadrado ou elevado ao cubo, para construção do nosso modelo. No modelo de splines que iremos construir, a variável explicativa é uma variável sintética, ou seja, `uma variável que nós criamos e que não tem nenhuma relação com o modelo em si`.
 # 
-# O que buscamos com o modelo de splines é estimar **quais seriam os pesos mais plausíveis** que melhor descreve nossos dados. Parece muito estranho fazer isso, mais funciona muito bem! Vamos ver um exemplo de como isso acontece. 
+# O que buscamos com o modelo de splines é estimar **quais seriam os pesos mais plausíveis** que melhor descreve nossos dados. Parece muito estranho fazer isso, mais funciona muito bem! 
+# 
+# Vamos ver um exemplo de como isso acontece... 
 
-# In[ ]:
+# In[38]:
 
 
 plt.figure(figsize=(17, 6))
@@ -1390,13 +1496,13 @@ plt.show()
 # 
 # $$ \mu = \alpha + w_1  B_{i, 1} + w_2  B_{i, 2} + w_3  B_{i, 3} + w_4  B_{i, 4} +  w_5  B_{i, 5}$$
 # 
-# Para evitarmos de termos que escrever todos os termos na mão dentro da *stan*, podemos reescrever a equação acima da seguinte forma:
+# Para evitar de termos que escrever todos os termos na mão dentro da *stan*, podemos reescrever a equação acima da seguinte forma:
 # 
 # $$ \mu = \alpha + w_k  B_{i, k} $$
 # 
 # Essa notação matemática converte a equação acima para uma simples multiplicação de matrizes, conforme vimos no ensino médio, e assim, tanto evitamos reescrever todos os termos manualmente quanto conseguirmos otimizar os custos computacionais envolvidos nos cálculos. (*Geralmente é sempre uma boa ideia utilizar matrizes.*)
 
-# In[ ]:
+# In[39]:
 
 
 # ==================================
@@ -1446,13 +1552,13 @@ sigma_spline_1 = fit_spline_1['sigma'].flatten()
 Bw_spline_1 = np.matmul(spline_1, w_spline_1)  # Fazendo a multiplicação das matrizes B * w 
 
 
-# Com o modelo ajustado, temos a estimativa do parâmetro $w$, que são os pesos de cada uma das funções de base. Para sabermos qual o efeito gerado de cada um desses pesos aplicados ao nas funções, multiplicamos ambos:
+# Com o modelo ajustado, temos a estimativa do parâmetro $w$, que são os pesos de cada uma das funções de base. Para sabermos qual o efeito gerado de cada um desses pesos, iremos aplicá-los nas funções, multiplicamos ambos:
 # 
-# $$ \mbox{Bw_spline_1} = w_k B_{i, k} $$
+# $$ \mbox{Bw_spline_1} = w_k B_{1, k} $$
 # 
 # O resultado dessa operação pode ser visto no gráfico abaixo.
 
-# In[ ]:
+# In[69]:
 
 
 # ====================================================
@@ -1477,17 +1583,19 @@ plt.text(1940, 1.95,'$Knot_5$', size=25, color='darkgray')
 plt.show()
 
 
-# Para conseguirmos verificar a estimativa da temperatura de modo visual, somaremos ao valor de `Bw_spline_1` o valor `alpha_spline_1`, que é a estimativa do valor médio da temperatura. Veja a seguir o gráfico. 
+# Para conseguirmos verificar a estimativa da temperatura de modo visual, somaremos, ao valor de `Bw_spline_1` o valor `alpha_spline_1`, que é a estimativa do valor médio da temperatura. Veja a seguir o gráfico. 
 # 
-# Assim como em outros modelos anteriores, temos a região de plausibilidade dada pelas retas em cada um do nós. Apesar de termos apenas $5$ nós, a estimativa para $\mu$ é muito boa.
+# Assim como em outros modelos anteriores, temos a região de plausibilidade dada pelas retas em cada um dos nós. Apesar de termos apenas $5$ nós, a estimativa para $\mu$ é muito boa.
 # 
-# Para termos uma estimativa mais detalhada, devemos aumentar o número de nós e também alterar o grau das funções de bases usada. Quando maior o número de nós e, também, maior o número do grau das funções de base, tendemos a ter um ajuste mais preciso.
+# Para termos uma estimativa mais detalhada, `devemos aumentar o número de nós e também alterar o grau das funções de bases usadas`. Quando maior o número de nós e, também, maior o número do grau das funções de base, tendemos a ter um ajuste mais preciso.
 # 
-# Um ajuste preciso pode ser preocupante e estragar nosso dia, o motivo disso é um efeito conhecido como `overffiting`. Iremos tratar disso mais adiante, mas de modo geral *overffting*, ou sobreajuste, é a capacidade do modelo identificar detalhes minuciosos na amostra mas não consegue ser bom em identificar os detalhes na população. Por enquanto, iremos apenas entender como é o funcionamento de uma spline e em capítulos posteriores, veremos mais detalhes sobre o fantasma do `overffiting` em nossos modelo.
+# Um ajuste preciso pode ser preocupante e estragar nosso dia., O motivo disso é um efeito conhecido como `overffiting`. Iremos tratar disso mais adiante, mas de modo geral *overffting*, ou sobreajuste, é a capacidade do modelo identificar detalhes minuciosos na amostra, mas não conseguir ser bom em identificar os detalhes na população. 
 
 # <img src="./images/overffiting.jpg" alt="overffiting example" width=500>
 
-# In[ ]:
+# Por enquanto, iremos apenas entender como é o funcionamento de uma spline e, em capítulos posteriores, veremos mais detalhes sobre o fantasma do `overffiting` em nossos modelos.
+
+# In[70]:
 
 
 # ======================================================
@@ -1515,7 +1623,7 @@ plt.text(1940, 7.5,'$Knot_5$', size=25, color='darkgray')
 plt.show()
 
 
-# In[ ]:
+# In[71]:
 
 
 # ==========================================================
@@ -1535,7 +1643,7 @@ HPDI_posteriori_spline_1 = np.array(HPDI_posteriori_spline_1)
 mean_posteriori_spline_1 = posteriori_spline_1.mean(axis=1)  # Média do HPDI por cada ano
 
 
-# In[ ]:
+# In[72]:
 
 
 # ===============================================
@@ -1567,7 +1675,11 @@ plt.text(1980, 8.0,'$Knot_5$', size=25, color='darkgray')
 plt.show()
 
 
-# In[ ]:
+# Agora que entendemos como é a construção de uma spline e como ajustar elas aos dados, iremos construir as mesmas estimativas usando as splines que mais são usadas nos dia a dia. A capacidade de inferência de uma spline com grau maior que o utilizado no exemplo anterior e, tambéme a adição de mais pontos ao longo do eixo $x$ permite um ajuste muito melhor que aquele que fizemos no exemplo anterior. 
+# 
+# A seguir a descrição e a construção uma `spline` com grau 3 e 15 nós ao longo do eixo.
+
+# In[78]:
 
 
 # ======================================
@@ -1589,7 +1701,7 @@ plt.ylim((0, 1))
 plt.show()
 
 
-# In[ ]:
+# In[79]:
 
 
 # =======================================================
@@ -1640,7 +1752,7 @@ sigma_spline_3 = fit_spline_3['sigma'].flatten()
 Bw_spline_3 = np.matmul(spline_3, w_spline_3)  # Fazendo a multiplicação das matrizes B * w
 
 
-# In[ ]:
+# In[80]:
 
 
 # ====================================================
@@ -1659,7 +1771,7 @@ plt.grid(ls='--', color='white', alpha=0.6)
 plt.show()
 
 
-# In[ ]:
+# In[85]:
 
 
 # ==========================================================
@@ -1672,7 +1784,7 @@ posteriori_spline_3 = np.random.normal(alpha_spline_3 + Bw_spline_3, sigma_splin
 #  Lembre-se: a velocidade do cálculo do HPDI é tão mais rápido quando 
 #             mais próximo de 1 estiver o valor do intervalo_credibilidade
 #  Altere esses valores para perceber a abertura do intevalo de credibilidade sobre os dados.
-intervalo_credibilidade = 0.89
+intervalo_credibilidade = 0.97
 
 HPDI_posteriori_spline_3 = [] # Vetor do HPDI
 
@@ -1683,7 +1795,7 @@ HPDI_posteriori_spline_3 = np.array(HPDI_posteriori_spline_3)
 mean_posteriori_spline_3 = posteriori_spline_3.mean(axis=1)  # Média do HPDI por cada ano
 
 
-# In[ ]:
+# In[86]:
 
 
 # ===============================================
@@ -1711,11 +1823,11 @@ plt.text(2000, 8.1, 'Um problema que pode acontecer \n quando geramos a spline c
 plt.show()
 
 
-# #### Possibilidades das Splines
+# ## Possibilidades das Splines
 # 
-# - A quantidade de nós e os graus da funções de base são nossa escolhas
+# - A quantidade de nós e os graus das funções de base são de nossa escolha.
 # 
-# Exitem muitas diferente maneiras de se definir uma spline, assim como existem muitos outros tipos de splines. As que vimos aqui foram as splines mais simples. 
+# Exitem muitas maneiras diferente de se definir uma *spline*, assim como existem muitos outros tipos de *splines*. As que vimos aqui foram as splines mais simples. 
 # 
 # Obs: No curso a definição das b-splines são um pouco diferente das que usamos aqui. Para saber com é o formato das funções que o Richard usa ver a aula [Statistical Rethinking Winter 2019 Lecture 04](https://www.youtube.com/watch?v=ENxTrFf9a7c&list=PLDcUM9US4XdNM4Edgs7weiyIguLSToZRI) a partir dos 57 minutos.
 # 

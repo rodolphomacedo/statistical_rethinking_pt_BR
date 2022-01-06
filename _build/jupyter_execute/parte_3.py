@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # coding: utf-8
 
-# # 3- Modelos Geocêntricos
+# ## 3- Modelos Geocêntricos
 # 
 
 # ## Distribuição Normal
@@ -878,7 +878,7 @@ ax2.grid(color='white', ls='--', linewidth=0.5)
 plt.show()
 
 
-# ## Adicionando uma variável preditora
+# ## Adicionando uma variável Preditora
 # 
 # Agora, iremos refazer a estimativa da altura, mas utulizaremos `mais uma variável` para nos ajudar explicar melhor a altura, assim teremos mais informações, usaremos o `peso` (*weight*) que nos ajudará a descrever a altura (*height*)?
 # 
@@ -1000,18 +1000,24 @@ plt.grid(color='white', ls='--', linewidth=0.4)
 plt.show()
 
 
-# # Continuar daqui a revisão
+# O resultado das simulações da distribuição à priori do $\alpha$ e o $\beta$, geram as curvas acima, de acordo o modelo: 
 # 
-# Analisando as retas, resultados da simulação da priori para $\alpha$ e $\beta$, podemos ver que muitas linhas estão superiores a altura de $272 cm$. Também podemos ver que existem linhas que indicam alturas menores que zero, o que naturalmente deveria estar errado. Ambos comportamentos são prioritariamente resutantes dos valores gerados pela distribuição dos $\beta$, a inclinação da reta. Assim, essas retas são nossas crenças à priori.
+# $$ altura = \alpha + \beta \times peso $$ 
 # 
-# Agora que temos um pouco mais de intimidade com o comportamento das nossas prioris, podemos concluir que devemos diminuir nosso entusiasmos com relação ao $\beta$, pois essa é uma priori muito ruim. Haverá momentos, em situações reais, que será necessário verificar a compatibilidade com o mundo real. Faça alterações nas prioris para verificar a mudança no efeito.
+# com podemos ver no gráfico, muitas linhas tem valores superiores à altura de $272 cm$. Também podemos ver que existem linhas que indicam alturas menores que zero, `o que naturalmente deveria estar errado`. Ambos comportamentos são prioritariamente resultantes dos valores gerados pela distribuição dos $\beta$'s, a inclinação da reta. 
+# 
+# ```{note}
+# Essas retas são as nossas crenças à priori.
+# ```
+# 
+# Agora que temos um pouco mais de intimidade com o comportamento das nossas prioris, podemos concluir que devemos diminuir nosso entusiasmo com relação ao $\beta$, pois essa `é uma priori muito ruim`. Haverá momentos, em situações reais, que será necessário verificar a compatibilidade com o mundo real. Faça alterações nas prioris para verificar a mudança no efeito.
 
-# #### Distribuição Preditiva da Priori
+# ### Distribuição Preditiva da Priori
 # 
 # Nós agora sabemos algo sobre as prioris, temos um conhecimento científico sobre a nossa distribuição dos $\beta$'s, sabemos que ele é positivo, assim, então, vamos transforma-lo em positivo? 
 # 
 # 
-# Mas como?
+# *Mas como?*
 # 
 # 
 # Para fazer isso, usaremos a distribuição `log-Normal`. Essa distribuição pode ser um pouco menos conhecida, porém é muito útil para situações desse tipo. Essa distribuição, log-Normal, construída partir da exponenciação dos valores da distribuição Normal.
@@ -1034,21 +1040,21 @@ plt.show()
 # 
 # Um caminho para se entender melhor o que é uma $lognormal$ é o seguinte:
 # 
-# Qual é a distribuição de $X$ que, ao aplicarmos o log, ela se tornará $Normal$? Naturalmente temos que:
+# Qual é a distribuição de $X$, na qual, ao aplicarmos o log, $log(X)$, ela se tornará $Normal$? Naturalmente temos que:
 # 
-# se
+# de acordo com a expressão abaixo: 
 # 
-# $$ a = log(exp(a)) $$
+# $$ log(exp(a)) = a , \forall a \in R$$
 # 
-# então:
+# se a distribuição de $X$ for:
 # 
 # $$ X \sim exp\{Normal\} $$
 # 
-# pois,
+# então a operação abaixo é válida,
 # 
 # $$  log(exp\{Normal\}) = Normal $$
 # 
-# ou seja,
+# logo,
 # 
 # $$ log(X) = Normal $$
 # 
@@ -1062,6 +1068,11 @@ plt.show()
 # =====================================
 #     Estudos sobre as Log-Normais 
 # =====================================
+# Iremos plotar, a partir de uma 
+# distribuição normal, uma lognormal 
+# e compara-la com amostragem da 
+# lognormal implementada no Numpy!
+# =====================================
 
 d_normal = np.random.normal(0, 1, 1000)
 d_lognormal = np.random.lognormal(0, 1, 1000)
@@ -1069,31 +1080,38 @@ d_lognormal = np.random.lognormal(0, 1, 1000)
 fig, [[ax1, ax2],[ax3, ax4]] = plt.subplots(2, 2, figsize=(17, 9))
 
 ax1.hist(np.exp(d_normal), bins=150, density=True, rwidth=0.8)
-ax1.set_xlim(0, 5)
-ax1.set_title('$exp( Normal(0,1) )$ \n Log Normal gerada na mão \n Mostrando valores de 0 a 5')
+ax1.set_title('$exp( Normal(0,1) )$ \n Log Normal gerada na mão')
 ax1.grid(color='white', ls='--', linewidth=0.4)
 
 ax2.hist(d_lognormal, bins=150, density=True, rwidth=0.8)
-ax2.set_xlim(0, 5)
-ax2.set_title('Histograma da distribuição lognormal \n Gerada usando Numpy \n Mostrando os valores de 0 a 5')
+ax2.set_title('Histograma da distribuição lognormal \n Gerada usando Numpy')
 ax2.grid(color='white', ls='--', linewidth=0.4)
 
-ax3.hist(np.exp(d_normal), bins=70, density=True, rwidth=0.8)
-ax3.set_title('$exp( Normal(0,1) )$ \n Log Normal gerada na mão')
+ax3.hist(np.exp(d_normal), bins=150, density=True, rwidth=0.8)
+ax3.set_xlim(0, 5)
+ax3.set_title('$exp( Normal(0,1) )$ \n Log Normal gerada na mão \n Mostrando valores de 0 a 5')
 ax3.grid(color='white', ls='--', linewidth=0.4)
 
-
-ax4.hist(d_lognormal, bins=70, density=True, rwidth=0.8)
-ax4.set_title('Histograma da distribuição lognormal \n Gerada usando Numpy')
+ax4.hist(d_lognormal, bins=250, density=True, rwidth=0.8)
+ax4.set_xlim(0, 5)
+ax4.set_title('Histograma da distribuição lognormal \n Gerada usando Numpy \n Mostrando os valores de 0 a 5')
 ax4.grid(color='white', ls='--', linewidth=0.4)
 
 plt.tight_layout()  # Ajustar as distâncias entre os gráficos
 plt.show()
 
 
-# Com a lognormal introduzida, iremos trocar a distribuição da a priori de $\beta \sim Normal(0, 10)$ para uma priori que é distribuída conforme uma $\beta \sim lognormal(0, 1)$.
+# -----
 # 
-# Assim como antes, vamos simular para entender o novo comportamento da nossa priori. 
+# Com a lognormal explicada, iremos trocar a distribuição da a priori de: 
+# 
+# $$\beta \sim Normal(0, 10)$$
+# 
+# para uma priori que é distribuída conforme uma *lognormal*: 
+# 
+# $$\beta \sim lognormal(0, 1)$$
+# 
+# Assim, como antes, vamos `simular para entender o novo comportamento da nossa priori`. 
 
 # In[20]:
 
@@ -1127,11 +1145,11 @@ plt.grid(color='white', ls='--', linewidth=0.4)
 plt.show()
 
 
-# Nós ainda temos muita dispersão e também temos ainda algumas poucas linhas que ultrapassam a maior altura já registrada (de $272 cm$). Isso acontece pois não limitamos a nossa margem superior pela distribuição de $\beta$. Mas essa nossa nova abordagem parece ser uma priori bem mais condizente com o que podemos imaginar.
+# Nós ainda temos muita dispersão e também temos ainda algumas poucas linhas que ultrapassam a maior altura já registrada (de $272 cm$). Isso acontece porque não limitamos a nossa margem superior pela distribuição de $\beta$. Mas essa nossa nova abordagem parece ser uma priori bem mais condizente com o que podemos imaginar.
 
 # #### Aproximação da posteriori
 # 
-# Vamos fazer a aproximação da posteriori usando a Stan e verificar os resultados.
+# Vamos fazer a aproximação da posteriori usando a *Stan* e verificar os resultados.
 
 # In[21]:
 
@@ -1151,12 +1169,12 @@ modelo_altura_2 = """
     parameters {
         real alpha;
         real<lower=0> beta;
-        real<lower=0> sigma;
+        real<lower=0, upper=50> sigma;
     }
 
     model {
-        // alpha ~ normal(178, 20);
-        // beta ~ lognormal(0, 1);
+        alpha ~ normal(178, 20);
+        beta ~ lognormal(0, 1);
         // sigma ~ uniform(0, 50);
 
         for (i in 1:N){
@@ -1164,6 +1182,7 @@ modelo_altura_2 = """
         }
 }
 """
+
 # Nossa amostra é apenas para pessoas acima de 18 anos
 df_maioridade = df.loc[df.age >= 18, ['weight', 'height']]
 
@@ -1224,19 +1243,19 @@ plt.show()
 # ==========================================
 fig, [ax1, ax2, ax3] = plt.subplots(1, 3, figsize=(17, 9))
 
-ax1.hist(fit_altura_2['alpha'].flatten(), bins=50, density=True, rwidth=0.8, color='red', alpha=0.4)
+ax1.hist(fit_altura_2['alpha'].flatten(), bins=50, density=True, rwidth=0.8, color='darkred', alpha=0.6)
 ax1.set_title('Posteriori alpha')
 ax1.grid(color='white', ls='--', linewidth=0.4)
 ax1.set_ylabel('Frequência')
 ax1.set_xlabel('Alpha')
 
-ax2.hist(fit_altura_2['beta'].flatten(), bins=50, density=True, rwidth=0.8, color='red', alpha=0.4)
+ax2.hist(fit_altura_2['beta'].flatten(), bins=50, density=True, rwidth=0.8, color='darkred', alpha=0.6)
 ax2.set_title('Posteriori beta')
 ax2.grid(color='white', ls='--', linewidth=0.4)
 ax2.set_ylabel('Frequência')
 ax2.set_xlabel('Beta')
 
-ax3.hist(fit_altura_2['sigma'].flatten(), bins=50, density=True, rwidth=0.8, color='red', alpha=0.4)
+ax3.hist(fit_altura_2['sigma'].flatten(), bins=50, density=True, rwidth=0.8, color='darkred', alpha=0.6)
 ax3.set_title('Posteriori sigma')
 ax3.grid(color='white', ls='--', linewidth=0.4)
 ax3.set_ylabel('Frequência')
@@ -1245,3 +1264,11 @@ ax3.set_xlabel('Sigma')
 plt.tight_layout()  # Ajustar as distâncias entre os gráficos
 plt.show()
 
+
+# # Resumo
+# 
+# Até aqui vimos a construção de um modelo linear simples usando a Stan, vimos também como pensar e como construir uma priori, vimos como gerar as amostras da posteriori e analisar seus resultados.
+# 
+# O modelo linear é o modelo muito simples e é empregado em *muitas* análises no dia a dia. 
+# 
+# Na mesma linha de raciocínio que usamos para pensar e construir esse modelo de regressão linear, nós também iremos utilizá-la na próxima parte desse material. Iremos adicionar mais ferramentas dentro dessa estrutura e, com isso, aumentaremos um pouco mais a profundidade que nossas análises podem alcançar.

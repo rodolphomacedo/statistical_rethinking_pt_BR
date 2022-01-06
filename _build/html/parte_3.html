@@ -238,55 +238,53 @@
   <a class="reference internal nav-link" href="#">
    3- Modelos Geocêntricos
   </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#distribuicao-normal">
+   Distribuição Normal
+  </a>
   <ul class="visible nav section-nav flex-column">
    <li class="toc-h2 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#distribuicao-normal">
-     Distribuição Normal
+    <a class="reference internal nav-link" href="#regressao-linear">
+     Regressão Linear
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#gerando-um-processo-de-flutuacao-normal">
+     Gerando um processo de flutuação normal
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#porque-a-normal">
+     Porque a Normal?
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#perspectiva-ontologica">
+     Perspectiva Ontológica
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#perspectiva-epistemologica">
+     Perspectiva Epistemologica
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#modelos-lineares">
+     Modelos Lineares
     </a>
     <ul class="nav section-nav flex-column">
      <li class="toc-h3 nav-item toc-entry">
-      <a class="reference internal nav-link" href="#regressao-linear">
-       Regressão Linear
-      </a>
-     </li>
-     <li class="toc-h3 nav-item toc-entry">
-      <a class="reference internal nav-link" href="#gerando-um-processo-de-flutuacao-normal">
-       Gerando um processo de flutuação normal
-      </a>
-     </li>
-     <li class="toc-h3 nav-item toc-entry">
-      <a class="reference internal nav-link" href="#porque-a-normal">
-       Porque a Normal?
-      </a>
-     </li>
-     <li class="toc-h3 nav-item toc-entry">
-      <a class="reference internal nav-link" href="#perspectiva-ontologica">
-       Perspectiva Ontológica
-      </a>
-     </li>
-     <li class="toc-h3 nav-item toc-entry">
-      <a class="reference internal nav-link" href="#perspectiva-epistemologica">
-       Perspectiva Epistemologica
-      </a>
-     </li>
-     <li class="toc-h3 nav-item toc-entry">
-      <a class="reference internal nav-link" href="#modelos-lineares">
-       Modelos Lineares
-      </a>
-      <ul class="nav section-nav flex-column">
-       <li class="toc-h4 nav-item toc-entry">
-        <a class="reference internal nav-link" href="#acordando-a-linguagem-que-iremos-trabalhar">
-         Acordando a linguagem que iremos trabalhar
-        </a>
-       </li>
-      </ul>
-     </li>
-     <li class="toc-h3 nav-item toc-entry">
-      <a class="reference internal nav-link" href="#linguagem-da-modelagem">
-       Linguagem da modelagem
+      <a class="reference internal nav-link" href="#acordando-a-linguagem-que-iremos-trabalhar">
+       Acordando a linguagem que iremos trabalhar
       </a>
      </li>
     </ul>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#linguagem-da-modelagem">
+     Linguagem da modelagem
+    </a>
    </li>
   </ul>
  </li>
@@ -332,7 +330,7 @@
    </li>
    <li class="toc-h2 nav-item toc-entry">
     <a class="reference internal nav-link" href="#adicionando-uma-variavel-preditora">
-     Adicionando uma variável preditora
+     Adicionando uma variável Preditora
     </a>
     <ul class="nav section-nav flex-column">
      <li class="toc-h3 nav-item toc-entry">
@@ -346,25 +344,27 @@
     <a class="reference internal nav-link" href="#distribuicao-priori-preditiva">
      Distribuição Priori Preditiva
     </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h3 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#distribuicao-preditiva-da-priori">
+       Distribuição Preditiva da Priori
+      </a>
+      <ul class="nav section-nav flex-column">
+       <li class="toc-h4 nav-item toc-entry">
+        <a class="reference internal nav-link" href="#aproximacao-da-posteriori">
+         Aproximação da posteriori
+        </a>
+       </li>
+      </ul>
+     </li>
+    </ul>
    </li>
   </ul>
  </li>
  <li class="toc-h1 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#continuar-daqui-a-revisao">
-   Continuar daqui a revisão
+  <a class="reference internal nav-link" href="#resumo">
+   Resumo
   </a>
-  <ul class="visible nav section-nav flex-column">
-   <li class="toc-h2 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#distribuicao-preditiva-da-priori">
-     Distribuição Preditiva da Priori
-    </a>
-   </li>
-   <li class="toc-h2 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#aproximacao-da-posteriori">
-     Aproximação da posteriori
-    </a>
-   </li>
-  </ul>
  </li>
 </ul>
 
@@ -377,15 +377,16 @@
         
               <div>
                 
-  <div class="tex2jax_ignore mathjax_ignore section" id="modelos-geocentricos">
+  <div class="section" id="modelos-geocentricos">
 <h1>3- Modelos Geocêntricos<a class="headerlink" href="#modelos-geocentricos" title="Permalink to this headline">¶</a></h1>
+</div>
 <div class="section" id="distribuicao-normal">
-<h2>Distribuição Normal<a class="headerlink" href="#distribuicao-normal" title="Permalink to this headline">¶</a></h2>
+<h1>Distribuição Normal<a class="headerlink" href="#distribuicao-normal" title="Permalink to this headline">¶</a></h1>
 <img alt="gauss" src="_images/Gauss.jpg" />
 <p>fonte: <a class="reference external" href="https://pt.wikipedia.org/wiki/Marco_alem%C3%A3o">wikipedia</a></p>
 <p>fonte: <a class="reference external" href="https://www.bis-ans-ende-der-welt.net/Deutschland-B.htm">Distribuição Gausiana</a></p>
 <div class="section" id="regressao-linear">
-<h3>Regressão Linear<a class="headerlink" href="#regressao-linear" title="Permalink to this headline">¶</a></h3>
+<h2>Regressão Linear<a class="headerlink" href="#regressao-linear" title="Permalink to this headline">¶</a></h2>
 <p>São simples <em>golems</em> estatísticos.</p>
 <ul class="simple">
 <li><p>Modelo de média e variância normalmente (Gaussiano) distribuído.</p></li>
@@ -394,7 +395,7 @@
 </ul>
 </div>
 <div class="section" id="gerando-um-processo-de-flutuacao-normal">
-<h3>Gerando um processo de flutuação normal<a class="headerlink" href="#gerando-um-processo-de-flutuacao-normal" title="Permalink to this headline">¶</a></h3>
+<h2>Gerando um processo de flutuação normal<a class="headerlink" href="#gerando-um-processo-de-flutuacao-normal" title="Permalink to this headline">¶</a></h2>
 <p>Através da flutuação normal <em>(sobe 1 ou desce 1)</em> iremos construir um processo que tenha como resultante natural o surgimento de um comportamento cuja distribuição podemos descrever como a normal.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -523,7 +524,7 @@
 <p>Todas as flutuações geradas se equilibriam entre si, gerando assim uma curva simétrica. Porém cada uma delas individualmente, e não necessariamente, se equilibram entre si. Isso é a <span class="math notranslate nohighlight">\(Normal\)</span>!</p>
 </div>
 <div class="section" id="porque-a-normal">
-<h3>Porque a Normal?<a class="headerlink" href="#porque-a-normal" title="Permalink to this headline">¶</a></h3>
+<h2>Porque a Normal?<a class="headerlink" href="#porque-a-normal" title="Permalink to this headline">¶</a></h2>
 <p>O interessante, e frustrante ao mesmo tempo, é que mesmos nós sabendo como cada uma das curvas são geradas, não temos acesso a <code class="docutils literal notranslate"><span class="pre">como</span> <span class="pre">cada</span> <span class="pre">uma</span> <span class="pre">delas</span> <span class="pre">individualmente</span> <span class="pre">faz</span> <span class="pre">o</span> <span class="pre">seu</span> <span class="pre">percurso</span></code>, pois temos muito pouca informação sobre como é o processo gerador dessas curvas.</p>
 <p>Assim, quando vimos um comportamento de um evento que é normalmente distribuído, por exemplo, não sabemos o que tem la dentro! Não temos um acesso intuitivo da informação contida no comportamento individual de cada passeio.</p>
 <p>Mas sabendo que o processo como um todo tem o comportamento, aproximadamente, normalmente distribuído, podemos usar essa informação para falsificar ou não hipóteses de um estudo particular.</p>
@@ -538,7 +539,7 @@
 <p>Isso é verdade não apenas para a <span class="math notranslate nohighlight">\(Normal\)</span>, mas para muitas outras distribuições! Todas as distribuições de máxima entropia tem essa mesma propriedade, que muitos processos diferentes possuem a mesma distribuição de frequências.</p>
 </div>
 <div class="section" id="perspectiva-ontologica">
-<h3>Perspectiva Ontológica<a class="headerlink" href="#perspectiva-ontologica" title="Permalink to this headline">¶</a></h3>
+<h2>Perspectiva Ontológica<a class="headerlink" href="#perspectiva-ontologica" title="Permalink to this headline">¶</a></h2>
 <p>Ontologia é o ramo da filosofia que <code class="docutils literal notranslate"><span class="pre">estuda</span> <span class="pre">a</span> <span class="pre">natureza</span> <span class="pre">do</span> <span class="pre">ser</span></code>, da existência e da própria realidade. Vamos observar a distribuição <span class="math notranslate nohighlight">\(Normal\)</span> sobre uma perspectiva ontológia:</p>
 <ul class="simple">
 <li><p>Processo que adiciona flutuações amortecidas como resultado.</p></li>
@@ -551,7 +552,7 @@
 <p>Essa é a distribuição mais é conservadora que podemos assumir. Qualquer outra distribuição será mais restrita por isso terá mais informação incorporada, por isso a opção mais conservadora que podemos propor é a <code class="docutils literal notranslate"><span class="pre">gaussiana</span></code>, no qual tudo que precisamos para ela é a média a variância. (<em>Isso será demostrado mais para frente no curso</em>.)</p>
 </div>
 <div class="section" id="perspectiva-epistemologica">
-<h3>Perspectiva Epistemologica<a class="headerlink" href="#perspectiva-epistemologica" title="Permalink to this headline">¶</a></h3>
+<h2>Perspectiva Epistemologica<a class="headerlink" href="#perspectiva-epistemologica" title="Permalink to this headline">¶</a></h2>
 <p>Epistemologia, também conhecida como a Teoria do Conhecimento, é o ramo da filosofia que estuda como o ser humano ou a própria ciência adquire e justifica seus conhecimentos. Vamos observar a <span class="math notranslate nohighlight">\(Normal\)</span> sobre essa perspectiva:</p>
 <ul class="simple">
 <li><p>Conhecemos apenas a média e a variância.</p></li>
@@ -560,7 +561,7 @@
 </ul>
 </div>
 <div class="section" id="modelos-lineares">
-<h3>Modelos Lineares<a class="headerlink" href="#modelos-lineares" title="Permalink to this headline">¶</a></h3>
+<h2>Modelos Lineares<a class="headerlink" href="#modelos-lineares" title="Permalink to this headline">¶</a></h2>
 <p>“<strong>Modelo lineares generalizados</strong>”: teste <em>t</em>, regressão simples, regressão multipla, ANOVA, ANCOVA, MANOVA, MANCOVA, etc, etc, etc. Todos esses modelos <code class="docutils literal notranslate"><span class="pre">são</span> <span class="pre">a</span> <span class="pre">mesma</span> <span class="pre">coisa,</span> <span class="pre">são</span> <span class="pre">todos</span> <span class="pre">modelos</span> <span class="pre">os</span> <span class="pre">lineares</span></code>.</p>
 <p>A seguir, iremos construir modelos lineares manualmente e do zero para entendermos como é o processo de pensamento de construção de hipóteses e, também, iremos construir um gráfico no qual iremos visualizar a nossa incerteza do sistema.</p>
 <div class="admonition warning">
@@ -568,7 +569,7 @@
 <p>Iremos aprender estratégias e não procedimentos!</p>
 </div>
 <div class="section" id="acordando-a-linguagem-que-iremos-trabalhar">
-<h4>Acordando a linguagem que iremos trabalhar<a class="headerlink" href="#acordando-a-linguagem-que-iremos-trabalhar" title="Permalink to this headline">¶</a></h4>
+<h3>Acordando a linguagem que iremos trabalhar<a class="headerlink" href="#acordando-a-linguagem-que-iremos-trabalhar" title="Permalink to this headline">¶</a></h3>
 <p>Relembrando o primeiro modelo que nós fizemos anteriormente, o lançamento do globo, nós tinhamos:</p>
 <div class="math notranslate nohighlight">
 \[ w \sim Binomial(N, p) \]</div>
@@ -592,7 +593,7 @@
 </div>
 </div>
 <div class="section" id="linguagem-da-modelagem">
-<h3>Linguagem da modelagem<a class="headerlink" href="#linguagem-da-modelagem" title="Permalink to this headline">¶</a></h3>
+<h2>Linguagem da modelagem<a class="headerlink" href="#linguagem-da-modelagem" title="Permalink to this headline">¶</a></h2>
 <p>Do mesmo modo que escrevemos o modelo acima iremos escrever todos os outros modelos, inclusive, a programação usando a linguagem probabilística <code class="docutils literal notranslate"><span class="pre">Stan</span></code>, o qual tem a sua sintaxe próxima a esse formato.</p>
 <p>Para qualquer modelo que iremos elaborar, seja uma regressão linear simples ou modelos mais elaborados, temos que criar uma lista com todas as variáveis que irão participar desse modelo. Algumas <code class="docutils literal notranslate"><span class="pre">coisas</span> <span class="pre">que</span> <span class="pre">iremos</span> <span class="pre">observar</span> <span class="pre">nos</span> <span class="pre">dados</span></code>, como a contagem do número de vezes que o globo foi lançado. E também haverá outras <code class="docutils literal notranslate"><span class="pre">coisas</span> <span class="pre">que</span> <span class="pre">não</span> <span class="pre">vamos</span> <span class="pre">poder</span> <span class="pre">observar</span></code>, como a inclinação de uma reta de uma modelo linear simples, ou proporção de água no globo, pois elas não são entidades observáveis.</p>
 <p>Por isso temos que listar todas as variáveis e então defini-las.</p>
@@ -623,7 +624,6 @@
 <p>O <span class="math notranslate nohighlight">\(x_i\)</span> é uma variável que ajuda a explicar o comportamento do <span class="math notranslate nohighlight">\(y_i\)</span>, ou seja, <span class="math notranslate nohighlight">\(x_i\)</span> é uma variável explicativa.</p>
 <p>Mas repare que <span class="math notranslate nohighlight">\(x_i\)</span> também tem uma distribuição, nós normalmente não nos preocupamos em definir uma distribuição para as variáveis explicativas, pois não iremos prevê-las, <code class="docutils literal notranslate"><span class="pre">porém</span> <span class="pre">existe</span> <span class="pre">uma</span> <span class="pre">grande</span> <span class="pre">vantagem</span> <span class="pre">em</span> <span class="pre">fazer</span> <span class="pre">essas</span> <span class="pre">suposições</span> <span class="pre">de</span> <span class="pre">distribuição</span></code>, pois podemos fazer coisas muito legais com esse fato, iremos ver essas coisas mais à frente, tais como <code class="docutils literal notranslate"><span class="pre">medidas</span> <span class="pre">de</span> <span class="pre">erros</span></code> e também <code class="docutils literal notranslate"><span class="pre">dados</span> <span class="pre">faltantes</span></code>.</p>
 <p>Assim, como todas as variáveis têm sua própria definição de distribuição, se você não sabe algo sobre algumas delas podemos colocar dentro do modelo e assim iremos ganhar automaticamente um poder inferencial do que estávamos perdendo antes.</p>
-</div>
 </div>
 </div>
 <div class="tex2jax_ignore mathjax_ignore section" id="construindo-um-modelo-linear">
@@ -1157,8 +1157,8 @@
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>======================================================================
-  mu médio:  49.74  	 mu original:  50
-  sigma médio:  12.31  	 sigma original:  12
+  mu médio:  50.86  	 mu original:  50
+  sigma médio:  12.22  	 sigma original:  12
 ======================================================================
 </pre></div>
 </div>
@@ -1279,7 +1279,7 @@
   mu amostrado:  138.26
   sigma amostrado:  27.6
 ==============================
-  mu médio:  138.39
+  mu médio:  138.41
   sigma médio:  27.66
 ==============================
 </pre></div>
@@ -1290,7 +1290,7 @@
 </div>
 </div>
 <div class="section" id="adicionando-uma-variavel-preditora">
-<h2>Adicionando uma variável preditora<a class="headerlink" href="#adicionando-uma-variavel-preditora" title="Permalink to this headline">¶</a></h2>
+<h2>Adicionando uma variável Preditora<a class="headerlink" href="#adicionando-uma-variavel-preditora" title="Permalink to this headline">¶</a></h2>
 <p>Agora, iremos refazer a estimativa da altura, mas utulizaremos <code class="docutils literal notranslate"><span class="pre">mais</span> <span class="pre">uma</span> <span class="pre">variável</span></code> para nos ajudar explicar melhor a altura, assim teremos mais informações, usaremos o <code class="docutils literal notranslate"><span class="pre">peso</span></code> (<em>weight</em>) que nos ajudará a descrever a altura (<em>height</em>)?</p>
 <p><em>Obs: Iremos utilizar apenas pessoas que tenham acima de 18 anos de idade para todos os estudo seguintes, apenas simplesmente como efeito didático.</em></p>
 <div class="cell docutils container">
@@ -1389,16 +1389,19 @@
 <img alt="_images/parte_3_49_0.png" src="_images/parte_3_49_0.png" />
 </div>
 </div>
+<p>O resultado das simulações da distribuição à priori do <span class="math notranslate nohighlight">\(\alpha\)</span> e o <span class="math notranslate nohighlight">\(\beta\)</span>, geram as curvas acima, de acordo o modelo:</p>
+<div class="math notranslate nohighlight">
+\[ altura = \alpha + \beta \times peso \]</div>
+<p>com podemos ver no gráfico, muitas linhas tem valores superiores à altura de <span class="math notranslate nohighlight">\(272 cm\)</span>. Também podemos ver que existem linhas que indicam alturas menores que zero, <code class="docutils literal notranslate"><span class="pre">o</span> <span class="pre">que</span> <span class="pre">naturalmente</span> <span class="pre">deveria</span> <span class="pre">estar</span> <span class="pre">errado</span></code>. Ambos comportamentos são prioritariamente resultantes dos valores gerados pela distribuição dos <span class="math notranslate nohighlight">\(\beta\)</span>’s, a inclinação da reta.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Essas retas são as nossas crenças à priori.</p>
 </div>
-</div>
-<div class="tex2jax_ignore mathjax_ignore section" id="continuar-daqui-a-revisao">
-<h1>Continuar daqui a revisão<a class="headerlink" href="#continuar-daqui-a-revisao" title="Permalink to this headline">¶</a></h1>
-<p>Analisando as retas, resultados da simulação da priori para <span class="math notranslate nohighlight">\(\alpha\)</span> e <span class="math notranslate nohighlight">\(\beta\)</span>, podemos ver que muitas linhas estão superiores a altura de <span class="math notranslate nohighlight">\(272 cm\)</span>. Também podemos ver que existem linhas que indicam alturas menores que zero, o que naturalmente deveria estar errado. Ambos comportamentos são prioritariamente resutantes dos valores gerados pela distribuição dos <span class="math notranslate nohighlight">\(\beta\)</span>, a inclinação da reta. Assim, essas retas são nossas crenças à priori.</p>
-<p>Agora que temos um pouco mais de intimidade com o comportamento das nossas prioris, podemos concluir que devemos diminuir nosso entusiasmos com relação ao <span class="math notranslate nohighlight">\(\beta\)</span>, pois essa é uma priori muito ruim. Haverá momentos, em situações reais, que será necessário verificar a compatibilidade com o mundo real. Faça alterações nas prioris para verificar a mudança no efeito.</p>
+<p>Agora que temos um pouco mais de intimidade com o comportamento das nossas prioris, podemos concluir que devemos diminuir nosso entusiasmo com relação ao <span class="math notranslate nohighlight">\(\beta\)</span>, pois essa <code class="docutils literal notranslate"><span class="pre">é</span> <span class="pre">uma</span> <span class="pre">priori</span> <span class="pre">muito</span> <span class="pre">ruim</span></code>. Haverá momentos, em situações reais, que será necessário verificar a compatibilidade com o mundo real. Faça alterações nas prioris para verificar a mudança no efeito.</p>
 <div class="section" id="distribuicao-preditiva-da-priori">
-<h2>Distribuição Preditiva da Priori<a class="headerlink" href="#distribuicao-preditiva-da-priori" title="Permalink to this headline">¶</a></h2>
+<h3>Distribuição Preditiva da Priori<a class="headerlink" href="#distribuicao-preditiva-da-priori" title="Permalink to this headline">¶</a></h3>
 <p>Nós agora sabemos algo sobre as prioris, temos um conhecimento científico sobre a nossa distribuição dos <span class="math notranslate nohighlight">\(\beta\)</span>’s, sabemos que ele é positivo, assim, então, vamos transforma-lo em positivo?</p>
-<p>Mas como?</p>
+<p><em>Mas como?</em></p>
 <p>Para fazer isso, usaremos a distribuição <code class="docutils literal notranslate"><span class="pre">log-Normal</span></code>. Essa distribuição pode ser um pouco menos conhecida, porém é muito útil para situações desse tipo. Essa distribuição, log-Normal, construída partir da exponenciação dos valores da distribuição Normal.</p>
 <div class="math notranslate nohighlight">
 \[lognormal(0, 1) = exp\{ Normal(0, 1)\}\]</div>
@@ -1412,17 +1415,17 @@
 </ul>
 <hr class="docutils" />
 <p>Um caminho para se entender melhor o que é uma <span class="math notranslate nohighlight">\(lognormal\)</span> é o seguinte:</p>
-<p>Qual é a distribuição de <span class="math notranslate nohighlight">\(X\)</span> que, ao aplicarmos o log, ela se tornará <span class="math notranslate nohighlight">\(Normal\)</span>? Naturalmente temos que:</p>
-<p>se</p>
+<p>Qual é a distribuição de <span class="math notranslate nohighlight">\(X\)</span>, na qual, ao aplicarmos o log, <span class="math notranslate nohighlight">\(log(X)\)</span>, ela se tornará <span class="math notranslate nohighlight">\(Normal\)</span>? Naturalmente temos que:</p>
+<p>de acordo com a expressão abaixo:</p>
 <div class="math notranslate nohighlight">
-\[ a = log(exp(a)) \]</div>
-<p>então:</p>
+\[ log(exp(a)) = a , \forall a \in R\]</div>
+<p>se a distribuição de <span class="math notranslate nohighlight">\(X\)</span> for:</p>
 <div class="math notranslate nohighlight">
 \[ X \sim exp\{Normal\} \]</div>
-<p>pois,</p>
+<p>então a operação abaixo é válida,</p>
 <div class="math notranslate nohighlight">
 \[  log(exp\{Normal\}) = Normal \]</div>
-<p>ou seja,</p>
+<p>logo,</p>
 <div class="math notranslate nohighlight">
 \[ log(X) = Normal \]</div>
 <p>então:</p>
@@ -1433,6 +1436,11 @@
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># =====================================</span>
 <span class="c1">#     Estudos sobre as Log-Normais </span>
 <span class="c1"># =====================================</span>
+<span class="c1"># Iremos plotar, a partir de uma </span>
+<span class="c1"># distribuição normal, uma lognormal </span>
+<span class="c1"># e compara-la com amostragem da </span>
+<span class="c1"># lognormal implementada no Numpy!</span>
+<span class="c1"># =====================================</span>
 
 <span class="n">d_normal</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1000</span><span class="p">)</span>
 <span class="n">d_lognormal</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">lognormal</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1000</span><span class="p">)</span>
@@ -1440,22 +1448,21 @@
 <span class="n">fig</span><span class="p">,</span> <span class="p">[[</span><span class="n">ax1</span><span class="p">,</span> <span class="n">ax2</span><span class="p">],[</span><span class="n">ax3</span><span class="p">,</span> <span class="n">ax4</span><span class="p">]]</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">17</span><span class="p">,</span> <span class="mi">9</span><span class="p">))</span>
 
 <span class="n">ax1</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="n">d_normal</span><span class="p">),</span> <span class="n">bins</span><span class="o">=</span><span class="mi">150</span><span class="p">,</span> <span class="n">density</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">rwidth</span><span class="o">=</span><span class="mf">0.8</span><span class="p">)</span>
-<span class="n">ax1</span><span class="o">.</span><span class="n">set_xlim</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">5</span><span class="p">)</span>
-<span class="n">ax1</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;$exp( Normal(0,1) )$ </span><span class="se">\n</span><span class="s1"> Log Normal gerada na mão </span><span class="se">\n</span><span class="s1"> Mostrando valores de 0 a 5&#39;</span><span class="p">)</span>
+<span class="n">ax1</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;$exp( Normal(0,1) )$ </span><span class="se">\n</span><span class="s1"> Log Normal gerada na mão&#39;</span><span class="p">)</span>
 <span class="n">ax1</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="n">color</span><span class="o">=</span><span class="s1">&#39;white&#39;</span><span class="p">,</span> <span class="n">ls</span><span class="o">=</span><span class="s1">&#39;--&#39;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mf">0.4</span><span class="p">)</span>
 
 <span class="n">ax2</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">d_lognormal</span><span class="p">,</span> <span class="n">bins</span><span class="o">=</span><span class="mi">150</span><span class="p">,</span> <span class="n">density</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">rwidth</span><span class="o">=</span><span class="mf">0.8</span><span class="p">)</span>
-<span class="n">ax2</span><span class="o">.</span><span class="n">set_xlim</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">5</span><span class="p">)</span>
-<span class="n">ax2</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;Histograma da distribuição lognormal </span><span class="se">\n</span><span class="s1"> Gerada usando Numpy </span><span class="se">\n</span><span class="s1"> Mostrando os valores de 0 a 5&#39;</span><span class="p">)</span>
+<span class="n">ax2</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;Histograma da distribuição lognormal </span><span class="se">\n</span><span class="s1"> Gerada usando Numpy&#39;</span><span class="p">)</span>
 <span class="n">ax2</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="n">color</span><span class="o">=</span><span class="s1">&#39;white&#39;</span><span class="p">,</span> <span class="n">ls</span><span class="o">=</span><span class="s1">&#39;--&#39;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mf">0.4</span><span class="p">)</span>
 
-<span class="n">ax3</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="n">d_normal</span><span class="p">),</span> <span class="n">bins</span><span class="o">=</span><span class="mi">70</span><span class="p">,</span> <span class="n">density</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">rwidth</span><span class="o">=</span><span class="mf">0.8</span><span class="p">)</span>
-<span class="n">ax3</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;$exp( Normal(0,1) )$ </span><span class="se">\n</span><span class="s1"> Log Normal gerada na mão&#39;</span><span class="p">)</span>
+<span class="n">ax3</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="n">d_normal</span><span class="p">),</span> <span class="n">bins</span><span class="o">=</span><span class="mi">150</span><span class="p">,</span> <span class="n">density</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">rwidth</span><span class="o">=</span><span class="mf">0.8</span><span class="p">)</span>
+<span class="n">ax3</span><span class="o">.</span><span class="n">set_xlim</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">5</span><span class="p">)</span>
+<span class="n">ax3</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;$exp( Normal(0,1) )$ </span><span class="se">\n</span><span class="s1"> Log Normal gerada na mão </span><span class="se">\n</span><span class="s1"> Mostrando valores de 0 a 5&#39;</span><span class="p">)</span>
 <span class="n">ax3</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="n">color</span><span class="o">=</span><span class="s1">&#39;white&#39;</span><span class="p">,</span> <span class="n">ls</span><span class="o">=</span><span class="s1">&#39;--&#39;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mf">0.4</span><span class="p">)</span>
 
-
-<span class="n">ax4</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">d_lognormal</span><span class="p">,</span> <span class="n">bins</span><span class="o">=</span><span class="mi">70</span><span class="p">,</span> <span class="n">density</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">rwidth</span><span class="o">=</span><span class="mf">0.8</span><span class="p">)</span>
-<span class="n">ax4</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;Histograma da distribuição lognormal </span><span class="se">\n</span><span class="s1"> Gerada usando Numpy&#39;</span><span class="p">)</span>
+<span class="n">ax4</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">d_lognormal</span><span class="p">,</span> <span class="n">bins</span><span class="o">=</span><span class="mi">250</span><span class="p">,</span> <span class="n">density</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">rwidth</span><span class="o">=</span><span class="mf">0.8</span><span class="p">)</span>
+<span class="n">ax4</span><span class="o">.</span><span class="n">set_xlim</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">5</span><span class="p">)</span>
+<span class="n">ax4</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;Histograma da distribuição lognormal </span><span class="se">\n</span><span class="s1"> Gerada usando Numpy </span><span class="se">\n</span><span class="s1"> Mostrando os valores de 0 a 5&#39;</span><span class="p">)</span>
 <span class="n">ax4</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="n">color</span><span class="o">=</span><span class="s1">&#39;white&#39;</span><span class="p">,</span> <span class="n">ls</span><span class="o">=</span><span class="s1">&#39;--&#39;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mf">0.4</span><span class="p">)</span>
 
 <span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>  <span class="c1"># Ajustar as distâncias entre os gráficos</span>
@@ -1467,8 +1474,14 @@
 <img alt="_images/parte_3_52_0.png" src="_images/parte_3_52_0.png" />
 </div>
 </div>
-<p>Com a lognormal introduzida, iremos trocar a distribuição da a priori de <span class="math notranslate nohighlight">\(\beta \sim Normal(0, 10)\)</span> para uma priori que é distribuída conforme uma <span class="math notranslate nohighlight">\(\beta \sim lognormal(0, 1)\)</span>.</p>
-<p>Assim como antes, vamos simular para entender o novo comportamento da nossa priori.</p>
+<hr class="docutils" />
+<p>Com a lognormal explicada, iremos trocar a distribuição da a priori de:</p>
+<div class="math notranslate nohighlight">
+\[\beta \sim Normal(0, 10)\]</div>
+<p>para uma priori que é distribuída conforme uma <em>lognormal</em>:</p>
+<div class="math notranslate nohighlight">
+\[\beta \sim lognormal(0, 1)\]</div>
+<p>Assim, como antes, vamos <code class="docutils literal notranslate"><span class="pre">simular</span> <span class="pre">para</span> <span class="pre">entender</span> <span class="pre">o</span> <span class="pre">novo</span> <span class="pre">comportamento</span> <span class="pre">da</span> <span class="pre">nossa</span> <span class="pre">priori</span></code>.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># ==========================================</span>
@@ -1505,11 +1518,10 @@
 <img alt="_images/parte_3_54_0.png" src="_images/parte_3_54_0.png" />
 </div>
 </div>
-<p>Nós ainda temos muita dispersão e também temos ainda algumas poucas linhas que ultrapassam a maior altura já registrada (de <span class="math notranslate nohighlight">\(272 cm\)</span>). Isso acontece pois não limitamos a nossa margem superior pela distribuição de <span class="math notranslate nohighlight">\(\beta\)</span>. Mas essa nossa nova abordagem parece ser uma priori bem mais condizente com o que podemos imaginar.</p>
-</div>
+<p>Nós ainda temos muita dispersão e também temos ainda algumas poucas linhas que ultrapassam a maior altura já registrada (de <span class="math notranslate nohighlight">\(272 cm\)</span>). Isso acontece porque não limitamos a nossa margem superior pela distribuição de <span class="math notranslate nohighlight">\(\beta\)</span>. Mas essa nossa nova abordagem parece ser uma priori bem mais condizente com o que podemos imaginar.</p>
 <div class="section" id="aproximacao-da-posteriori">
-<h2>Aproximação da posteriori<a class="headerlink" href="#aproximacao-da-posteriori" title="Permalink to this headline">¶</a></h2>
-<p>Vamos fazer a aproximação da posteriori usando a Stan e verificar os resultados.</p>
+<h4>Aproximação da posteriori<a class="headerlink" href="#aproximacao-da-posteriori" title="Permalink to this headline">¶</a></h4>
+<p>Vamos fazer a aproximação da posteriori usando a <em>Stan</em> e verificar os resultados.</p>
 <div class="cell tag_remove_output docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># =================================================================</span>
@@ -1527,12 +1539,12 @@
 <span class="s2">    parameters {</span>
 <span class="s2">        real alpha;</span>
 <span class="s2">        real&lt;lower=0&gt; beta;</span>
-<span class="s2">        real&lt;lower=0&gt; sigma;</span>
+<span class="s2">        real&lt;lower=0, upper=50&gt; sigma;</span>
 <span class="s2">    }</span>
 
 <span class="s2">    model {</span>
-<span class="s2">        // alpha ~ normal(178, 20);</span>
-<span class="s2">        // beta ~ lognormal(0, 1);</span>
+<span class="s2">        alpha ~ normal(178, 20);</span>
+<span class="s2">        beta ~ lognormal(0, 1);</span>
 <span class="s2">        // sigma ~ uniform(0, 50);</span>
 
 <span class="s2">        for (i in 1:N){</span>
@@ -1540,6 +1552,7 @@
 <span class="s2">        }</span>
 <span class="s2">}</span>
 <span class="s2">&quot;&quot;&quot;</span>
+
 <span class="c1"># Nossa amostra é apenas para pessoas acima de 18 anos</span>
 <span class="n">df_maioridade</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">df</span><span class="o">.</span><span class="n">age</span> <span class="o">&gt;=</span> <span class="mi">18</span><span class="p">,</span> <span class="p">[</span><span class="s1">&#39;weight&#39;</span><span class="p">,</span> <span class="s1">&#39;height&#39;</span><span class="p">]]</span>
 
@@ -1601,19 +1614,19 @@
 <span class="c1"># ==========================================</span>
 <span class="n">fig</span><span class="p">,</span> <span class="p">[</span><span class="n">ax1</span><span class="p">,</span> <span class="n">ax2</span><span class="p">,</span> <span class="n">ax3</span><span class="p">]</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">17</span><span class="p">,</span> <span class="mi">9</span><span class="p">))</span>
 
-<span class="n">ax1</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">fit_altura_2</span><span class="p">[</span><span class="s1">&#39;alpha&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">flatten</span><span class="p">(),</span> <span class="n">bins</span><span class="o">=</span><span class="mi">50</span><span class="p">,</span> <span class="n">density</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">rwidth</span><span class="o">=</span><span class="mf">0.8</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;red&#39;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.4</span><span class="p">)</span>
+<span class="n">ax1</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">fit_altura_2</span><span class="p">[</span><span class="s1">&#39;alpha&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">flatten</span><span class="p">(),</span> <span class="n">bins</span><span class="o">=</span><span class="mi">50</span><span class="p">,</span> <span class="n">density</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">rwidth</span><span class="o">=</span><span class="mf">0.8</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;darkred&#39;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.6</span><span class="p">)</span>
 <span class="n">ax1</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;Posteriori alpha&#39;</span><span class="p">)</span>
 <span class="n">ax1</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="n">color</span><span class="o">=</span><span class="s1">&#39;white&#39;</span><span class="p">,</span> <span class="n">ls</span><span class="o">=</span><span class="s1">&#39;--&#39;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mf">0.4</span><span class="p">)</span>
 <span class="n">ax1</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;Frequência&#39;</span><span class="p">)</span>
 <span class="n">ax1</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;Alpha&#39;</span><span class="p">)</span>
 
-<span class="n">ax2</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">fit_altura_2</span><span class="p">[</span><span class="s1">&#39;beta&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">flatten</span><span class="p">(),</span> <span class="n">bins</span><span class="o">=</span><span class="mi">50</span><span class="p">,</span> <span class="n">density</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">rwidth</span><span class="o">=</span><span class="mf">0.8</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;red&#39;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.4</span><span class="p">)</span>
+<span class="n">ax2</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">fit_altura_2</span><span class="p">[</span><span class="s1">&#39;beta&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">flatten</span><span class="p">(),</span> <span class="n">bins</span><span class="o">=</span><span class="mi">50</span><span class="p">,</span> <span class="n">density</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">rwidth</span><span class="o">=</span><span class="mf">0.8</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;darkred&#39;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.6</span><span class="p">)</span>
 <span class="n">ax2</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;Posteriori beta&#39;</span><span class="p">)</span>
 <span class="n">ax2</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="n">color</span><span class="o">=</span><span class="s1">&#39;white&#39;</span><span class="p">,</span> <span class="n">ls</span><span class="o">=</span><span class="s1">&#39;--&#39;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mf">0.4</span><span class="p">)</span>
 <span class="n">ax2</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;Frequência&#39;</span><span class="p">)</span>
 <span class="n">ax2</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;Beta&#39;</span><span class="p">)</span>
 
-<span class="n">ax3</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">fit_altura_2</span><span class="p">[</span><span class="s1">&#39;sigma&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">flatten</span><span class="p">(),</span> <span class="n">bins</span><span class="o">=</span><span class="mi">50</span><span class="p">,</span> <span class="n">density</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">rwidth</span><span class="o">=</span><span class="mf">0.8</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;red&#39;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.4</span><span class="p">)</span>
+<span class="n">ax3</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">fit_altura_2</span><span class="p">[</span><span class="s1">&#39;sigma&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">flatten</span><span class="p">(),</span> <span class="n">bins</span><span class="o">=</span><span class="mi">50</span><span class="p">,</span> <span class="n">density</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">rwidth</span><span class="o">=</span><span class="mf">0.8</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;darkred&#39;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.6</span><span class="p">)</span>
 <span class="n">ax3</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;Posteriori sigma&#39;</span><span class="p">)</span>
 <span class="n">ax3</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="n">color</span><span class="o">=</span><span class="s1">&#39;white&#39;</span><span class="p">,</span> <span class="n">ls</span><span class="o">=</span><span class="s1">&#39;--&#39;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mf">0.4</span><span class="p">)</span>
 <span class="n">ax3</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;Frequência&#39;</span><span class="p">)</span>
@@ -1627,9 +1640,9 @@
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Resumo das posterioris:
 ============================================================
-Media alpha:  154.6  - Desvio Padrão alpha:  0.268
-Média beta:   0.905  - Desvio Padrão beta:   0.043
-Média sigma:  5.109  - Desvio Padrão sigma:  0.19
+Media alpha:  154.6  - Desvio Padrão alpha:  0.279
+Média beta:   0.904  - Desvio Padrão beta:   0.043
+Média sigma:  5.109  - Desvio Padrão sigma:  0.198
 </pre></div>
 </div>
 <img alt="_images/parte_3_58_1.png" src="_images/parte_3_58_1.png" />
@@ -1637,6 +1650,14 @@ Média sigma:  5.109  - Desvio Padrão sigma:  0.19
 </div>
 </div>
 </div>
+</div>
+</div>
+</div>
+<div class="tex2jax_ignore mathjax_ignore section" id="resumo">
+<h1>Resumo<a class="headerlink" href="#resumo" title="Permalink to this headline">¶</a></h1>
+<p>Até aqui vimos a construção de um modelo linear simples usando a Stan, vimos também como pensar e como construir uma priori, vimos como gerar as amostras da posteriori e analisar seus resultados.</p>
+<p>O modelo linear é o modelo muito simples e é empregado em <em>muitas</em> análises no dia a dia.</p>
+<p>Na mesma linha de raciocínio que usamos para pensar e construir esse modelo de regressão linear, nós também iremos utilizá-la na próxima parte desse material. Iremos adicionar mais ferramentas dentro dessa estrutura e, com isso, aumentaremos um pouco mais a profundidade que nossas análises podem alcançar.</p>
 </div>
 
     <script type="text/x-thebe-config">
