@@ -262,16 +262,19 @@
   </a>
   <ul class="visible nav section-nav flex-column">
    <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#medidas-das-ideias">
+     Medidas das ideias
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
     <a class="reference internal nav-link" href="#falha-da-falsificacao">
      Falha da Falsificação
     </a>
-    <ul class="nav section-nav flex-column">
-     <li class="toc-h3 nav-item toc-entry">
-      <a class="reference internal nav-link" href="#o-que-karl-popper-propoe">
-       O que Karl Popper propõe:
-      </a>
-     </li>
-    </ul>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#o-que-karl-popper-propoe">
+     O que Karl Popper propõe:
+    </a>
    </li>
   </ul>
  </li>
@@ -308,8 +311,8 @@
     </a>
    </li>
    <li class="toc-h2 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#jardim-da-bifurcacao-dos-dados">
-     Jardim da Bifurcação dos Dados
+    <a class="reference internal nav-link" href="#jardim-das-bifurcacoes-dos-dados">
+     Jardim das Bifurcações dos Dados
     </a>
    </li>
    <li class="toc-h2 nav-item toc-entry">
@@ -340,75 +343,97 @@
 <a class="reference internal image-reference" href="_images/cover_book_SR2.jpg"><img alt="Statistical Rethinking 2" src="_images/cover_book_SR2.jpg" style="width: 500px;" /></a>
 <div class="section" id="anteloquio">
 <h2>Antelóquio<a class="headerlink" href="#anteloquio" title="Permalink to this headline">¶</a></h2>
+<p><code class="docutils literal notranslate"><span class="pre">Antelóquio</span></code> é o que se diz ou escreve antes; uma apresentação, um preâmbulo, um prólogo.</p>
 <p>Todas as notas desse material foram baseadas nas aulas de 2019 (<a class="reference external" href="https://www.youtube.com/playlist?list=PLDcUM9US4XdNM4Edgs7weiyIguLSToZRI">ACESSE</a>) do curso do <a class="reference external" href="https://www.mpg.de/9349950/evolutionary-anthropology-mcelreath"><code class="docutils literal notranslate"><span class="pre">Prof.</span> <span class="pre">Richard</span> <span class="pre">McElreath</span></code></a> e também em seu livro (<em>capa acima</em>) Statistical Rethinking - <em>Segunda Edição</em>.</p>
-<p>Esse material foi construído tentando preservar os detalhes mais importantes e as construções manuais dos modelos na medida do possível e modo de ensino, permitindo assim um entendimento mais concreto do que está acontencendo.</p>
-<p>Diferenças do material original: Esse material foi construído transportando as idéias codificadas em <a class="reference external" href="https://cran.r-project.org/">R</a> do pacote <a class="reference external" href="https://github.com/rmcelreath/rethinking">rethinking</a> para a linguagem <a class="reference external" href="https://www.python.org/">python</a> em conjunto com suas principais bibliotecas de análise de dados (numpy, scipy, matplotlib) e no lugar do pacote <em>rethinking</em> usaremos, tanto quanto meu conhecimento alcançar, utilização da biblioteca <a class="reference external" href="http://mc-stan.org/">Stan</a> e sua interface para python <a class="reference external" href="https://pystan.readthedocs.io/en/latest/">pystan</a>.</p>
+<p>Escrevi esse material como o intuíto de construir um estudo estruturado que me permita uma boa compreensão das aulas do curso e, por consequência, melhor as habilidades em programação e exposição de idéias.</p>
+<p>Esse material foi construído tentando preservar os detalhes didáticos que mais julguei importantes e, também, as construções dos modelos na medida do possível, permitindo assim um entendimento mais concreto do que está acontencendo.</p>
+<p>Diferenças do material original do curso: esse material foi construído transportando as idéias codificadas em <a class="reference external" href="https://cran.r-project.org/">R</a> do pacote <a class="reference external" href="https://github.com/rmcelreath/rethinking">rethinking</a> para a linguagem <a class="reference external" href="https://www.python.org/">python</a> em conjunto com suas principais bibliotecas de análise de dados (numpy, scipy, matplotlib) e no lugar do pacote <em>rethinking</em> usei, tanto quanto meu conhecimento permitiu, utilização da biblioteca <a class="reference external" href="http://mc-stan.org/">Stan</a> e sua interface para python <a class="reference external" href="https://pystan.readthedocs.io/en/latest/">pystan</a>.</p>
 <hr class="docutils" />
 <p>Esse material foi escrtio em lingua portuguesa (Brasil).</p>
 <p>Estará disponibilizado gratuitamente no github: <a class="reference external" href="https://github.com/rodolphomacedo">https://github.com/rodolphomacedo</a></p>
 <p>Erros, sugestões ou dúvidas podem ser enviadas para o email <span class="xref myst">rodolpho.ime&#64;gmail.com</span></p>
-<p><em>Bom divertimento!!!</em></p>
+<p><em>Bons estudos!!!</em></p>
 </div>
 <div class="section" id="prefacio">
 <h2>Prefácio<a class="headerlink" href="#prefacio" title="Permalink to this headline">¶</a></h2>
-<p>Esse material tem como objetivo primário descrever um modo de (re)pensar a estatística. Para uma primeira leitura não é necessário um foco mais atento dos códigos que geram os gráficos, porém o próprio código e os comentários são partes integrantes do método que usei para apresentar as idéias e muitas dúvidas podem sanadas com uma leitura mais atenta.</p>
-<p>Tentei colocar o máximo de figuras e mêmes que pude encontrar para ilustrar os exemplos.</p>
+<p>O prefácio é texto preliminar de apresentação, colocado no começo do livro, com explicações sobre os objetivos.</p>
+<p>Esse material tem como objetivo primário descrever um modo de (re)pensar a estatística. Para uma primeira leitura não é necessário um foco mais atento dos códigos que geram os gráficos, porém o próprio código e os comentários são partes integrantes do método que usei para apresentar as ideias e muitas dúvidas podem sanadas com uma leitura mais atenta.</p>
+<p>Tentei colocar o máximo de figuras e memes que pude encontrar para ilustrar os exemplos, muitos deles foram os mesmos que foram usados nas apresentação do curso.</p>
 </div>
 <div class="section" id="requisitos">
 <h2>Requisitos<a class="headerlink" href="#requisitos" title="Permalink to this headline">¶</a></h2>
-<p>É necessário um breve conhecimento da <code class="docutils literal notranslate"><span class="pre">teoria</span> <span class="pre">das</span> <span class="pre">probabilidades</span></code> e uma vivência razoável em python e suas bibliotecas mais usuais de análise de dados.</p>
+<p>É necessário um breve conhecimento da <code class="docutils literal notranslate"><span class="pre">teoria</span> <span class="pre">das</span> <span class="pre">probabilidades</span></code> e as técnicas básicas de <code class="docutils literal notranslate"><span class="pre">contagem</span></code>. Uma vivência razoável em python e suas bibliotecas mais usuais de análise de dados.</p>
 </div>
 </div>
 <hr class="docutils" />
 <div class="tex2jax_ignore mathjax_ignore section" id="golem-de-praga">
 <h1>Golem de Praga<a class="headerlink" href="#golem-de-praga" title="Permalink to this headline">¶</a></h1>
 <a class="reference internal image-reference" href="_images/golem_of_prague.png"><img alt="Golem of Prague" src="_images/golem_of_prague.png" style="width: 1000px;" /></a>
-<p>Todos que são cientistas precisam fazer inferências sobre alguns aspectos de um subconjunto de particularidades do corpo de um problema que está sob estudo.</p>
+<p><a class="reference external" href="https://youtu.be/4WVelCswXo4?t=2562">AULA 1 - Statistical Rethinking Winter 2019 Lecture 01 - Golem de Praga</a></p>
+<p><code class="docutils literal notranslate"><span class="pre">Golem</span></code> é um ser artificial místico, associado à tradição mística do judaísmo, particularmente à cabala, que pode ser trazido à vida através de um processo divino. No folclore judaico, o golem é um ser animado que é feito de material inanimado, muitas vezes visto como um gigante de pedra.</p>
+<p>Um Golem pode ser entendido como robô que <code class="docutils literal notranslate"><span class="pre">obedece</span></code> as ordens do seu criador, porém <code class="docutils literal notranslate"><span class="pre">não</span> <span class="pre">possuem</span> <span class="pre">nenhum</span> <span class="pre">compromisso</span> <span class="pre">com</span> <span class="pre">a</span> <span class="pre">verdade</span></code>, deixando assim a cargo do <code class="docutils literal notranslate"><span class="pre">seu</span> <span class="pre">criador</span> <span class="pre">avaliar</span> <span class="pre">e</span> <span class="pre">criticar</span> <span class="pre">suas</span> <span class="pre">ações</span> <span class="pre">à</span> <span class="pre">luz</span> <span class="pre">da</span> <span class="pre">racionalidade</span></code>.</p>
+<p>O que vamos fazer nesse curso é aprender a construção dos golems bayesianos.</p>
+<div class="section" id="medidas-das-ideias">
+<h2>Medidas das ideias<a class="headerlink" href="#medidas-das-ideias" title="Permalink to this headline">¶</a></h2>
+<p>Cientista, em um sentido mais amplo, refere-se a qualquer pessoa que exerça uma atividade sistemática para obter conhecimento. Em um sentido mais restrito, cientista refere-se a indivíduos que usam o método científicos.</p>
+<p>Todos os cientistas precisam fazer inferências sobre aspectos de ao menos uma parcela de particularidades de um problema que está sobre estudo.</p>
 <p>Medir a Natureza é fascinante! Tal medida nos permite um entendimento aproximado de um subconjunto do funcionamento da maquinaria natural do Todo.</p>
-<p>Ao se observar o fenômeno a ser estudado, a proposta da criação de uma métrica deriva-se de uma ideia, uma sugestão, uma proposta, que se admite, independentemente do fato de ser verdadeira ou falsa, como um princípio a partir do qual se pode deduzir um determinado conjunto de consequências. Tal proposta definiremos como a
-<code class="docutils literal notranslate"><span class="pre">hipótese</span></code>.</p>
-<p>A realização de uma operação <em>intelectual</em>, por meio da qual se afirma a verdade de uma hipótese em decorrência de sua ligação com outras já reconhecidas como verdadeiras, isto é, <code class="docutils literal notranslate"><span class="pre">inferência</span></code>.</p>
-<p>Problemas de escopo aberto apresentam relativas dificuldades que desafiam a capacidade de nosso espírito em obtermos uma solução. Tais problemas contém uma particularidade de serem dificíes de obter conhecimento a seu respeito.   (**complementar com LAPLACE “sobre a probablidade” ***)</p>
-<p>A estatítica sugerida pelo biólogo Ronald Fisher, no início da década de 20, não contém em seu propósito a capacidade de resolver problemas de caráter tão amplo.  <strong>(complementar com SHARON, capítulo3 em Fisher)</strong></p>
-<p>Tais técnicas propostas, e estudadas ainda hoje, podem ser visto como <em>pequenos robôs</em> que precisam de uma entrada e produzem uma saída agnóstica a seu propósito. <em>Robôs</em> de modo geral são assim, são bons para realizar tarefas que suprem e extende a necessidade humana.</p>
-<p>O ambiente é, de modo geral, extremamente confuso para entede-lô completamente, assim a construção de uma estrutura nos permitirá obter ao menos alguns pontos de sabedoria do sistema.</p>
+<p>Ao se observar o fenômeno a ser estudado, a proposta da criação de uma métrica surge a partir de uma ideia, uma sugestão, uma proposta, que se admite, independentemente do fato de ser verdadeira ou falsa, como um princípio a partir do qual se pode deduzir um determinado conjunto de consequências.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Tal ideia a definiremos como <code class="docutils literal notranslate"><span class="pre">hipótese</span></code>.</p>
+</div>
+<p>Para conseguirmos saber se a <em>hipótese</em> é verdadeira é necessário utilizarmos um método confiável. Esse método é a realização de uma operação <em>intelectual</em>, por meio da qual se afirma a verdade da hipótese em decorrência de sua ligação com outras já reconhecidas como verdadeiras, isto é, <code class="docutils literal notranslate"><span class="pre">inferência</span></code>.</p>
+<p><code class="docutils literal notranslate"><span class="pre">Problemas</span> <span class="pre">de</span> <span class="pre">escopo</span> <span class="pre">aberto</span></code> apresentam dificuldades relativas grandes e que desafiam a nossa capacidade de encontrar uma solução. Tais problemas guardam em si a particularidade de serem dificíes de obter pouco de conhecimento a seu respeito.</p>
+<hr class="docutils" />
+<p><em>Ver complementar com LAPLACE “sobre a probablidade.</em></p>
+<p>A estatítica sugerida pelo biólogo Ronald Fisher, no início da década de 20, não contém em seu propósito a capacidade de resolver problemas de caráter tão amplo.  <em>(ver complementar com SHARON, capítulo3 em Fisher - A teoria que não morreria)</em></p>
+<p>Tais técnicas propostas, e estudadas ainda hoje, podem ser vistas como <code class="docutils literal notranslate"><span class="pre">pequenos</span> <span class="pre">robôs</span></code> que precisam de uma entrada e produzem uma saída <code class="docutils literal notranslate"><span class="pre">agnóstica</span> <span class="pre">a</span> <span class="pre">seu</span> <span class="pre">propósito</span></code>. <em>Robôs</em> de modo geral são assim, são bons para realizar tarefas que supram a necessidade humana.</p>
+<p>O <code class="docutils literal notranslate"><span class="pre">ambiente</span></code> é, de modo geral, extremamente confuso para entede-lô completamente. Assim, naturalmente, nasce uma necessidade da construção de uma estrutura nos permitirá obter, ao menos, alguns pontos de sabedoria desse sistema.</p>
+</div>
 <hr class="docutils" />
 <div class="section" id="falha-da-falsificacao">
 <h2>Falha da Falsificação<a class="headerlink" href="#falha-da-falsificacao" title="Permalink to this headline">¶</a></h2>
-<p>Karl Popper, um dos mais conhecidos filósofos da ciência, entra para a história por propors uma definição do que é <code class="docutils literal notranslate"><span class="pre">ciência</span></code> e, o que ela não é, através da falsificação ou não.</p>
-<p>(Pode ser que o rítmo que estou fazendo todas as coisas na minha vida, seja realmente um rítmo bom pra MIM. E prestar atenção na <strong>pressa de terminar tudo ontem</strong> quando me pegar assim, tentar diminuir até a serenidade, mas a questão é como posso melhorar a ansiedade, a qualidade da escrita, e principalmente como criar um sistema de ação pelo qual consiga caminhar pelas pelas melhores estradas de todas as possíveis em todas as coisas, (<em>Ler os Jardim que se birfucam</em>))
-A m. abre uma capacidade de pensar de forma mais ampla, tem que perceber quando estiver fechando, o que estou voltando a ter. Daí treinar para reverter sozinho.)</p>
-<p>O critério de falsificação é a demarcação do que está acontecendo dentro e fora. Mas há muitas outras coisas sobre as evidências que nos exige que tenhamos mais de um modelo para verificar quais deles são consistentemente com o que observamos. O que queremos é tentar falsificar é o modelo explicativo e não qualquer outro modelo sem importância.
-Agora no século XX, isso foi revertido, oque os cientistas tentam falsificar com seus testes estatísticos não são suas hipóteses de pesquisa, mas algumas hipóteses que eles não gostam e que nada está acontecendo.</p>
+<p>Karl Popper, um dos mais conhecidos filósofos da ciência, entra para a história por propor uma definição do que pode ser <code class="docutils literal notranslate"><span class="pre">ciência</span></code> e, também, o que ela não é, através da falsificação ou não.</p>
+<p>O critério de falsificação é a demarcação do que está acontecendo dentro e fora. Mas há muitas outras coisas sobre as evidências que exige que tenhamos mais de um modelo para verificar quais deles são consistentemente com que observamos. O que queremos é tentar falsificar o modelo explicativo e não qualquer outro modelo sem importância.
+Agora no século XX, isso foi revertido, oque os cientistas tentam falsificar com seus testes estatísticos não são suas hipóteses de pesquisa, mas algumas hipóteses que eles não gostam e que nada está acontecendo ali.</p>
 <p>O que deveriamos realmente fazer é tentar fazer as previsões sobre o que está acontecendo e falsificar o restante.</p>
-<ul class="simple">
-<li><p><em>Assim, ciência não se trata de falsificar coisas, é necessário construir uma teoria substantiva em algum ponto.</em></p></li>
-</ul>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Assim, ciência não se trata de falsificar coisas, é necessário construir uma teoria substantiva em algum ponto.</p>
+</div>
+</div>
 <div class="section" id="o-que-karl-popper-propoe">
-<h3>O que Karl Popper propõe:<a class="headerlink" href="#o-que-karl-popper-propoe" title="Permalink to this headline">¶</a></h3>
-<p><em>Construa uma hipótese de pesquisa substantiva com previsões pontuais sobre o que deveria estar acontecendo e tente falsifica-lá.</em></p>
-<p><strong>E não falsificar a ideia boba que não está acontecendo nada. Porque sempre está acontecendo algo, essa é a Natureza. Muitas as coisas estão correlacionadas em muitos lugares na natureza!</strong></p>
+<h2>O que Karl Popper propõe:<a class="headerlink" href="#o-que-karl-popper-propoe" title="Permalink to this headline">¶</a></h2>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Construa uma hipótese de pesquisa substantiva com previsões pontuais sobre o que deveria estar acontecendo e tente falsifica-lá.</p>
+</div>
+<p>E não falsificar a ideia boba que não está acontecendo nada. <code class="docutils literal notranslate"><span class="pre">Porque</span> <span class="pre">sempre</span> <span class="pre">está</span> <span class="pre">acontecendo</span> <span class="pre">algo,</span> <span class="pre">essa</span> <span class="pre">é</span> <span class="pre">a</span> <span class="pre">Natureza</span></code>. Muitas as coisas estão correlacionadas em muitos lugares na Natureza!</p>
 <p>A questão principal é:</p>
-<ul class="simple">
-<li><p><strong>Como prever sua estrutura?</strong></p></li>
-</ul>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Como prever sua estrutura?</p>
+</div>
 <ul class="simple">
 <li><p>Modelos <em>nulos</em> não são únicos!</p></li>
 <li><p>Deveria <em>falsificar</em> o modelo explanatório, e não o modelo <em>nulo</em> (<span class="math notranslate nohighlight">\(h_0\)</span>).</p></li>
-<li><p>Falsificação é consensual, não logico!</p></li>
+<li><p>A falsificação é consensual, não lógica!</p></li>
 <li><p>Falseabilidade é sobre a demarcação e não sobre o método.</p></li>
 <li><p>Não exite um procedimento estatístico suficiente.</p></li>
-<li><p>Ciência é uma tecnologia social.</p></li>
 </ul>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Ciência é uma tecnologia social!</p>
 </div>
 </div>
 </div>
 <hr class="docutils" />
 <div class="tex2jax_ignore mathjax_ignore section" id="engeharia-de-golem">
 <h1>Engeharia de Golem<a class="headerlink" href="#engeharia-de-golem" title="Permalink to this headline">¶</a></h1>
-<p>Para o desenvolvimento dos golem’s vamos precisar de um conjunto de princípios para que possamos construir nosso modelo estatístico. Não vamos entrar nesse curso achando que é apenas uma escolha de golem de dentro de uma caixa de ferramentas pré-fabricado.</p>
-<p>Iremos construir os nosso próprios golems e também aprederemos os princícios para conseguirmos criticá-los e refiná-los.</p>
-<p>Existem muitos modos de fazer essa escolha sob o direcionamento de filosofia que escolher trabalhar!</p>
+<p>Para o desenvolvimento dos <em>golem’s</em> bayesianos vamos precisar de um conjunto de princípios para que possamos construir nossos modelo estatístico. Não vamos entrar nesse curso achando que é apenas uma escolha de golem de dentro de uma caixa de ferramentas  com golems pré-fabricados.</p>
+<p>Iremos aprender a construir os nossos próprios golems e também aprenderemos os princípios para conseguirmos criticá-los e refiná-los.</p>
+<p>Existem muitos modos de fazer essas escolhas dos principíos, sob os diversos direcionamentos da <code class="docutils literal notranslate"><span class="pre">filosofia</span> <span class="pre">que</span> <span class="pre">escolhermos</span> <span class="pre">trabalhar</span></code>!</p>
 <p>Nós iremos seguir esses três principios:</p>
 <ul class="simple">
 <li><p>Análise de dados Bayesiana</p></li>
@@ -421,9 +446,13 @@ Agora no século XX, isso foi revertido, oque os cientistas tentam falsificar co
 <li><p>Contar todas as maneiras que os dado podem acontecer, de acordo com a suposição.</p></li>
 <li><p>As suposições que são mais consistentes com os dados, ou seja, as que ocorrem mais vezes, são mais plausíveis de acontecerem.</p></li>
 </ul>
-<p><strong>Faremos algumas suposições sobre como o mundo poderá ser e também como é o processo casual acontece. Então iremos ver algumas observações que são consequencias desse processo.</strong></p>
-<p>Assim podemos dizer que temos um conjunto de suposições alternativos, e cada uma dessas suposições são mais ou menos plauíveis de ocorrer de acordo com quantidade de vezes que ela já ocorreu.</p>
-<p><strong>Isso é na verdade uma forma muito específica de contar as coisas.</strong> Isso é o que o nossos Golems irão fazer, contar de forma  MUITO rápida! Nós precisamos apenas programá-los para que ele conte do modo que nós quizermos.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Faremos algumas suposições sobre como o mundo poderá ser e, também, como o processo casual acontece. Então iremos ver algumas observações que são consequências desse processo.</p>
+</div>
+<p>Assim, podemos dizer que temos um conjunto de suposições alternativas, e cada uma dessas suposições são mais ou menos plauíveis de ocorrer de acordo com quantidade de vezes que ela já ocorreu anteriormente.</p>
+<p><strong>Isso é na verdade uma forma muito específica de contar as coisas.</strong> Isso é o que o nossos <code class="docutils literal notranslate"><span class="pre">Golem's</span></code> irão fazer, <code class="docutils literal notranslate"><span class="pre">contar</span> <span class="pre">de</span> <span class="pre">forma</span>&#160; <span class="pre">MUITO</span> <span class="pre">rápida</span></code>!</p>
+<p>Nós precisamos apenas programá-los, para que ele conte do modo que nós quisermos.</p>
 </div>
 <div class="section" id="modelos-multiniveis">
 <h2>Modelos Multiníveis<a class="headerlink" href="#modelos-multiniveis" title="Permalink to this headline">¶</a></h2>
@@ -451,7 +480,7 @@ Agora no século XX, isso foi revertido, oque os cientistas tentam falsificar co
 <div class="section" id="comparacao-de-modelos">
 <h2>Comparação de modelos<a class="headerlink" href="#comparacao-de-modelos" title="Permalink to this headline">¶</a></h2>
 <ul class="simple">
-<li><p>Temos que ter múltiplos modelos para podermos compará-los e saber o que está acontecendo, e não falsificar uma hipótese nula. Estamos comparando o significado dos modelos.</p></li>
+<li><p>Temos que ter múltiplos modelos para podermos compará-los e saber o que está acontecendo, <code class="docutils literal notranslate"><span class="pre">e</span> <span class="pre">não</span> <span class="pre">falsificar</span> <span class="pre">uma</span> <span class="pre">hipótese</span> <span class="pre">nula</span></code>. Estamos comparando o significado dos modelos.</p></li>
 <li><p>Problemas básicos:</p>
 <ul>
 <li><p>Overfitting</p></li>
@@ -472,10 +501,11 @@ Agora no século XX, isso foi revertido, oque os cientistas tentam falsificar co
 <div class="tex2jax_ignore mathjax_ignore section" id="erro-de-colombo">
 <h1>Erro de Colombo<a class="headerlink" href="#erro-de-colombo" title="Permalink to this headline">¶</a></h1>
 <p>Colombo, enquanto navegava, enxergaria quais das direções que ele poderia seguir guiando-se apenas por seu mapa. O mapa não é o mundo real, é apenas uma representação, uma hipótese, do que ele pode ser. O mundo real é sempre muito maior e bem mais complexo.</p>
-<p>Nós, enquanto estamos construíndo um modelo, estamos nos guiando por um mapa lógico mental. Esse mapa também não é o mundo real, é apenas uma representação, uma hipótese, ou ainda uma sugestão particular, do que o mundo pode ser.</p>
-<ul class="simple">
-<li><p><em>O mundo real é sempre bem maior e bem mais complexo do que possa me parecer!</em></p></li>
-</ul>
+<p>Nós, enquanto estamos construindo um modelo, estamos nos guiando por um mapa lógico mental. Esse mapa também não é o mundo real, é apenas uma representação, uma hipótese, ou ainda uma sugestão particular, do que o mundo pode ser.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>O mundo real é sempre bem maior e bem mais complexo do que se possa parecer!</p>
+</div>
 <a class="reference internal image-reference" href="_images/Martin_Behaim_1492_Ocean_Map.png"><img alt="Colombo Globe" src="_images/Martin_Behaim_1492_Ocean_Map.png" style="width: 800px;" /></a>
 <p>Cadê a América?</p>
 <p><a class="reference external" href="https://pt.wikipedia.org/wiki/Erdapfel">Behain Globe</a>: <em>Globo que Colombo usou viajando em direção as Américas.</em></p>
@@ -488,28 +518,32 @@ Agora no século XX, isso foi revertido, oque os cientistas tentam falsificar co
 </ul>
 <p>Temos que nos preocupar com ambos!</p>
 <hr class="docutils" />
-<p><strong>Sobre Savage</strong>:</p>
+<p><strong>Quem foi Savage?</strong>:</p>
 <ul class="simple">
 <li><p>O economista Milton Friedman disse que Savage foi “<em>…uma das poucas pessoas que conheci a quem sem hesitar chamaria de gênio.</em>”</p></li>
-<li><p>Durante a Segunda Guerra Mundial, Savage serviu como principal assistente “estatístico” de John von Neumann.</p></li>
+<li><p>Durante a Segunda Guerra Mundial, Savage serviu como principal <code class="docutils literal notranslate"><span class="pre">assistente</span> <span class="pre">estatístico</span> <span class="pre">de</span> <span class="pre">John</span> <span class="pre">von</span> <span class="pre">Neumann</span></code>.</p></li>
 </ul>
 <p><a class="reference external" href="https://en.wikipedia.org/wiki/Leonard_Jimmie_Savage"><em>Savage - Wikipedia</em></a></p>
 </div>
-<div class="section" id="jardim-da-bifurcacao-dos-dados">
-<h2>Jardim da Bifurcação dos Dados<a class="headerlink" href="#jardim-da-bifurcacao-dos-dados" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="jardim-das-bifurcacoes-dos-dados">
+<h2>Jardim das Bifurcações dos Dados<a class="headerlink" href="#jardim-das-bifurcacoes-dos-dados" title="Permalink to this headline">¶</a></h2>
 <p>Para entender com funciona máquina bayesiana, vamos introduzir um exemplo simples:</p>
 <p><em>Obs: Ler o livro Borges, especificamente El jardim de sendeiros que se bifurcam</em>.</p>
-<p>Temos uma bolsa com <span class="math notranslate nohighlight">\(4\)</span> bolas (<span class="math notranslate nohighlight">\(N=4\)</span>). Sabemos que só existem a bolas <em>azuis</em> (<span class="math notranslate nohighlight">\(1\)</span>) e bolas <em>brancas</em> (<span class="math notranslate nohighlight">\(0\)</span>).</p>
-<p>O que queremos saber é a quais são as <span class="math notranslate nohighlight">\(4\)</span> bolas que tem dentro da bolsa?</p>
-<p>Vamos sortear as bolas e em seguida iremos devolver elas para a bolsa novamente.</p>
+<p>Temos uma bolsa com <span class="math notranslate nohighlight">\(4\)</span> bolas (<span class="math notranslate nohighlight">\(N=4\)</span>). Sabemos que só existem a bolas <em>azuis</em> (rotuladas de <span class="math notranslate nohighlight">\(1\)</span>) e bolas <em>brancas</em> (<span class="math notranslate nohighlight">\(0\)</span>).</p>
+<p>O que queremos saber é:</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Quantas bolas de cada cor tem dentro da bolsa?</p>
+</div>
+<p>Vamos sortear as bolas e em seguida <code class="docutils literal notranslate"><span class="pre">iremos</span> <span class="pre">devolver</span> <span class="pre">elas</span> <span class="pre">para</span> <span class="pre">a</span> <span class="pre">bolsa</span></code> novamente.</p>
 <p>Em três sorteios, tivemos o seguinte resultado:</p>
 <div class="math notranslate nohighlight">
 \[[Azul, Branca, Azul]\]</div>
-<p>ou ainda, matematicamente:</p>
+<p>ou ainda:</p>
 <div class="math notranslate nohighlight">
 \[[1, 0, 1] \]</div>
 <p>Vamos construir um procedimento para obter mais conhecimento a respeito de quais são as bolas que estão na bolsa.</p>
-<p>A primeira coisa a se fazer é, listar todas as possíveis sugestões que pode acontecer, e elas são:</p>
+<p>A primeira coisa a se fazer é, listar todas as possíveis sugestões que podem acontecer, são elas :</p>
 <p>(1) <span class="math notranslate nohighlight">\([B, B, B, B]\)</span></p>
 <p>(2) <span class="math notranslate nohighlight">\([A, B, B, B]\)</span></p>
 <p>(3) <span class="math notranslate nohighlight">\([A, A, B, B]\)</span></p>
@@ -536,7 +570,7 @@ Agora no século XX, isso foi revertido, oque os cientistas tentam falsificar co
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">### Jardim da Bifurcação dos Dados</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">### Jardim da Bifurcações dos Dados</span>
 
 <span class="n">N</span> <span class="o">=</span> <span class="mi">4</span>  <span class="c1"># Quantidade de bolas na bolsa.</span>
 
@@ -545,6 +579,8 @@ Agora no século XX, isso foi revertido, oque os cientistas tentam falsificar co
 </div>
 </div>
 </div>
+<p>A seguir será necessário conhecimento de contagem. No curso é feito uma abordagem gráfica muito interessante. Assista para entende-lá!</p>
+<p>Entenda a combinatória de um modo gráfico diretamente no curso, <a class="reference external" href="https://youtu.be/4WVelCswXo4?t=2562">clique aqui para assistir!</a></p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">### Contando quantas vezes cada hipótese pode ter ocorrido, dado nossa amostra.</span>
@@ -557,21 +593,24 @@ Agora no século XX, isso foi revertido, oque os cientistas tentam falsificar co
                                            <span class="c1"># A - B - A #</span>
                                            <span class="c1"># ========= #</span>
                     
-<span class="n">plausibilidade_da_hipotese</span><span class="p">[</span><span class="s1">&#39;B B B B&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span>  <span class="c1"># 0 * 4 * 0  = Nenhuma configuração é possível.</span>
-<span class="n">plausibilidade_da_hipotese</span><span class="p">[</span><span class="s1">&#39;A B B B&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">3</span>  <span class="c1"># 1 * 3 * 1  = 3</span>
-<span class="n">plausibilidade_da_hipotese</span><span class="p">[</span><span class="s1">&#39;A A B B&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">8</span>  <span class="c1"># 2 * 2 * 2  = 8</span>
-<span class="n">plausibilidade_da_hipotese</span><span class="p">[</span><span class="s1">&#39;A A A B&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">9</span>  <span class="c1"># 3 * 1 * 3  = 9</span>
-<span class="n">plausibilidade_da_hipotese</span><span class="p">[</span><span class="s1">&#39;A A A A&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span>  <span class="c1"># 4 * 0 * 4  = Nenhuma configuração é possível.</span>
+<span class="n">plausibilidade_da_hipotese</span><span class="p">[</span><span class="s1">&#39;B B B B&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span>  <span class="c1"># 0 * 4 * 0  = Todas brancas, nenhuma configuração é possível.</span>
+<span class="n">plausibilidade_da_hipotese</span><span class="p">[</span><span class="s1">&#39;A B B B&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">3</span>  <span class="c1"># 1 * 3 * 1  = 3 Maneiras distintas dessa configuração acontecer.</span>
+<span class="n">plausibilidade_da_hipotese</span><span class="p">[</span><span class="s1">&#39;A A B B&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">8</span>  <span class="c1"># 2 * 2 * 2  = 8 Maneiras distintas dessa configuração acontecer.</span>
+<span class="n">plausibilidade_da_hipotese</span><span class="p">[</span><span class="s1">&#39;A A A B&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">9</span>  <span class="c1"># 3 * 1 * 3  = 9 Maneiras distintas dessa configuração acontecer.</span>
+<span class="n">plausibilidade_da_hipotese</span><span class="p">[</span><span class="s1">&#39;A A A A&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span>  <span class="c1"># 4 * 0 * 4  = Todas azuis, nenhuma configuração é possível.</span>
 </pre></div>
 </div>
 </div>
 </div>
 <hr class="docutils" />
-<p><em>Esse é o cerne da estatística bayesiana, contagens. Apenas contagens!</em></p>
-<p>Uma das várias coisas interessantes que podemos fazer é usar a contagem anterior (<em>à priori</em>), e somar com a contagem atual:</p>
-<p>Vamos, dessa vez, retirar mais uma bola … e dessa vez, tiramos uma bola <code class="docutils literal notranslate"><span class="pre">Azul</span></code>:</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Esse é o cerne da estatística bayesiana, contagens. Apenas contagens!</p>
+</div>
+<p>Vamos, dessa vez, sortear mais uma bola… e, dessa vez, tiramos uma bola <code class="docutils literal notranslate"><span class="pre">Azul</span></code>:</p>
 <div class="math notranslate nohighlight">
 \[[A]\]</div>
+<p>Uma das várias coisas interessantes que podemos fazer é usar a contagem que fizemos anteriormente. Chamaremos essa contagem de contagem <code class="docutils literal notranslate"><span class="pre">à</span> <span class="pre">priori</span></code>, e então somamos com a contagem atual:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Quantidade de maneiras que podemos tirar uma bola Azul para cada hipótese(bolsa) proposta, </span>
@@ -580,10 +619,10 @@ Agora no século XX, isso foi revertido, oque os cientistas tentam falsificar co
 <span class="n">nova_plausibilidade_da_hipotese</span> <span class="o">=</span> <span class="p">{}</span>  <span class="c1"># Inicializando um novo dicionário com as novas hipóteses.</span>
 
 <span class="n">nova_plausibilidade_da_hipotese</span><span class="p">[</span><span class="s1">&#39;B B B B&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span>  <span class="c1"># 0  = Nenhuma configuraçao possível</span>
-<span class="n">nova_plausibilidade_da_hipotese</span><span class="p">[</span><span class="s1">&#39;A B B B&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span>  <span class="c1"># 1 </span>
-<span class="n">nova_plausibilidade_da_hipotese</span><span class="p">[</span><span class="s1">&#39;A A B B&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">2</span>  <span class="c1"># 2</span>
-<span class="n">nova_plausibilidade_da_hipotese</span><span class="p">[</span><span class="s1">&#39;A A A B&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">3</span>  <span class="c1"># 3</span>
-<span class="n">nova_plausibilidade_da_hipotese</span><span class="p">[</span><span class="s1">&#39;A A A A&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">4</span>  <span class="c1"># 4 </span>
+<span class="n">nova_plausibilidade_da_hipotese</span><span class="p">[</span><span class="s1">&#39;A B B B&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span>  <span class="c1"># 1 Maneiras distintas dessa configuração acontecer.</span>
+<span class="n">nova_plausibilidade_da_hipotese</span><span class="p">[</span><span class="s1">&#39;A A B B&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">2</span>  <span class="c1"># 2 Maneiras distintas dessa configuração acontecer.</span>
+<span class="n">nova_plausibilidade_da_hipotese</span><span class="p">[</span><span class="s1">&#39;A A A B&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">3</span>  <span class="c1"># 3 Maneiras distintas dessa configuração acontecer.</span>
+<span class="n">nova_plausibilidade_da_hipotese</span><span class="p">[</span><span class="s1">&#39;A A A A&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">4</span>  <span class="c1"># 4 Maneiras distintas dessa configuração acontecer.</span>
 </pre></div>
 </div>
 </div>
@@ -607,9 +646,9 @@ Agora no século XX, isso foi revertido, oque os cientistas tentam falsificar co
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Mostrando, para cada uma das hipóteses, o quão plausível é cada uma delas. </span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Mostrando, para cada uma das hipóteses, o quão plausível é cada uma delas acontecer de acordo com a amostra. </span>
 
-<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Número de manerias diferentes de conseguir obter essa amostra, dado a hipótese atual. </span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Número de manerias diferentes de conseguirmos obter essa amostra, dado a hipótese atual. </span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
 
 <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Plausibildade da hipótese [B B B B] = &#39;</span><span class="p">,</span> <span class="n">plausibilidade</span><span class="p">[</span><span class="s1">&#39;B B B B&#39;</span><span class="p">],</span> <span class="s1">&#39;maneiras possíveis, dado a hipótese.&#39;</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Plausibildade da hipótese [A B B B] = &#39;</span><span class="p">,</span> <span class="n">plausibilidade</span><span class="p">[</span><span class="s1">&#39;A B B B&#39;</span><span class="p">],</span> <span class="s1">&#39;maneiras possíveis, dado a hipótese.&#39;</span><span class="p">)</span>
@@ -620,7 +659,7 @@ Agora no século XX, isso foi revertido, oque os cientistas tentam falsificar co
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Número de manerias diferentes de conseguir obter essa amostra, dado a hipótese atual. 
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Número de manerias diferentes de conseguirmos obter essa amostra, dado a hipótese atual. 
 
 Plausibildade da hipótese [B B B B] =  0 maneiras possíveis, dado a hipótese.
 Plausibildade da hipótese [A B B B] =  3 maneiras possíveis, dado a hipótese.
@@ -635,10 +674,11 @@ Plausibildade da hipótese [A A A A] =  0 maneiras possíveis, dado a hipótese.
 <hr class="docutils" />
 <div class="section" id="adicionando-prioris">
 <h2>Adicionando Prioris<a class="headerlink" href="#adicionando-prioris" title="Permalink to this headline">¶</a></h2>
-<p>Imagine que na fábrica que produz bolsas com bolinhas dentro, a informação que um funcionário nos disse é que:</p>
+<p>Imagine que na fábrica que produz essas bolsas com as bolinhas dentro, um funcionário nos diga que:</p>
 <ul class="simple">
-<li><p>Existem poucas bolinhas <code class="docutils literal notranslate"><span class="pre">Azuis</span></code> em cada bolsa, e cada bolsa tem uma chance bem grande de ter uma 1 bolinha Azul. Para nós conseguirmos informar está <strong>intuição</strong>  sobre a quantidade de bolinhas que são mais prováveis que cada bolsa contenha, podemos descrever os pesos mais viáveis. Chamaremos essa nova informação de <em>à priori</em>:</p></li>
+<li><p>Existem poucas bolinhas <code class="docutils literal notranslate"><span class="pre">Azuis</span></code> em cada bolsa, e cada bolsa tem uma chance bem grande de ter uma 1 bolinha Azul. Para nós conseguirmos transmitir essa <strong>intuição</strong> do funcionário sobre a quantidade de bolinhas que são mais prováveis em cada bolsa, podemos descrever os pesos mais viáveis.</p></li>
 </ul>
+<p>Chamaremos essa nova informação de <em>à priori</em>. ou seja, é a informação de quantas bolas o funcionário acredita ter de cada cor na bolsa. Assim, para cada uma das nossas hipóteses, temos o quão plausível é ela acontecer.</p>
 <div class="math notranslate nohighlight">
 \[ [B B B B]  = 0 \]</div>
 <div class="math notranslate nohighlight">
@@ -705,19 +745,31 @@ Nova plausibildade da hipótese [A A A A] =  0 maneiras possíveis, dado a hipó
 </div>
 <div class="tex2jax_ignore mathjax_ignore section" id="conclusao">
 <h1>Conclusão<a class="headerlink" href="#conclusao" title="Permalink to this headline">¶</a></h1>
-<p>Temos uma intuição lógica muito boa de qual das possíveis bolsas que sugerimos poderia ser. Sabemos que as nossas bolsas hipotéticas que contém apenas bolas azuis <span class="math notranslate nohighlight">\([A A A A]\)</span> ou apenas bolas brancas <span class="math notranslate nohighlight">\([B B B B]\)</span> tem <em>peso</em> de <span class="math notranslate nohighlight">\(0\)</span> de acontecer, pois sabemos que tem pelo menos <span class="math notranslate nohighlight">\(1\)</span> bola Azul e <span class="math notranslate nohighlight">\(1\)</span> bola Branca na nossa amostragem.</p>
-<p>Já nossas outras bolsas hipotéticas, tem suas <code class="docutils literal notranslate"><span class="pre">plausibilidades</span></code> positivas de acontecer. As mais plausíveis são as bolsas com maior número de maneiras de acontecer! <em>Lindo!</em></p>
+<p>Temos uma intuição lógica muito boa de qual das possíveis bolsas (quais as hipóteses) que sugerimos poderia ser <code class="docutils literal notranslate"><span class="pre">a</span> <span class="pre">verdadeira</span> <span class="pre">bolsa</span></code>. Sabemos que as nossas bolsas hipotéticas contém apenas bolas azuis <span class="math notranslate nohighlight">\([A A A A]\)</span> ou apenas bolas brancas <span class="math notranslate nohighlight">\([B B B B]\)</span> tem <em>peso</em> de <span class="math notranslate nohighlight">\(0\)</span>, pois sabemos que tem pelo menos <span class="math notranslate nohighlight">\(1\)</span> bola Azul e <span class="math notranslate nohighlight">\(1\)</span> bola Branca na nossa amostragem.</p>
+<p>Já nossas outras bolsas hipotéticas, tem suas <code class="docutils literal notranslate"><span class="pre">plausibilidades</span></code> positivas (<em>maior que zero</em>). Então, podemos concluir que:</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>As hipóteses mais plausíveis são as bolsas com maior número de maneiras de acontecer!</p>
+</div>
+<p><em>Simplesmente lindo!!!</em></p>
 <hr class="docutils" />
-<p>O exemplo das <em>quantidade bolinhas contidas na bolsa</em> apresenta como é o funcionamento e a construção da lógica de <em>todos</em> os modelos bayesianos que iremos construir.</p>
-<p>Em muitos casos, iremos precisar contar infinitas hipóteses. Para isso, iremos usar o computador juntamente com cálculo para conseguir fazer tais contagens.</p>
-<p>Porém existe uma particularidade no desenvolvimento acima: uma contagem poderá ficar muito, mas muito grande, quando o número de bolinhas contidas na bolsa aumenta e também quando aumentamos a quantidade de vezes que retiramos uma bola da urna. Por exemplo, uma urna com 10 bolinhas e 10 retiradas, qual a magnetudo do número de contagens? E 1000 bolinhas? E infinitas? Essa última, apesar de ser parecer absurda, será a que iremos utilizar com mais frequência.</p>
-<p><code class="docutils literal notranslate"><span class="pre">Como</span> <span class="pre">contar</span> <span class="pre">até</span> <span class="pre">infinito</span> <span class="pre">muitas</span> <span class="pre">vezes?</span></code></p>
+<p>O exemplo da <em>quantidade bolinhas azuis contidas na bolsa</em> apresenta <code class="docutils literal notranslate"><span class="pre">como</span> <span class="pre">é</span> <span class="pre">o</span> <span class="pre">funcionamento</span> <span class="pre">e</span> <span class="pre">a</span> <span class="pre">construção</span> <span class="pre">da</span> <span class="pre">lógica</span> <span class="pre">de</span> <span class="pre">todos</span> <span class="pre">os</span> <span class="pre">modelos</span> <span class="pre">bayesianos</span></code> que iremos construir.</p>
+<p>Em muitos casos, <code class="docutils literal notranslate"><span class="pre">iremos</span> <span class="pre">precisar</span> <span class="pre">contar</span> <span class="pre">infinitas</span> <span class="pre">hipóteses</span></code>. Para isso, iremos usar o computador juntamente com cálculo para conseguir fazer tais contagens.</p>
+<p>Porém, existe uma particularidade no desenvolvimento acima: uma contagem poderá ficar muito, mas muito grande, quando o número de bolinhas contidas na bolsa aumenta e também quando aumentamos a quantidade de vezes que retiramos uma bola da urna.</p>
+<p>Por exemplo, um experimento de uma urna com <span class="math notranslate nohighlight">\(10\)</span> bolinhas e <span class="math notranslate nohighlight">\(10\)</span> retiradas. Qual a magnitude do número de contagens que é preciso fazer?</p>
+<p>E se fossem 1000 bolinhas? E <code class="docutils literal notranslate"><span class="pre">infinitas</span></code>?</p>
+<p>Essa última, apesar de se parecer absurda, será a que iremos utilizar com mais frequência. Então como surge um obstáculo:</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>Como contar até infinita vezes?</p>
+</div>
 <p>Voltando no exemplo das bolinhas, podemos calcular somas relativas, ou seja, qual a proporção de bolas azuis (por exemplo) que existem na amostra?</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Quantidade total de maneiras possíveis de ocorrer uma das hipóteses</span>
 
 <span class="n">total</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">(</span><span class="n">nova_plausibilidade</span><span class="o">.</span><span class="n">values</span><span class="p">())</span>
+
 <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;A quantidade total: &#39;</span><span class="p">,</span> <span class="n">total</span><span class="p">)</span>
 </pre></div>
 </div>
@@ -728,29 +780,29 @@ Nova plausibildade da hipótese [A A A A] =  0 maneiras possíveis, dado a hipó
 </div>
 </div>
 </div>
-<p>Normalizando a nossa contagem pela total, teremos:</p>
+<p><code class="docutils literal notranslate"><span class="pre">Normalizando</span></code> a nossa contagem, vamos dividir cada hipótese pela soma <code class="docutils literal notranslate"><span class="pre">total</span></code>, assim teremos:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Normalizando as contagens plausíveis.</span>
 
-<span class="n">plasusibilidade_normalizada</span> <span class="o">=</span> <span class="p">{}</span>   <span class="c1"># Inicializando um novo dicionário.</span>
+<span class="n">plausibilidade_normalizada</span> <span class="o">=</span> <span class="p">{}</span>   <span class="c1"># Inicializando um novo dicionário de plausibilidade normalizada.</span>
 
-<span class="n">plasusibilidade_normalizada</span><span class="p">[</span><span class="s1">&#39;B B B B&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">nova_plausibilidade</span><span class="p">[</span><span class="s1">&#39;B B B B&#39;</span><span class="p">]</span> <span class="o">/</span> <span class="n">total</span>
-<span class="n">plasusibilidade_normalizada</span><span class="p">[</span><span class="s1">&#39;A B B B&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">nova_plausibilidade</span><span class="p">[</span><span class="s1">&#39;A B B B&#39;</span><span class="p">]</span> <span class="o">/</span> <span class="n">total</span>
-<span class="n">plasusibilidade_normalizada</span><span class="p">[</span><span class="s1">&#39;A A B B&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">nova_plausibilidade</span><span class="p">[</span><span class="s1">&#39;A A B B&#39;</span><span class="p">]</span> <span class="o">/</span> <span class="n">total</span>
-<span class="n">plasusibilidade_normalizada</span><span class="p">[</span><span class="s1">&#39;A A A B&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">nova_plausibilidade</span><span class="p">[</span><span class="s1">&#39;A A A B&#39;</span><span class="p">]</span> <span class="o">/</span> <span class="n">total</span>
-<span class="n">plasusibilidade_normalizada</span><span class="p">[</span><span class="s1">&#39;A A A A&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">nova_plausibilidade</span><span class="p">[</span><span class="s1">&#39;A A A A&#39;</span><span class="p">]</span> <span class="o">/</span> <span class="n">total</span>
+<span class="n">plausibilidade_normalizada</span><span class="p">[</span><span class="s1">&#39;B B B B&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">nova_plausibilidade</span><span class="p">[</span><span class="s1">&#39;B B B B&#39;</span><span class="p">]</span> <span class="o">/</span> <span class="n">total</span>
+<span class="n">plausibilidade_normalizada</span><span class="p">[</span><span class="s1">&#39;A B B B&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">nova_plausibilidade</span><span class="p">[</span><span class="s1">&#39;A B B B&#39;</span><span class="p">]</span> <span class="o">/</span> <span class="n">total</span>
+<span class="n">plausibilidade_normalizada</span><span class="p">[</span><span class="s1">&#39;A A B B&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">nova_plausibilidade</span><span class="p">[</span><span class="s1">&#39;A A B B&#39;</span><span class="p">]</span> <span class="o">/</span> <span class="n">total</span>
+<span class="n">plausibilidade_normalizada</span><span class="p">[</span><span class="s1">&#39;A A A B&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">nova_plausibilidade</span><span class="p">[</span><span class="s1">&#39;A A A B&#39;</span><span class="p">]</span> <span class="o">/</span> <span class="n">total</span>
+<span class="n">plausibilidade_normalizada</span><span class="p">[</span><span class="s1">&#39;A A A A&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">nova_plausibilidade</span><span class="p">[</span><span class="s1">&#39;A A A A&#39;</span><span class="p">]</span> <span class="o">/</span> <span class="n">total</span>
 </pre></div>
 </div>
 </div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Nova plausibildade da hipótese [A B B B] = &#39;</span><span class="p">,</span> <span class="nb">round</span><span class="p">(</span><span class="n">plasusibilidade_normalizada</span><span class="p">[</span><span class="s1">&#39;B B B B&#39;</span><span class="p">],</span> <span class="mi">2</span><span class="p">),</span> <span class="s1">&#39;maneiras possíveis, dado a hipótese.&#39;</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Nova plausibildade da hipótese [A B B B] = &#39;</span><span class="p">,</span> <span class="nb">round</span><span class="p">(</span><span class="n">plasusibilidade_normalizada</span><span class="p">[</span><span class="s1">&#39;A B B B&#39;</span><span class="p">],</span> <span class="mi">2</span><span class="p">),</span> <span class="s1">&#39;maneiras possíveis, dado a hipótese.&#39;</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Nova plausibildade da hipótese [A A B B] = &#39;</span><span class="p">,</span> <span class="nb">round</span><span class="p">(</span><span class="n">plasusibilidade_normalizada</span><span class="p">[</span><span class="s1">&#39;A A B B&#39;</span><span class="p">],</span> <span class="mi">2</span><span class="p">),</span> <span class="s1">&#39;maneiras possíveis, dado a hipótese.&#39;</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Nova plausibildade da hipótese [A A A B] = &#39;</span><span class="p">,</span> <span class="nb">round</span><span class="p">(</span><span class="n">plasusibilidade_normalizada</span><span class="p">[</span><span class="s1">&#39;A A A B&#39;</span><span class="p">],</span> <span class="mi">2</span><span class="p">),</span> <span class="s1">&#39;maneiras possíveis, dado a hipótese.&#39;</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Nova plausibildade da hipótese [A A A A] = &#39;</span><span class="p">,</span> <span class="nb">round</span><span class="p">(</span><span class="n">plasusibilidade_normalizada</span><span class="p">[</span><span class="s1">&#39;A A A A&#39;</span><span class="p">],</span> <span class="mi">2</span><span class="p">),</span> <span class="s1">&#39;maneiras possíveis, dado a hipótese.&#39;</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Nova plausibildade da hipótese [A B B B] = &#39;</span><span class="p">,</span> <span class="nb">round</span><span class="p">(</span> <span class="n">plausibilidade_normalizada</span><span class="p">[</span><span class="s1">&#39;B B B B&#39;</span><span class="p">],</span> <span class="mi">2</span><span class="p">),</span> <span class="s1">&#39;maneiras possíveis, dado a hipótese.&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Nova plausibildade da hipótese [A B B B] = &#39;</span><span class="p">,</span> <span class="nb">round</span><span class="p">(</span> <span class="n">plausibilidade_normalizada</span><span class="p">[</span><span class="s1">&#39;A B B B&#39;</span><span class="p">],</span> <span class="mi">2</span><span class="p">),</span> <span class="s1">&#39;maneiras possíveis, dado a hipótese.&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Nova plausibildade da hipótese [A A B B] = &#39;</span><span class="p">,</span> <span class="nb">round</span><span class="p">(</span> <span class="n">plausibilidade_normalizada</span><span class="p">[</span><span class="s1">&#39;A A B B&#39;</span><span class="p">],</span> <span class="mi">2</span><span class="p">),</span> <span class="s1">&#39;maneiras possíveis, dado a hipótese.&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Nova plausibildade da hipótese [A A A B] = &#39;</span><span class="p">,</span> <span class="nb">round</span><span class="p">(</span> <span class="n">plausibilidade_normalizada</span><span class="p">[</span><span class="s1">&#39;A A A B&#39;</span><span class="p">],</span> <span class="mi">2</span><span class="p">),</span> <span class="s1">&#39;maneiras possíveis, dado a hipótese.&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Nova plausibildade da hipótese [A A A A] = &#39;</span><span class="p">,</span> <span class="nb">round</span><span class="p">(</span> <span class="n">plausibilidade_normalizada</span><span class="p">[</span><span class="s1">&#39;A A A A&#39;</span><span class="p">],</span> <span class="mi">2</span><span class="p">),</span> <span class="s1">&#39;maneiras possíveis, dado a hipótese.&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -766,10 +818,10 @@ Nova plausibildade da hipótese [A A A A] =  0.0 maneiras possíveis, dado a hip
 </div>
 <p>Agora todas as plausibilidades normalizadas estão entre <span class="math notranslate nohighlight">\(0\)</span> e <span class="math notranslate nohighlight">\(1\)</span>, e soma de todos os elementos será, sempre, <span class="math notranslate nohighlight">\(1\)</span>.</p>
 <hr class="docutils" />
-<p>Será nossa <strong>probablidade</strong>, isso é, é o <strong>peso</strong> da evidência para cada possibildade.  Essa é a inferência bayesiana! <code class="docutils literal notranslate"><span class="pre">Lindo!!!</span></code></p>
+<p>Assim teremos nossa <strong>probablidade</strong>, isso é, é o <strong>peso</strong> da evidência para cada hipótese sugerida. Essa é a inferência bayesiana! <code class="docutils literal notranslate"><span class="pre">Lindo!!!</span></code></p>
 <p>A <strong>teoria das probablidade</strong> é o único conjunto de ferramentas que nos permitam trabalhar com números normalizados entre <span class="math notranslate nohighlight">\(0\)</span> e <span class="math notranslate nohighlight">\(1\)</span>.</p>
-<p><em>Plausibilidade é a probabilidade</em>: É um conjunto de números não-negativos que somam <span class="math notranslate nohighlight">\(1\)</span>.</p>
-<p><strong>São os números de maneiras pelas quais cada uma dessas conjecturas poderia ser verdadeira condicionalmente em  todas as evidências!!!</strong></p>
+<p><em>Plausibilidade normalizada é a probabilidade</em>: Ou seja, é um conjunto de números <code class="docutils literal notranslate"><span class="pre">não-negativos</span></code> que somam <span class="math notranslate nohighlight">\(1\)</span>.</p>
+<p><strong>São os números de maneiras pelas quais cada uma dessas conjecturas poderiam ser verdadeiras condicionalmente em  todas as evidências!!!</strong></p>
 <p>A teroria das probabilidades é apenas um conjunto de atalhos para a possibilidades de contagens.</p>
 </div>
 
