@@ -32,8 +32,8 @@ nbclient.exceptions.CellTimeoutError: A cell timed out while it was being execut
 The message was: Cell execution timed out.
 Here is a preview of the cell contents:
 -------------------
-['# ==================================', '#   Construindo o modelo b-spline', '# ==================================', '', 'model_spline_1 = """']
+['# ==========================================================', '#      Reamostragem da Posteriori B-Spline de Grau 1 ', '# ==========================================================', '', 'posteriori_spline_1 = np.random.normal(alpha_spline_1 + Bw_spline_1, sigma_spline_1)  # Amostras normal(mu, sigma)']
 ...
-["alpha_spline_1 = fit_spline_1['alpha']", "w_spline_1 = fit_spline_1['w']", "sigma_spline_1 = fit_spline_1['sigma'].flatten()", '', 'Bw_spline_1 = np.matmul(spline_1, w_spline_1)  # Fazendo a multiplicação das matrizes B * w']
+['for year_i in range(np.shape(posteriori_spline_1)[0]):  # OBS: Essa operação é um pouco demorada. ', '    HPDI_posteriori_spline_1.append(HPDI(posteriori_spline_1[year_i, :], intervalo_credibilidade))', '', 'HPDI_posteriori_spline_1 = np.array(HPDI_posteriori_spline_1)', 'mean_posteriori_spline_1 = posteriori_spline_1.mean(axis=1)  # Média do HPDI por cada ano']
 -------------------
 
