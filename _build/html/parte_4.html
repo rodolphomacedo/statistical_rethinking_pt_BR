@@ -54,7 +54,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="5 - Muitas variáveis e os waffles espúrios" href="parte_5.html" />
+    <link rel="next" title="5 - Muitas Variáveis e os Waffles Espúrios" href="parte_5.html" />
     <link rel="prev" title="3- Modelos Geocêntricos" href="parte_3.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="None">
@@ -127,7 +127,7 @@
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="parte_5.html">
-   5 - Muitas variáveis e os waffles espúrios
+   5 - Muitas Variáveis e os Waffles Espúrios
   </a>
  </li>
 </ul>
@@ -525,16 +525,16 @@
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>        alpha      beta     sigma
-0  154.499600  0.951151  4.883041
-1  154.640018  0.929944  5.313244
-2  154.277576  0.980807  5.448804
-3  154.164437  0.979160  5.421049
-4  154.671679  0.853678  5.397506
-5  154.743268  0.902866  5.065876
-6  154.582135  0.825102  4.979170
-7  154.552836  0.880691  4.906987
-8  154.069364  0.881931  5.387828
-9  154.503850  0.960612  5.216029
+0  154.637584  0.894068  5.648993
+1  154.689839  0.930006  5.417290
+2  153.706390  0.944183  5.112579
+3  154.081393  0.939647  5.031454
+4  154.353472  0.939104  5.692605
+5  155.003041  1.002690  4.946944
+6  155.091426  0.846590  5.535991
+7  155.141094  0.897356  5.284787
+8  154.789167  0.881774  4.638719
+9  154.246967  0.849651  5.414422
 </pre></div>
 </div>
 </div>
@@ -583,45 +583,45 @@
     </tr>
     <tr>
       <th>mean</th>
-      <td>154.470476</td>
-      <td>0.914594</td>
-      <td>5.201953</td>
+      <td>154.574037</td>
+      <td>0.912507</td>
+      <td>5.272378</td>
     </tr>
     <tr>
       <th>std</th>
-      <td>0.225245</td>
-      <td>0.054074</td>
-      <td>0.223898</td>
+      <td>0.470006</td>
+      <td>0.047954</td>
+      <td>0.336694</td>
     </tr>
     <tr>
       <th>min</th>
-      <td>154.069364</td>
-      <td>0.825102</td>
-      <td>4.883041</td>
+      <td>153.706390</td>
+      <td>0.846590</td>
+      <td>4.638719</td>
     </tr>
     <tr>
       <th>25%</th>
-      <td>154.333082</td>
-      <td>0.881001</td>
-      <td>5.000846</td>
+      <td>154.273593</td>
+      <td>0.884847</td>
+      <td>5.051735</td>
     </tr>
     <tr>
       <th>50%</th>
-      <td>154.528343</td>
-      <td>0.916405</td>
-      <td>5.264637</td>
+      <td>154.663711</td>
+      <td>0.913681</td>
+      <td>5.349605</td>
     </tr>
     <tr>
       <th>75%</th>
-      <td>154.625548</td>
-      <td>0.958247</td>
-      <td>5.395086</td>
+      <td>154.949573</td>
+      <td>0.939511</td>
+      <td>5.506316</td>
     </tr>
     <tr>
       <th>max</th>
-      <td>154.743268</td>
-      <td>0.980807</td>
-      <td>5.448804</td>
+      <td>155.141094</td>
+      <td>1.002690</td>
+      <td>5.692605</td>
     </tr>
   </tbody>
 </table>
@@ -2159,6 +2159,27 @@
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">KeyboardInterrupt</span><span class="g g-Whitespace">                         </span>Traceback (most recent call last)
+<span class="o">/</span><span class="n">tmp</span><span class="o">/</span><span class="n">ipykernel_404033</span><span class="o">/</span><span class="mf">1401433009.</span><span class="n">py</span> <span class="ow">in</span> <span class="o">&lt;</span><span class="n">module</span><span class="o">&gt;</span>
+<span class="g g-Whitespace">     </span><span class="mi">10</span> 
+<span class="g g-Whitespace">     </span><span class="mi">11</span> <span class="k">for</span> <span class="n">year_i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">shape</span><span class="p">(</span><span class="n">posteriori_spline_1</span><span class="p">)[</span><span class="mi">0</span><span class="p">]):</span>  <span class="c1"># OBS: Essa operação é um pouco demorada.</span>
+<span class="ne">---&gt; </span><span class="mi">12</span>     <span class="n">HPDI_posteriori_spline_1</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">HPDI</span><span class="p">(</span><span class="n">posteriori_spline_1</span><span class="p">[</span><span class="n">year_i</span><span class="p">,</span> <span class="p">:],</span> <span class="n">intervalo_credibilidade</span><span class="p">))</span>
+<span class="g g-Whitespace">     </span><span class="mi">13</span> 
+<span class="g g-Whitespace">     </span><span class="mi">14</span> <span class="n">HPDI_posteriori_spline_1</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">HPDI_posteriori_spline_1</span><span class="p">)</span>
+
+<span class="nn">/tmp/ipykernel_404033/3413415751.py</span> in <span class="ni">HPDI</span><span class="nt">(posterior_samples, credible_mass)</span>
+<span class="g g-Whitespace">     </span><span class="mi">14</span>         <span class="n">ciWidth</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">sorted_points</span><span class="p">[</span><span class="n">i</span> <span class="o">+</span> <span class="n">ciIdxInc</span><span class="p">]</span> <span class="o">-</span> <span class="n">sorted_points</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+<span class="g g-Whitespace">     </span><span class="mi">15</span>         <span class="n">HDImin</span> <span class="o">=</span> <span class="n">sorted_points</span><span class="p">[</span><span class="n">ciWidth</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="nb">min</span><span class="p">(</span><span class="n">ciWidth</span><span class="p">))]</span>
+<span class="ne">---&gt; </span><span class="mi">16</span>         <span class="n">HDImax</span> <span class="o">=</span> <span class="n">sorted_points</span><span class="p">[</span><span class="n">ciWidth</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="nb">min</span><span class="p">(</span><span class="n">ciWidth</span><span class="p">))</span><span class="o">+</span><span class="n">ciIdxInc</span><span class="p">]</span>
+<span class="g g-Whitespace">     </span><span class="mi">17</span> 
+<span class="g g-Whitespace">     </span><span class="mi">18</span>     <span class="k">return</span><span class="p">(</span><span class="n">HDImin</span><span class="p">,</span> <span class="n">HDImax</span><span class="p">)</span>
+
+<span class="ne">KeyboardInterrupt</span>: 
+</pre></div>
+</div>
+</div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -2409,7 +2430,7 @@
     <a class='right-next' id="next-link" href="parte_5.html" title="next page">
     <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">5 - Muitas variáveis e os waffles espúrios</p>
+        <p class="prev-next-title">5 - Muitas Variáveis e os Waffles Espúrios</p>
     </div>
     <i class="fas fa-angle-right"></i>
     </a>

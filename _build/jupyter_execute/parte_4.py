@@ -1558,7 +1558,7 @@ Bw_spline_1 = np.matmul(spline_1, w_spline_1)  # Fazendo a multiplicação das m
 # 
 # O resultado dessa operação pode ser visto no gráfico abaixo.
 
-# In[69]:
+# In[40]:
 
 
 # ====================================================
@@ -1595,7 +1595,7 @@ plt.show()
 
 # Por enquanto, iremos apenas entender como é o funcionamento de uma spline e, em capítulos posteriores, veremos mais detalhes sobre o fantasma do `overffiting` em nossos modelos.
 
-# In[70]:
+# In[41]:
 
 
 # ======================================================
@@ -1623,7 +1623,7 @@ plt.text(1940, 7.5,'$Knot_5$', size=25, color='darkgray')
 plt.show()
 
 
-# In[71]:
+# In[42]:
 
 
 # ==========================================================
