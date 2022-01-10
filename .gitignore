@@ -2,3 +2,4 @@ data/rethinking-master/
 *.pdf
 ./build/
 ./__pycache__/
+.ipynb_checkpoints/
