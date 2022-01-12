@@ -1632,7 +1632,7 @@ plt.show()
 
 posteriori_spline_1 = np.random.normal(alpha_spline_1 + Bw_spline_1, sigma_spline_1)  # Amostras normal(mu, sigma)
 
-intervalo_credibilidade = 0.88  # Intervalo de credibilidade - HPDI
+intervalo_credibilidade = 0.96  # Intervalo de credibilidade - HPDI
 
 HPDI_posteriori_spline_1 = [] # Vetor do HPDI
 
@@ -1643,7 +1643,7 @@ HPDI_posteriori_spline_1 = np.array(HPDI_posteriori_spline_1)
 mean_posteriori_spline_1 = posteriori_spline_1.mean(axis=1)  # Média do HPDI por cada ano
 
 
-# In[72]:
+# In[43]:
 
 
 # ===============================================
@@ -1679,7 +1679,7 @@ plt.show()
 # 
 # A seguir a descrição e a construção uma `spline` com grau 3 e 15 nós ao longo do eixo.
 
-# In[78]:
+# In[44]:
 
 
 # ======================================
@@ -1701,7 +1701,7 @@ plt.ylim((0, 1))
 plt.show()
 
 
-# In[79]:
+# In[45]:
 
 
 # =======================================================
@@ -1752,7 +1752,7 @@ sigma_spline_3 = fit_spline_3['sigma'].flatten()
 Bw_spline_3 = np.matmul(spline_3, w_spline_3)  # Fazendo a multiplicação das matrizes B * w
 
 
-# In[80]:
+# In[46]:
 
 
 # ====================================================
@@ -1771,7 +1771,7 @@ plt.grid(ls='--', color='white', alpha=0.6)
 plt.show()
 
 
-# In[85]:
+# In[47]:
 
 
 # ==========================================================
@@ -1795,7 +1795,7 @@ HPDI_posteriori_spline_3 = np.array(HPDI_posteriori_spline_3)
 mean_posteriori_spline_3 = posteriori_spline_3.mean(axis=1)  # Média do HPDI por cada ano
 
 
-# In[86]:
+# In[48]:
 
 
 # ===============================================
