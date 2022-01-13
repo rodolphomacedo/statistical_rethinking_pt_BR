@@ -53,7 +53,7 @@
 # 
 # <img src="./images/golem_of_prague.png" alt="Golem of Prague" width=1000 />
 # 
-# [AULA 1 - Statistical Rethinking Winter 2019 Lecture 01 - Golem de Praga](https://youtu.be/4WVelCswXo4?t=2562)
+# [AULA - Statistical Rethinking Winter 2019 Lecture 01 - Golem de Praga](https://youtu.be/4WVelCswXo4?t=2562)
 
 # `Golem` é um ser artificial místico, associado à tradição mística do judaísmo, particularmente à cabala, que pode ser trazido à vida através de um processo divino. No folclore judaico, o golem é um ser animado que é feito de material inanimado, muitas vezes visto como um gigante de pedra. 
 # 

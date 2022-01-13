@@ -14,6 +14,8 @@
 # 
 # fonte: [Distribuição Gausiana](https://www.bis-ans-ende-der-welt.net/Deutschland-B.htm)
 
+# [Aula - Statistical Rethinking Winter 2019 Lecture 03](https://www.youtube.com/watch?v=h5aPo5wXN8E)
+
 # ### Regressão Linear
 # 
 # São simples *golems* estatísticos.

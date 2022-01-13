@@ -5,6 +5,8 @@
 
 # <img src="./images/cat_bow_tie.jpg" atl="cat with bow tie" width=1000>
 
+# [](https://www.youtube.com/watch?v=ENxTrFf9a7c)
+
 # ----
 
 # No capítulo anterior vimos como construir o nosso primeiro modelo de regressão linear, no qual estimamos a altura de uma pessoa usando a informação de seu próprio peso como um auxílio informativo. Temos, assim, como resultado do nosso modelo, a distribuição à posteriori dos parâmetros que foram estimados, $\alpha$, $\beta$ e o $\sigma$.

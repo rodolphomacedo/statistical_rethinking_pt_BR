@@ -3,6 +3,8 @@
 
 # # 2 - Engenharia de Golems
 
+# [Aula - Statistical Rethinking Winter 2019 Lecture 02](https://www.youtube.com/watch?v=XoVtOAN0htU)
+
 # Esse capítulo terá dois objetivos principais:
 #     
 # 1. Construir a intuição de como a atualização funciona, ou seja, como os Golems `aprendem com a experiência.`
