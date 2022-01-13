@@ -363,6 +363,7 @@
   <div class="tex2jax_ignore mathjax_ignore section" id="funcoes-wiggly">
 <h1>4 - Funções Wiggly<a class="headerlink" href="#funcoes-wiggly" title="Permalink to this headline">¶</a></h1>
 <a class="reference internal image-reference" href="_images/cat_bow_tie.jpg"><img alt="_images/cat_bow_tie.jpg" src="_images/cat_bow_tie.jpg" style="width: 1000px;" /></a>
+<p><a class="reference external" href="https://www.youtube.com/watch?v=ENxTrFf9a7c"></a></p>
 <hr class="docutils" />
 <p>No capítulo anterior vimos como construir o nosso primeiro modelo de regressão linear, no qual estimamos a altura de uma pessoa usando a informação de seu próprio peso como um auxílio informativo. Temos, assim, como resultado do nosso modelo, a distribuição à posteriori dos parâmetros que foram estimados, <span class="math notranslate nohighlight">\(\alpha\)</span>, <span class="math notranslate nohighlight">\(\beta\)</span> e o <span class="math notranslate nohighlight">\(\sigma\)</span>.</p>
 <div class="admonition-modelo-linear-simples admonition">
@@ -509,7 +510,7 @@
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/parte_4_12_0.png" src="_images/parte_4_12_0.png" />
+<img alt="_images/parte_4_13_0.png" src="_images/parte_4_13_0.png" />
 </div>
 </div>
 <div class="section" id="a-observacao-da-nossa-incerteza">
@@ -525,16 +526,16 @@
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>        alpha      beta     sigma
-0  154.402537  0.989403  5.125526
-1  154.926469  0.890806  4.926972
-2  154.690153  0.837586  5.324249
-3  154.555068  0.892624  5.125565
-4  154.171082  0.953300  4.980378
-5  154.355959  0.921765  5.350257
-6  155.148224  0.960020  5.372188
-7  154.633180  0.859183  5.077338
-8  154.319842  0.820773  5.198047
-9  154.523531  0.970700  5.097296
+0  154.405342  0.859042  5.001452
+1  154.631411  0.904992  4.996950
+2  154.090744  0.859364  5.130775
+3  154.774483  0.927004  4.808609
+4  154.628573  0.866973  4.958434
+5  154.866011  0.964442  5.459211
+6  154.470916  0.931128  5.364684
+7  154.465262  0.972556  5.361762
+8  154.694074  0.943534  5.228433
+9  154.207081  0.857643  5.016961
 </pre></div>
 </div>
 </div>
@@ -583,45 +584,45 @@
     </tr>
     <tr>
       <th>mean</th>
-      <td>154.572605</td>
-      <td>0.909616</td>
-      <td>5.157782</td>
+      <td>154.523390</td>
+      <td>0.908668</td>
+      <td>5.132727</td>
     </tr>
     <tr>
       <th>std</th>
-      <td>0.293963</td>
-      <td>0.058653</td>
-      <td>0.152499</td>
+      <td>0.244859</td>
+      <td>0.045336</td>
+      <td>0.212529</td>
     </tr>
     <tr>
       <th>min</th>
-      <td>154.171082</td>
-      <td>0.820773</td>
-      <td>4.926972</td>
+      <td>154.090744</td>
+      <td>0.857643</td>
+      <td>4.808609</td>
     </tr>
     <tr>
       <th>25%</th>
-      <td>154.367603</td>
-      <td>0.867089</td>
-      <td>5.082328</td>
+      <td>154.420322</td>
+      <td>0.861266</td>
+      <td>4.998076</td>
     </tr>
     <tr>
       <th>50%</th>
-      <td>154.539299</td>
-      <td>0.907194</td>
-      <td>5.125545</td>
+      <td>154.549745</td>
+      <td>0.915998</td>
+      <td>5.073868</td>
     </tr>
     <tr>
       <th>75%</th>
-      <td>154.675910</td>
-      <td>0.958340</td>
-      <td>5.292698</td>
+      <td>154.678408</td>
+      <td>0.940432</td>
+      <td>5.328429</td>
     </tr>
     <tr>
       <th>max</th>
-      <td>155.148224</td>
-      <td>0.989403</td>
-      <td>5.372188</td>
+      <td>154.866011</td>
+      <td>0.972556</td>
+      <td>5.459211</td>
     </tr>
   </tbody>
 </table>
@@ -777,7 +778,7 @@
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/parte_4_22_0.png" src="_images/parte_4_22_0.png" />
+<img alt="_images/parte_4_23_0.png" src="_images/parte_4_23_0.png" />
 </div>
 </div>
 <p>A divisão dos gráficos acima foi construída para conseguirmos percerber, de modo visual, <code class="docutils literal notranslate"><span class="pre">que</span> <span class="pre">quando</span> <span class="pre">mais</span> <span class="pre">amostras</span> <span class="pre">tivermos</span> <span class="pre">coletado</span></code> (isto é, <em>quanto maior número de pontos azuis nós tivermos coletados como amostra</em>), mais informações teremos e, portanto, teremos muito <code class="docutils literal notranslate"><span class="pre">menos</span> <span class="pre">incerteza</span></code> sobre o nosso objeto de estudo.</p>
@@ -813,7 +814,7 @@
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/parte_4_25_0.png" src="_images/parte_4_25_0.png" />
+<img alt="_images/parte_4_26_0.png" src="_images/parte_4_26_0.png" />
 </div>
 </div>
 </div>
@@ -963,7 +964,7 @@
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/parte_4_30_0.png" src="_images/parte_4_30_0.png" />
+<img alt="_images/parte_4_31_0.png" src="_images/parte_4_31_0.png" />
 </div>
 </div>
 <p>Perceba que nos gráficos de borboletas nós usamos os cortes para os intervalos com <span class="math notranslate nohighlight">\(89\%\)</span>. Isso é apenas para mostrar que não, isso mesmo, <code class="docutils literal notranslate"><span class="pre">não</span> <span class="pre">existe</span> <span class="pre">nada</span> <span class="pre">especial</span> <span class="pre">nos</span> <span class="pre">cortes</span> <span class="pre">do</span> <span class="pre">HPDI</span></code>.</p>
@@ -1008,7 +1009,7 @@
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/parte_4_33_0.png" src="_images/parte_4_33_0.png" />
+<img alt="_images/parte_4_34_0.png" src="_images/parte_4_34_0.png" />
 </div>
 </div>
 <p>Como podemos ver no gráfico acima, temos duas regiões de confiança. A região mais interna - <em>azul mais escura</em> - nos indica que esse trecho contém <span class="math notranslate nohighlight">\(89\%\)</span> de probabilidade da <code class="docutils literal notranslate"><span class="pre">média</span> <span class="pre">estar</span> <span class="pre">ali</span> <span class="pre">dentro</span></code>, para cada um dos pesos.</p>
@@ -1057,7 +1058,7 @@
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/parte_4_37_0.png" src="_images/parte_4_37_0.png" />
+<img alt="_images/parte_4_38_0.png" src="_images/parte_4_38_0.png" />
 </div>
 </div>
 <p>Vamos ver dois modos de construir os modelos de <code class="docutils literal notranslate"><span class="pre">Regressão</span> <span class="pre">Aditivas</span></code>:</p>
@@ -1217,7 +1218,7 @@
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/parte_4_45_0.png" src="_images/parte_4_45_0.png" />
+<img alt="_images/parte_4_46_0.png" src="_images/parte_4_46_0.png" />
 </div>
 </div>
 <p><code class="docutils literal notranslate"><span class="pre">Regressões</span> <span class="pre">Polinomiais</span></code> tem esse tipo de anomalia implícita que vimos no gráfico acima. Dentro da região dos pontos ela se comporta de modo aceitável, porém fora da região desses pontos, a função se torna descontrolada. Isso ocorre porque exitem muitas outras funções de segundo grau que podem ser ajustadas nesse conjunto de pontos. Isso não ocorre com tanta intensidade nas regressões com splines.</p>
@@ -1252,7 +1253,7 @@
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/parte_4_47_0.png" src="_images/parte_4_47_0.png" />
+<img alt="_images/parte_4_48_0.png" src="_images/parte_4_48_0.png" />
 </div>
 </div>
 <div class="cell tag_remove_output docutils container">
@@ -1337,7 +1338,7 @@
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/parte_4_49_0.png" src="_images/parte_4_49_0.png" />
+<img alt="_images/parte_4_50_0.png" src="_images/parte_4_50_0.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -1377,7 +1378,7 @@
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/parte_4_50_0.png" src="_images/parte_4_50_0.png" />
+<img alt="_images/parte_4_51_0.png" src="_images/parte_4_51_0.png" />
 </div>
 </div>
 </div>
@@ -1499,7 +1500,7 @@
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/parte_4_55_0.png" src="_images/parte_4_55_0.png" />
+<img alt="_images/parte_4_56_0.png" src="_images/parte_4_56_0.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -1539,7 +1540,7 @@
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/parte_4_56_0.png" src="_images/parte_4_56_0.png" />
+<img alt="_images/parte_4_57_0.png" src="_images/parte_4_57_0.png" />
 </div>
 </div>
 <div class="cell tag_remove_output docutils container">
@@ -1674,7 +1675,7 @@
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[]
 </pre></div>
 </div>
-<img alt="_images/parte_4_59_1.png" src="_images/parte_4_59_1.png" />
+<img alt="_images/parte_4_60_1.png" src="_images/parte_4_60_1.png" />
 </div>
 </div>
 <p>O que fizemos aqui foi escolher uma forma matemática polinômial (<em>um polinômio de primeiro, de segundo ou de terceiro grau</em>) e ajustarmos a melhor estrutura em cada um deles usando os dados da amostra.</p>
@@ -1854,7 +1855,7 @@
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/parte_4_70_0.png" src="_images/parte_4_70_0.png" />
+<img alt="_images/parte_4_71_0.png" src="_images/parte_4_71_0.png" />
 </div>
 </div>
 <p>Nosso objetivo aqui é construir uma tendência com esses registros de temperaturas, o que significa que queremos estimar uma spline para esses dados.</p>
@@ -1878,7 +1879,7 @@
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/parte_4_72_0.png" src="_images/parte_4_72_0.png" />
+<img alt="_images/parte_4_73_0.png" src="_images/parte_4_73_0.png" />
 </div>
 </div>
 <div class="section" id="como-as-splines-funcionam">
@@ -1925,7 +1926,7 @@
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/parte_4_75_0.png" src="_images/parte_4_75_0.png" />
+<img alt="_images/parte_4_76_0.png" src="_images/parte_4_76_0.png" />
 </div>
 </div>
 <p>Vamos agora construir as splines em seus nós (<em>knots</em>). Iremos desenhar abaixo todas as variáveis sintéticas. Os valores das variáveis sintéticas são construídas ao longo de todo intervalo da variável <code class="docutils literal notranslate"><span class="pre">ano</span></code>. E então queremos interpolar os dados.</p>
@@ -1980,7 +1981,7 @@
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/parte_4_80_0.png" src="_images/parte_4_80_0.png" />
+<img alt="_images/parte_4_81_0.png" src="_images/parte_4_81_0.png" />
 </div>
 </div>
 <p>Assim como as splines para os desenhistas, nós, estatísticos, usamos elas de modos semelhantes em matemática. No gráfico acima plotamos <span class="math notranslate nohighlight">\(5\)</span> funções de bases (<em>basis-functions</em>) tendo como ponto central os nós (<em>knots</em>) que definimos anteriormente.</p>
@@ -2003,7 +2004,7 @@
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/parte_4_82_0.png" src="_images/parte_4_82_0.png" />
+<img alt="_images/parte_4_83_0.png" src="_images/parte_4_83_0.png" />
 </div>
 </div>
 <p>Com as splines definidas acima, iremos construir nosso modelo em <em>Stan</em> para estimar a temperatura em cada ano da floração das cerejeiras. Iremos supor que a temperatura é distribuída normalmente, conforme gráfico acima.</p>
@@ -2098,7 +2099,7 @@
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/parte_4_86_0.png" src="_images/parte_4_86_0.png" />
+<img alt="_images/parte_4_87_0.png" src="_images/parte_4_87_0.png" />
 </div>
 </div>
 <p>Para conseguirmos verificar a estimativa da temperatura de modo visual, somaremos, ao valor de <code class="docutils literal notranslate"><span class="pre">Bw_spline_1</span></code> o valor <code class="docutils literal notranslate"><span class="pre">alpha_spline_1</span></code>, que é a estimativa do valor médio da temperatura. Veja a seguir o gráfico.</p>
@@ -2136,7 +2137,7 @@
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/parte_4_90_0.png" src="_images/parte_4_90_0.png" />
+<img alt="_images/parte_4_91_0.png" src="_images/parte_4_91_0.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -2193,7 +2194,7 @@
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/parte_4_92_0.png" src="_images/parte_4_92_0.png" />
+<img alt="_images/parte_4_93_0.png" src="_images/parte_4_93_0.png" />
 </div>
 </div>
 <p>Agora que entendemos como é a construção de uma spline e como ajustar elas aos dados, iremos construir as mesmas estimativas usando as splines que mais são usadas nos dia a dia. A capacidade de inferência de uma spline com grau maior que o utilizado no exemplo anterior e, tambéme a adição de mais pontos ao longo do eixo <span class="math notranslate nohighlight">\(x\)</span> permite um ajuste muito melhor que aquele que fizemos no exemplo anterior.</p>
@@ -2221,7 +2222,7 @@
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/parte_4_94_0.png" src="_images/parte_4_94_0.png" />
+<img alt="_images/parte_4_95_0.png" src="_images/parte_4_95_0.png" />
 </div>
 </div>
 <div class="cell tag_remove_output docutils container">
@@ -2296,7 +2297,7 @@
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/parte_4_96_0.png" src="_images/parte_4_96_0.png" />
+<img alt="_images/parte_4_97_0.png" src="_images/parte_4_97_0.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -2353,7 +2354,7 @@
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/parte_4_98_0.png" src="_images/parte_4_98_0.png" />
+<img alt="_images/parte_4_99_0.png" src="_images/parte_4_99_0.png" />
 </div>
 </div>
 </div>
