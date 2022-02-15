@@ -258,6 +258,38 @@
      Múltiplas causas de divórcios
     </a>
    </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#entendendo-os-grafos-um-pouco-mais-perto">
+     Entendendo os grafos um pouco mais perto.
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#bons-grafos">
+     Bons Grafos
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#prioris">
+     Prioris
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#nosso-modelo">
+     Nosso modelo
+    </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h3 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#regressao-multipla">
+       Regressão Múltipla
+      </a>
+     </li>
+    </ul>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id1">
+     Regressão Múltipla
+    </a>
+   </li>
   </ul>
  </li>
 </ul>
@@ -378,6 +410,20 @@ na região implica num aumento assustador no número de divórcios nessa mesma r
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">ModuleNotFoundError</span><span class="g g-Whitespace">                       </span>Traceback (most recent call last)
+<span class="o">/</span><span class="n">tmp</span><span class="o">/</span><span class="n">ipykernel_353700</span><span class="o">/</span><span class="mf">2025174005.</span><span class="n">py</span> <span class="ow">in</span> <span class="o">&lt;</span><span class="n">module</span><span class="o">&gt;</span>
+<span class="g g-Whitespace">      </span><span class="mi">1</span> <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="g g-Whitespace">      </span><span class="mi">2</span> <span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="ne">----&gt; </span><span class="mi">3</span> <span class="kn">import</span> <span class="nn">stan</span>
+<span class="g g-Whitespace">      </span><span class="mi">4</span> <span class="kn">import</span> <span class="nn">nest_asyncio</span>
+<span class="g g-Whitespace">      </span><span class="mi">5</span> <span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+
+<span class="ne">ModuleNotFoundError</span>: No module named &#39;stan&#39;
+</pre></div>
+</div>
+</div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -397,7 +443,31 @@ na região implica num aumento assustador no número de divórcios nessa mesma r
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Lendo os dados</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">HPDI</span><span class="p">(</span><span class="n">posterior_samples</span><span class="p">,</span> <span class="n">credible_mass</span><span class="p">):</span>
+    
+    <span class="c1"># Calcula o maior intervalo de probabilidades a partir de uma amostra</span>
+    
+    <span class="c1"># Fonte: https://stackoverflow.com/questions/22284502/highest-posterior-density-region-and-central-credible-region</span>
+    <span class="n">sorted_points</span> <span class="o">=</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">posterior_samples</span><span class="p">)</span>
+    <span class="n">ciIdxInc</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">ceil</span><span class="p">(</span><span class="n">credible_mass</span> <span class="o">*</span> <span class="nb">len</span><span class="p">(</span><span class="n">sorted_points</span><span class="p">))</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="s1">&#39;int&#39;</span><span class="p">)</span>
+    <span class="n">nCIs</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">sorted_points</span><span class="p">)</span> <span class="o">-</span> <span class="n">ciIdxInc</span>
+    <span class="n">ciWidth</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">*</span><span class="n">nCIs</span>
+    
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">nCIs</span><span class="p">):</span>
+        <span class="n">ciWidth</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">sorted_points</span><span class="p">[</span><span class="n">i</span> <span class="o">+</span> <span class="n">ciIdxInc</span><span class="p">]</span> <span class="o">-</span> <span class="n">sorted_points</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+        <span class="n">HDImin</span> <span class="o">=</span> <span class="n">sorted_points</span><span class="p">[</span><span class="n">ciWidth</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="nb">min</span><span class="p">(</span><span class="n">ciWidth</span><span class="p">))]</span>
+        <span class="n">HDImax</span> <span class="o">=</span> <span class="n">sorted_points</span><span class="p">[</span><span class="n">ciWidth</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="nb">min</span><span class="p">(</span><span class="n">ciWidth</span><span class="p">))</span><span class="o">+</span><span class="n">ciIdxInc</span><span class="p">]</span>
+
+    <span class="k">return</span><span class="p">(</span><span class="n">HDImin</span><span class="p">,</span> <span class="n">HDImax</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># ====================================</span>
+<span class="c1">#   Lendo os dados da Waffle House</span>
+<span class="c1"># ====================================</span>
 
 <span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;./data/WaffleDivorce.csv&#39;</span><span class="p">,</span> <span class="n">sep</span><span class="o">=</span><span class="s1">&#39;;&#39;</span><span class="p">)</span>
 <span class="n">df</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
@@ -547,16 +617,16 @@ na região implica num aumento assustador no número de divórcios nessa mesma r
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/parte_5_20_0.png" src="_images/parte_5_20_0.png" />
+<img alt="_images/parte_5_21_0.png" src="_images/parte_5_21_0.png" />
 </div>
 </div>
 <p>Vamos construir modelos lineares simples para os dois gráficos acima.</p>
 <div class="cell tag_remove_output docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># =======================================================</span>
-<span class="c1"># Construindo um modelo linear simples:</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># ========================================================</span>
+<span class="c1">#  Construindo um modelo linear simples:</span>
 <span class="c1">#</span>
-<span class="c1">#  taxa de divórcio ~ alpha + beta * taxa_casamento</span>
+<span class="c1">#    taxa de divórcio ~ alpha + beta * taxa_casamento</span>
 <span class="c1"># ========================================================</span>
 <span class="n">divorce_model1</span> <span class="o">=</span> <span class="s2">&quot;&quot;&quot;</span>
 <span class="s2">    data {</span>
@@ -643,8 +713,16 @@ na região implica num aumento assustador no número de divórcios nessa mesma r
 
 <span class="n">plt</span><span class="o">.</span><span class="n">suptitle</span><span class="p">(</span><span class="s1">&#39;Associações Espúrias?&#39;</span><span class="p">)</span>
 
+<span class="c1"># Calculando as regiões de HPDI para mu - Taxa de casamentos com 0.92 de credibilidade</span>
+<span class="n">range_mu</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sort</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">Marriage</span><span class="p">)</span>
+<span class="n">posteriori_mu_aux</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="n">alpha_1</span> <span class="o">+</span> <span class="n">beta_1</span> <span class="o">*</span> <span class="n">marriage</span> <span class="k">for</span> <span class="n">marriage</span> <span class="ow">in</span> <span class="n">range_mu</span><span class="p">]])[</span><span class="mi">0</span><span class="p">]</span>
+<span class="n">posteriori_mu_HPDI</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="n">HPDI</span><span class="p">(</span><span class="n">posteriori_marriage</span><span class="p">,</span> <span class="mf">0.92</span><span class="p">)</span> <span class="k">for</span> <span class="n">posteriori_marriage</span> <span class="ow">in</span> <span class="n">posteriori_mu_aux</span><span class="p">]])[</span><span class="mi">0</span><span class="p">]</span>
+
 <span class="c1"># Gráfico de Divórcio x Casamento</span>
 <span class="n">ax1</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">Marriage</span><span class="o">.</span><span class="n">values</span> <span class="p">,</span><span class="n">df</span><span class="o">.</span><span class="n">Divorce</span><span class="o">.</span><span class="n">values</span><span class="p">)</span>
+<span class="n">ax1</span><span class="o">.</span><span class="n">fill_between</span><span class="p">(</span><span class="n">range_mu</span><span class="p">,</span> 
+                 <span class="n">posteriori_mu_HPDI</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">],</span> <span class="n">posteriori_mu_HPDI</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">],</span> 
+                 <span class="n">color</span><span class="o">=</span><span class="s1">&#39;gray&#39;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.4</span><span class="p">)</span>
 <span class="n">ax1</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">Marriage</span><span class="o">.</span><span class="n">values</span><span class="p">,</span> 
          <span class="n">alpha_1</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span> <span class="o">+</span> <span class="n">beta_1</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span> <span class="o">*</span> <span class="n">df</span><span class="o">.</span><span class="n">Marriage</span><span class="o">.</span><span class="n">values</span><span class="p">,</span>
          <span class="n">color</span><span class="o">=</span><span class="s1">&#39;black&#39;</span><span class="p">)</span>
@@ -654,8 +732,19 @@ na região implica num aumento assustador no número de divórcios nessa mesma r
 <span class="n">ax1</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;Taxa de Divórcio&#39;</span><span class="p">)</span>
 <span class="n">ax1</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;Correlação Positiva </span><span class="se">\n</span><span class="s1"> Espúria?&#39;</span><span class="p">)</span>
 
+<span class="c1"># ------------</span>
+
+<span class="c1"># Calculando as regiões de HPDI para mu - Mediana para idade de casamentos com 0.92 de credibilidade</span>
+<span class="n">range_mu</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sort</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">MedianAgeMarriage</span><span class="p">)</span>
+<span class="n">posteriori_mu_aux</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="n">alpha_2</span> <span class="o">+</span> <span class="n">beta_2</span> <span class="o">*</span> <span class="n">mediaAgeMarriage</span> <span class="k">for</span> <span class="n">mediaAgeMarriage</span> <span class="ow">in</span> <span class="n">range_mu</span><span class="p">]])[</span><span class="mi">0</span><span class="p">]</span>
+<span class="n">posteriori_mu_HPDI</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="n">HPDI</span><span class="p">(</span><span class="n">posteriori_mediaAgeMarriage</span><span class="p">,</span> <span class="mf">0.92</span><span class="p">)</span> <span class="k">for</span> <span class="n">posteriori_mediaAgeMarriage</span> <span class="ow">in</span> <span class="n">posteriori_mu_aux</span><span class="p">]])[</span><span class="mi">0</span><span class="p">]</span>
+
 <span class="c1"># Gráfico de Divórcio x Mediana da Idade dos Casamentos</span>
 <span class="n">ax2</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">MedianAgeMarriage</span><span class="o">.</span><span class="n">values</span> <span class="p">,</span><span class="n">df</span><span class="o">.</span><span class="n">Divorce</span><span class="o">.</span><span class="n">values</span><span class="p">)</span>
+<span class="n">ax2</span><span class="o">.</span><span class="n">fill_between</span><span class="p">(</span><span class="n">range_mu</span><span class="p">,</span> 
+                 <span class="n">posteriori_mu_HPDI</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">],</span> <span class="n">posteriori_mu_HPDI</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">],</span> 
+                 <span class="n">color</span><span class="o">=</span><span class="s1">&#39;gray&#39;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.4</span><span class="p">)</span>
+
 <span class="n">ax2</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">MedianAgeMarriage</span><span class="o">.</span><span class="n">values</span><span class="p">,</span> 
          <span class="n">alpha_2</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span> <span class="o">+</span> <span class="n">beta_2</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span> <span class="o">*</span> <span class="n">df</span><span class="o">.</span><span class="n">MedianAgeMarriage</span><span class="o">.</span><span class="n">values</span><span class="p">,</span>
          <span class="n">color</span><span class="o">=</span><span class="s1">&#39;black&#39;</span><span class="p">)</span>
@@ -670,23 +759,572 @@ na região implica num aumento assustador no número de divórcios nessa mesma r
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/parte_5_24_0.png" src="_images/parte_5_24_0.png" />
+<img alt="_images/parte_5_25_0.png" src="_images/parte_5_25_0.png" />
 </div>
 </div>
 <p>Observando os dois gráficos acima, quais dessas correlações são <code class="docutils literal notranslate"><span class="pre">causas</span> <span class="pre">plausíveis</span></code>?</p>
-<p>No gráfico da esquerda, sabemos que a <code class="docutils literal notranslate"><span class="pre">taxa</span> <span class="pre">de</span> <span class="pre">casamento</span></code> tem uma associação com a <code class="docutils literal notranslate"><span class="pre">taxa</span> <span class="pre">de</span> <span class="pre">divórcio</span></code>, pois para se divorciar é necessário antes ter casado. Mas essa interpretação dos fatos pode estar contaminada pelo nosso senso comum e, assim, uma associação espúria, nos seria válida. Um dos motivos pra isso acontecer é que em locais que possuem maiores incentivos religiosos e incentivos para casamentos, pode não haver uma causalidade direta com o divórcio.</p>
-<p>Já no gráfico à direita, que a <code class="docutils literal notranslate"><span class="pre">taxa</span> <span class="pre">de</span> <span class="pre">divórcio</span></code> está associada com <code class="docutils literal notranslate"><span class="pre">mediana</span> <span class="pre">das</span> <span class="pre">idades</span> <span class="pre">dos</span> <span class="pre">noivos</span></code>, apresentam uma associação negativa. O que pode nos levar a pensar que jovens, ao se casarem, tomam decisões muito emotivas e que isso também levaria a altas taxas de divórcios. Ou pode ser que essa seja uma associação espúria e nossas hipóteses não tenham sentido.</p>
+<p>No gráfico da esquerda, sabemos que a <code class="docutils literal notranslate"><span class="pre">taxa</span> <span class="pre">de</span> <span class="pre">casamento</span></code> tem uma associação direta com a <code class="docutils literal notranslate"><span class="pre">taxa</span> <span class="pre">de</span> <span class="pre">divórcio</span></code>, pois, para se divorciar é necessário antes ter casado. Mas essa interpretação dos fatos pode estar contaminada pelo nosso senso comum e, assim, uma associação espúria, nos seria válida. Um dos motivos pra isso acontecer é que em locais que possuem maiores incentivos religiosos e podem implicar em maiores incentivos para casamentos, podendo, assim, não haver uma causalidade direta com o divórcio.</p>
+<p>Já no gráfico à direita, a <code class="docutils literal notranslate"><span class="pre">taxa</span> <span class="pre">de</span> <span class="pre">divórcio</span></code> está associada com <code class="docutils literal notranslate"><span class="pre">mediana</span> <span class="pre">das</span> <span class="pre">idades</span> <span class="pre">dos</span> <span class="pre">noivos</span></code>, nos apresentando uma associação negativa. Isso pode nos levar a pensar que jovens, ao se casarem, tomam decisões muito emotivas e que isso também levaria a altas taxas de divórcios. Ou pode ser que essa seja uma associação espúria e nossas hipóteses e nosso senso comum não tenha sentido.</p>
 <p>Assim, mesmo que nossas justificativas sejam bastante <code class="docutils literal notranslate"><span class="pre">verossímeis</span></code> a respeito do comportamento da Natureza do evento, não podemos afirmar que essas associações não sejam espúrias.</p>
-<p>Se a identificação de associações espúrias no exemplo de filmes do <em>Nicolas Cage</em> <code class="docutils literal notranslate"><span class="pre">pareciam</span> <span class="pre">óbvias</span></code> de serem identificadas, agora, essas não parecem ser tão simples de se perceber veracidade.</p>
-<p>Portanto, é necessário construirmos um ferramental que nos permita identificar com mais facilidade e com um maior grau de certeza se essas associações são reais ou são espúrias.</p>
-<p>O que queremos fazer agora é colocar essas duas variáveis no mesmo modelo e entender o que isso faz e por que nos revela, quase certamente, que determinada variável é uma impostora.</p>
+<p>Se a identificação de associações espúrias, como no exemplo de filmes do <em>Nicolas Cage</em>, <code class="docutils literal notranslate"><span class="pre">pareciam</span> <span class="pre">óbvias</span></code> de serem identificadas, agora, essas não parecem ser tão simples de perceber sua veracidade.</p>
+<p>Portanto, é necessário construirmos um ferramental que nos permita identificar com mais facilidade e, com um maior grau de certeza, se essas associações são reais ou são espúrias.</p>
+<p>O que queremos fazer agora é colocar essas duas variáveis no mesmo modelo e entender o que isso faz e por que nos revela, quase certamente, que determinada variável é uma <code class="docutils literal notranslate"><span class="pre">impostora</span></code>.</p>
 </div>
 <div class="section" id="multiplas-causas-de-divorcios">
 <h2>Múltiplas causas de divórcios<a class="headerlink" href="#multiplas-causas-de-divorcios" title="Permalink to this headline">¶</a></h2>
+<img alt="Aprender a taxa casamentos de uma cidade" src="_images/cidade1.jpg" />
+<p><a class="reference external" href="https://pt.wikipedia.org/wiki/Cidade#/media/Ficheiro:Hong_Kong_Night_Skyline.jpg">Fonte: <em>Hong Kong - wikipedia</em></a></p>
+<p>Como entender o mecanismo das Causas Naturais de divórcio numa cidade grande, por exemplo?</p>
 <p>O que nós queremos saber é qual o valor de uma <code class="docutils literal notranslate"><span class="pre">variável</span> <span class="pre">preditora</span></code>, uma vez que nós conhecemos os valores das outras variáveis preditoras corretamente?</p>
-<p>Todas variáveis preditoras são ,em alguma extensão, correlacionadas com as outras variáveis preditoras e também com a variável resposta, entretanto, elas têm <code class="docutils literal notranslate"><span class="pre">correlações</span> <span class="pre">parciais</span></code> que são reveladoras de informações adicionais dessa estrutura de correlação.</p>
-<p>Para entendermos melhor, vamos exemplificar com nosso exemplo dos divórcios.</p>
-<p>Gostariamos de aprender mais sobre o valor da <code class="docutils literal notranslate"><span class="pre">taxa</span> <span class="pre">de</span> <span class="pre">casamentos</span></code> uma vez que já conhecemos a <code class="docutils literal notranslate"><span class="pre">mediana</span> <span class="pre">da</span> <span class="pre">idade</span> <span class="pre">da</span> <span class="pre">taxa</span> <span class="pre">dos</span> <span class="pre">noivos</span></code>. 9:57</p>
+<p>Todas variáveis preditoras são ,em alguma extensão, correlacionadas com as outras variáveis preditoras e, também, com a variável resposta. Entretanto, elas têm <code class="docutils literal notranslate"><span class="pre">correlações</span> <span class="pre">parciais</span></code> que são reveladoras de informações adicionais dessa estrutura de correlação.</p>
+<p>Para entendermos melhor, vamos exemplificar com nosso exemplo sobre divórcios.</p>
+<p>Nós gostariamos de aprender mais sobre o valor da <code class="docutils literal notranslate"><span class="pre">taxa</span> <span class="pre">de</span> <span class="pre">casamentos</span></code>, uma vez que já conhecemos a <code class="docutils literal notranslate"><span class="pre">mediana</span> <span class="pre">da</span> <span class="pre">idade</span> <span class="pre">da</span> <span class="pre">taxa</span> <span class="pre">dos</span> <span class="pre">noivos</span></code>.</p>
+</div>
+<div class="section" id="entendendo-os-grafos-um-pouco-mais-perto">
+<h2>Entendendo os grafos um pouco mais perto.<a class="headerlink" href="#entendendo-os-grafos-um-pouco-mais-perto" title="Permalink to this headline">¶</a></h2>
+<p>DAG’s são o acrônimo para a expressão inglês <code class="docutils literal notranslate"><span class="pre">Directed</span> <span class="pre">Acyclic</span> <span class="pre">Graph</span></code>, o que é portugês é conhecido como <code class="docutils literal notranslate"><span class="pre">Grafos</span> <span class="pre">Acíclicos</span> <span class="pre">Direcionados</span></code> <a class="reference external" href="https://pt.wikipedia.org/wiki/Grafos_ac%C3%ADclicos_dirigidos">(<em>ver mais em wikipedia</em>)</a>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># =======================================</span>
+<span class="c1">#   Construindo o desenho de um DAG </span>
+<span class="c1"># =======================================</span>
+
+<span class="c1"># -----------------------------------------------------</span>
+<span class="c1"># Obs: Os próximos grafos irei esconder os códigos, </span>
+<span class="c1">#      para ficar visualmente melhor. Mas, se quiser,</span>
+<span class="c1">#      os códigos podem ser encontrados no github.</span>
+<span class="c1"># -----------------------------------------------------</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">17</span><span class="p">,</span> <span class="mi">7</span><span class="p">))</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">xlim</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylim</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+
+<span class="n">size</span><span class="o">=</span><span class="mi">40</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">annotate</span><span class="p">(</span><span class="s1">&#39;A&#39;</span><span class="p">,</span> <span class="p">(</span><span class="mf">0.2</span><span class="p">,</span> <span class="mf">0.8</span><span class="p">),</span> <span class="n">fontsize</span><span class="o">=</span><span class="n">size</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">annotate</span><span class="p">(</span><span class="s1">&#39;M&#39;</span><span class="p">,</span> <span class="p">(</span><span class="mf">0.8</span><span class="p">,</span> <span class="mf">0.8</span><span class="p">),</span> <span class="n">fontsize</span><span class="o">=</span><span class="n">size</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">annotate</span><span class="p">(</span><span class="s1">&#39;D&#39;</span><span class="p">,</span> <span class="p">(</span><span class="mf">0.495</span><span class="p">,</span> <span class="mf">0.2</span><span class="p">),</span> <span class="n">fontsize</span><span class="o">=</span><span class="n">size</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Grafo dos Divórcios&#39;</span><span class="p">)</span>
+
+<span class="c1"># Edge: M &lt;---&gt; D</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">annotate</span><span class="p">(</span><span class="s2">&quot;&quot;</span><span class="p">,</span> 
+             <span class="n">xytext</span><span class="o">=</span><span class="p">(</span><span class="mf">0.79</span><span class="p">,</span> <span class="mf">0.79</span><span class="p">),</span> <span class="n">xy</span><span class="o">=</span><span class="p">(</span><span class="mf">0.53</span><span class="p">,</span> <span class="mf">0.265</span><span class="p">)</span> <span class="p">,</span>
+             <span class="n">arrowprops</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span><span class="n">arrowstyle</span><span class="o">=</span><span class="s2">&quot;-|&gt;,  head_width=1, head_length=1.2&quot;</span><span class="p">))</span>
+
+<span class="c1"># Edge: A &lt;---&gt; M</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">annotate</span><span class="p">(</span><span class="s2">&quot;&quot;</span><span class="p">,</span> 
+             <span class="n">xytext</span><span class="o">=</span><span class="p">(</span><span class="mf">0.24</span><span class="p">,</span> <span class="mf">0.82</span><span class="p">),</span> <span class="n">xy</span><span class="o">=</span><span class="p">(</span><span class="mf">0.77</span><span class="p">,</span> <span class="mf">0.82</span><span class="p">),</span>
+             <span class="n">arrowprops</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span><span class="n">arrowstyle</span><span class="o">=</span><span class="s2">&quot;-|&gt;,  head_width=1, head_length=1.2&quot;</span><span class="p">))</span>
+
+<span class="c1"># Edge: A &lt;---&gt; D</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">annotate</span><span class="p">(</span><span class="s2">&quot;&quot;</span><span class="p">,</span> 
+             <span class="n">xytext</span><span class="o">=</span><span class="p">(</span><span class="mf">0.24</span><span class="p">,</span> <span class="mf">0.77</span><span class="p">),</span> <span class="n">xy</span><span class="o">=</span><span class="p">(</span><span class="mf">0.48</span><span class="p">,</span> <span class="mf">0.26</span><span class="p">),</span>
+             <span class="n">arrowprops</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span><span class="n">arrowstyle</span><span class="o">=</span><span class="s2">&quot;-|&gt;,  head_width=1, head_length=1.2&quot;</span><span class="p">))</span>
+
+
+<span class="c1"># Remover os valores dos eixos</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">yticks</span><span class="p">([])</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xticks</span><span class="p">([])</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/parte_5_34_0.png" src="_images/parte_5_34_0.png" />
+</div>
+</div>
+<p>DAG’s são ferramentas heurísticas usadas no framework de inferências causais. Elas não como ferramentas mecânicas analíticas que já vimos, mas são <em>incrivelmente</em> úteis para nos auxiliar a pensar melhor e eventualmente também nos permite entender muito melhor os modelos mecânicos.</p>
+<p>As setas do <em>DAG</em> apontam apenas em uma <code class="docutils literal notranslate"><span class="pre">direção</span></code> e essa direções indica uma <code class="docutils literal notranslate"><span class="pre">relação</span> <span class="pre">de</span> <span class="pre">causalidade</span></code> entre as variáveis analisadas, ou seja, indica que uma variável tem <code class="docutils literal notranslate"><span class="pre">influência</span> <span class="pre">direta</span></code> sobre a outra.</p>
+<p>A ausência de <em>ciclos</em> significa que não existem <em>loops</em> na causalidade. Mas esses loops podem acontecer sobre o tempo, o que tornaria a análise também uma <code class="docutils literal notranslate"><span class="pre">série</span> <span class="pre">temporal</span></code>!</p>
+<p>A representação desses problemas reais em estruturas como <em>DAG’s</em> podem ser, realmente, muito grandes. Pois, assim, podemos descrever a estrutura no tempo <span class="math notranslate nohighlight">\(T\)</span>, <span class="math notranslate nohighlight">\(\{T_1, T_2, ...\}\)</span>, e assim por diante.</p>
+<p>Nós, normalmente rotulamos os grafos por dois nomes: <code class="docutils literal notranslate"><span class="pre">nós</span></code> (<em>nodes</em>) e <code class="docutils literal notranslate"><span class="pre">arestas</span></code> (<em>edge</em>). (Iremos aqui, por conveção, usar os nomes em inglês.)</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Os nodes (nós) são as variáveis. Já os edges (as arestas) representam a relação causal entre os nodes.</p>
+</div>
+<p>As associações que foram levadas em consideração, podem  ser incluídas dentro dos modelos de redes bayesianas, que são considerados parte do conjunto de ferramentas de <em>Machine Learning</em>. Esses modelos também não levam em consideração a causalidade, pois não existe um mecanismo interno nesses modelos que leve em consideração a direção da causalidade.</p>
+<p>Já nos <em>DAG’s</em>, tal mecanismo, existe!</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Esse mecanismo nos permite a capacidade de enxergar, através das lentes probabilísticas, a influência da causa e efeito em diferentes eventos! Isso não é medir uma associação. É uma medida para a causalidade!</p>
+</div>
+<p>E isso, faz <code class="docutils literal notranslate"><span class="pre">toda</span></code> a diferença!</p>
+<p><em>Também veremos qual é a diferença entre as duas abordagens comnetadas…</em></p>
+</div>
+<div class="section" id="bons-grafos">
+<h2>Bons Grafos<a class="headerlink" href="#bons-grafos" title="Permalink to this headline">¶</a></h2>
+<p>Queremos saber a diferença entre esses dois grafos abaixo. O da esquerda tem um caminho direto de <span class="math notranslate nohighlight">\(A &lt;-&gt; M &lt;-&gt; D\)</span> e, no outro gráfico, uma suposição de que temos que a relação causal entre a taxa de casamento (<span class="math notranslate nohighlight">\(M\)</span>) e a taxa de divórcio (<span class="math notranslate nohighlight">\(D\)</span>) não existe mais.</p>
+<div class="cell tag_remove_input docutils container">
+<div class="cell_output docutils container">
+<img alt="_images/parte_5_39_0.png" src="_images/parte_5_39_0.png" />
+</div>
+</div>
+<p>Regressões Lineares, em princípio, podem nos dizer a diferença entre essas duas coisas. Mas uma regressão bivariada já não pode mais. Elas podem nos dar apenas algum conhecimento da associação entre <em>casamentos</em> e <em>divórcios</em>, mas não podem nos dizer qual a diferença entre esses dois <em>DAG’s</em> acima.</p>
+<p>Mas, porque não?</p>
+<p>Por que, A tem influência tanto na taxa de casamentos (<span class="math notranslate nohighlight">\(A &lt;-&gt; M\)</span>) quanto em D (<span class="math notranslate nohighlight">\(A &lt;-&gt; D\)</span>), isso gera uma <code class="docutils literal notranslate"><span class="pre">correlação</span></code> entre os eventos <em>taxa de casamento</em> (<span class="math notranslate nohighlight">\(M\)</span>) e <em>taxa de divórcio</em> (<span class="math notranslate nohighlight">\(D\)</span>), mesmo que uma não influencie na outra, como no gráfico à direita. (<em>Elegante essa explicação, hein!</em>)</p>
+<p>É um modo bonito de dizer:</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>Correlação não é Casualidade!</p>
+</div>
+<p>Essa mesmo estrutura do <em>DAG’s</em>, pode ser modelada com as correlações espúrias do início do capítulo, <em>waffle House</em> vs <em>taxa de divórcios</em></p>
+<div class="cell tag_remove_input docutils container">
+<div class="cell_output docutils container">
+<img alt="_images/parte_5_41_0.png" src="_images/parte_5_41_0.png" />
+</div>
+</div>
+<p>A correlação que existe entre essas duas variáveis como foi visto anteriormente, tem sua origem na causa de algum outro evento que não conhecemos, rotulado por (<span class="math notranslate nohighlight">\(?\)</span>). Só sabemos que seu comportamento tem uma influência direta sobre a magnitude do efeito dos divórcios e da quantidade de lojas da rede de restaurantes tem por região.</p>
+<p>Então, se estamos tentando medir a ligação entre a taxa de casamentos (<span class="math notranslate nohighlight">\(M\)</span>) e a taxa de divórcios (<span class="math notranslate nohighlight">\(D\)</span>) usando, como sugestão, a estrutura o grafo da direita (<em>da figura acima</em>), teremos uma grande confusão. Pois  mais adiante uma definição melhor sobre essa confusão.</p>
+<p>Vamos rotular essa estrutura com a seguinte notação:</p>
+<div class="math notranslate nohighlight">
+\[ M &lt;-&gt; D | A \]</div>
+<p>Significa que podemos conhecer a <code class="docutils literal notranslate"><span class="pre">associação</span></code> que <span class="math notranslate nohighlight">\(M\)</span> e <span class="math notranslate nohighlight">\(D\)</span> tem entre si, (<span class="math notranslate nohighlight">\(M &lt;-&gt; D\)</span>), condicionado (<span class="math notranslate nohighlight">\(|\)</span>, caracter chamado de <em>pipe</em>) a <span class="math notranslate nohighlight">\(A\)</span>.</p>
+<p>Quando conhecemos o valor de <span class="math notranslate nohighlight">\(A\)</span>, então eu tenho um valor extra, uma associação externa, entre as duas variáveis. E é isso que a regressão múltipla pode pode nos dizer.</p>
+<div class="math notranslate nohighlight">
+\[ D_i \sim Normal(\mu_i, \sigma)\]</div>
+<div class="math notranslate nohighlight">
+\[ \mu_i = \alpha + \beta_M M_i + \beta_A A_i \]</div>
+<p>Onde:</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(D_i\)</span>: Taxa de divórcio</p></li>
+</ul>
+<p>As taxas médias dos casamentos:</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(\beta_M\)</span>: A ‘<em>peso</em>’ da taxa de casamentos</p></li>
+<li><p><span class="math notranslate nohighlight">\(M_i\)</span>: A taxa média de casamentos</p></li>
+</ul>
+<p>As as medianas das idades nos casamentos:</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(\beta_A\)</span>: A ‘<em>peso</em>’ da mediana das idades dos casamentos</p></li>
+<li><p><span class="math notranslate nohighlight">\(A_i\)</span>: Mediana das idades dos casamentos</p></li>
+</ul>
+<p>Podemos ver que esse modelo tem uma certa diferença dos modelos que vimos anteriormente. Existe um <span class="math notranslate nohighlight">\(\beta\)</span> para cada uma das variáveis preditoras.</p>
+<p>Essa regressão linear, é um tipo especial de <em>rede bayesiana</em>, associa a variável resposta (<span class="math notranslate nohighlight">\(D_i\)</span>) a uma distribuição gaussiana. E sua média (<span class="math notranslate nohighlight">\(\mu_i\)</span>) é dada pela variáveis já conhecidas e um desvio padrão (<span class="math notranslate nohighlight">\(\sigma\)</span>).</p>
+<p>Então, nossa média será descrita como <span class="math notranslate nohighlight">\(\mu_i\)</span>, onde <span class="math notranslate nohighlight">\(i\)</span>, significa que condicionaremos os valores de <span class="math notranslate nohighlight">\(\mu_i\)</span> para cada <span class="math notranslate nohighlight">\(i\)</span>. Aqui, no exemplo, cada <span class="math notranslate nohighlight">\(i\)</span> indica um novo estado do sul dos EUA. E, assim, cada condicionamento será descrito pelos ‘<em>pesos</em>’ multiplicado as suas próprias variáveis preditoras.</p>
+</div>
+<div class="section" id="prioris">
+<h2>Prioris<a class="headerlink" href="#prioris" title="Permalink to this headline">¶</a></h2>
+<p>Agora, nós iremos padronizar a variável <em>taxa de divórcio</em> (<span class="math notranslate nohighlight">\(D_i\)</span>), a variável <em>taxa de casamento</em> (<span class="math notranslate nohighlight">\(M_i\)</span>) e também a variável <em>mediana das idades dos casamentos</em>.</p>
+<p>Assim, como esperamos, podemos escrever a priori para <span class="math notranslate nohighlight">\(\alpha\)</span> da seguinte forma:</p>
+<div class="math notranslate nohighlight">
+\[\alpha \sim Normal(0, 0.2)\]</div>
+<p>Pois esperamos que <span class="math notranslate nohighlight">\(\alpha\)</span> esteja próximo de zero!</p>
+<p>E as prioris para os <span class="math notranslate nohighlight">\(\beta\)</span>’s da seguinte forma:</p>
+<div class="math notranslate nohighlight">
+\[ \beta_M \sim Normal(0, 0.5)\]</div>
+<div class="math notranslate nohighlight">
+\[ \beta_A \sim Normal(0, 0.5)\]</div>
+<div class="math notranslate nohighlight">
+\[ \sigma \sim Exponential(1) \]</div>
+<p>Pois todos os valores foram padronizados, e assim esperamos que a estimativa à priori seja próxima de zero.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># =============================</span>
+<span class="c1">#   Padronizando as variáveis </span>
+<span class="c1"># =============================</span>
+<span class="n">M_stdr</span> <span class="o">=</span> <span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">Marriage</span> <span class="o">-</span> <span class="n">df</span><span class="o">.</span><span class="n">Marriage</span><span class="o">.</span><span class="n">mean</span><span class="p">())</span><span class="o">/</span><span class="n">df</span><span class="o">.</span><span class="n">Marriage</span><span class="o">.</span><span class="n">std</span><span class="p">()</span> 
+<span class="n">D_stdr</span> <span class="o">=</span> <span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">Divorce</span> <span class="o">-</span> <span class="n">df</span><span class="o">.</span><span class="n">Divorce</span><span class="o">.</span><span class="n">mean</span><span class="p">())</span><span class="o">/</span><span class="n">df</span><span class="o">.</span><span class="n">Divorce</span><span class="o">.</span><span class="n">std</span><span class="p">()</span>
+<span class="n">A_stdr</span> <span class="o">=</span> <span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">MedianAgeMarriage</span> <span class="o">-</span> <span class="n">df</span><span class="o">.</span><span class="n">MedianAgeMarriage</span><span class="o">.</span><span class="n">mean</span><span class="p">())</span><span class="o">/</span><span class="n">df</span><span class="o">.</span><span class="n">MedianAgeMarriage</span><span class="o">.</span><span class="n">std</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># ===========================================================</span>
+<span class="c1">#  Priori preditiva para Mediana das Idades dos Casamentos</span>
+<span class="c1"># ===========================================================</span>
+
+<span class="n">range_A</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="n">A_stdr</span><span class="o">.</span><span class="n">min</span><span class="p">(),</span> <span class="n">A_stdr</span><span class="o">.</span><span class="n">max</span><span class="p">())</span>  <span class="c1"># Range de valores da média de idade dos casamentos padronizados</span>
+
+<span class="n">qtd_amostras</span> <span class="o">=</span> <span class="mi">50</span>  <span class="c1"># Quantidade de amostras da priori preditiva</span>
+
+<span class="c1"># Amostrando os valores de 𝜇𝑖 da priori</span>
+<span class="n">𝛼</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mf">0.2</span><span class="p">,</span> <span class="n">qtd_amostras</span><span class="p">)</span>
+<span class="n">𝛽_A</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">,</span> <span class="n">qtd_amostras</span><span class="p">)</span>
+<span class="n">𝜎</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">exponential</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">qtd_amostras</span><span class="p">)</span>  <span class="c1"># Priori 𝜎 ~ Exp(1)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># ========================================</span>
+<span class="c1">#   Gráfico da Priori Preditiva para 𝜇𝑖</span>
+<span class="c1"># ========================================</span>
+
+<span class="n">𝜇</span> <span class="o">=</span> <span class="p">[</span> <span class="n">𝛼</span> <span class="o">+</span> <span class="n">𝛽_A</span> <span class="o">*</span> <span class="n">A_i</span> <span class="k">for</span> <span class="n">A_i</span> <span class="ow">in</span> <span class="n">range_A</span> <span class="p">]</span>  <span class="c1"># Calculando 𝜇𝑖 = 𝛼 + 𝛽𝐴 * 𝐴𝑖, para todo 𝐴𝑖</span>
+
+<span class="c1"># Plotando o gráfico </span>
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">17</span><span class="p">,</span> <span class="mi">9</span><span class="p">))</span>
+
+<span class="c1"># Relembrando o DAG: A &lt;-&gt; D!</span>
+<span class="c1"># Plotando as retas da posteriori para 𝜇𝑖</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">range_A</span><span class="p">,</span> <span class="n">𝜇</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;darkblue&#39;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mf">0.2</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Priori Preditiva de $\mu_i$&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;( $A$ ) Média das Idades dos Casamentos (padronizadas)&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;( $D$ ) Taxa de Divórcio (padronizadas)&quot;</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="n">ls</span><span class="o">=</span><span class="s1">&#39;--&#39;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;white&#39;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.4</span><span class="p">)</span>
+
+<span class="c1"># Ajustando os limites da visuzalização do gráfico.</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylim</span><span class="p">((</span><span class="o">-</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlim</span><span class="p">((</span><span class="o">-</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">))</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/parte_5_50_0.png" src="_images/parte_5_50_0.png" />
+</div>
+</div>
+<p>Temos no gráfico acima a representação da nossa distribuição à priori do modelo de regressão linear. Sorteamos <span class="math notranslate nohighlight">\(50\)</span> linhas dessa distribuição. Essa é a distribuição  à priori preditiva de <span class="math notranslate nohighlight">\(\mu_i\)</span>.  Ou seja, <code class="docutils literal notranslate"><span class="pre">isso</span> <span class="pre">é</span> <span class="pre">oque</span> <span class="pre">nosso</span> <span class="pre">modelo</span> <span class="pre">pensa</span> <span class="pre">sobre</span> <span class="pre">o</span> <span class="pre">problema,</span> <span class="pre">antes</span> <span class="pre">de</span> <span class="pre">darmos</span> <span class="pre">os</span> <span class="pre">dados</span> <span class="pre">à</span> <span class="pre">ele</span></code>.</p>
+<p>Temos que sempre fazer a simulação da priori preditiva. Só assim será possível entender uma importante característica presente em todos os modelo. Temos observar se a amplitude da priori faz sentido. Quando nós dermos os dados para o modelo, é necessário que as estimativas do modelo resida sobre distribuição à priori. Caso contrário, teremos uma priori ruim. Em cenários mais simples, e com muitos dados, esse efeito pode até passar despercebido e ajustar bem. Porém em cenários mais complexos, uma priori ruim poderá ser desastrosa!</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Sempre verifique a priori.</p>
+</div>
+<p>Vamos andar pelo gráfico para entendermos melhor suas partes. Iniciando pela <code class="docutils literal notranslate"><span class="pre">Média</span> <span class="pre">das</span> <span class="pre">Idades</span> <span class="pre">dos</span> <span class="pre">Casamentos</span> <span class="pre">padronizada</span> <span class="pre">($A$</span> <span class="pre">padronizada)</span></code> que é uma gaussiana, centrada em <span class="math notranslate nohighlight">\(0\)</span> e com desvio padrão<span class="math notranslate nohighlight">\(\frac{1}{2}\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[A \sim Normal(0, 0.5)\]</div>
+<p>No gráfico nós estamos observando todos os valores dentro do intervalo <span class="math notranslate nohighlight">\([-2, \mbox{ } 2]\)</span>. Esse intervalo corresponde ao <span class="math notranslate nohighlight">\(2^o\)</span> desvio padrão! Isso deve corresponder a grande maioria dos casos que os valores da Mediana das Idades dos Casamentos (<em>padronizadas</em>) irá ocorrer.</p>
+<p>Esse pensamento também é válido para a variável <code class="docutils literal notranslate"><span class="pre">Taxa</span> <span class="pre">de</span> <span class="pre">Divórcio</span> <span class="pre">($D$</span> <span class="pre">padronizada)</span></code>. Seus valores também estão delimitados pelo intervalo <span class="math notranslate nohighlight">\([-2, \mbox{ } 2]\)</span>, representando o <span class="math notranslate nohighlight">\(2^o\)</span> desvio padrão.</p>
+<p>Esse modelo nos diz é qual a taxa de divórcio padronizada,(<span class="math notranslate nohighlight">\(D\)</span>), que é uma variável <em>z-score</em>, quando já conhecemos os valores da Média das Idades dos Casamentos (<span class="math notranslate nohighlight">\(A\)</span>), que também está padronizada (outra <em>z-score</em>). Assim temos duas variáveis padronizadas, <em>z-scores</em>, explicando uma à outra.</p>
+<p>Agora, se as linhas da regressão linear não morar no espaço delimitado pela priori, então a <code class="docutils literal notranslate"><span class="pre">escolhemos</span> <span class="pre">uma</span> <span class="pre">priori</span> <span class="pre">ruim</span></code>! Por que isso é impossível! Se após dermos os dados pra o modelo, a inclinação da curva for maior que a delimitada pela região da priori, temos uma priori ruim.</p>
+<p>Ainda podemos discutir se a escolha da priori irá governar todo o range da taxa de divóricio. Provavelmente não é verdade. Em capítulos posteriores, quando falarmos sobre <em>overfitting</em> (ou em português, teremos um sobreajuste). Isso acontece pois a priori não é apertada o suficiente para trabalharmos segurança. Nesse caso podemos pensar em prioris <em>flat</em>, que podem ser justificada cientificamente, tal como uma priori <em>flat</em> implícita nas análises frequentistas.</p>
+</div>
+<div class="section" id="nosso-modelo">
+<h2>Nosso modelo<a class="headerlink" href="#nosso-modelo" title="Permalink to this headline">¶</a></h2>
+<p>Esse é nosso modelo, descrito na primeira linha. Na segunda linha temos dois termos lineares, lembrando que o termo linear significa aditivo. Esses dois termos irá gerar um plano. A seguir, teremos nossas prioris. Um destaque para a priori do <span class="math notranslate nohighlight">\(\sigma\)</span>, de agora em diante não vamos mais usar <span class="math notranslate nohighlight">\(Uniform\)</span> mas sim a distribuição <span class="math notranslate nohighlight">\(Exponential\)</span>, pois ela tem boas propriedades. Falaremos mais sobre isso adiante.</p>
+<div class="math notranslate nohighlight">
+\[D_i \sim Normal(\mu_i, \sigma) \]</div>
+<div class="math notranslate nohighlight">
+\[ \mu_i = \alpha + \beta_M M_i + \beta_A A_i \]</div>
+<div class="math notranslate nohighlight">
+\[ \alpha \sim Normal(0, 0.2) \]</div>
+<div class="math notranslate nohighlight">
+\[ \beta_M \sim Normal(0, 0.5) \]</div>
+<div class="math notranslate nohighlight">
+\[ \beta_A \sim Normal(0, 0.5) \]</div>
+<div class="math notranslate nohighlight">
+\[ \sigma \sim  Exponential(1) \]</div>
+<p>O uso da distribuição <span class="math notranslate nohighlight">\(Exponential\)</span> como priori para <span class="math notranslate nohighlight">\(\sigma\)</span> tem vantagens tais como, sempre tem valores positivos, para valores maiores a sua probabilidade decresce e para defini-lá precisamos indicar qual será seu valor médio.</p>
+<div class="cell tag_remove_output docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># =====================================</span>
+<span class="c1">#  Estimando o modelo linear proposto</span>
+<span class="c1"># =====================================</span>
+
+<span class="n">stan_model_divorce</span> <span class="o">=</span> <span class="s2">&quot;&quot;&quot;</span>
+<span class="s2">    data {</span>
+<span class="s2">        int N;</span>
+<span class="s2">        vector[N] divorce_rate;</span>
+<span class="s2">        vector[N] marriage_rate;</span>
+<span class="s2">        vector[N] median_age;</span>
+<span class="s2">    }</span>
+<span class="s2">    </span>
+<span class="s2">    parameters {</span>
+<span class="s2">        real alpha;</span>
+<span class="s2">        real beta_M;</span>
+<span class="s2">        real beta_A;</span>
+<span class="s2">        real&lt;lower=0&gt; sigma;</span>
+<span class="s2">    }</span>
+
+<span class="s2">    model{</span>
+<span class="s2">        alpha ~ normal(0, 0.2);</span>
+<span class="s2">        beta_M ~ normal(0,0.5);</span>
+<span class="s2">        beta_A ~ normal(0, 0.5);</span>
+<span class="s2">        sigma ~ exponential(1);</span>
+<span class="s2">        </span>
+<span class="s2">        divorce_rate ~ normal(alpha + beta_M * marriage_rate + beta_A * median_age, sigma);</span>
+<span class="s2">    }</span>
+<span class="s2">&quot;&quot;&quot;</span>
+
+<span class="n">my_data</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s1">&#39;N&#39;</span><span class="p">:</span> <span class="nb">len</span><span class="p">(</span><span class="n">D_stdr</span><span class="o">.</span><span class="n">values</span><span class="p">),</span> 
+    <span class="s1">&#39;divorce_rate&#39;</span><span class="p">:</span> <span class="n">D_stdr</span><span class="o">.</span><span class="n">values</span><span class="p">,</span>
+    <span class="s1">&#39;marriage_rate&#39;</span><span class="p">:</span> <span class="n">M_stdr</span><span class="o">.</span><span class="n">values</span><span class="p">,</span>
+    <span class="s1">&#39;median_age&#39;</span><span class="p">:</span> <span class="n">A_stdr</span><span class="o">.</span><span class="n">values</span>
+<span class="p">}</span>
+
+<span class="n">posteriori_divorce</span> <span class="o">=</span> <span class="n">stan</span><span class="o">.</span><span class="n">build</span><span class="p">(</span><span class="n">stan_model_divorce</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">my_data</span><span class="p">)</span>
+<span class="n">fit_divorce</span> <span class="o">=</span> <span class="n">posteriori_divorce</span><span class="o">.</span><span class="n">sample</span><span class="p">(</span><span class="n">num_chains</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span> <span class="n">num_samples</span><span class="o">=</span><span class="mi">1000</span><span class="p">)</span>
+
+<span class="n">alpha</span> <span class="o">=</span> <span class="n">fit_divorce</span><span class="p">[</span><span class="s1">&#39;alpha&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">flatten</span><span class="p">()</span>
+<span class="n">beta_M</span> <span class="o">=</span> <span class="n">fit_divorce</span><span class="p">[</span><span class="s1">&#39;beta_M&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">flatten</span><span class="p">()</span>
+<span class="n">beta_A</span> <span class="o">=</span> <span class="n">fit_divorce</span><span class="p">[</span><span class="s1">&#39;beta_A&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">flatten</span><span class="p">()</span>
+<span class="n">sigma</span> <span class="o">=</span> <span class="n">fit_divorce</span><span class="p">[</span><span class="s1">&#39;sigma&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">flatten</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">resume_posteriori</span><span class="p">(</span><span class="n">var</span><span class="p">,</span> <span class="n">confidence_HPDI</span><span class="o">=</span><span class="mf">0.93</span><span class="p">,</span> <span class="n">rounded</span><span class="o">=</span><span class="mi">2</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Return the summary of posteriori data</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">posteriori</span> <span class="o">=</span> <span class="p">[]</span>
+
+    <span class="n">confi_HPDI</span> <span class="o">=</span> <span class="n">HPDI</span><span class="p">(</span><span class="n">var</span><span class="p">,</span> <span class="n">confidence_HPDI</span><span class="p">)</span>
+    
+    <span class="n">posteriori</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">var</span><span class="o">.</span><span class="n">mean</span><span class="p">())</span>
+    <span class="n">posteriori</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">var</span><span class="o">.</span><span class="n">std</span><span class="p">())</span>
+    <span class="n">posteriori</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">confi_HPDI</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+    <span class="n">posteriori</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">confi_HPDI</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+
+    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">posteriori</span><span class="p">]),</span> <span class="n">rounded</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">describe_posteriori</span><span class="p">(</span><span class="n">vars_post</span><span class="p">,</span> <span class="n">confidence_HPDI</span><span class="o">=</span><span class="mf">0.93</span><span class="p">,</span> <span class="n">plot</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+    
+    <span class="n">post</span> <span class="o">=</span> <span class="p">[]</span>
+    
+    <span class="k">for</span> <span class="n">var_</span> <span class="ow">in</span> <span class="n">vars_post</span><span class="p">:</span>
+        <span class="n">post</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">resume_posteriori</span><span class="p">(</span><span class="nb">eval</span><span class="p">(</span><span class="n">var_</span><span class="p">),</span> <span class="n">confidence_HPDI</span><span class="p">))</span>
+    
+    <span class="n">hpdi_min_label</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="mi">100</span> <span class="o">*</span> <span class="nb">round</span><span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">confidence_HPDI</span><span class="p">,</span> <span class="mi">3</span><span class="p">))</span> <span class="o">+</span> <span class="s1">&#39;%&#39;</span>
+    <span class="n">hpdi_max_label</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="mi">100</span> <span class="o">*</span> <span class="nb">round</span><span class="p">(</span><span class="n">confidence_HPDI</span><span class="p">,</span> <span class="mi">3</span><span class="p">))</span> <span class="o">+</span> <span class="s1">&#39;%&#39;</span>
+        
+    <span class="n">post</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">post</span><span class="p">,</span>
+                        <span class="n">index</span><span class="o">=</span><span class="n">vars_post</span><span class="p">,</span>
+                        <span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;Mean&#39;</span><span class="p">,</span> <span class="s1">&#39;Std&#39;</span><span class="p">,</span> <span class="n">hpdi_min_label</span><span class="p">,</span> <span class="n">hpdi_max_label</span><span class="p">])</span>
+    
+    <span class="k">if</span> <span class="n">plot</span><span class="p">:</span>
+        
+        <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">17</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">post</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span><span class="p">))</span>
+    
+        <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Estimativas das Posterioris&#39;</span><span class="p">)</span>
+        
+        <span class="n">min_axis_</span> <span class="o">=</span> <span class="n">post</span><span class="o">.</span><span class="n">iloc</span><span class="p">[:,</span> <span class="mi">2</span><span class="p">:</span><span class="mi">4</span><span class="p">]</span><span class="o">.</span><span class="n">min</span><span class="p">()</span><span class="o">.</span><span class="n">min</span><span class="p">()</span>
+        <span class="n">max_axis_</span> <span class="o">=</span> <span class="n">post</span><span class="o">.</span><span class="n">iloc</span><span class="p">[:,</span> <span class="mi">2</span><span class="p">:</span><span class="mi">4</span><span class="p">]</span><span class="o">.</span><span class="n">max</span><span class="p">()</span><span class="o">.</span><span class="n">max</span><span class="p">()</span>
+
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">post</span><span class="p">)):</span>
+            <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">([</span><span class="n">min_axis_</span><span class="o">*</span><span class="mf">1.5</span><span class="p">,</span> <span class="n">max_axis_</span><span class="o">*</span><span class="mf">1.5</span><span class="p">],</span> <span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="n">i</span><span class="p">],</span> <span class="n">ls</span><span class="o">=</span><span class="s1">&#39;--&#39;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;gray&#39;</span><span class="p">)</span>
+            <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">([</span><span class="n">post</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="mi">2</span><span class="p">],</span> <span class="n">post</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="mi">3</span><span class="p">]],</span> <span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="n">i</span><span class="p">],</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;blue&#39;</span><span class="p">)</span>
+            <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">post</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="n">i</span><span class="p">,</span> <span class="s1">&#39;ko&#39;</span><span class="p">)</span>
+            <span class="n">plt</span><span class="o">.</span><span class="n">annotate</span><span class="p">(</span><span class="n">post</span><span class="o">.</span><span class="n">index</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="p">(</span><span class="n">min_axis_</span><span class="o">*</span><span class="mf">1.5</span><span class="p">,</span> <span class="n">i</span><span class="o">+</span><span class="mf">0.2</span><span class="p">),</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;blue&#39;</span><span class="p">)</span>
+            
+
+        <span class="k">if</span> <span class="n">min_axis_</span> <span class="o">&lt;</span> <span class="mi">0</span> <span class="ow">and</span> <span class="n">max_axis_</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="n">plt</span><span class="o">.</span><span class="n">axvline</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">ls</span><span class="o">=</span><span class="s1">&#39;--&#39;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;red&#39;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.6</span><span class="p">)</span>
+
+        <span class="n">plt</span><span class="o">.</span><span class="n">ylim</span><span class="p">((</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">post</span><span class="p">)</span><span class="o">+</span><span class="mi">1</span><span class="p">))</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="n">ls</span><span class="o">=</span><span class="s1">&#39;--&#39;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;white&#39;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.4</span><span class="p">)</span>
+        
+        <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">gca</span><span class="p">()</span>
+        <span class="n">ax</span><span class="o">.</span><span class="n">axes</span><span class="o">.</span><span class="n">yaxis</span><span class="o">.</span><span class="n">set_visible</span><span class="p">(</span><span class="kc">False</span><span class="p">)</span>
+        
+        <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+    
+    <span class="k">return</span> <span class="n">post</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># =====================================</span>
+<span class="c1">#  Descrevendo os dados da posteriori</span>
+<span class="c1"># =====================================</span>
+
+<span class="n">vars_post</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;alpha&#39;</span><span class="p">,</span> <span class="s1">&#39;beta_M&#39;</span><span class="p">,</span> <span class="s1">&#39;beta_A&#39;</span><span class="p">,</span> <span class="s1">&#39;sigma&#39;</span><span class="p">]</span>
+<span class="n">describe_posteriori</span><span class="p">(</span><span class="n">vars_post</span><span class="p">,</span> <span class="mf">0.945</span><span class="p">,</span> <span class="n">plot</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Mean</th>
+      <th>Std</th>
+      <th>5.5%</th>
+      <th>94.5%</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>alpha</th>
+      <td>-0.00</td>
+      <td>0.10</td>
+      <td>-0.19</td>
+      <td>0.19</td>
+    </tr>
+    <tr>
+      <th>beta_M</th>
+      <td>-0.06</td>
+      <td>0.16</td>
+      <td>-0.34</td>
+      <td>0.25</td>
+    </tr>
+    <tr>
+      <th>beta_A</th>
+      <td>-0.60</td>
+      <td>0.16</td>
+      <td>-0.90</td>
+      <td>-0.31</td>
+    </tr>
+    <tr>
+      <th>sigma</th>
+      <td>0.82</td>
+      <td>0.09</td>
+      <td>0.67</td>
+      <td>1.00</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<p>As informações da tabela acima contém um resumo das posterioris estimadas. Como esperado <span class="math notranslate nohighlight">\(\alpha\)</span> tem a média <span class="math notranslate nohighlight">\(0\)</span>. Pois tinha que ser assim conforme a construção do nosso modelo.</p>
+<p>Já a estimativa para do <span class="math notranslate nohighlight">\(\beta_M\)</span>, <code class="docutils literal notranslate"><span class="pre">taxa</span> <span class="pre">de</span> <span class="pre">casamento</span></code>, é levemente negativa e o desvio padrão está entre <span class="math notranslate nohighlight">\(2\)</span> a <span class="math notranslate nohighlight">\(3\)</span> vezes a sua média. Podemos olhar para o intervalo de HPDI de <span class="math notranslate nohighlight">\(89\%\)</span> no qual essa valores estão entre <span class="math notranslate nohighlight">\(-0.3\)</span> e <span class="math notranslate nohighlight">\(0.2\)</span>.</p>
+<p>Talvez exista algum efeito, ou talvez não tenha nenhum efeito dependendo da direção. Nós apenas não sabemos muito bem o que pensar sobre essa variável, pois ela não apresenta uma relação consistente, não existe uma associação consistente na regressão multipla entre a <em>taxa de casamentos</em> e a <em>taxa de divórcios</em>.</p>
+<p>Agora, a <code class="docutils literal notranslate"><span class="pre">mediana</span> <span class="pre">das</span> <span class="pre">idades</span> <span class="pre">do</span> <span class="pre">casamentos</span></code> tem uma estimativa média de <span class="math notranslate nohighlight">\(-0.6\)</span> com o desvio padrão também de <span class="math notranslate nohighlight">\(0.16\)</span>, temos que a massa da posteriori está inteiramente abaixo de zero! Assim, realmente temos uma associção negativa entre a <em>media das idades dos casasmentos</em> e a <em>taxa de divórcios</em>.</p>
+<p>Mas agora nós já sabemos que não temos um <code class="docutils literal notranslate"><span class="pre">impacto</span> <span class="pre">diretamente</span> <span class="pre">causal</span></code> entre <em>taxa de casamentos</em> e a <em>taxa de divórcios</em>. Isso estava mascarado pois <em>idade mediana</em> é uma causa comum entre as duas outras variáveis.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">vars_all</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;beta_1&#39;</span><span class="p">,</span> <span class="s1">&#39;beta_M&#39;</span><span class="p">,</span> <span class="s1">&#39;beta_2&#39;</span><span class="p">,</span> <span class="s1">&#39;beta_A&#39;</span><span class="p">]</span> 
+
+<span class="c1">#  Legendas</span>
+<span class="c1"># ------------</span>
+<span class="c1"># beta_2 == D ~ A   </span>
+<span class="c1"># beta_A ==&gt; D ~ A + M </span>
+
+<span class="c1"># beta_M ==&gt; D ~ A + M  </span>
+<span class="c1"># beta_1 ==&gt; D ~ M  </span>
+
+<span class="n">describe_posteriori</span><span class="p">(</span><span class="n">vars_all</span><span class="p">,</span> <span class="mf">0.945</span><span class="p">,</span> <span class="n">plot</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/parte_5_59_0.png" src="_images/parte_5_59_0.png" />
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Mean</th>
+      <th>Std</th>
+      <th>5.5%</th>
+      <th>94.5%</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>beta_1</th>
+      <td>0.18</td>
+      <td>0.07</td>
+      <td>0.05</td>
+      <td>0.30</td>
+    </tr>
+    <tr>
+      <th>beta_M</th>
+      <td>-0.06</td>
+      <td>0.16</td>
+      <td>-0.34</td>
+      <td>0.25</td>
+    </tr>
+    <tr>
+      <th>beta_2</th>
+      <td>-0.87</td>
+      <td>0.17</td>
+      <td>-1.18</td>
+      <td>-0.51</td>
+    </tr>
+    <tr>
+      <th>beta_A</th>
+      <td>-0.60</td>
+      <td>0.16</td>
+      <td>-0.90</td>
+      <td>-0.31</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<p>Quando observando as tabelas acima e comparando com o gráfico, temos que a taxa de casamentos (<span class="math notranslate nohighlight">\(\beta_M\)</span>), resultante da regressão multipla, tem a sua distribuição à posteriori, com <span class="math notranslate nohighlight">\(89\%\)</span> de HPDI, contendo o <code class="docutils literal notranslate"><span class="pre">zero</span></code>. Portanto provávelmente a variável taxa de casamento (<span class="math notranslate nohighlight">\(\beta_M\)</span>) <code class="docutils literal notranslate"><span class="pre">não</span> <span class="pre">tem</span> <span class="pre">impacto</span> <span class="pre">casual</span> <span class="pre">direto</span></code> na taxa de divórcio.</p>
+<p>Ele foi mascarado por que a <em>mediana das idades dos casamentos</em> (<span class="math notranslate nohighlight">\(A\)</span>) é uma variável que influência tanto a <em>taxa de divórcio</em> quanto a <em>taxa de casamentos</em>.</p>
+<p>No gráfico acima fica claro que o modelo <em>beta_1</em>, no modelo <span class="math notranslate nohighlight">\(D ~ M\)</span>, nos diz que <em>taxa de casamento</em> tem uma associação positiva com a <em>taxa de divórcio</em>, o que era de se esperar pelos nossos entendimentos sobre como poderia funcionar esse evento.</p>
+<p>Entretanto, como a regressão múltipla podemos ver que a posteriori atinge o zero, e assim não podemos perceber que <em>provavelmente</em> não existe uma associação entre a <em>taxa de casamentos</em> e a <em>taxa de divórcios</em>.</p>
+<p>Isso é uma boa coisa que a regressão múltipla pode fazer por nós! Eu acredito que <code class="docutils literal notranslate"><span class="pre">essa</span> <span class="pre">é</span> <span class="pre">realmente</span> <span class="pre">a</span> <span class="pre">relação</span> <span class="pre">causal</span></code> que temos aqui.</p>
+<p>Assim, nosso <em>DAG</em> provavelmente seria dessa forma:</p>
+<div class="cell tag_remove_input docutils container">
+<div class="cell_output docutils container">
+<img alt="_images/parte_5_61_0.png" src="_images/parte_5_61_0.png" />
+</div>
+</div>
+<p>Assim, como não temos uma relação forte da <em>taxa de casamentos</em> (<span class="math notranslate nohighlight">\(M\)</span>) com a variável <em>taxa de divórcios</em> (<span class="math notranslate nohighlight">\(D\)</span>), a representação de nosso <em>DAG</em>, ou seja, a representação da causalidade, poderá ser mapeada de acordo com o gráfico acima.</p>
+<p>Mas vamos explorar um pouco melhor o significado dessa abordagem.</p>
+<div class="section" id="regressao-multipla">
+<h3>Regressão Múltipla<a class="headerlink" href="#regressao-multipla" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><p>Uma vez que nós conhecemos <span class="math notranslate nohighlight">\(A\)</span>, <em>mediana das idades dos casamentos</em>, existe apenas um pequeno valor adicional de conhecimento sobre <span class="math notranslate nohighlight">\(D\)</span> que está contido em <span class="math notranslate nohighlight">\(M\)</span>, a <em>taxa de casamento</em>.</p></li>
+</ul>
+<p>Então podemos interpretar isso da seguinte forma, ao conhecermos os valores de <span class="math notranslate nohighlight">\(A\)</span> implica que o conhecimento de <span class="math notranslate nohighlight">\(M\)</span> não vai nos ajudar muito mais a entender <span class="math notranslate nohighlight">\(D\)</span>. Isso coincide com <em>DAG</em> acima, onde não há relação causal da <em>taxa de casamentos</em> para a <em>taxa de divórcios</em>.</p>
+<ul class="simple">
+<li><p>Uma vez que nós conhecemos a <span class="math notranslate nohighlight">\(M\)</span>, taxa de casamentos, há muito valor em conhecer também <span class="math notranslate nohighlight">\(A\)</span>, mediana das idades dos casamentos.</p></li>
+</ul>
+<p>Isso funciona na outra direção, pois a <em>mediana das idades dos casamentos</em> (<span class="math notranslate nohighlight">\(A\)</span>) é uma <code class="docutils literal notranslate"><span class="pre">causa</span></code> comum da <em>taxa de casamentos</em> (<span class="math notranslate nohighlight">\(M\)</span>).</p>
+<ul class="simple">
+<li><p>Se nós não conhecermos a <em>mediana das idades dos casamentos</em> (<span class="math notranslate nohighlight">\(A\)</span>) em algum estado, ainda é útil conhecer a <em>taxa de casamentos</em> (<span class="math notranslate nohighlight">\(M\)</span>).</p></li>
+</ul>
+<p>Saber sobre a <em>taxa de casamentos</em> é útil e importante pois isso pode nos dá informações adicionais. Essa informação vem de outra relação causal e não da uma informação causal direta entre as variáveis.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Esse é nosso negócio aqui. A inferência! Descobrir a diferença entre essas coisas.</p>
+</div>
+<p>Se nós apenas quisermos fazer uma previsão e não nos importarmos com a inferência causal, a <em>taxa de casamento</em> é útil e ajudará a prever as coisas. Mas, por outro lado, não nos ajuda a fazer <code class="docutils literal notranslate"><span class="pre">interevenções</span> <span class="pre">no</span> <span class="pre">mundo</span> <span class="pre">real</span></code>, porque se quisermos mudar a <em>taxa de divórcios</em> (<span class="math notranslate nohighlight">\(D\)</span>) nos estado manipulando a <em>taxa de casamento</em> (<span class="math notranslate nohighlight">\(M\)</span>) não teria nenhum efeito.</p>
+<p>Simplesmente por que não é assim que as coisas funcionam. <code class="docutils literal notranslate"><span class="pre">A</span> <span class="pre">maquinaria</span> <span class="pre">de</span> <span class="pre">causalidade</span> <span class="pre">natural</span> <span class="pre">dos</span> <span class="pre">divórcios</span> <span class="pre">não</span> <span class="pre">apresenta</span> <span class="pre">essa</span> <span class="pre">ligação</span></code> entre da <em>taxa de casamentos</em> para a <em>taxa de divórcios</em>.</p>
+<p>Assim, para efeito de políticas públicas, é necessário focar nas alterações na <em>mediana da idade dos casamentos</em> para verificar os efeitos na <em>taxa de divórcios</em>.</p>
+<p>Assim precisamos ser claros se queremos <strong>apenas</strong> prever as coisas. Se quisermos também inteferir as relações causais, devemos fazer a previsão das relações causais para que possamos fazer as intervenções. <code class="docutils literal notranslate"><span class="pre">Uma</span> <span class="pre">intervenção</span> <span class="pre">requer</span> <span class="pre">um</span> <span class="pre">verdadeiro</span> <span class="pre">entendimento</span> <span class="pre">da</span> <span class="pre">causalidade</span> <span class="pre">do</span> <span class="pre">sistema</span></code>.</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>Uma previsão não tem o poder de fazer tais intervenções causais.</p>
+</div>
+<p>Isso é o grande terror da ciência, podemos fazer previsões realmente boas sem entendermos nada! Lembra dos modelos <em>geocêntricos</em>. <code class="docutils literal notranslate"><span class="pre">Modelo</span> <span class="pre">estatísticos</span> <span class="pre">corretos</span> <span class="pre">não</span> <span class="pre">são</span> <span class="pre">suficientes</span> <span class="pre">para</span> <span class="pre">descobrir</span> <span class="pre">relações</span> <span class="pre">causais</span></code>, então precisamos de algo extra!</p>
+</div>
+</div>
+<div class="section" id="id1">
+<h2>Regressão Múltipla<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h2>
+<p>Parei em regressão múltipla 31:10</p>
 </div>
 </div>
 

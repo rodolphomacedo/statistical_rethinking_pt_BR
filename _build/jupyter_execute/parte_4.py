@@ -1625,7 +1625,7 @@ plt.text(1940, 7.5,'$Knot_5$', size=25, color='darkgray')
 plt.show()
 
 
-# In[42]:
+# In[52]:
 
 
 # ==========================================================
@@ -1645,7 +1645,7 @@ HPDI_posteriori_spline_1 = np.array(HPDI_posteriori_spline_1)
 mean_posteriori_spline_1 = posteriori_spline_1.mean(axis=1)  # Média do HPDI por cada ano
 
 
-# In[43]:
+# In[53]:
 
 
 # ===============================================
@@ -1681,7 +1681,7 @@ plt.show()
 # 
 # A seguir a descrição e a construção uma `spline` com grau 3 e 15 nós ao longo do eixo.
 
-# In[44]:
+# In[54]:
 
 
 # ======================================
@@ -1703,7 +1703,7 @@ plt.ylim((0, 1))
 plt.show()
 
 
-# In[45]:
+# In[55]:
 
 
 # =======================================================
@@ -1754,7 +1754,7 @@ sigma_spline_3 = fit_spline_3['sigma'].flatten()
 Bw_spline_3 = np.matmul(spline_3, w_spline_3)  # Fazendo a multiplicação das matrizes B * w
 
 
-# In[46]:
+# In[56]:
 
 
 # ====================================================
@@ -1773,7 +1773,7 @@ plt.grid(ls='--', color='white', alpha=0.6)
 plt.show()
 
 
-# In[47]:
+# In[57]:
 
 
 # ==========================================================
@@ -1797,7 +1797,7 @@ HPDI_posteriori_spline_3 = np.array(HPDI_posteriori_spline_3)
 mean_posteriori_spline_3 = posteriori_spline_3.mean(axis=1)  # Média do HPDI por cada ano
 
 
-# In[48]:
+# In[58]:
 
 
 # ===============================================
