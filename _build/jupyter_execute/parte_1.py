@@ -13,19 +13,19 @@
 # 
 # Escrevi esse material como o intuíto de construir um estudo estruturado que me permita uma boa compreensão das aulas do curso e, por consequência, melhor as habilidades em programação e exposição de idéias.
 # 
-# Esse material foi construído tentando preservar os detalhes didáticos que mais julguei importantes e, também, as construções dos modelos na medida do possível, permitindo assim um entendimento mais concreto do que está acontencendo.
+# Esse material foi construído tentando preservar os detalhes didáticos que julguei serem mais importantes e, também, as construções dos modelos na medida do possível utilizando `Python`, permitindo assim um entendimento mais concreto do que está acontencendo.
 # 
 # ```{alert}
-# Tudo que está sendo colocado nesse material está público nos vídeos do curso, na internet com as fontes de referências, caso eu esteja algum material privado entre em contato!
+# Tudo que está sendo colocado nesse material está público nos vídeos do curso, na internet com as fontes de referências, caso eu esteja utilizando algum material privado entre em contato!
 # ```
 # 
-# Diferenças do material original do curso: esse material foi construído transportando as idéias codificadas em [R](https://cran.r-project.org/) do pacote [rethinking](https://github.com/rmcelreath/rethinking) para a linguagem [python](https://www.python.org/) em conjunto com suas principais bibliotecas de análise de dados (numpy, scipy, matplotlib) e no lugar do pacote *rethinking* usei, tanto quanto meu conhecimento permitiu, utilização da biblioteca [Stan](http://mc-stan.org/) e sua interface para python [pystan](https://pystan.readthedocs.io/en/latest/). 
+# Diferenças do material original do curso: esse material foi construído transportando as idéias codificadas em [R](https://cran.r-project.org/) do pacote [rethinking](https://github.com/rmcelreath/rethinking) para a linguagem [python](https://www.python.org/) em conjunto com suas principais bibliotecas de análise de dados (numpy, scipy, matplotlib) e no lugar do pacote *rethinking* usei, tanto quanto meu conhecimento me permitiu, utilização da biblioteca [Stan](http://mc-stan.org/) e sua interface para python [pystan](https://pystan.readthedocs.io/en/latest/). 
 # 
 # 
 # -----
 # Esse material foi escrtio em lingua portuguesa (Brasil).
 # 
-# Estará disponibilizado gratuitamente no github: https://github.com/rodolphomacedo 
+# Estará disponibilizado gratuitamente no github: https://github.com/rodolphomacedo.
 # 
 # Erros, sugestões ou dúvidas podem ser enviadas para o email [rodolpho.ime@gmail.com](rodolpho.ime@gmail.com)
 # 
@@ -33,13 +33,13 @@
 
 # ## Prefácio
 # 
-# O prefácio é texto preliminar de apresentação, colocado no começo do livro, com explicações sobre os objetivos.
+# O prefácio é um breve texto preliminar de apresentação, colocado no começo do livro, com explicações sobre os objetivos.
 # 
 # 
-# Esse material tem como objetivo primário descrever um modo de (re)pensar a estatística. Para uma primeira leitura não é necessário um foco mais atento dos códigos que geram os gráficos, porém o próprio código e os comentários são partes integrantes do método que usei para apresentar as ideias e muitas dúvidas podem sanadas com uma leitura mais atenta.
+# Esse material tem como objetivo primário descrever um modo de (re)pensar a estatística. Para uma primeira leitura não é necessário um foco mais atento dos códigos que geram os gráficos, porém o próprio código e os comentários são partes integrantes do método que usei para apresentar as ideias e muitas dúvidas podem ser sanadas com uma leitura mais atenta.
 # 
 # 
-# Tentei colocar o máximo de figuras e memes que pude encontrar para ilustrar os exemplos, muitos deles foram os mesmos que foram usados nas apresentação do curso.
+# Tentei colocar o máximo de figuras e memes que pude encontrar para ilustrar os exemplos, muitos deles foram os mesmos que foram usados nas apresentações do curso.
 
 # ## Requisitos
 # 
@@ -53,52 +53,72 @@
 # 
 # <img src="./images/golem_of_prague.png" alt="Golem of Prague" width=1000 />
 # 
-# [AULA - Statistical Rethinking Winter 2019 Lecture 01 - Golem de Praga](https://youtu.be/4WVelCswXo4?t=2562)
+# [Statistical Rethinking Winter 2019 Lecture 01 - Golem de Praga](https://youtu.be/4WVelCswXo4?t=2562)
 
-# `Golem` é um ser artificial místico, associado à tradição mística do judaísmo, particularmente à cabala, que pode ser trazido à vida através de um processo divino. No folclore judaico, o golem é um ser animado que é feito de material inanimado, muitas vezes visto como um gigante de pedra. 
+# `Golem` é um ser artificial místico. Geralmente associado à tradição mística do judaísmo, particularmente à cabala, que pode ser trazido à vida através de um processo divino. No folclore judaico, o golem é um ser animado que é feito de material inanimado, muitas vezes visto como um gigante de pedra. 
 # 
-# Um Golem pode ser entendido como robô que `obedece` as ordens do seu criador, porém `não possuem nenhum compromisso com a verdade`, deixando assim a cargo do `seu criador avaliar e criticar suas ações à luz da racionalidade`.
+# Um Golem pode ser entendido como robô que `obedece` as ordens do seu criador, porém `eles não possuem nenhum compromisso com a verdade`, deixando assim a cargo do `seu criador avaliar e criticar suas ações à luz da racionalidade`.
 # 
-# O que vamos fazer nesse curso é aprender a construção dos golems bayesianos.
+# Nesse material vamos é aprender a construir `golems bayesianos`.
 
 # ## Medidas das ideias
 # 
-# Cientista, em um sentido mais amplo, refere-se a qualquer pessoa que exerça uma atividade sistemática para obter conhecimento. Em um sentido mais restrito, cientista refere-se a indivíduos que usam o método científicos.
+# Um cientista, em um sentido mais amplo, refere-se a qualquer pessoa que exerça uma atividade sistemática para obter conhecimento sobre algo. Em um sentido mais restrito, cientista refere-se a indivíduos que usam o método científicos.
 # 
-# Todos os cientistas precisam fazer inferências sobre aspectos de ao menos uma parcela de particularidades de um problema que está sobre estudo. 
+# Todos nós precisamos construir inferências sobre aspectos de ao menos uma parcela de particularidades de um problema que está sobre estudo. 
 # 
-# Medir a Natureza é fascinante! Tal medida nos permite um entendimento aproximado de um subconjunto do funcionamento da maquinaria natural do Todo.
+# Medir a Natureza é fascinante! Tal medida nos permite um entendimento aproximado de um subconjunto do funcionamento da `maquinaria natural do Todo`.
 # 
 # Ao se observar o fenômeno a ser estudado, a proposta da criação de uma métrica surge a partir de uma ideia, uma sugestão, uma proposta, que se admite, independentemente do fato de ser verdadeira ou falsa, como um princípio a partir do qual se pode deduzir um determinado conjunto de consequências. 
 # 
 # ```{note}
-# Tal ideia a definiremos como `hipótese`.  
+# Tal ideia a definiremos como uma `hipótese`.  
 # ```
 # 
-# Para conseguirmos saber se a *hipótese* é verdadeira é necessário utilizarmos um método confiável. Esse método é a realização de uma operação *intelectual*, por meio da qual se afirma a verdade da hipótese em decorrência de sua ligação com outras já reconhecidas como verdadeiras, isto é, `inferência`.
+# Para conseguirmos saber se a *hipótese* é verdadeira é necessário utilizarmos um método confiável. Esse método é a realização de uma operação *intelectual*, por meio da qual se afirma a verdade da hipótese em decorrência de sua ligação com outras já reconhecidas como verdadeiras, isto é, uma `inferência`.
 
-# `Problemas de escopo aberto` apresentam dificuldades relativas grandes e que desafiam a nossa capacidade de encontrar uma solução. Tais problemas guardam em si a particularidade de serem dificíes de obter pouco de conhecimento a seu respeito.   
+# ### Problemas de escopo aberto
+# 
+# Os problemas de escopo aberto apresentam dificuldades relativamente grandes e que desafiam a nossa capacidade de encontrar uma solução. 
+# 
+# Tais problemas guardam em si a particularidade de serem difíceis de obter um pouco de conhecimento a seu respeito.   
 # 
 # ----
 # 
-# *Ver complementar com LAPLACE "sobre a probablidade.*
+# *Complementar com LAPLACE Ensaio Filosóficos sobre as probabilidades. "sobre a probablidade. pg. 42*
 
-# A estatítica sugerida pelo biólogo Ronald Fisher, no início da década de 20, não contém em seu propósito a capacidade de resolver problemas de caráter tão amplo.  *(ver complementar com SHARON, capítulo3 em Fisher - A teoria que não morreria)*
+# A estrutura estatística sugerida pelo biólogo Ronald Fisher, no início da década de 20, não contém em seu propósito a capacidade de resolver problemas de caráter tão amplo.  *(ver complementar com SHARON, capítulo3 em Fisher - A teoria que não morreria)*
 # 
 # Tais técnicas propostas, e estudadas ainda hoje, podem ser vistas como `pequenos robôs` que precisam de uma entrada e produzem uma saída `agnóstica a seu propósito`. *Robôs* de modo geral são assim, são bons para realizar tarefas que supram a necessidade humana. 
+# 
+# A estrutura de testes estatísticos proposta por Fischer pode ser estruturada hoje em dia usando `flowcharts`. Abaixo temos um exemplo de como essa estrutura pode ser visualizada. 
 
-# O `ambiente` é, de modo geral, extremamente confuso para entede-lô completamente. Assim, naturalmente, nasce uma necessidade da construção de uma estrutura nos permitirá obter, ao menos, alguns pontos de sabedoria desse sistema.
+# <img src="./images/test_flowchart.png" alt="Golem of Prague" width=1000 />
 
 # ----
+
+# O `ambiente de estudo` é, de modo geral, extremamente confuso para conseguirmos completamente. Ao londo desse material iremos entender mais a fundo essa complexidade.
+# 
+# Assim, naturalmente, nasce uma necessidade da construção de uma estrutura que nos permitirá obter, ao menos, alguns pontos de sabedoria desse ambiente.
 
 # ## Falha da Falsificação 
 
 # Karl Popper, um dos mais conhecidos filósofos da ciência, entra para a história por propor uma definição do que pode ser `ciência` e, também, o que ela não é, através da falsificação ou não.
 # 
-# O critério de falsificação é a demarcação do que está acontecendo dentro e fora. Mas há muitas outras coisas sobre as evidências que exige que tenhamos mais de um modelo para verificar quais deles são consistentemente com que observamos. O que queremos é tentar falsificar o modelo explicativo e não qualquer outro modelo sem importância.
-# Agora no século XX, isso foi revertido, oque os cientistas tentam falsificar com seus testes estatísticos não são suas hipóteses de pesquisa, mas algumas hipóteses que eles não gostam e que nada está acontecendo ali. 
+# ```{note}
+# O critério de falsificação é a demarcação do que está acontecendo dentro e fora. Mas existem muitas outras coisas sobre o que foi `evidenciado` e, que por sua complexidade, exige que tenhamos `mais de um modelo` para verificar `quais deles são consistentes com que observamos`. 
+# ```
 # 
-# O que deveriamos realmente fazer é tentar fazer as previsões sobre o que está acontecendo e falsificar o restante.
+# O que queremos `é tentar falsificar um modelo explicativo` e não qualquer outro modelo sem importância!
+# 
+# Agora no século $XX$, isso foi revertido! Oque os cientistas tentam falsificar com seus testes estatísticos não são as suas hipóteses de pesquisa, mas algumas hipóteses que eles não gostam e que não está acontecendo nada.
+# 
+# *(Obs: Pensar num exemplo sobre essa parte acima.)* 
+# 
+# O que deveríamos realmente fazer são as previsões sobre o que está acontecendo ali e falsificar todo o restante.
+# 
+# *(Obs: Usar o mesmo exemplo sobre essa parte acima.)* 
+# 
 # 
 # ```{Note}
 # Assim, ciência não se trata de falsificar coisas, é necessário construir uma teoria substantiva em algum ponto.
@@ -112,12 +132,21 @@
 # Construa uma hipótese de pesquisa substantiva com previsões pontuais sobre o que deveria estar acontecendo e tente falsifica-lá.
 # ```
 # 
-# E não falsificar a ideia boba que não está acontecendo nada. `Porque sempre está acontecendo algo, essa é a Natureza`. Muitas as coisas estão correlacionadas em muitos lugares na Natureza!
+# E não falsificar a ideia boba em que não está acontecendo nada. 
 # 
-# A questão principal é:
+# 
+# Porque sempre está acontecendo algo, `essa é a Natureza`! 
+# 
+# 
+# Muitas coisas estão correlacionadas em muitos lugares na Natureza! Existe um emaranhado de coisas acontecendo, simultâneamente e interagindo entre si a todo momento. 
+# 
+# 
+# Falsificar a ideia de que `algo não está acontecendo algo ali` é como olhar para cima para tomar a decisão de atravessar uma rua, ao invés de olhar para ambos os lados.  
+# 
+# Mas a questão principal é:
 # 
 # ```{note} 
-# Como prever sua estrutura?
+# Como prever essa estrutura?
 # ```
 
 # - Modelos *nulos* não são únicos!
@@ -132,10 +161,10 @@
 # - Falseabilidade é sobre a demarcação e não sobre o método.
 # 
 # 
-# - Não exite um procedimento estatístico suficiente.
+# - Não existe um procedimento estatístico suficiente.
 # 
 # ```{note}
-# Ciência é uma tecnologia social!
+# A ciência é uma tecnologia social!
 # ```
 # 
 
@@ -143,11 +172,11 @@
 
 # # Engeharia de Golem
 
-# Para o desenvolvimento dos *golem's* bayesianos vamos precisar de um conjunto de princípios para que possamos construir nossos modelo estatístico. Não vamos entrar nesse curso achando que é apenas uma escolha de golem de dentro de uma caixa de ferramentas  com golems pré-fabricados.
+# Para o desenvolvimento dos *golem's* bayesianos vamos precisar de um conjunto de princípios para que possamos construir nossos modelo estatístico. Não vamos entrar nesse curso achando que é apenas uma escolha de golem de dentro de uma caixa de ferramentas com vários golems pré-fabricados, ou algum *flowchart de técnicas quaisquer*.
 # 
 # Iremos aprender a construir os nossos próprios golems e também aprenderemos os princípios para conseguirmos criticá-los e refiná-los.
 # 
-# Existem muitos modos de fazer essas escolhas dos principíos, sob os diversos direcionamentos da `filosofia que escolhermos trabalhar`!
+# Existem muitos modos de fazermos as escolhas desses principíos que estão sob os diversos direcionamentos da `filosofia que escolhermos trabalhar`!
 # 
 # 
 # Nós iremos seguir esses três principios:
@@ -159,21 +188,21 @@
 # - Comparação de modelos
 #     
 
-# ## Análise de Dados Bayesiano
+# ## Análise de Dados Bayesiana
 
-# - Contar todas as maneiras que os dado podem acontecer, de acordo com a suposição.
+# - Contar todas as maneiras que as coisas podem acontecer, de acordo com nossa suposição.
 # 
 # - As suposições que são mais consistentes com os dados, ou seja, as que ocorrem mais vezes, são mais plausíveis de acontecerem.
 # 
 # ```{note}
-# Faremos algumas suposições sobre como o mundo poderá ser e, também, como o processo casual acontece. Então iremos ver algumas observações que são consequências desse processo.
+# Logo faremos algumas suposições sobre como o mundo poderá ser e, também, como o processo casual acontece. Então iremos ver algumas observações que são consequências desse processo.
 # ```
 # 
-# Assim, podemos dizer que temos um conjunto de suposições alternativas, e cada uma dessas suposições são mais ou menos plauíveis de ocorrer de acordo com quantidade de vezes que ela já ocorreu anteriormente.
+# Assim, podemos dizer que temos um conjunto de suposições alternativas, e cada uma dessas suposições são mais ou menos plausíveis de ocorrer de acordo com quantidade de vezes que ela já ocorreu anteriormente.
 # 
-# **Isso é na verdade uma forma muito específica de contar as coisas.** Isso é o que o nossos `Golem's` irão fazer, `contar de forma  MUITO rápida`!
+# Isso é, na verdade, uma forma muito específica de **contar coisas.** Isso é o que o nossos `Golem's` irão fazer, contar coisas, mas de um modo `MUITO rápido`!
 # 
-# Nós precisamos apenas programá-los, para que ele conte do modo que nós quisermos.
+# Nós precisamos apenas programá-los, para que ele conte as coisas que nós quisermos.
 
 # ## Modelos Multiníveis
 # 
@@ -216,16 +245,17 @@
 
 # ---
 
-# # Erro de Colombo
+# # O Erro de Colombo
 
-# Colombo, enquanto navegava, enxergaria quais das direções que ele poderia seguir guiando-se apenas por seu mapa. O mapa não é o mundo real, é apenas uma representação, uma hipótese, do que ele pode ser. O mundo real é sempre muito maior e bem mais complexo.
+# Cristóvão de Colombo foi um navegador e explorador genovês, responsável por liderar a frotas Marítimas sob as ordens dos Reis Católicos de Espanha. 
 # 
+# Colombo, empreendeu a sua viagem através do Oceano Atlântico com o objetivo de atingir a Índia, tendo na realidade descoberto as ilhas das Caraíbas (*as Antilhas*) e, mais tarde, a costa do Golfo do México na América Central. 
 # 
-# Nós, enquanto estamos construindo um modelo, estamos nos guiando por um mapa lógico mental. Esse mapa também não é o mundo real, é apenas uma representação, uma hipótese, ou ainda uma sugestão particular, do que o mundo pode ser.
+# Em $12$ de Outubro de $1492$ Colombo alcança o continente americano. Esse episódio histórico é conhecido hoje como `o descobrimento da América`. $^1$
 # 
-# ```{note}
-# O mundo real é sempre bem maior e bem mais complexo do que se possa parecer! 
-# ```
+# Porém, enquanto navegava, sempre *enxergava quais as melhores direções* que ele poderia seguir guiando-se apenas por seu mapa.
+# 
+# Essa é uma réplica do mapa que Colombo utilizou nessa viagem histórica:
 
 # <img src="./images/Martin_Behaim_1492_Ocean_Map.png" alt="Colombo Globe" width=800>
 # 
@@ -235,7 +265,18 @@
 # 
 # [Behain Globe](https://pt.wikipedia.org/wiki/Erdapfel): *Globo que Colombo usou viajando em direção as Américas.*
 # 
-# ---
+# 
+# $^1$[Cristóvão de Colombo - Wikipedia](https://pt.wikipedia.org/wiki/Crist%C3%B3v%C3%A3o_Colombo)
+#  
+
+# O mapa não é o mundo real, é apenas uma representação, uma hipótese, do que ele pode ser. O mundo real é sempre muito maior e bem mais complexo.
+# 
+# 
+# Nós, enquanto estamos construindo um modelo, `estamos nos guiando por um mapa lógico mental`. Esse mapa também não é o mundo real, é apenas uma representação, uma hipótese, ou ainda uma sugestão particular, do que o mundo pode ser.
+# 
+# ```{note}
+# O mundo real é sempre bem maior e bem mais complexo do que se possa parecer! 
+# ```
 
 # #### Sensu L.J. Savage (1954)
 # 
@@ -259,8 +300,6 @@
 # ## Jardim das Bifurcações dos Dados
 
 # Para entender com funciona máquina bayesiana, vamos introduzir um exemplo simples:
-# 
-# *Obs: Ler o livro Borges, especificamente El jardim de sendeiros que se bifurcam*.
 # 
 # <img src="./images/blue_white_balls_exe.jpg" alt="blue and white balls" width=800/>
 # 
@@ -303,6 +342,8 @@
 # As nossas 3 retiradas:
 # 
 # $[A, B, A] <=> [1, 0, 1]$
+# 
+# Vamos calcular as coisas usando Python
 
 # In[1]:
 
@@ -322,14 +363,18 @@ plt.rcParams['axes.facecolor'] = 'lightgray'
 # In[3]:
 
 
-### Jardim da Bifurcações dos Dados
+#  Jardim da Bifurcações dos Dados
+# ===================================
 
 N = 4  # Quantidade de bolas na bolsa.
 
-amostra = [1, 0, 1]  # Nossas retiradas.
+amostra = [1, 0, 1]  # Nossas retiradas - [Azul, Branca, Azul].
 
 
-# A seguir será necessário conhecimento de contagem. No curso é feito uma abordagem gráfica muito interessante. Assista para entende-lá!
+# A seguir será necessário breve conhecimento de técnicas de contagem. Uma ótima referência pode ser encontrar aqui [Programa de Aperfeiçoamento para Professores de Matemática do Ensino Médio - Janeiro / 2004
+# Problemas de Contagem - Prof. Morgado](https://www.youtube.com/watch?v=N-aDkQ5zZps)
+# 
+# No curso é feito uma abordagem gráfica muito interessante. Assista para entende-lá!
 # 
 # Entenda a combinatória de um modo gráfico diretamente no curso, [clique aqui para assistir!](https://youtu.be/4WVelCswXo4?t=2562)
 # 
@@ -337,7 +382,8 @@ amostra = [1, 0, 1]  # Nossas retiradas.
 # In[4]:
 
 
-### Contando quantas vezes cada hipótese pode ter ocorrido, dado nossa amostra.
+#  Contando quantas vezes cada hipótese pode ter ocorrido, dado nossa amostra.
+# =============================================================================
 
 plausibilidade_da_hipotese = {}  # Inicializando um novo dicionário com as hipóteses propostas.
 
@@ -346,7 +392,7 @@ plausibilidade_da_hipotese = {}  # Inicializando um novo dicionário com as hip�
                                            # ========= #
                                            # A - B - A #
                                            # ========= #
-                    
+#                                            |   |   | 
 plausibilidade_da_hipotese['B B B B'] = 0  # 0 * 4 * 0  = Todas brancas, nenhuma configuração é possível.
 plausibilidade_da_hipotese['A B B B'] = 3  # 1 * 3 * 1  = 3 Maneiras distintas dessa configuração acontecer.
 plausibilidade_da_hipotese['A A B B'] = 8  # 2 * 2 * 2  = 8 Maneiras distintas dessa configuração acontecer.
@@ -373,8 +419,11 @@ plausibilidade_da_hipotese['A A A A'] = 0  # 4 * 0 * 4  = Todas azuis, nenhuma c
 # In[5]:
 
 
-# Quantidade de maneiras que podemos tirar uma bola Azul para cada hipótese(bolsa) proposta, 
-#  ou seja, em cada bolsa hipotética.
+#  Mais um novo sorteio de bolas na bolsa
+# ========================================
+
+#  Contar a quantidade de maneiras que podemos tirar uma bola Azul para cada hipótese proposta, 
+#  ou seja, para cada bolsa hipotética que pensamos.
 
 nova_plausibilidade_da_hipotese = {}  # Inicializando um novo dicionário com as novas hipóteses.
 
@@ -385,13 +434,15 @@ nova_plausibilidade_da_hipotese['A A A B'] = 3  # 3 Maneiras distintas dessa con
 nova_plausibilidade_da_hipotese['A A A A'] = 4  # 4 Maneiras distintas dessa configuração acontecer.
 
 
-# Assim teremos a contagem anterior (*à priori*) multiplicada pela nova retirada da bola Azul.
+# Assim teremos a contagem anterior (contagem *à priori*) multiplicada pela nova retirada da bola Azul.
 
 # In[6]:
 
 
-# Atualizando a contagem com a nova informação (nova bola Azul)
-# multiplicação é apenas uma forma de somar as possibilidades de cada hipótese.
+#  Atualizando a contagem com a nova informação (a nova bola Azul)
+# =================================================================
+
+# A multiplicação é apenas uma forma de somar as possibilidades de cada hipótese.
 
 plausibilidade = {}
 
@@ -405,7 +456,8 @@ plausibilidade['A A A A'] = plausibilidade_da_hipotese['A A A A'] * nova_plausib
 # In[7]:
 
 
-# Mostrando, para cada uma das hipóteses, o quão plausível é cada uma delas acontecer de acordo com a amostra. 
+#  O quão plausível é cada uma das bolsas hipotéticas, de acordo com a amostra observada. 
+# ========================================================================================
 
 print('Número de manerias diferentes de conseguirmos obter essa amostra, dado a hipótese atual. \n')
 
@@ -421,9 +473,9 @@ print('Plausibildade da hipótese [A A A A] = ', plausibilidade['A A A A'], 'man
 # ## Adicionando Prioris
 # 
 
-# Imagine que na fábrica que produz essas bolsas com as bolinhas dentro, um funcionário nos diga que:
+# Ainda nesse exemplo, imagine que na fábrica que produz essas bolsas com as bolinhas dentro, um funcionário nos diga que:
 # 
-# - Existem poucas bolinhas `Azuis` em cada bolsa, e cada bolsa tem uma chance bem grande de ter uma 1 bolinha Azul. Para nós conseguirmos transmitir essa **intuição** do funcionário sobre a quantidade de bolinhas que são mais prováveis em cada bolsa, podemos descrever os pesos mais viáveis. 
+# - Existem poucas bolinhas `Azuis` em cada bolsa, e cada bolsa tem uma chance bem grande de ter uma bolinha Azul. Para nós conseguirmos transmitir essa **intuição** do funcionário sobre a quantidade de bolinhas que são mais prováveis em cada bolsa, podemos descrever os pesos mais viáveis. 
 # 
 # Chamaremos essa nova informação de *à priori*. ou seja, é a informação de quantas bolas o funcionário acredita ter de cada cor na bolsa. Assim, para cada uma das nossas hipóteses, temos o quão plausível é ela acontecer.
 #     
@@ -442,7 +494,8 @@ print('Plausibildade da hipótese [A A A A] = ', plausibilidade['A A A A'], 'man
 # In[8]:
 
 
-# Inserindo a nossa informação a priori no nosso modelo.
+#  Inserindo a nossa informação a priori no nosso modelo.
+# =======================================================
 
 priori = {}   # Inicializando um novo dicionário com as prioris.
 
@@ -456,7 +509,8 @@ priori['A A A A'] = 0
 # In[9]:
 
 
-# Calculando a posteriori
+#  Calculando a posteriori
+# ==========================
 
 nova_plausibilidade = {}   # Inicializando um novo dicionário com as posterioris.
 
@@ -472,19 +526,23 @@ nova_plausibilidade['A A A A'] = priori['A A A A'] * plausibilidade['A A A A']
 # In[10]:
 
 
-# Mostrando, para cada uma das hipóteses, o quão plausível são as novas contagens. 
-
-print('Nova plausibildade da hipótese [A B B B] = ', nova_plausibilidade['A B B B'], 'maneiras possíveis, dado a hipótese.')
-print('Nova plausibildade da hipótese [A A B B] = ', nova_plausibilidade['A A B B'], 'maneiras possíveis, dado a hipótese.')
-print('Nova plausibildade da hipótese [A A A B] = ', nova_plausibilidade['A A A B'], 'maneiras possíveis, dado a hipótese.')
-print('Nova plausibildade da hipótese [A A A A] = ', nova_plausibilidade['A A A A'], 'maneiras possíveis, dado a hipótese.')
+#  Mostrando, para cada uma das hipóteses, o quão plausível são as novas contagens. 
+# =================================================================================
+print('='*85)
+print('\n\t\tQuais bolsas são as mais prováveis, dado a amostra!\n')
+print('-'*85)
+print('\nNova plausibildade da hipótese [A B B B] = ', nova_plausibilidade['A B B B'], 'maneiras possíveis, dado a hipótese. \n')
+print('Nova plausibildade da hipótese [A A B B] = ', nova_plausibilidade['A A B B'], 'maneiras possíveis, dado a hipótese. \n')
+print('Nova plausibildade da hipótese [A A A B] = ', nova_plausibilidade['A A A B'], 'maneiras possíveis, dado a hipótese. \n')
+print('Nova plausibildade da hipótese [A A A A] = ', nova_plausibilidade['A A A A'], 'maneiras possíveis, dado a hipótese. \n')
+print('='*85)
 
 
 #  # Conclusão
 
-# Temos uma intuição lógica muito boa de qual das possíveis bolsas (quais as hipóteses) que sugerimos poderia ser `a verdadeira bolsa`. Sabemos que as nossas bolsas hipotéticas contém apenas bolas azuis $[A A A A]$ ou apenas bolas brancas $[B B B B]$ tem *peso* de $0$, pois sabemos que tem pelo menos $1$ bola Azul e $1$ bola Branca na nossa amostragem.
+# Temos uma intuição lógica muito boa de qual das possíveis bolsas (ou sejas, quais as hipóteses) que sugerimos poderia ser `a verdadeira bolsa`. Sabemos que as nossas bolsas hipotéticas contém apenas bolas azuis $[A A A A]$ ou apenas bolas brancas $[B B B B]$ tem *peso* de $0$, pois sabemos que tem pelo menos $1$ bola Azul e $1$ bola Branca na nossa amostragem.
 # 
-# Já nossas outras bolsas hipotéticas, tem suas `plausibilidades` positivas (*maior que zero*). Então, podemos concluir que:
+# Já nossas outras bolsas hipotéticas, tem suas `plausibilidades` positivas (ou seja, *maior que zero*). Então, podemos concluir que:
 # 
 # ```{note}
 # As hipóteses mais plausíveis são as bolsas com maior número de maneiras de acontecer!
@@ -494,7 +552,7 @@ print('Nova plausibildade da hipótese [A A A A] = ', nova_plausibilidade['A A A
 
 # ----
 
-# O exemplo da *quantidade bolinhas azuis contidas na bolsa* apresenta `como é o funcionamento e a construção da lógica de todos os modelos bayesianos` que iremos construir.
+# O exemplo da *quantidade de bolinhas azuis contidas na bolsa* apresenta `como é o funcionamento e a construção da lógica de todos os modelos bayesianos` que iremos construir.
 # 
 # Em muitos casos, `iremos precisar contar infinitas hipóteses`. Para isso, iremos usar o computador juntamente com cálculo para conseguir fazer tais contagens.
 
@@ -504,26 +562,36 @@ print('Nova plausibildade da hipótese [A A A A] = ', nova_plausibilidade['A A A
 # 
 # E se fossem 1000 bolinhas? E `infinitas`? 
 # 
-# Essa última, apesar de se parecer absurda, será a que iremos utilizar com mais frequência. Então como surge um obstáculo:
+# Essa última, apesar de se parecer absurda, será a que iremos utilizar com mais frequência. 
+# 
+# Então surge um obstáculo:
 # 
 # 
 # ```{warning}
 # Como contar até infinita vezes?
 # ```
 
-# Voltando no exemplo das bolinhas, podemos calcular somas relativas, ou seja, qual a proporção de bolas azuis (por exemplo) que existem na amostra?
+# Voltando no exemplo das bolinhas...
+# 
+# Podemos calcular `somas relativas`, ou seja, qual a proporção de bolas azuis (por exemplo) que existem na amostra?
 
 # In[11]:
 
 
-# Quantidade total de maneiras possíveis de ocorrer uma das hipóteses
+#  Quantidade total de maneiras possíveis de ocorrer uma das hipóteses
+# ======================================================================
 
+# Somando todas as possíveis maneiras que uma das bolsas podem ocorrer.
 total = sum(nova_plausibilidade.values())
 
-print('A quantidade total: ', total)
+print('='*85)
+print('  A soma de todos os modos que cada uma das bolsa podem ser : ', total, ', dado a amostra!')
+print('='*85)
 
 
-# `Normalizando` a nossa contagem, vamos dividir cada hipótese pela soma `total`, assim teremos:
+# `Normalizando` a nossa contagem! 
+# 
+# Para fazermos isso vamos dividir cada uma das hipótese pela soma `total`, assim teremos:
 
 # In[12]:
 
@@ -542,21 +610,27 @@ plausibilidade_normalizada['A A A A'] = nova_plausibilidade['A A A A'] / total
 # In[13]:
 
 
-print('Nova plausibildade da hipótese [A B B B] = ', round( plausibilidade_normalizada['B B B B'], 2), 'maneiras possíveis, dado a hipótese.')
-print('Nova plausibildade da hipótese [A B B B] = ', round( plausibilidade_normalizada['A B B B'], 2), 'maneiras possíveis, dado a hipótese.')
-print('Nova plausibildade da hipótese [A A B B] = ', round( plausibilidade_normalizada['A A B B'], 2), 'maneiras possíveis, dado a hipótese.')
-print('Nova plausibildade da hipótese [A A A B] = ', round( plausibilidade_normalizada['A A A B'], 2), 'maneiras possíveis, dado a hipótese.')
-print('Nova plausibildade da hipótese [A A A A] = ', round( plausibilidade_normalizada['A A A A'], 2), 'maneiras possíveis, dado a hipótese.')
+print('='*90)
+print('\n\t  Qual a probabilidade de ser uma das bolsas, dado a amostra!\n')
+print('-'*89)
+print('\n Nova plausibildade da hipótese [A B B B] = ', round( plausibilidade_normalizada['B B B B'], 2),'%  maneiras possíveis, dado a hipótese.\n')
+print(' Nova plausibildade da hipótese [A B B B] = ', round( plausibilidade_normalizada['A B B B'], 2),'%  maneiras possíveis, dado a hipótese.\n')
+print(' Nova plausibildade da hipótese [A A B B] = ', round( plausibilidade_normalizada['A A B B'], 2),'%  maneiras possíveis, dado a hipótese.\n')
+print(' Nova plausibildade da hipótese [A A A B] = ', round( plausibilidade_normalizada['A A A B'], 2),'%  maneiras possíveis, dado a hipótese.\n')
+print(' Nova plausibildade da hipótese [A A A A] = ', round( plausibilidade_normalizada['A A A A'], 2),'%  maneiras possíveis, dado a hipótese.\n')
+print('='*90)
 
 
-# Agora todas as plausibilidades normalizadas estão entre $0$ e $1$, e soma de todos os elementos será, sempre, $1$.
+# Agora todas as plausibilidades normalizadas (as probabilidades) estão entre $0$ e $1$, e soma de todos os elementos será, sempre, $1$.
 
 # ----
 
-# Assim teremos nossa **probablidade**, isso é, é o **peso** da evidência para cada hipótese sugerida. Essa é a inferência bayesiana! `Lindo!!!`
+# Assim teremos nossa **probablidade**, isso é, é o **peso** da evidência para cada hipótese sugerida. 
+# 
+# Essa é a inferência bayesiana! `Lindo!!!`
 # 
 
-# A **teoria das probablidade** é o único conjunto de ferramentas que nos permitam trabalhar com números normalizados entre $0$ e $1$.
+# A **teoria das probablidade** é o único conjunto de ferramentas que nos permite trabalhar com números normalizados entre $0$ e $1$.
 
 # *Plausibilidade normalizada é a probabilidade*: Ou seja, é um conjunto de números `não-negativos` que somam $1$. 
 # 

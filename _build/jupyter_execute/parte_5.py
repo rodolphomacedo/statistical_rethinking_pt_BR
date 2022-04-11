@@ -709,7 +709,7 @@ D_stdr = (df.Divorce - df.Divorce.mean())/df.Divorce.std()
 A_stdr = (df.MedianAgeMarriage - df.MedianAgeMarriage.mean())/df.MedianAgeMarriage.std()
 
 
-# In[19]:
+# In[14]:
 
 
 # ===========================================================
@@ -726,7 +726,7 @@ qtd_amostras = 50  # Quantidade de amostras da priori preditiva
 𝜎 = np.random.exponential(1, qtd_amostras)  # Priori 𝜎 ~ Exp(1)
 
 
-# In[20]:
+# In[15]:
 
 
 # ========================================
@@ -797,7 +797,7 @@ plt.show()
 # 
 # O uso da distribuição $Exponential$ como priori para $\sigma$ tem vantagens tais como, sempre tem valores positivos, para valores maiores a sua probabilidade decresce e para defini-lá precisamos indicar qual será seu valor médio.
 
-# In[161]:
+# In[16]:
 
 
 # =====================================
@@ -845,7 +845,7 @@ beta_A = fit_divorce['beta_A'].flatten()
 sigma = fit_divorce['sigma'].flatten()
 
 
-# In[162]:
+# In[17]:
 
 
 def resume_posteriori(var, confidence_HPDI=0.93, rounded=2):
@@ -864,7 +864,7 @@ def resume_posteriori(var, confidence_HPDI=0.93, rounded=2):
     return np.round(np.array([posteriori]), rounded)[0]
 
 
-# In[323]:
+# In[18]:
 
 
 def describe_posteriori(vars_post, confidence_HPDI=0.93, plot=True):
@@ -911,7 +911,7 @@ def describe_posteriori(vars_post, confidence_HPDI=0.93, plot=True):
     return post
 
 
-# In[300]:
+# In[19]:
 
 
 # =====================================
@@ -934,7 +934,7 @@ describe_posteriori(vars_post, 0.945, plot=False)
 # Mas agora nós já sabemos que não temos um `impacto diretamente causal` entre *taxa de casamentos* e a *taxa de divórcios*. Isso estava mascarado pois *idade mediana* é uma causa comum entre as duas outras variáveis. 
 # 
 
-# In[324]:
+# In[20]:
 
 
 vars_all = ['beta_1', 'beta_M', 'beta_2', 'beta_A'] 
@@ -962,7 +962,7 @@ describe_posteriori(vars_all, 0.945, plot=True)
 # 
 # Assim, nosso *DAG* provavelmente seria dessa forma:
 
-# In[328]:
+# In[21]:
 
 
 # =======================================
