@@ -3,4 +3,4 @@ data/rethinking-master/
 ./build/
 ./__pycache__/
 .ipynb_checkpoints/
-_build
+_build/
