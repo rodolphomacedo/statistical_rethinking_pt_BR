@@ -85,7 +85,7 @@
 # 
 # ----
 # 
-# *Complementar com LAPLACE Ensaio Filosóficos sobre as probabilidades. "sobre a probablidade. pg. 42*
+# *Complementar com LAPLACE Ensaio Filosóficos sobre as probabilidades. "sobre a probabilidade. pg. 42*
 
 # A estrutura estatística sugerida pelo biólogo Ronald Fisher, no início da década de 20, não contém em seu propósito a capacidade de resolver problemas de caráter tão amplo.  *(ver complementar com SHARON, capítulo3 em Fisher - A teoria que não morreria)*
 # 
@@ -625,12 +625,12 @@ print('='*90)
 
 # ----
 
-# Assim teremos nossa **probablidade**, isso é, é o **peso** da evidência para cada hipótese sugerida. 
+# Assim teremos nossa **probabilidade**, isso é, é o **peso** da evidência para cada hipótese sugerida. 
 # 
 # Essa é a inferência bayesiana! `Lindo!!!`
 # 
 
-# A **teoria das probablidade** é o único conjunto de ferramentas que nos permite trabalhar com números normalizados entre $0$ e $1$.
+# A **teoria das probabilidade** é o único conjunto de ferramentas que nos permite trabalhar com números normalizados entre $0$ e $1$.
 
 # *Plausibilidade normalizada é a probabilidade*: Ou seja, é um conjunto de números `não-negativos` que somam $1$. 
 # 
