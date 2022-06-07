@@ -1,6 +1,7 @@
 data/rethinking-master/
 *.pdf
 ./build/
+build/
 ./__pycache__/
 .ipynb_checkpoints/
 ./_build/
