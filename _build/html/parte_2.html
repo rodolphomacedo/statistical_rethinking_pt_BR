@@ -370,10 +370,11 @@
   <div class="tex2jax_ignore mathjax_ignore section" id="engenharia-de-golems">
 <h1>2 - Engenharia de Golems<a class="headerlink" href="#engenharia-de-golems" title="Permalink to this headline">¶</a></h1>
 <p><a class="reference external" href="https://www.youtube.com/watch?v=XoVtOAN0htU">Aula - Statistical Rethinking Winter 2019 Lecture 02</a></p>
-<p>Esse capítulo terá dois objetivos principais:</p>
+<p>Esse capítulo terá
+dois objetivos principais:</p>
 <ol class="simple">
 <li><p>Construir a intuição de como a atualização funciona, ou seja, como os Golems <code class="docutils literal notranslate"><span class="pre">aprendem</span> <span class="pre">com</span> <span class="pre">a</span> <span class="pre">experiência.</span></code></p></li>
-<li><p>Dar uma intuição sobre <code class="docutils literal notranslate"><span class="pre">como</span> <span class="pre">construir</span> <span class="pre">esses</span> <span class="pre">modelos.</span></code></p></li>
+<li><p>Apresentar uma intuição sobre <code class="docutils literal notranslate"><span class="pre">como</span> <span class="pre">construir</span> <span class="pre">esses</span> <span class="pre">modelos.</span></code></p></li>
 </ol>
 <p>Como iremos usar a probabilidade para fazer um típico modelo estatístico?</p>
 <ol class="simple">
@@ -382,7 +383,7 @@
 <li><p><strong>Avaliar como está o modelo</strong>: Temos que ser críticos com o nosso modelo, por causa da distinção entre o pequeno <code class="docutils literal notranslate"><span class="pre">mundo</span> <span class="pre">de</span> <span class="pre">Colombo</span></code> e o <code class="docutils literal notranslate"><span class="pre">Mundo</span> <span class="pre">Real</span></code>.</p></li>
 </ol>
 <p><strong>Exemplo</strong>: Como é feito o processo da criação dos dados?</p>
-<p>No curso, o Richard lançou um Globo Terrestre para os alunos. Cada aluno segurou o globo deveria observar, em sua mão direita, seu <code class="docutils literal notranslate"><span class="pre">dedo</span> <span class="pre">indicador</span></code> estava sobre algum dos oceanos (representado como <span class="math notranslate nohighlight">\(W\)</span>, <em>water</em>) ou sobre a terra (<span class="math notranslate nohighlight">\(L\)</span>, <em>land</em>), e registrar esses dados.</p>
+<p>No curso, o prof. Richard lançou um Globo Terrestre para os alunos. Cada aluno que segurou o globo deveria observar, em sua mão direita, se seu <code class="docutils literal notranslate"><span class="pre">dedo</span> <span class="pre">indicador</span></code> estava sobre algum dos oceanos (representado como <span class="math notranslate nohighlight">\(W\)</span>, <em>water</em>) ou sobre a terra (<span class="math notranslate nohighlight">\(L\)</span>, <em>land</em>), e registrar esses dados.</p>
 <p>Esse é o processo de como os dados estão nascendo!</p>
 <p>Suponha que a partir dos lançamentos, nós obtemos a sequência:</p>
 <div class="math notranslate nohighlight">
@@ -416,15 +417,16 @@
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Design do Modelo</span>
 
-<span class="n">amostras</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;W&#39;</span><span class="p">,</span> <span class="s1">&#39;L&#39;</span><span class="p">,</span> <span class="s1">&#39;W&#39;</span><span class="p">,</span> <span class="s1">&#39;W&#39;</span><span class="p">,</span> <span class="s1">&#39;W&#39;</span><span class="p">,</span> <span class="s1">&#39;L&#39;</span><span class="p">,</span> <span class="s1">&#39;W&#39;</span><span class="p">,</span> <span class="s1">&#39;L&#39;</span><span class="p">]</span> <span class="c1"># Amostra que obtemos a partir do lançamentos do globo.</span>
+<span class="n">amostras</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;W&#39;</span><span class="p">,</span> <span class="s1">&#39;L&#39;</span><span class="p">,</span> <span class="s1">&#39;W&#39;</span><span class="p">,</span> <span class="s1">&#39;W&#39;</span><span class="p">,</span> <span class="s1">&#39;W&#39;</span><span class="p">,</span> <span class="s1">&#39;L&#39;</span><span class="p">,</span> <span class="s1">&#39;W&#39;</span><span class="p">,</span> <span class="s1">&#39;L&#39;</span><span class="p">]</span> <span class="c1"># Amostra a partir dos lançamentos do globo.</span>
 
 <span class="n">amostras</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span> <span class="k">if</span> <span class="n">amostra</span> <span class="o">==</span> <span class="s1">&#39;W&#39;</span> <span class="k">else</span> <span class="mi">0</span> <span class="k">for</span> <span class="n">amostra</span> <span class="ow">in</span> <span class="n">amostras</span><span class="p">]</span>  <span class="c1"># Transformando os dados em números. [1 = W; 0 = L]</span>
 </pre></div>
 </div>
 </div>
 </div>
-<p>Quando o globo foi lançado, a probabilidade do dedo indicador “cair na água”, em qualquer um dos lançamentos, deveria ser proporcional a proporção de água que tem na superfície do planeta. Isso é como jogar uma moeda para sortear cara ou coroa. <code class="docutils literal notranslate"><span class="pre">O</span> <span class="pre">ambiente</span> <span class="pre">é</span> <span class="pre">determinístico,</span> <span class="pre">porém</span> <span class="pre">caótico</span> <span class="pre">para</span> <span class="pre">nós</span></code>. Assim, pequenas diferenças nas condições iniciais, geram resultados essencialmente aleatórios.</p>
-<p>Para nós, na escala do ambiente em que vivemos, o ambiente é determinístico, mas é um sistema caótico, portanto, aleatório, pois somos seres que não conseguimos compreender o sistema e por isso somos ignorantes a seu respeito. Tal como o lançamento de moedas, para nós, é um bom sistema de aleatorização, pois não podemos medir a velocidade inicial e também a posição do giro bem o suficiente para prever como vai cair, <code class="docutils literal notranslate"><span class="pre">essa</span> <span class="pre">é</span> <span class="pre">a</span> <span class="pre">única</span> <span class="pre">razão</span></code>!</p>
+<p>Quando o globo foi lançado, a probabilidade do dedo indicador “cair na água”, em qualquer um dos lançamentos, deveria ser proporcional a proporção de água que tem na superfície do planeta. Isso é como jogar uma moeda para sortear cara ou coroa. Mas uma moeda com muitos lados. <code class="docutils literal notranslate"><span class="pre">O</span> <span class="pre">ambiente</span> <span class="pre">é</span> <span class="pre">determinístico,</span> <span class="pre">porém</span> <span class="pre">caótico</span> <span class="pre">para</span> <span class="pre">nós</span></code>. Assim, pequenas diferenças nas condições iniciais, geram resultados essencialmente aleatórios.</p>
+<p>Para nós, na escala em que vivemos, o ambiente é determinístico. Mas é um sistema caótico e, portanto, aleatório. Pois não temos a capacidade de compreender o sistema todo e, por isso, somos ignorantes a seu respeito.</p>
+<p>O simples lançamento de moedas, para nós, é considerado um bom sistema de aleatorização. Não podemos medir a velocidade inicial e também a posição do giro bem o suficiente para prever como cairá a moeda, <code class="docutils literal notranslate"><span class="pre">essa</span> <span class="pre">é</span> <span class="pre">a</span> <span class="pre">única</span> <span class="pre">razão</span></code>!</p>
 <p>Então dizemos que há um número aleatório que gerado, mas que a proporção dele deve ter uma probabilidade <span class="math notranslate nohighlight">\(p\)</span> da superfície da Terra ser coberta por água.</p>
 <p>Onde <span class="math notranslate nohighlight">\(p\)</span> é a proporção de água que cobre a superfície da Terra. Por isso <code class="docutils literal notranslate"><span class="pre">não</span> <span class="pre">importa</span> <span class="pre">a</span> <span class="pre">ordem</span> <span class="pre">dos</span> <span class="pre">lançamentos</span></code>, já que a probabilidade se mantém a mesma durante todo o processo de amostragem.</p>
 <p>Essa é uma suposição, precisamos demonstrar e sermos críticos com relação a isso. Em capítulos futuros iremos aprender como fazer um cálculo para inspecionar essa suposição.</p>

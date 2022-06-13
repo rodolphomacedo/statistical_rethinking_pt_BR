@@ -141,7 +141,7 @@
 # 
 # - Critério de Backdoor.
 
-# Já sabemos que o Waffle House não causa os divórcios. Mas o que causa os divórcios?
+# Já sabemos que o Waffle House não causam os divórcios. Mas o que causa os divórcios?
 # 
 # Já vimos no mapa acima que divórcios do sul do país tem uma taxa bem mais alta do que no restante mais ao norte. Existem muitos esforços para tentar identificar as causas e as taxas de divórcios. Sabemos que no sul tem uma predominância religiosa quando comparada ao restante do país. Isso deixa os cientistas com certas desconfianças.
 
@@ -477,6 +477,7 @@ plt.show()
 # As setas do *DAG* apontam apenas em uma `direção` e essa direções indica uma `relação de causalidade` entre as variáveis analisadas, ou seja, indica que uma variável tem `influência direta` sobre a outra.
 # 
 # A ausência de *ciclos* significa que não existem *loops* na causalidade. Mas esses loops podem acontecer sobre o tempo, o que tornaria a análise também uma `série temporal`!
+
 # 
 # A representação desses problemas reais em estruturas como *DAG's* podem ser, realmente, muito grandes. Pois, assim, podemos descrever a estrutura no tempo $T$, $\{T_1, T_2, ...\}$, e assim por diante.
 # 
@@ -577,7 +578,7 @@ plt.xticks([])
 plt.show()
 
 
-# Regressões Lineares, em princípio, podem nos dizer a diferença entre essas duas coisas. Mas uma regressão bivariada já não pode mais. Elas podem nos dar apenas algum conhecimento da associação entre *casamentos* e *divórcios*, mas não podem nos dizer qual a diferença entre esses dois *DAG's* acima. 
+# Regressões Lineares, em princípio, podem nos dizer a diferença entre essas duas coisas. Mas uma regressão bivariada já não pode mais. Elas podem nos dar apenas algum conhecimento da associação entre *casamentos* e *divórcios*, mas `não podem nos dizer qual a diferença entre esses dois *DAG's*` acima. 
 # 
 # Mas, porque não? 
 # 
@@ -825,7 +826,10 @@ stan_model_divorce = """
         beta_A ~ normal(0, 0.5);
         sigma ~ exponential(1);
         
-        divorce_rate ~ normal(alpha + beta_M * marriage_rate + beta_A * median_age, sigma);
+        divorce_rate ~ normal(alpha + 
+                              beta_M * marriage_rate + 
+                              beta_A * median_age, 
+                              sigma);
     }
 """
 
@@ -924,7 +928,7 @@ describe_posteriori(vars_post, 0.945, plot=False)
 
 # As informações da tabela acima contém um resumo das posterioris estimadas. Como esperado $\alpha$ tem a média $0$. Pois tinha que ser assim conforme a construção do nosso modelo.
 # 
-# Já a estimativa para do $\beta_M$, `taxa de casamento`, é levemente negativa e o desvio padrão está entre $2$ a $3$ vezes a sua média. Podemos olhar para o intervalo de HPDI de $89\%$ no qual essa valores estão entre $-0.3$ e $0.2$. 
+# Já a estimativa para do $\beta_M$, `taxa de casamento`, é levemente negativa e o desvio padrão está entre $2$ a $3$ vezes a sua média. Podemos olhar para o intervalo de HPDI de $89\%$ no qual essa valores estão entre $-0.36$ e $0.26$. 
 # 
 # Talvez exista algum efeito, ou talvez não tenha nenhum efeito dependendo da direção. Nós apenas não sabemos muito bem o que pensar sobre essa variável, pois ela não apresenta uma relação consistente, não existe uma associação consistente na regressão multipla entre a *taxa de casamentos* e a *taxa de divórcios*.
 # 
@@ -937,16 +941,16 @@ describe_posteriori(vars_post, 0.945, plot=False)
 # In[20]:
 
 
-vars_all = ['beta_1', 'beta_M', 'beta_2', 'beta_A'] 
-
 #  Legendas
-# ------------
+# ===========
+
 # beta_2 == D ~ A   
 # beta_A ==> D ~ A + M 
 
 # beta_M ==> D ~ A + M  
 # beta_1 ==> D ~ M  
 
+vars_all = ['beta_1', 'beta_M', 'beta_2', 'beta_A'] 
 describe_posteriori(vars_all, 0.945, plot=True)
 
 
@@ -1029,7 +1033,7 @@ plt.show()
 # 
 # - Se nós não conhecermos a *mediana das idades dos casamentos* ($A$) em algum estado, ainda é útil conhecer a *taxa de casamentos* ($M$).
 # 
-# Saber sobre a *taxa de casamentos* é útil e importante pois isso pode nos dá informações adicionais. Essa informação vem de outra relação causal e não da uma informação causal direta entre as variáveis.
+# Saber sobre a *taxa de casamentos* ($M$) é útil e importante pois isso pode nos dá informações adicionais. Essa informação vem de outra relação causal e não nos dá uma informação causal direta entre as variáveis.
 
 # ```{note}
 # Esse é nosso negócio aqui. A inferência! Descobrir a diferença entre essas coisas.
@@ -1039,7 +1043,7 @@ plt.show()
 # 
 # Simplesmente por que não é assim que as coisas funcionam. `A maquinaria de causalidade natural dos divórcios não apresenta essa ligação` entre da *taxa de casamentos* para a *taxa de divórcios*.
 # 
-# Assim, para efeito de políticas públicas, é necessário focar nas alterações na *mediana da idade dos casamentos* para verificar os efeitos na *taxa de divórcios*.
+# Assim, para efeito de políticas públicas, é necessário focar nas alterações na *mediana da idade dos casamentos* ($M$) para verificar os efeitos na *taxa de divórcios* ($D$).
 # 
 # Assim precisamos ser claros se queremos **apenas** prever as coisas. Se quisermos também inteferir as relações causais, devemos fazer a previsão das relações causais para que possamos fazer as intervenções. `Uma intervenção requer um verdadeiro entendimento da causalidade do sistema`. 
 # 
@@ -1049,6 +1053,488 @@ plt.show()
 # 
 # Isso é o grande terror da ciência, podemos fazer previsões realmente boas sem entendermos nada! Lembra dos modelos *geocêntricos*. `Modelo estatísticos corretos não são suficientes para descobrir relações causais`, então precisamos de algo extra!
 
-# ## Regressão Múltipla
+# ## Predição da Posteriori
 # 
-# Parei em regressão múltipla 31:10
+# Como visualizamos os modelos como este acima? Existem muitas diferentes formas de mostrar isso. Vamos ver algumas  formas e exemplos rapidamente. Porém a maneira mais útil de visualizar um particular modelo depende do modelo em particular e do objeto de estudo que estamos tentando observar. Não existe uma forma genérica para visualizar qualquer tipo de gráfico.
+# 
+# Vamos apresentar alguns exemplos:
+# 
+# 1. **Plot dos resíduos dos preditores**: Muito útil para entender como a regressão funciona, assim iremos fazer isso apenas uma vez nesse curso. Esse tipo de visualização é muito bom para entender o funcionamento da regressão mas não é tão bom para comunicar os resultados.
+# 
+# 
+# 
+# 2. **Plot contrafactuais**: Chama-se contrafactuais pois nós imaginamos como manipular qualquer uma das variáveis sem alterar quaisquer outras variárveis. Com isso faremos as previsões para saber como o modelo se comporta com essas manipulações.
+# 
+# 
+# 
+# 3. **Plot da Predição da Posteriori**: É basicamente o mesmo que já fizemos antes, porém veremos alguns pontos diferentes mais adiante.
+
+# ### Plot dos Resíduos dos Preditores
+# 
+# - **Objetivo:** Mostrar a associação de cada um dos preditores com o resultado, "controlado" por outras preditores.
+# 
+# A associação de uma variável com o resultado parece ter o controle em outras variáveis preditoras, então dentro da maquinaria do modelo. Queremos com isso entender como o modelo *enxerga* essas coisas internamente. Isso é o que queremos fazer, calcular esses estados intermediários mesmo que eles não sejam visíveis no modelo, para termos uma boa intuição do que está acontecendo internamente no modelo.
+# 
+# 
+# - Nos dá uma intuição muito boa.
+# 
+# Útil para termos uma intuição do modelo e como está o seu funcionamento interno.
+# 
+# 
+# - Nunca analise os resíduos.
+# 
+# Não existem motivos lógicos para fazer uma regressão da variável resposta, ($D \sim residuos$, por exemplo), isso nos dá uma resposta errada. Pois nos dará estimativas erradas e tendênciosas.
+# 
+# 
+# **Receita**:
+# 
+# 1. **Faça uma regressão de uma variável com as outras variáveis.**
+# 
+#     - No nosso exemplo, teremos a *idade mediana dos casamentos*, ($M$) explicando a *taxa de casamento*, ($A$), ambas padronizadas. 
+# 
+# 
+# 
+# 2. **Calcule os resíduos dos preditores.**
+# 
+#     - Assim podemos encontrar a *variância extra* que sobrou depois dessa associação, esses são os resíduos.
+# 
+# 
+# 
+# 
+# 3. **Faça uma regressão da variáveis resposta com os resíduos encontrados no passo anterior.**
+
+# In[22]:
+
+
+# ==========================================
+#   Relembrando: Padronizando as variáveis 
+# ==========================================
+# M_stdr = (df.Marriage - df.Marriage.mean())/df.Marriage.std() 
+# D_stdr = (df.Divorce - df.Divorce.mean())/df.Divorce.std()
+# A_stdr = (df.MedianAgeMarriage - df.MedianAgeMarriage.mean())/df.MedianAgeMarriage.std()
+
+
+# Para evitar a reescrever muito código, irei ao longo do texto criando alguns funções para facilitar a leitura.
+# 
+# Segue abaixo a primeira função, ela irá plotar uma priori para um modelo linear normalmente distribuído.
+
+# In[23]:
+
+
+# ===================
+#  Plotando a priori
+# ===================
+
+def plot_priori_lm_normal(N, alpha, beta):
+    """
+    Plot à priori to linear model using normal distribution.
+    
+    Modelo:
+    =======
+    y ~ normal(mu_i, sigma)
+    mi = alpha + beta * x
+    
+    Prioris:
+    ========
+    alpha ~ normal(alpha[alpha_mean], alpha[alpha_std], N)
+    beta ~ normal(beta[beta_mean], beta[beta_std], N)
+    sigma ~ exponential(1)
+    
+    Params:
+    =======
+    N: int
+    alpha: [alpha_mean, alpha_std]
+    beta: [beta_mean, beta_std]
+    """
+    # Prioris
+    alpha = np.random.normal(alpha[0], alpha[1], N)
+    beta = np.random.normal(beta[0], beta[1], N)   
+
+    # Os dados originais estão padronizados
+    x = np.linspace(-3, 3, 100)
+
+    # Modelo linear para as prioris
+    y = [alpha + beta * x_i for x_i in x]
+
+    # Plotando a priori
+    plt.figure(figsize=(17,9))
+
+    plt.plot(x, y, color='darkblue', linewidth=0.1)
+
+    plt.title('Plot das Prioris normalizadas')
+    plt.xlabel('(x) - Eixo X')
+    plt.ylabel('(y) - Eixo y')
+
+    plt.xlim((-3, 3))
+    plt.ylim((-3, 3))
+
+    plt.grid(ls='--', color='white', alpha=0.4)
+
+    plt.show()
+
+
+# Abaixo, a função irá encapsular todo o código de uma regressão linear bayesiana univariada.
+
+# In[24]:
+
+
+# ================================
+#  Regressão Linear - Univariada 
+# ================================
+
+def plot_lm_posteriori(var_y, var_x, alpha, beta, N=200, plot_residuos=True, 
+                       title_xaxis=False, title_yaxis=False):
+    # Modelo linear para as prioris
+    # Os dados originais estão padronizados
+
+    # Os dados originais estão padronizados
+    x = np.linspace(-3, 3, 100)
+    
+    # Cáculo dos y e y_mean dado x
+    y = [alpha + beta * x_i for x_i in x]
+    y_mean = alpha.mean() + beta.mean() * x
+
+    # Plotando a priori
+    plt.figure(figsize=(17,9))
+
+    plt.plot(x, y, color='darkblue', linewidth=0.1, alpha=0.5)
+    plt.plot(x, y_mean, color='black', linewidth=2)
+    plt.plot(var_y, var_x, 'o', color='red', markersize=5)
+
+    if plot_residuos:
+        plt.plot([var_y, var_y], 
+                 [var_x, alpha.mean() + beta.mean() * var_y],
+                 '-', markersize=3, color='darkred', alpha=0.3)
+
+    plt.title('Posteriori Plot dos Resíduos dos Preditores')
+    plt.xlabel(title_xaxis if title_xaxis else '(x) - Eixo x')
+    plt.ylabel(title_yaxis if title_yaxis else '(y) - Eixo y')
+
+    plt.xlim((-3, 3))
+    plt.ylim((-3, 3))
+
+    plt.grid(ls='--', color='white', alpha=0.4)
+
+    plt.show()
+
+    
+
+def lm(var_y, var_x, alpha, beta, exp=1, num_chains=4, filter_n=500, num_samples=5000, plot=True, 
+       plot_residuos=True, title_xaxis=False, title_yaxis=False):
+    
+    if not (len(var_x) == len(var_y)):  # TODO: Use except to raise an error.
+        print('Erro: As dimensões das variáveis não são iguais.')
+        return False
+    
+    stan_model = """ 
+        data {
+            int<lower=0> N;
+            vector[N] variavel_resposta;
+            vector[N] variavel_explicativa;
+            real alpha_mean;
+            real alpha_std;
+            real beta_mean;
+            real beta_std;
+            real exp;
+        }
+
+        parameters {
+            real alpha;
+            real beta;
+            real<lower=0> sigma;
+        }
+
+        model {
+            alpha ~ normal(alpha_mean, alpha_std);
+            beta ~ normal(beta_mean, beta_std);
+            sigma ~ exponential({exp});
+
+            variavel_resposta ~ normal(alpha +  beta  * variavel_explicativa, sigma);
+        }
+    """
+
+    data = {
+        'N': len(var_y),
+        'variavel_resposta': var_y,
+        'variavel_explicativa': var_x,
+        'alpha_mean': alpha[0],
+        'alpha_std': alpha[1],
+        'beta_mean': beta[0],
+        'beta_std': beta[1],
+        'exp': exp,
+    }
+    
+    posteriori = stan.build(stan_model, data=data)
+    fit = posteriori.sample(num_chains=num_chains, num_samples=num_samples)
+
+    alpha_ = fit['alpha'].flatten()
+    beta_ = fit['beta'].flatten()
+    
+    # Filtra a quantidade de dados para o plot
+    if filter_n > 0:
+        alpha_ = alpha_[len(alpha_) - filter_n: ]
+        beta_ = beta_[len(beta_) - filter_n: ]
+    
+    if plot:
+        plot_lm_posteriori(var_y, var_x, alpha_, beta_, plot_residuos=plot_residuos, 
+                           title_xaxis=title_xaxis, title_yaxis=title_yaxis)
+    
+    residuos = var_y - (alpha_.mean() + beta_.mean() * var_x)
+    
+    return alpha_, beta_, residuos
+
+
+# In[25]:
+
+
+# ====================================
+#  Plotando a priori para verificar 
+# ====================================
+# Prioris
+alpha_divorce = [0, 0.3]
+beta_divorce = [0, 0.4]
+N = 200
+
+# Plot da Priori - Modelo linear
+plot_priori_lm_normal(N, alpha_divorce, beta_divorce)
+
+
+# In[26]:
+
+
+# ==================
+#  Posteriori M ~ A
+# ==================
+
+posteriori_MA = lm(M_stdr.values, A_stdr.values, alpha_divorce, beta_divorce,
+                   title_xaxis= "Taxa de casamentos (M)",
+                   title_yaxis= "Mediana das Idades (A)")
+
+
+# In[27]:
+
+
+# =============================
+#  Posteriori D ~ residuos_MA
+# =============================
+residuos_MA = posteriori_MA[2]
+
+posteriori_MA = lm(D_stdr.values, residuos_MA, alpha_divorce, beta_divorce, plot_residuos=False,
+                   title_xaxis="Taxa de Divórcio (D)", 
+                   title_yaxis="Resíduos da Taxa de Casamentos (A-residual)")
+
+
+# In[28]:
+
+
+# ===================
+#  Posteriori A ~ M
+# ===================
+
+posteriori_AM = lm(A_stdr.values, M_stdr.values, alpha_divorce, beta_divorce, 
+                   title_xaxis= "Mediana das Idades (A)",
+                   title_yaxis= "Taxa de casamentos (M)")
+
+
+# In[29]:
+
+
+# =============================
+#  Posteriori D ~ residuos_AM
+# =============================
+residuos_AM = posteriori_AM[2]  # Resíduos
+
+# posteriori_AM = lm(D_stdr.values, residuos_AM, alpha_divorce, beta_divorce, plot_residuos=False)
+posteriori_AM = lm(D_stdr.values, residuos_AM, alpha_divorce, beta_divorce, plot_residuos=False,
+                   title_xaxis="Taxa de Divórcio (D)", 
+                   title_yaxis="Resíduos da Idade da Mediana dos Casamentos (M-residual)")
+
+
+# Podemos observar que nos gráficos acima (o ($2^o$) gráfico `Posteriori D ~ residuos_MA` e o ($4^o$) gráfico `Posteriori D ~ residuos_AM`) que a regressão dos seus respectivos resíduos explicando a taxa de divórcio.
+# 
+# Existe uma forte correlação negativa no gráfico `Posteriori D ~ residuos_AM`, o que já ocorre no gráfico `Posteriori D ~ residuos_MA`. Isso ocorre por que assim existe um valor considerável
+# da `taxa de casamentos (M)` que explica  
+# 
+# 
+# ------
+# 
+# (**TODO:** *Comparar com a [aula](https://youtu.be/e0tO64mtYMU?t=2281), 38:01* - Parece que estão invertidos.)
+# 
+# 
+
+# ## 'Controles' estatísticos
+# 
+
+# Quando pensamos em controles estatíticos, já nos vem a mente os *Designs de Experimentos*, no qual configuramos quais as variáveis são possívelmente *causas* nos estudos observados. Não fazemos isso, não há nada ético que indique que *taxa de casamento* ($M$) é causa de algo. Isso não é ético com as outras pessoas nem conosco fazer essas coisas. 
+# 
+# Então, nós estávemos presos a estudos observacionais para uma quantidade muito grande de problemas importantes e o que nós queremos fazer é `inferencias causais` no entanto, e as regressões múltiplas nos oferecem uma forma para fazer isso, apenas quando combinamos com uma ideia clara sobre quais são as relações causais entre os modelos.
+# 
+# `Controle estatístico` significa condicionar apenas as informações em uma variável e verificar se existe alguma informação valiosa!
+# 
+# Mas, para `interpretar o efeito` o efeito que acontece apartir desses controles é necessário um framework, ou seja, uma estrutura adequada tal como os *DAGs* ou qualquer outra coisa. Iremos ver exemplos que ao controlar algo estamos na verdade criando um `confound` (*uma confusão*). Podemos criar confound tanto quanto removê-los, nesse caso iremos remover achando que iremos ter uma resposta certa, mais tarde. 
+
+# - **Regressão linear múltipla responde a questão**: O quão cada preditor está associado com o resultado, uma vez que conhecemos TODOS os outros preditores?
+# 
+# 
+# - Usamos modelo para construir a saída esperada - *não mágica!*
+# 
+# 
+# - Não ser arrogante: A *taxa de casamento* ainda pode estar associada com a *taxa de divórcio* para algum  subconjunto de estados.
+#     
+#     
+# - Não podemos fazer uma forte inferência causal apenas com as médias, é preciso os dados indivíduais.
+
+# ## Gráficos contrafactuais
+
+# Os gráfico contrafactuais são mostrados quando mantemos todas as variáveis fixas e manipulamos apeans uma variável de interesse. Assim, veremos a linha de regressão mudando seu comportamento.
+# 
+# 
+# O objetivo é explorar as implicações dos resultados do modelo.
+# 
+#     - Fixar os outros preditores
+#     
+#     - Calcular a predição através do valor dos preditores
+# 
+# 
+# 
+# Nos gráficos vemos como o modelo vê as coisa internamente, ou seja, como ele vê as relações preditivas, assumindo que podemos brincar de Deus e definir os valores preditos para qualquer relação. Claro, qualquer relação que não esteja no mundo real.
+# 
+# 
+# Manipular uma dessas variáveis também irá manipular os valores das outras variáveis. Assim, se manipularmos a `idade mediada dos casamentos` também estaremos manipulando a `taxa de casamento`. Porém o contrário não é verdadeiro.
+# 
+#     
+# Com esses gráficos podemos definir qualquer valor que goste e ver como o modelo irá reagir a essa alteração. Isso é muito útil para saber o acontece no modelo, mas isso ainda `não é inferencia causal`.
+
+# ## Checagem da predição da posteriori
+
+# - **Objetivo**: Calcular as predições implicíta para os casos observados.
+# 
+#     - Checar o ajuste do modelo - golems podem cometer erros.
+#     
+#     - Encontrar falhas na modelagem, estimular novas ideias.
+#   
+#   
+# Para saber a aproximação da posteriori funcionou corretamente. As vezes os ajustes da posteriori nos diram que o ajuste está muito ruim entre as `previsões posteriores do modelo` e os `dados brutos`. Isso que iremos fazer, comparar esses dois conjuntos de dados, se forem semelhantes, nós podemos ter errado algo, nosso computador pode ter errado algo ou ambos. 
+# 
+# Precisamos rever e ajustar, as estimativas dos modelos podem estar erradas pois as vezes a natureza do modelo é complicada deixando um ambiente hostil para vida humana e temos que lutar para existir, lutando contra a entropia.
+# 
+# 
+# ---
+# 
+# - Sempre sobre a média da distribuição posteriori.
+# 
+#     - Usar apenas a média da posteriori nos leva a excesso de confiançã.
+#     
+#     - Abraçar a incerteza.
+#     
+#     
+# A outra coisa que podemos fazer é olhar para os casos que não se encaixam muito bem e tentar descobrir como fazer inferências causais mais robustas.  
+
+# <img src="./images/check_posteriori_lesson_5.png" width=500 alt="Check posteriori predictive">
+# 
+# 
+# **Obs**: Refazer o gráfico da [aula](https://youtu.be/e0tO64mtYMU?t=2579), foi utilizado para uma explicação de com fazer a checagem da posteriori.
+
+# O gráfico acima irá comparar os valores preditos contidos na posteriori com os valores observados. Para cada um dos estados, calculamos o intervalo de $89\%$ de credibilidade (HPDI) e sua média. 
+# 
+# 
+# A linha tracejada é a identidade. Para estados que tem a média em cima da linha, temos um ajuste perfeito. Já para estados longe dessa linha, como o estado ID ([Idaho](https://pt.wikipedia.org/wiki/Idaho)) o valor predito falha! 
+# 
+# 
+# Uma das possíveis explicações do porque estamos prevendo altos valores na taxa de divóricos em um estado que temos como evidência uma taxa bem mais baixa é, a grande presença de frequentadores da `A Igreja de Jesus Cristo dos Santos dos Últimos Dias`, conhecidos como os [Mórmons](https://pt.wikipedia.org/wiki/Idaho#/media/Ficheiro:Idaho_Falls_Temple.jpg). Casamentos de pessoas dessa religião tendem a serem mais duradouros por seus motivos religiosos.
+# 
+# Mas para outros estados que estão mal ajustados, é necessário olhar mais de perto e entender melhor o que está acontecendo. 
+
+# ## Associações Mascaradas
+
+# Vamos ver outra coisa interessante que a regressão pode fazer. Uma delas é conseguir revelar as `correlações espúrias`, como acabamos de ver na sessão anterior, com a estratificação dos controles estatísticos. 
+
+# Outra coisa interessante é a de que quando temos 2 preditores influenciando na variável resposta, cada em diferentes direções, eles acabam mascarando um ao outro. Precisamos saber qual o real efeito total da causalidade, chamamos isso de `associação mascarada`.
+# 
+# 
+# - As vezes a associação entre o resultado e o preditor pode ser mascarada por uma outra variável.
+# 
+# 
+# - Necessitamos de ambos preditores para ver a sua influência causal.
+# 
+# 
+# 
+# - Tende a surgir quando:
+#     
+# 
+#     - Outro preditor associado com a resposta que atua na direção oposta.    
+# 
+#     - Ambos os preditores tem uma associação entre si.
+# 
+# E como consequência, na natureza eles escondem o efeito um dos outros. E, se não medirmos ambos, podemos ser levados a acreditar que nenhum dele importa tanto quando realmente importam.  
+# 
+# 
+# - Ruído nos preditores também poderá mascarar a associação (*residuals confounding*).
+# 
+# Outro tipo de associação mascarada é quando ocorre que nossas medidas contém muitos erros, assim podemos não ver qual o efeito real que está acontecendo. 
+
+# ### Milk and Brain
+# 
+# <img src="./images/milk_brain.png" alt="Milk and Brain">
+# 
+# ----
+# 
+# Dados pode ser encontrado [aqui])(https://github.com/rmcelreath/rethinking/blob/master/data/milk.csv)
+
+# Na imagem acima temos três primatas, um lêmure e dois macacos.
+# Estamos interessado, com esse conjunto de dados, em saber a associação que existe entre a `energia do leite` ($\frac{Kcal}{gramas}$), quão energético é o leite que chegam aos seus filhotes e `quão inteligente` ($\%$ *neocortex*) cada primata é, usando como particular método de metrificação de inteligência, qual o percentual do neocortex em relação a todo o cérebro).
+# 
+# 
+# Uma das hipótese que temos é que, para primatas que sejam mais inteligentes, é necessário maior quantidade de energia no leite materno.
+
+# In[71]:
+
+
+# =======================
+#  Milk and Brain - Data
+# =======================
+milk_full = pd.read_csv('./data/milk.csv', sep=';')
+milk_full
+
+
+# In[42]:
+
+
+# ================
+#   Descrições
+# ================
+
+milk_full.describe()
+
+
+# In[70]:
+
+
+# =====================
+#  Filtrando os dados 
+# =====================
+
+milk = milk_full[['kcal.per.g', 'neocortex.perc']].copy()
+milk['log(mass)'] = np.log(milk_full[['mass']])
+milk.head()
+
+
+# In[111]:
+
+
+# =====================
+#  Leite dos Primatas
+# =====================
+
+pd.plotting.scatter_matrix(milk[['kcal.per.g', 'log(mass)', 'neocortex.perc']], 
+                           figsize=(17, 9), marker='o', color='red',
+                           hist_kwds={'bins': 20, 'rwidth': 0.9, 'color': 'red', 'alpha': 0.1}, 
+                           s=100)
+plt.show()
+
+
+# O que vemos aqui é uma forte correlação positiva entre o  $\%$ *neocortex* e a magnetude da massa. Ou seja, quanto mais massa o primata tiver, maior também será o percentual do seu cortex, e não apenas o cérebro como um todo.
+# 
+# A seguir vamos fazer a regressão entre essas duas variáveis.
+
+# Parei no 52:51

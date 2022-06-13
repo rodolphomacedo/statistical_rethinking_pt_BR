@@ -5,11 +5,12 @@
 
 # [Aula - Statistical Rethinking Winter 2019 Lecture 02](https://www.youtube.com/watch?v=XoVtOAN0htU)
 
-# Esse capítulo terá dois objetivos principais:
+# Esse capítulo terá
+# dois objetivos principais:
 #     
 # 1. Construir a intuição de como a atualização funciona, ou seja, como os Golems `aprendem com a experiência.`
 #     
-# 2. Dar uma intuição sobre `como construir esses modelos.`
+# 2. Apresentar uma intuição sobre `como construir esses modelos.`
 
 # Como iremos usar a probabilidade para fazer um típico modelo estatístico?
 # 
@@ -23,7 +24,7 @@
 
 # **Exemplo**: Como é feito o processo da criação dos dados?
 # 
-# No curso, o Richard lançou um Globo Terrestre para os alunos. Cada aluno segurou o globo deveria observar, em sua mão direita, seu `dedo indicador` estava sobre algum dos oceanos (representado como $W$, *water*) ou sobre a terra ($L$, *land*), e registrar esses dados.
+# No curso, o prof. Richard lançou um Globo Terrestre para os alunos. Cada aluno que segurou o globo deveria observar, em sua mão direita, se seu `dedo indicador` estava sobre algum dos oceanos (representado como $W$, *water*) ou sobre a terra ($L$, *land*), e registrar esses dados.
 # 
 # Esse é o processo de como os dados estão nascendo!
 
@@ -63,14 +64,16 @@ plt.rcParams['axes.facecolor'] = 'lightgray'
 
 # Design do Modelo
 
-amostras = ['W', 'L', 'W', 'W', 'W', 'L', 'W', 'L'] # Amostra que obtemos a partir do lançamentos do globo.
+amostras = ['W', 'L', 'W', 'W', 'W', 'L', 'W', 'L'] # Amostra a partir dos lançamentos do globo.
 
 amostras = [1 if amostra == 'W' else 0 for amostra in amostras]  # Transformando os dados em números. [1 = W; 0 = L]
 
 
-# Quando o globo foi lançado, a probabilidade do dedo indicador "cair na água", em qualquer um dos lançamentos, deveria ser proporcional a proporção de água que tem na superfície do planeta. Isso é como jogar uma moeda para sortear cara ou coroa. `O ambiente é determinístico, porém caótico para nós`. Assim, pequenas diferenças nas condições iniciais, geram resultados essencialmente aleatórios.
+# Quando o globo foi lançado, a probabilidade do dedo indicador "cair na água", em qualquer um dos lançamentos, deveria ser proporcional a proporção de água que tem na superfície do planeta. Isso é como jogar uma moeda para sortear cara ou coroa. Mas uma moeda com muitos lados. `O ambiente é determinístico, porém caótico para nós`. Assim, pequenas diferenças nas condições iniciais, geram resultados essencialmente aleatórios.
 # 
-# Para nós, na escala do ambiente em que vivemos, o ambiente é determinístico, mas é um sistema caótico, portanto, aleatório, pois somos seres que não conseguimos compreender o sistema e por isso somos ignorantes a seu respeito. Tal como o lançamento de moedas, para nós, é um bom sistema de aleatorização, pois não podemos medir a velocidade inicial e também a posição do giro bem o suficiente para prever como vai cair, `essa é a única razão`! 
+# Para nós, na escala em que vivemos, o ambiente é determinístico. Mas é um sistema caótico e, portanto, aleatório. Pois não temos a capacidade de compreender o sistema todo e, por isso, somos ignorantes a seu respeito.
+# 
+# O simples lançamento de moedas, para nós, é considerado um bom sistema de aleatorização. Não podemos medir a velocidade inicial e também a posição do giro bem o suficiente para prever como cairá a moeda, `essa é a única razão`! 
 
 # Então dizemos que há um número aleatório que gerado, mas que a proporção dele deve ter uma probabilidade $p$ da superfície da Terra ser coberta por água. 
 
