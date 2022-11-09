@@ -635,95 +635,40 @@
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;data/Howell1.csv&#39;</span><span class="p">,</span> <span class="n">sep</span><span class="o">=</span><span class="s1">&#39;;&#39;</span><span class="p">)</span>  <span class="c1"># Banco de dados do pacote Rethinking - Disponível no Github</span>
-<span class="n">df</span><span class="o">.</span><span class="n">describe</span><span class="p">()</span>  <span class="c1"># Resumo do banco de dados</span>
+
+<span class="c1"># Just adults</span>
+<span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="n">df</span><span class="o">.</span><span class="n">age</span> <span class="o">&gt;=</span> <span class="mi">18</span> <span class="p">]</span>
+
+<span class="c1"># =======================================</span>
+<span class="c1"># Página 86</span>
+<span class="c1"># Overthinking: Sample size and the normality  of sigma&#39;s posterior</span>
+<span class="c1"># Note que, no gráfico posteriori da conjunta, o sigma não é normal.</span>
+<span class="n">overthinking_test</span> <span class="o">=</span> <span class="kc">False</span>
+<span class="n">qtd_sampled</span> <span class="o">=</span> <span class="mi">5</span>
+
+<span class="c1"># Amostragem dos dados</span>
+<span class="k">if</span> <span class="n">overthinking_test</span><span class="p">:</span>
+    <span class="n">sample_df</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">uniform</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">df</span><span class="p">),</span> <span class="n">qtd_sampled</span><span class="p">)</span>
+    <span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="n">sample_df</span><span class="p">,</span> <span class="p">:]</span>
+<span class="c1"># =======================================</span>
+    
+<span class="nb">print</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">describe</span><span class="p">())</span>  <span class="c1"># Resumo do banco de dados</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_html"><div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>height</th>
-      <th>weight</th>
-      <th>age</th>
-      <th>male</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>count</th>
-      <td>544.000000</td>
-      <td>544.000000</td>
-      <td>544.000000</td>
-      <td>544.000000</td>
-    </tr>
-    <tr>
-      <th>mean</th>
-      <td>138.263596</td>
-      <td>35.610618</td>
-      <td>29.344393</td>
-      <td>0.472426</td>
-    </tr>
-    <tr>
-      <th>std</th>
-      <td>27.602448</td>
-      <td>14.719178</td>
-      <td>20.746888</td>
-      <td>0.499699</td>
-    </tr>
-    <tr>
-      <th>min</th>
-      <td>53.975000</td>
-      <td>4.252425</td>
-      <td>0.000000</td>
-      <td>0.000000</td>
-    </tr>
-    <tr>
-      <th>25%</th>
-      <td>125.095000</td>
-      <td>22.007717</td>
-      <td>12.000000</td>
-      <td>0.000000</td>
-    </tr>
-    <tr>
-      <th>50%</th>
-      <td>148.590000</td>
-      <td>40.057844</td>
-      <td>27.000000</td>
-      <td>0.000000</td>
-    </tr>
-    <tr>
-      <th>75%</th>
-      <td>157.480000</td>
-      <td>47.209005</td>
-      <td>43.000000</td>
-      <td>1.000000</td>
-    </tr>
-    <tr>
-      <th>max</th>
-      <td>179.070000</td>
-      <td>62.992589</td>
-      <td>88.000000</td>
-      <td>1.000000</td>
-    </tr>
-  </tbody>
-</table>
-</div></div></div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>           height      weight         age        male
+count  352.000000  352.000000  352.000000  352.000000
+mean   154.597093   44.990486   41.138494    0.468750
+std      7.742332    6.456708   15.967855    0.499733
+min    136.525000   31.071052   18.000000    0.000000
+25%    148.590000   40.256290   28.000000    0.000000
+50%    154.305000   44.792210   39.000000    0.000000
+75%    160.655000   49.292693   51.000000    1.000000
+max    179.070000   62.992589   88.000000    1.000000
+</pre></div>
+</div>
+</div>
 </div>
 <p>Nosso conjunto de dados contém um total de <span class="math notranslate nohighlight">\(544\)</span> indivíduos, abaixo temos um histograma descritivo das quatro variáveis da base:</p>
 <ul class="simple">
@@ -951,7 +896,11 @@
 
 <span class="n">ax1</span><span class="o">.</span><span class="n">legend</span><span class="p">([</span><span class="s1">&#39;h=147&#39;</span><span class="p">,</span> <span class="s1">&#39;h=155&#39;</span><span class="p">,</span> <span class="s1">&#39;h=180&#39;</span><span class="p">])</span>
 
+<span class="c1"># Abaixo iremos fazer a soma dos logs, ao invés de multiplicar. Isso será feito na próxima célula.</span>
+<span class="c1"># posteriori_nao_normalizada = np.log(curva_1) + np.log(curva_2) + np.log(curva_3)  # </span>
 <span class="n">posteriori_nao_normalizada</span> <span class="o">=</span> <span class="n">curva_1</span> <span class="o">*</span> <span class="n">curva_2</span> <span class="o">*</span> <span class="n">curva_3</span>   <span class="c1"># Essa multiplicação será feita ponto a ponto.</span>
+
+
 
 <span class="n">posteriori</span> <span class="o">=</span> <span class="n">posteriori_nao_normalizada</span> <span class="o">/</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">posteriori_nao_normalizada</span><span class="p">)</span>  <span class="c1"># Normalizando a posteriori</span>
 <span class="n">ax2</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">100</span><span class="p">,</span> <span class="mi">301</span><span class="p">),</span> <span class="n">posteriori</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;darkblue&#39;</span><span class="p">)</span>  <span class="c1"># Essa multiplicação será feita ponto a ponto.</span>
@@ -984,8 +933,15 @@
 
 <span class="n">grid</span> <span class="o">=</span> <span class="mi">100</span>  <span class="c1"># Determina a precisão, para valores maiores demanda maior custo computacional!</span>
 
-<span class="n">mu_ls</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">150</span><span class="p">,</span> <span class="mi">160</span><span class="p">,</span> <span class="n">grid</span><span class="p">)</span>  <span class="c1"># Espaço do 𝜇 - Esses valores foram escolhidos para uma melhor visualização.</span>
-<span class="n">sigma_ls</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="n">grid</span><span class="p">)</span>  <span class="c1"># Espaço do 𝜎 - Esses valores foram escolhidos para uma melhor visualização.</span>
+<span class="k">if</span> <span class="n">overthinking_test</span><span class="p">:</span>  <span class="c1"># Pag. 86 SR2</span>
+    <span class="n">grid_width</span> <span class="o">=</span> <span class="p">(</span><span class="mi">142</span><span class="p">,</span> <span class="mi">162</span><span class="p">)</span>
+    <span class="n">grid_height</span> <span class="o">=</span> <span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">20</span><span class="p">)</span> 
+<span class="k">else</span><span class="p">:</span>
+    <span class="n">grid_width</span> <span class="o">=</span> <span class="p">(</span><span class="mi">153</span><span class="p">,</span> <span class="mi">156</span><span class="p">)</span>
+    <span class="n">grid_height</span> <span class="o">=</span> <span class="p">(</span><span class="mi">7</span><span class="p">,</span> <span class="mf">8.5</span><span class="p">)</span> 
+
+<span class="n">mu_ls</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="n">grid_width</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">grid_width</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">grid</span><span class="p">)</span>  <span class="c1"># Espaço do 𝜇 - Esses valores foram escolhidos para uma melhor visualização.</span>
+<span class="n">sigma_ls</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="n">grid_height</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">grid_height</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">grid</span><span class="p">)</span>  <span class="c1"># Espaço do 𝜎 - Esses valores foram escolhidos para uma melhor visualização.</span>
 
 <span class="n">mu</span><span class="p">,</span> <span class="n">sigma</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">meshgrid</span><span class="p">(</span><span class="n">mu_ls</span><span class="p">,</span> <span class="n">sigma_ls</span><span class="p">)</span>  <span class="c1"># Construindo um plano do 𝜇 vs 𝜎.</span>
 <span class="n">mu</span> <span class="o">=</span> <span class="n">mu</span><span class="o">.</span><span class="n">flatten</span><span class="p">()</span>
@@ -993,7 +949,7 @@
 
 <span class="n">verossimilhanca</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([])</span>
 <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">grid</span><span class="o">**</span><span class="mi">2</span><span class="p">):</span>
-    <span class="n">verossimilhanca_parcial</span> <span class="o">=</span> <span class="n">stats</span><span class="o">.</span><span class="n">norm</span><span class="p">(</span><span class="n">mu</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">sigma</span><span class="p">[</span><span class="n">i</span><span class="p">])</span><span class="o">.</span><span class="n">pdf</span><span class="p">(</span><span class="n">df2</span><span class="o">.</span><span class="n">height</span><span class="p">)</span> <span class="c1"># Calcular a probabilidade para todos os 𝜇 e 𝜎, todas as alturas da amostra. </span>
+    <span class="n">verossimilhanca_parcial</span> <span class="o">=</span> <span class="n">stats</span><span class="o">.</span><span class="n">norm</span><span class="p">(</span><span class="n">mu</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">sigma</span><span class="p">[</span><span class="n">i</span><span class="p">])</span><span class="o">.</span><span class="n">pdf</span><span class="p">(</span><span class="n">df2</span><span class="o">.</span><span class="n">height</span><span class="p">)</span> <span class="c1"># Calcular a verossimilhança para cada (𝜇, 𝜎), usando todas as alturas da amostra. </span>
     <span class="n">verossimilhanca_parcial_log</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">verossimilhanca_parcial</span><span class="o">.</span><span class="n">flatten</span><span class="p">())</span>  <span class="c1"># Calculando o log da verossimilhança</span>
     <span class="n">verossimilhanca</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">verossimilhanca</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">verossimilhanca_parcial_log</span><span class="p">))</span>
 
@@ -1017,8 +973,8 @@
 <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;$\sigma$&#39;</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Posteriori&#39;</span><span class="p">)</span>
 
-<span class="n">plt</span><span class="o">.</span><span class="n">xlim</span><span class="p">(</span><span class="mi">153</span><span class="p">,</span> <span class="mi">156</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">ylim</span><span class="p">(</span><span class="mi">7</span><span class="p">,</span> <span class="mi">9</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlim</span><span class="p">(</span><span class="n">grid_width</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">grid_width</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylim</span><span class="p">(</span><span class="n">grid_height</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">grid_height</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
 
 <span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="n">ls</span><span class="o">=</span><span class="s1">&#39;--&#39;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;white&#39;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mf">0.4</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
@@ -1043,20 +999,23 @@
 
 <span class="n">fig</span><span class="p">,</span> <span class="p">[[</span><span class="n">ax1</span><span class="p">,</span> <span class="n">ax2</span><span class="p">],</span> <span class="p">[</span><span class="n">ax3</span><span class="p">,</span> <span class="n">ax4</span><span class="p">]]</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">17</span><span class="p">,</span> <span class="mi">7</span><span class="p">))</span>
 
+<span class="c1"># Gráfico 1 e 3</span>
 <span class="n">ax1</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">posteriori_nao_normalizada</span><span class="p">,</span> <span class="s1">&#39;o&#39;</span><span class="p">,</span> <span class="n">ms</span><span class="o">=</span><span class="mf">0.1</span><span class="p">)</span>
 <span class="n">ax1</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;Posteriori não normalizada&#39;</span><span class="p">)</span>
 <span class="n">ax1</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;Escala em Log&#39;</span><span class="p">)</span>
 <span class="n">ax1</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="n">color</span><span class="o">=</span><span class="s1">&#39;white&#39;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mf">0.4</span><span class="p">,</span> <span class="n">ls</span><span class="o">=</span><span class="s1">&#39;--&#39;</span><span class="p">)</span>
 
+<span class="n">ax3</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="n">posteriori_nao_normalizada</span><span class="p">),</span> <span class="s1">&#39;o&#39;</span><span class="p">,</span> <span class="n">ms</span><span class="o">=</span><span class="mf">0.1</span><span class="p">)</span>
+<span class="n">ax3</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;Posteriori não normalizada&#39;</span><span class="p">)</span>
+<span class="n">ax3</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="n">color</span><span class="o">=</span><span class="s1">&#39;white&#39;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mf">0.4</span><span class="p">,</span> <span class="n">ls</span><span class="o">=</span><span class="s1">&#39;--&#39;</span><span class="p">)</span>
+
+<span class="c1"># Gráfico 2 e 4</span>
 <span class="n">post_ajustada</span> <span class="o">=</span> <span class="p">(</span><span class="n">posteriori_nao_normalizada</span> <span class="o">-</span> <span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">posteriori_nao_normalizada</span><span class="p">))</span>
+
 <span class="n">ax2</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">post_ajustada</span><span class="p">,</span> <span class="s1">&#39;o&#39;</span><span class="p">,</span> <span class="n">ms</span><span class="o">=</span><span class="mf">0.1</span><span class="p">)</span>
 <span class="n">ax2</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;Posteriori não normalizada - Ajustada&#39;</span><span class="p">)</span>
 <span class="n">ax2</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;Escala em Log - Ajsutada&#39;</span><span class="p">)</span>
 <span class="n">ax2</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="n">color</span><span class="o">=</span><span class="s1">&#39;white&#39;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mf">0.4</span><span class="p">,</span> <span class="n">ls</span><span class="o">=</span><span class="s1">&#39;--&#39;</span><span class="p">)</span>
-
-<span class="n">ax3</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="n">posteriori_nao_normalizada</span><span class="p">),</span> <span class="s1">&#39;o&#39;</span><span class="p">,</span> <span class="n">ms</span><span class="o">=</span><span class="mf">0.1</span><span class="p">)</span>
-<span class="n">ax3</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;Posteriori não normalizada&#39;</span><span class="p">)</span>
-<span class="n">ax3</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="n">color</span><span class="o">=</span><span class="s1">&#39;white&#39;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mf">0.4</span><span class="p">,</span> <span class="n">ls</span><span class="o">=</span><span class="s1">&#39;--&#39;</span><span class="p">)</span>
 
 <span class="n">ax4</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="n">post_ajustada</span><span class="p">),</span> <span class="s1">&#39;o&#39;</span><span class="p">,</span> <span class="n">ms</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
 <span class="n">ax4</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;Posteriori não normalizada - Ajustada&#39;</span><span class="p">)</span>
@@ -1137,7 +1096,9 @@
 </div>
 <div class="cell tag_remove_output docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">primeiro_codigo_stan</span> <span class="o">=</span> <span class="s2">&quot;&quot;&quot;</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Essa estrutura está definida na página 77 - SR2</span>
+
+<span class="n">primeiro_codigo_stan</span> <span class="o">=</span> <span class="s2">&quot;&quot;&quot;</span>
 <span class="s2">data {</span>
 <span class="s2">    int N;</span>
 <span class="s2">    real X[N];</span>
@@ -1149,9 +1110,6 @@
 <span class="s2">}</span>
 
 <span class="s2">model {</span>
-<span class="s2">    // mu ~ normal(60, 30);   // Priori para mu</span>
-<span class="s2">    // sigma ~ halfnormal(25); // Priori para sigma</span>
-<span class="s2">    </span>
 <span class="s2">    X ~ normal(mu, sigma);</span>
 <span class="s2">}</span>
 <span class="s2">&quot;&quot;&quot;</span>
@@ -1159,7 +1117,7 @@
 <span class="n">sigma_nao_observavel</span> <span class="o">=</span> <span class="mi">12</span>
 
 <span class="n">X</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="n">mu_nao_observavel</span><span class="p">,</span> <span class="n">sigma_nao_observavel</span><span class="p">,</span> <span class="mi">1000</span><span class="p">)</span>  <span class="c1"># Gerando os dados amostrais ~ Normal(50, 12)</span>
-<span class="n">meus_dados</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;N&#39;</span><span class="p">:</span> <span class="nb">len</span><span class="p">(</span><span class="n">X</span><span class="p">),</span> <span class="s1">&#39;X&#39;</span><span class="p">:</span> <span class="n">X</span><span class="p">}</span>  <span class="c1"># Construíndo um dicionário com os dados</span>
+<span class="n">meus_dados</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;N&#39;</span><span class="p">:</span> <span class="nb">len</span><span class="p">(</span><span class="n">X</span><span class="p">),</span> <span class="s1">&#39;X&#39;</span><span class="p">:</span> <span class="nb">list</span><span class="p">(</span><span class="n">X</span><span class="p">)}</span>  <span class="c1"># Construíndo um dicionário com os dados</span>
 
 <span class="n">posteriori_model</span> <span class="o">=</span> <span class="n">stan</span><span class="o">.</span><span class="n">build</span><span class="p">(</span><span class="n">primeiro_codigo_stan</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">meus_dados</span><span class="p">)</span>  <span class="c1"># Construíndo um modelo e anexando os dados</span>
 <span class="n">fit</span> <span class="o">=</span> <span class="n">posteriori_model</span><span class="o">.</span><span class="n">sample</span><span class="p">(</span><span class="n">num_chains</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span> <span class="n">num_samples</span><span class="o">=</span><span class="mi">1000</span><span class="p">)</span>  <span class="c1"># Fazendo a amostragem da posteriori </span>
@@ -1170,8 +1128,8 @@
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Recuperando os parâmetros</span>
-<span class="n">mu_modelo_1</span> <span class="o">=</span> <span class="n">fit</span><span class="p">[</span><span class="s1">&#39;mu&#39;</span><span class="p">]</span>  <span class="c1"># Amostras da posteriori do 𝜇</span>
-<span class="n">sigma_modelo_1</span> <span class="o">=</span> <span class="n">fit</span><span class="p">[</span><span class="s1">&#39;sigma&#39;</span><span class="p">]</span>  <span class="c1"># Amostras da posteriori do 𝜎</span>
+<span class="n">mu_modelo_1</span> <span class="o">=</span> <span class="n">fit</span><span class="p">[</span><span class="s1">&#39;mu&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">flatten</span><span class="p">()</span>  <span class="c1"># Amostras da posteriori do 𝜇</span>
+<span class="n">sigma_modelo_1</span> <span class="o">=</span> <span class="n">fit</span><span class="p">[</span><span class="s1">&#39;sigma&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">flatten</span><span class="p">()</span>  <span class="c1"># Amostras da posteriori do 𝜎</span>
 
 <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;=&#39;</span><span class="o">*</span><span class="mi">70</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;  mu médio: &#39;</span><span class="p">,</span> <span class="nb">round</span><span class="p">(</span><span class="n">mu_modelo_1</span><span class="o">.</span><span class="n">mean</span><span class="p">(),</span> <span class="mi">2</span><span class="p">),</span> <span class="s1">&#39; </span><span class="se">\t</span><span class="s1"> mu original: &#39;</span><span class="p">,</span> <span class="n">mu_nao_observavel</span><span class="p">)</span>
@@ -1182,13 +1140,13 @@
 
 <span class="n">fig</span><span class="o">.</span><span class="n">suptitle</span><span class="p">(</span><span class="s2">&quot;Posteriori estimada com a Stan&quot;</span><span class="p">)</span>
 
-<span class="n">ax1</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">mu_modelo_1</span><span class="o">.</span><span class="n">flatten</span><span class="p">(),</span> <span class="n">bins</span><span class="o">=</span><span class="mi">30</span><span class="p">,</span> <span class="n">rwidth</span><span class="o">=</span><span class="mf">0.9</span><span class="p">,</span> <span class="n">density</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;red&#39;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.3</span><span class="p">)</span>
+<span class="n">ax1</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">mu_modelo_1</span><span class="o">.</span><span class="n">flatten</span><span class="p">(),</span> <span class="n">rwidth</span><span class="o">=</span><span class="mf">0.9</span><span class="p">,</span> <span class="n">density</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;red&#39;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.3</span><span class="p">)</span>
 <span class="n">ax1</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="n">color</span><span class="o">=</span><span class="s1">&#39;white&#39;</span><span class="p">,</span> <span class="n">ls</span><span class="o">=</span><span class="s1">&#39;--&#39;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mf">0.3</span><span class="p">)</span>
 <span class="n">ax1</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;Posteriori de $\mu$&#39;</span><span class="p">)</span>
 <span class="n">ax1</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;$\mu$&#39;</span><span class="p">)</span>
 <span class="n">ax1</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;Frequências à Posteriori&#39;</span><span class="p">)</span>
 
-<span class="n">ax2</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">sigma_modelo_1</span><span class="o">.</span><span class="n">flatten</span><span class="p">(),</span> <span class="n">bins</span><span class="o">=</span><span class="mi">30</span><span class="p">,</span> <span class="n">rwidth</span><span class="o">=</span><span class="mf">0.9</span><span class="p">,</span> <span class="n">density</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;red&#39;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.3</span><span class="p">)</span>
+<span class="n">ax2</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">sigma_modelo_1</span><span class="o">.</span><span class="n">flatten</span><span class="p">(),</span> <span class="n">rwidth</span><span class="o">=</span><span class="mf">0.9</span><span class="p">,</span> <span class="n">density</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;red&#39;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.3</span><span class="p">)</span>
 <span class="n">ax2</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="n">color</span><span class="o">=</span><span class="s1">&#39;white&#39;</span><span class="p">,</span> <span class="n">ls</span><span class="o">=</span><span class="s1">&#39;--&#39;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mf">0.3</span><span class="p">)</span>
 <span class="n">ax2</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;Posteriori de $\sigma$&#39;</span><span class="p">)</span>
 <span class="n">ax2</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;$\sigma$&#39;</span><span class="p">)</span>
@@ -1200,8 +1158,8 @@
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>======================================================================
-  mu médio:  50.29  	 mu original:  50
-  sigma médio:  11.96  	 sigma original:  12
+  mu médio:  50.57  	 mu original:  50
+  sigma médio:  11.9  	 sigma original:  12
 ======================================================================
 </pre></div>
 </div>
@@ -1226,8 +1184,10 @@
 <span class="s2">    }</span>
 
 <span class="s2">    model {</span>
+<span class="s2">        //mu ~ normal(178, 0.1);  // *Teste com a priori muito informativa, veja o impacto do sigma à posteriori</span>
+<span class="s2">        //mu ~ normal(154, 0.1);  // *Teste com a priori informativa com a média bem pŕoxima do que será estimado, usado apenas para entendimento, verifique que a média da variância se mantém.</span>
 <span class="s2">        mu ~ normal(178, 20);   // Priori para mu</span>
-<span class="s2">        // sigma ~ uniform(1, 50);  // Priori para sigma</span>
+<span class="s2">        sigma ~ uniform(0, 50);  // Priori para sigma</span>
 
 <span class="s2">        altura ~ normal(mu, sigma);</span>
 <span class="s2">    }</span>
@@ -1241,12 +1201,49 @@
 <span class="n">altura_std</span> <span class="o">=</span> <span class="n">altura</span><span class="o">.</span><span class="n">std</span><span class="p">()</span>
 <span class="n">altura_resc</span> <span class="o">=</span> <span class="p">(</span><span class="n">altura</span> <span class="o">-</span> <span class="n">altura_media</span><span class="p">)</span> <span class="o">/</span> <span class="n">altura_std</span>
 
-<span class="n">dados</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;N&#39;</span><span class="p">:</span> <span class="nb">len</span><span class="p">(</span><span class="n">altura</span><span class="p">),</span> <span class="s1">&#39;altura&#39;</span><span class="p">:</span> <span class="n">altura</span><span class="p">}</span>  <span class="c1"># Iremos usar a altura não normalizada para efeito de simplificação.</span>
+<span class="n">dados</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;N&#39;</span><span class="p">:</span> <span class="nb">len</span><span class="p">(</span><span class="n">altura</span><span class="p">),</span> 
+         <span class="s1">&#39;altura&#39;</span><span class="p">:</span> <span class="n">altura</span><span class="p">}</span>  <span class="c1"># Iremos usar a altura não normalizada para efeito de simplificação.</span>
 
 <span class="n">posteriori_model</span> <span class="o">=</span> <span class="n">stan</span><span class="o">.</span><span class="n">build</span><span class="p">(</span><span class="n">modelo_altura</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">dados</span><span class="p">)</span>
 <span class="n">fit_altura</span> <span class="o">=</span> <span class="n">posteriori_model</span><span class="o">.</span><span class="n">sample</span><span class="p">(</span><span class="n">num_chains</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span> <span class="n">num_samples</span><span class="o">=</span><span class="mi">1000</span><span class="p">)</span>
 </pre></div>
 </div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Compare o sigma usando duas priori diferentes para mu.</span>
+<span class="c1"># (***) Com a priori mu ~ normal(178, 0.1), a posteriori do sigma tem um aumento significativo.</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;-&#39;</span><span class="o">*</span><span class="mi">40</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Média: &#39;</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">fit_altura</span><span class="p">[</span><span class="s1">&#39;mu&#39;</span><span class="p">]))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Sigma: &#39;</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">fit_altura</span><span class="p">[</span><span class="s1">&#39;sigma&#39;</span><span class="p">]))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;-&#39;</span><span class="o">*</span><span class="mi">40</span><span class="p">)</span>
+
+<span class="n">fig</span><span class="p">,</span> <span class="p">[</span><span class="n">ax1</span><span class="p">,</span> <span class="n">ax2</span><span class="p">]</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">17</span><span class="p">,</span> <span class="mi">5</span><span class="p">))</span>
+
+<span class="n">ax1</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">fit_altura</span><span class="p">[</span><span class="s1">&#39;mu&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">flatten</span><span class="p">(),</span> <span class="n">rwidth</span><span class="o">=</span><span class="mf">0.9</span><span class="p">,</span> <span class="n">density</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">ax1</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="n">color</span><span class="o">=</span><span class="s1">&#39;white&#39;</span><span class="p">,</span> <span class="n">ls</span><span class="o">=</span><span class="s1">&#39;--&#39;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mf">0.3</span><span class="p">)</span>
+<span class="n">ax1</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;Posteriori $\mu$ da altura&#39;</span><span class="p">)</span>
+<span class="n">ax1</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;Média do $\mu$ da altura (cm)&#39;</span><span class="p">)</span>
+
+<span class="n">ax2</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">fit_altura</span><span class="p">[</span><span class="s1">&#39;sigma&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">flatten</span><span class="p">(),</span> <span class="n">rwidth</span><span class="o">=</span><span class="mf">0.9</span><span class="p">,</span> <span class="n">density</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">ax2</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="n">color</span><span class="o">=</span><span class="s1">&#39;white&#39;</span><span class="p">,</span> <span class="n">ls</span><span class="o">=</span><span class="s1">&#39;--&#39;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mf">0.3</span><span class="p">)</span>
+<span class="n">ax2</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;Posteriori $\sigma$ da altura&#39;</span><span class="p">)</span>
+<span class="n">ax2</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;Média do $\sigma$ da altura&#39;</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>----------------------------------------
+Média:  154.6175358324885
+Sigma:  7.77149906071101
+----------------------------------------
+</pre></div>
+</div>
+<img alt="_images/parte_3_45_1.png" src="_images/parte_3_45_1.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -1266,7 +1263,6 @@
 <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;  mu médio: &#39;</span><span class="p">,</span> <span class="nb">round</span><span class="p">(</span><span class="n">mu_altura</span><span class="o">.</span><span class="n">mean</span><span class="p">(),</span> <span class="mi">2</span><span class="p">))</span>
 <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;  sigma médio: &#39;</span><span class="p">,</span> <span class="nb">round</span><span class="p">(</span><span class="n">sigma_altura</span><span class="o">.</span><span class="n">mean</span><span class="p">(),</span> <span class="mi">2</span><span class="p">))</span>
 <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;=&#39;</span><span class="o">*</span><span class="mi">30</span><span class="p">)</span>
-
 
 <span class="n">fig</span><span class="p">,</span> <span class="p">[</span><span class="n">ax1</span><span class="p">,</span> <span class="n">ax2</span><span class="p">]</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">17</span><span class="p">,</span> <span class="mi">9</span><span class="p">))</span>
 
@@ -1319,23 +1315,23 @@
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Comparativo com a amostra
 ==============================
-  mu amostrado:  138.26
-  sigma amostrado:  27.6
+  mu amostrado:  154.6
+  sigma amostrado:  7.74
 ==============================
-  mu médio:  138.44
-  sigma médio:  27.67
+  mu médio:  154.62
+  sigma médio:  7.77
 ==============================
 </pre></div>
 </div>
-<img alt="_images/parte_3_45_1.png" src="_images/parte_3_45_1.png" />
-<img alt="_images/parte_3_45_2.png" src="_images/parte_3_45_2.png" />
+<img alt="_images/parte_3_46_1.png" src="_images/parte_3_46_1.png" />
+<img alt="_images/parte_3_46_2.png" src="_images/parte_3_46_2.png" />
 </div>
 </div>
 </div>
 <div class="section" id="adicionando-uma-variavel-preditora">
 <h2>Adicionando uma variável Preditora<a class="headerlink" href="#adicionando-uma-variavel-preditora" title="Permalink to this headline">¶</a></h2>
-<p>Agora, iremos refazer a estimativa da altura, mas utulizaremos <code class="docutils literal notranslate"><span class="pre">mais</span> <span class="pre">uma</span> <span class="pre">variável</span></code> para nos ajudar explicar melhor a altura, assim teremos mais informações, usaremos o <code class="docutils literal notranslate"><span class="pre">peso</span></code> (<em>weight</em>) que nos ajudará a descrever a altura (<em>height</em>)?</p>
-<p><em>Obs: Iremos utilizar apenas pessoas que tenham acima de 18 anos de idade para todos os estudo seguintes, apenas simplesmente como efeito didático.</em></p>
+<p>Agora, iremos refazer a estimativa da altura, mas iremos usar <code class="docutils literal notranslate"><span class="pre">mais</span> <span class="pre">uma</span> <span class="pre">variável</span></code> para nos ajudar explicar melhor a altura, e assim teremos mais informações. Usaremos a variável <code class="docutils literal notranslate"><span class="pre">peso</span></code> (<em>weight</em>) que nos ajudará a entender melhor a altura (<em>height</em>)?</p>
+<p><em>Obs: Iremos selecionar apenas as pessoas que tenham acima de 18 anos de idade para todos os estudo a seguir.</em></p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Gráfico de dispersão - peso ajudar a identificar qual a altura.</span>
@@ -1353,7 +1349,7 @@
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/parte_3_47_0.png" src="_images/parte_3_47_0.png" />
+<img alt="_images/parte_3_48_0.png" src="_images/parte_3_48_0.png" />
 </div>
 </div>
 <p>Usando um modelo linear de média, <span class="math notranslate nohighlight">\(\mu\)</span>:</p>
@@ -1429,7 +1425,7 @@
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/parte_3_51_0.png" src="_images/parte_3_51_0.png" />
+<img alt="_images/parte_3_52_0.png" src="_images/parte_3_52_0.png" />
 </div>
 </div>
 <p>O resultado das simulações da distribuição à priori do <span class="math notranslate nohighlight">\(\alpha\)</span> e o <span class="math notranslate nohighlight">\(\beta\)</span>, geram as curvas acima, de acordo o modelo:</p>
@@ -1447,7 +1443,7 @@
 <p><em>Mas como?</em></p>
 <p>Para fazer isso, usaremos a distribuição <code class="docutils literal notranslate"><span class="pre">log-Normal</span></code>. Essa distribuição pode ser um pouco menos conhecida, porém é muito útil para situações desse tipo. Essa distribuição, log-Normal, construída partir da exponenciação dos valores da distribuição Normal.</p>
 <div class="math notranslate nohighlight">
-\[lognormal(0, 1) = exp\{ Normal(0, 1)\}\]</div>
+\[Log-Normal(0, 1) = exp( Normal(0, 1))\]</div>
 <p>Na teoria das probabilidades, uma distribuição log-normal (ou lognormal) é uma distribuição de probabilidade contínua de uma variável aleatória cujo logaritmo é normalmente distribuído.</p>
 <p>Assim, se a variável aleatória <span class="math notranslate nohighlight">\(X\)</span> é log-normalmente distribuída, então <span class="math notranslate nohighlight">\(Y = log(X)\)</span> tem uma distribuição normal. <em>(Ref. Wikipedia)</em></p>
 <p>Referências:</p>
@@ -1464,14 +1460,14 @@
 \[ log(exp(a)) = a , \forall a \in R\]</div>
 <p>se a distribuição de <span class="math notranslate nohighlight">\(X\)</span> for:</p>
 <div class="math notranslate nohighlight">
-\[ X \sim exp\{Normal\} \]</div>
+\[ X \sim exp(Normal) \]</div>
 <p>então a operação abaixo é válida,</p>
 <div class="math notranslate nohighlight">
-\[  log(exp\{Normal\}) = Normal \]</div>
+\[  log(exp(Normal)) = Normal \]</div>
 <p>logo,</p>
 <div class="math notranslate nohighlight">
 \[ log(X) = Normal \]</div>
-<p>então:</p>
+<p>então, assim teremos que:</p>
 <div class="math notranslate nohighlight">
 \[ X \sim lognormal \]</div>
 <div class="cell docutils container">
@@ -1514,7 +1510,7 @@
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/parte_3_54_0.png" src="_images/parte_3_54_0.png" />
+<img alt="_images/parte_3_55_0.png" src="_images/parte_3_55_0.png" />
 </div>
 </div>
 <hr class="docutils" />
@@ -1558,7 +1554,7 @@
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/parte_3_56_0.png" src="_images/parte_3_56_0.png" />
+<img alt="_images/parte_3_57_0.png" src="_images/parte_3_57_0.png" />
 </div>
 </div>
 <p>Nós ainda temos muita dispersão e também temos ainda algumas poucas linhas que ultrapassam a maior altura já registrada (de <span class="math notranslate nohighlight">\(272 cm\)</span>). Isso acontece porque não limitamos a nossa margem superior pela distribuição de <span class="math notranslate nohighlight">\(\beta\)</span>. Mas essa nossa nova abordagem parece ser uma priori bem mais condizente com o que podemos imaginar.</p>
@@ -1592,7 +1588,7 @@
 
 <span class="s2">        for (i in 1:N){</span>
 <span class="s2">            altura[i] ~ normal(alpha +  beta * (peso[i] - x_barra), sigma);</span>
-<span class="s2">        }</span>
+<span class="s2">    }</span>
 <span class="s2">}</span>
 <span class="s2">&quot;&quot;&quot;</span>
 
@@ -1638,7 +1634,7 @@
 
 
 <span class="n">N</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">alpha_posteriori</span><span class="p">)</span>  <span class="c1"># Plotar todas as curvas estimadas</span>
-<span class="n">N</span> <span class="o">=</span> <span class="mi">500</span>  <span class="c1"># Plotar as 100 primeiras curvas</span>
+<span class="n">N</span> <span class="o">=</span> <span class="mi">200</span>  <span class="c1"># Plotar as 200 primeiras curvas</span>
 
 <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">17</span><span class="p">,</span> <span class="mi">9</span><span class="p">))</span>
 
@@ -1683,13 +1679,13 @@
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Resumo das posterioris:
 ============================================================
-Media alpha:  154.6  - Desvio Padrão alpha:  0.275
-Média beta:   0.903  - Desvio Padrão beta:   0.042
-Média sigma:  5.107  - Desvio Padrão sigma:  0.192
+Media alpha:  154.6  - Desvio Padrão alpha:  0.273
+Média beta:   0.904  - Desvio Padrão beta:   0.042
+Média sigma:  5.111  - Desvio Padrão sigma:  0.195
 </pre></div>
 </div>
-<img alt="_images/parte_3_60_1.png" src="_images/parte_3_60_1.png" />
-<img alt="_images/parte_3_60_2.png" src="_images/parte_3_60_2.png" />
+<img alt="_images/parte_3_61_1.png" src="_images/parte_3_61_1.png" />
+<img alt="_images/parte_3_61_2.png" src="_images/parte_3_61_2.png" />
 </div>
 </div>
 </div>
