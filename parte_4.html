@@ -130,6 +130,51 @@
    5 - Muitas Variáveis e os Waffles Espúrios
   </a>
  </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="parte_6.html">
+   6 - Os DAGs assombrados &amp; O Terror Causal
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="parte_7.html">
+   7 - Compasso de Ulisses
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="parte_8.html">
+   8 - Os peixes-bois condicionais
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="parte_9.html">
+   9 - Markov Chain Monte Carlo
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="parte_10.html">
+   10 - Grande Entropia e Modelos Lineares Generalizados
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="parte_11.html">
+   11 - A cravada de Deus e Inteiros
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="parte_12.html">
+   12 - Monstros e Misturas
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="parte_13.html">
+   13 - Modelos com Memória
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="parte_14.html">
+   14 - Aventuras na Covariâncias
+  </a>
+ </li>
 </ul>
 
     </div>
@@ -369,9 +414,9 @@
 <div class="admonition-modelo-linear-simples admonition">
 <p class="admonition-title">Modelo Linear Simples</p>
 <div class="math notranslate nohighlight">
-\[ altura_i = \alpha + \beta (peso_i - peso\_medio) \]</div>
+\[ altura_i = \alpha + \beta (peso_i - peso\_médio)\]</div>
 </div>
-<p>Das distribuições à posteriori dos parâmetros podemos pegar apenas os valores <code class="docutils literal notranslate"><span class="pre">&quot;precisos&quot;</span></code> desses parâmetros, ou seja, geralmente nós tendemos <code class="docutils literal notranslate"><span class="pre">pensar</span> <span class="pre">apenas</span> <span class="pre">com</span> <span class="pre">os</span> <span class="pre">valores</span> <span class="pre">esperados</span></code> (<em><code class="docutils literal notranslate"><span class="pre">valores</span> <span class="pre">médios</span></code></em>) da distribuição do <span class="math notranslate nohighlight">\(\alpha\)</span> e do <span class="math notranslate nohighlight">\(\beta\)</span> e, com isso, traçar uma linha reta com esses valores.</p>
+<p>Das distribuições à posteriori dos parâmetros podemos pegar apenas algum valor <code class="docutils literal notranslate"><span class="pre">&quot;preciso&quot;</span></code> desses parâmetros, ou seja, geralmente nós tendemos <code class="docutils literal notranslate"><span class="pre">pensar</span> <span class="pre">apenas</span> <span class="pre">com</span> <span class="pre">os</span> <span class="pre">valores</span> <span class="pre">esperados</span></code> (<em><code class="docutils literal notranslate"><span class="pre">valores</span> <span class="pre">médios</span></code></em>) da distribuição do <span class="math notranslate nohighlight">\(\alpha\)</span> e do <span class="math notranslate nohighlight">\(\beta\)</span> e, com isso, traçar uma linha reta com esses valores.</p>
 <p>Olhando para os resultados das inferências dos parâmetros, quando o <strong>peso</strong> está em seu valor médio, temos que <span class="math notranslate nohighlight">\(\alpha\)</span> significa o valor médio da altura!</p>
 <p>Percebeu? Percebeu como isso é muito bonito! Agora temos uma interpretação decente para o <span class="math notranslate nohighlight">\(\alpha\)</span>!</p>
 <p>Agora, o que significa o nosso <span class="math notranslate nohighlight">\(\beta\)</span>? Temos que para cada unidade de <span class="math notranslate nohighlight">\(peso\)</span> que aumentarmos a altura <span class="math notranslate nohighlight">\(h\)</span> também aumentará em <span class="math notranslate nohighlight">\(\beta\)</span> unidades. Assim, para nosso exemplo, <code class="docutils literal notranslate"><span class="pre">cada</span> <span class="pre">kilo</span> <span class="pre">que</span> <span class="pre">aumentarmos,</span> <span class="pre">a</span> <span class="pre">altura</span> <span class="pre">também</span> <span class="pre">tende</span> <span class="pre">a</span> <span class="pre">aumentar</span></code>, em média, <span class="math notranslate nohighlight">\(0.90\)</span>cm.</p>
@@ -526,16 +571,16 @@
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>        alpha      beta     sigma
-0  154.971707  0.986113  5.461547
-1  154.761763  0.916562  5.161238
-2  154.164587  0.927024  4.896515
-3  154.715754  0.890082  5.320681
-4  154.612796  0.967634  5.275184
-5  154.761763  0.916562  5.161238
-6  154.032912  0.954426  5.001520
-7  154.485128  0.933299  4.972606
-8  154.198064  0.859681  5.386437
-9  153.794424  0.980877  5.446497
+0  154.765819  0.946624  4.904993
+1  154.725060  0.894531  4.897424
+2  154.969708  0.940925  5.181750
+3  154.966983  0.978020  4.871757
+4  154.991493  0.892440  5.335516
+5  154.752034  0.866076  5.027855
+6  154.205608  0.862118  5.100277
+7  154.324713  0.838174  5.273384
+8  154.761308  0.952450  5.090631
+9  154.352351  0.883649  5.340434
 </pre></div>
 </div>
 </div>
@@ -584,45 +629,45 @@
     </tr>
     <tr>
       <th>mean</th>
-      <td>154.449890</td>
-      <td>0.933226</td>
-      <td>5.208346</td>
+      <td>154.681508</td>
+      <td>0.905501</td>
+      <td>5.102402</td>
     </tr>
     <tr>
       <th>std</th>
-      <td>0.382042</td>
-      <td>0.040229</td>
-      <td>0.202665</td>
+      <td>0.287348</td>
+      <td>0.046124</td>
+      <td>0.178393</td>
     </tr>
     <tr>
       <th>min</th>
-      <td>153.794424</td>
-      <td>0.859681</td>
-      <td>4.896515</td>
+      <td>154.205608</td>
+      <td>0.838174</td>
+      <td>4.871757</td>
     </tr>
     <tr>
       <th>25%</th>
-      <td>154.172956</td>
-      <td>0.916562</td>
-      <td>5.041449</td>
+      <td>154.445528</td>
+      <td>0.870469</td>
+      <td>4.935708</td>
     </tr>
     <tr>
       <th>50%</th>
-      <td>154.548962</td>
-      <td>0.930161</td>
-      <td>5.218211</td>
+      <td>154.756671</td>
+      <td>0.893486</td>
+      <td>5.095454</td>
     </tr>
     <tr>
       <th>75%</th>
-      <td>154.750261</td>
-      <td>0.964332</td>
-      <td>5.369998</td>
+      <td>154.916692</td>
+      <td>0.945199</td>
+      <td>5.250476</td>
     </tr>
     <tr>
       <th>max</th>
-      <td>154.971707</td>
-      <td>0.986113</td>
-      <td>5.461547</td>
+      <td>154.991493</td>
+      <td>0.978020</td>
+      <td>5.340434</td>
     </tr>
   </tbody>
 </table>
@@ -2324,7 +2369,14 @@
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">Bw_spline_3</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">17</span><span class="p">,</span> <span class="mi">9</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">Bw_spline_3</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;$B*w$ da B-Spline grau 3&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Ano&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;$B*w$&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="n">ls</span><span class="o">=</span><span class="s1">&#39;--&#39;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;white&#39;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.6</span><span class="p">)</span>
+
 <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
 </div>
@@ -2372,8 +2424,8 @@
 
 <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">cherry_not_na</span><span class="o">.</span><span class="n">year</span><span class="p">,</span> <span class="n">mean_posteriori_spline_3</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;black&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Média da posteriori&#39;</span><span class="p">)</span>  <span class="c1"># Plot da Média</span>
 
-<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">cherry_not_na</span><span class="o">.</span><span class="n">year</span><span class="p">,</span> <span class="n">alpha_spline_3</span><span class="p">[:,</span> <span class="p">:</span><span class="n">n_plot</span><span class="p">]</span> <span class="o">+</span> <span class="n">Bw_spline_3</span><span class="p">[:,</span> <span class="p">:</span><span class="n">n_plot</span><span class="p">],</span>  <span class="c1"># Plot do Intevalo da Média (Sem o HPDI)</span>
-         <span class="n">color</span><span class="o">=</span><span class="s1">&#39;red&#39;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mf">0.1</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.1</span><span class="p">)</span> 
+<span class="c1"># Plot do Intevalo da Média (Sem o HPDI)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">cherry_not_na</span><span class="o">.</span><span class="n">year</span><span class="p">,</span> <span class="n">alpha_spline_3</span><span class="p">[:</span><span class="n">n_plot</span><span class="p">]</span> <span class="o">+</span> <span class="n">Bw_spline_3</span><span class="p">[:,</span> <span class="p">:</span><span class="n">n_plot</span><span class="p">],</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;red&#39;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mf">0.1</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.1</span><span class="p">)</span> 
 
 <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Posteriori da B-Spline </span><span class="se">\n</span><span class="s1"> HPDI de &#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">intervalo_credibilidade</span><span class="p">)</span> <span class="o">+</span> <span class="s1">&#39;%&#39;</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Ano&#39;</span><span class="p">)</span>
@@ -2387,19 +2439,7 @@
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
-<span class="ne">IndexError</span><span class="g g-Whitespace">                                </span>Traceback (most recent call last)
-<span class="o">/</span><span class="n">tmp</span><span class="o">/</span><span class="n">ipykernel_81404</span><span class="o">/</span><span class="mf">1197164469.</span><span class="n">py</span> <span class="ow">in</span> <span class="o">&lt;</span><span class="n">module</span><span class="o">&gt;</span>
-<span class="g g-Whitespace">     </span><span class="mi">11</span> <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">cherry_not_na</span><span class="o">.</span><span class="n">year</span><span class="p">,</span> <span class="n">mean_posteriori_spline_3</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;black&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Média da posteriori&#39;</span><span class="p">)</span>  <span class="c1"># Plot da Média</span>
-<span class="g g-Whitespace">     </span><span class="mi">12</span> 
-<span class="ne">---&gt; </span><span class="mi">13</span> <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">cherry_not_na</span><span class="o">.</span><span class="n">year</span><span class="p">,</span> <span class="n">alpha_spline_3</span><span class="p">[:,</span> <span class="p">:</span><span class="n">n_plot</span><span class="p">]</span> <span class="o">+</span> <span class="n">Bw_spline_3</span><span class="p">[:,</span> <span class="p">:</span><span class="n">n_plot</span><span class="p">],</span>  <span class="c1"># Plot do Intevalo da Média (Sem o HPDI)</span>
-<span class="g g-Whitespace">     </span><span class="mi">14</span>          <span class="n">color</span><span class="o">=</span><span class="s1">&#39;red&#39;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mf">0.1</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.1</span><span class="p">)</span> 
-<span class="g g-Whitespace">     </span><span class="mi">15</span> 
-
-<span class="ne">IndexError</span>: too many indices for array: array is 1-dimensional, but 2 were indexed
-</pre></div>
-</div>
-<img alt="_images/parte_4_103_1.png" src="_images/parte_4_103_1.png" />
+<img alt="_images/parte_4_103_0.png" src="_images/parte_4_103_0.png" />
 </div>
 </div>
 </div>
