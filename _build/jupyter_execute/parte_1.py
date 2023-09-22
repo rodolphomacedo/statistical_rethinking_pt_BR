@@ -11,23 +11,24 @@
 # 
 # Todas as notas desse material foram baseadas nas aulas de 2019 ([ACESSE](https://www.youtube.com/playlist?list=PLDcUM9US4XdNM4Edgs7weiyIguLSToZRI)) do curso do [`Prof. Richard McElreath`](https://www.mpg.de/9349950/evolutionary-anthropology-mcelreath) e também em seu livro (*capa acima*) Statistical Rethinking - *Segunda Edição*. 
 # 
-# Escrevi esse material como o intuíto de construir um estudo estruturado e que permita uma boa compreensão das aulas do curso e, por consequência, melhorar as habilidades em programação e exposição de idéias.
+# Escrevi esse material como o intuíto de construir um estudo estruturado e que permita uma boa compreensão das aulas do curso e, consequentemente, melhorar minhas habilidades em programação e na exposição de ideias complexas como é o caso da probabilidade e a estatística bayesiana.
 # 
-# Esse material está sendo escrito tentando preservar os detalhes didáticos que julguei mais importantes da aula para o entendimento futuro. O curso está sendo ministrado na linguagem R. Nesse material, as construções dos modelos foram escritas utilizando a linguagem `Python`, apenas pela finalidade de aprender fazer todas as construções com as determinadas bibliotecas. Ajuda a ter um entendimento mais concreto do que está acontencendo.
+# Esse material está sendo escrito preservando os detalhes didáticos que julguei serem os mais importantes para o entendimento. O curso original foi ministrado usando a linguagem R. já nesse material, todas as construções dos modelos foram reescritas utilizando a linguagem `Python`, com a finalidade de aprender e reescrever todas as modelagens e gráficos com as bibliotecas do padrão dessa linguagem. A descrição escritas em liguagem ajuda a ter um entendimento mais concreto do que está acontencendo.
 # 
-# Tudo que está inserido nesse material está público nos vídeos do curso, as imagens retiradas da internet contém as fontes de referências, caso eu esteja utilizando algum material privado entre em contato!
+# Tudo que está inserido nesse material está público nos vídeos do curso, no github ou materiais de terceiros,  assim comos todas as imagens da internet, na qual contém fontes de referências. Caso esteja utilizando algum material privado entre em contato!
 # 
-# Diferenças entre o curso e esse material: esse material foi escrito traduzindo as principais idéias codificadas em [R](https://cran.r-project.org/) em conjunto com o pacote [rethinking](https://github.com/rmcelreath/rethinking) para a linguagem [python](https://www.python.org/) e adicionalmente as suas principais atuais bibliotecas de análise de dados (numpy, scipy, matplotlib) e no lugar do pacote *rethinking* usei, tanto quanto aprendi, a biblioteca [Stan](http://mc-stan.org/) através de sua interface python [pystan](https://pystan.readthedocs.io/en/latest/).
-# 
+# **Diferenças entre o curso e esse material**: esse material foi escrito traduzindo as principais idéias codificadas em [R](https://cran.r-project.org/) em conjunto com o pacote [rethinking](https://github.com/rmcelreath/rethinking) para a linguagem [python](https://www.python.org/) e adicionalmente as suas principais atuais bibliotecas de análise de dados (numpy, scipy, matplotlib e arviz) e no lugar do pacote *rethinking* usei, tanto quanto aprendi, a biblioteca [Stan](http://mc-stan.org/) através de sua interface python [pystan](https://pystan.readthedocs.io/en/latest/).
 # 
 # -----
-# Esse material foi escrtio em lingua portuguesa (Brasil).
+# Esse material foi escrito (*em grande parte*) em lingua portuguesa (Pt-BR).
 # 
-# Está disponibilizado no github: https://github.com/rodolphomacedo.
+# Está disponibilizado em [meu github](https://github.com/rodolphomacedo) e uma versão em formato E-Book (*Jupyter Book*) pode ser acessado [clicando aqui](https://rodolphomacedo.github.io/statistical_rethinking_pt_BR/capa.html).
 # 
 # Erros, sugestões ou dúvidas podem ser enviadas para o email [rodolpho.ime@gmail.com](rodolpho.ime@gmail.com)
 # 
-# *Bom estudos!!!*
+# Aos que desejem aprender modelagem bayesiana, espero que esse material forneça um bom caminho introdutório ao assunto.
+# 
+# *Bons estudos!!!*
 
 # ## Prefácio
 # 
@@ -40,7 +41,9 @@
 # Tentei colocar o máximo de figuras e memes que pude encontrar para ilustrar os exemplos, muitos deles foram os mesmos que foram usados nas apresentações do curso. Isso ajudará a lembrar alguns detalhes dito no curso.
 # 
 # ----
-# 28/07/2022 - Começei a pouco a acompanhar os estudos do livro em conjunto com o curso. A riqueza de pequenos detalhes didáticos contida no livro em comparação com esse material é muito grande, leia o livro! 
+# **PS**: Em 28/07/2022 - A partir da Aula 6, pude comprar o livro e dei continuidade aos estudos prioritariamente pelo próprio livro complementando com o curso quando necessário. A riqueza dos pequenos detalhes didáticos contida no livro em comparação com esse material é muito grande, leia o livro!
+# 
+# **PS2**: Em 18/08/2022 - Hoje iniciei a leitura do livro desde o capítulo 1. Sendo assim, todo material escrito do capítulo 6 em diante serão apenas os códigos em Python + Stan e com explicações complementares que podem melhorar o entendimento do assunto. Porém, desse o momento em diante, será preciso acompanhar os estudos diretamente pela leitura do livro e usando esse material com referência para de codificação para Python e/ou para modelos em Stan.
 
 # ## Requisitos
 # 

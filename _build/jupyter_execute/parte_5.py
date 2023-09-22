@@ -1537,7 +1537,7 @@ plot_comparative_obseved_posteriori()
 # 
 # ----
 # 
-# Dados pode ser encontrado [aqui])(https://github.com/rmcelreath/rethinking/blob/master/data/milk.csv)
+# Dados pode ser encontrado [aqui](https://github.com/rmcelreath/rethinking/blob/master/data/milk.csv)
 
 # Na imagem acima temos três primatas, um lêmure e dois macacos.
 # Estamos interessado, com esse conjunto de dados, em saber a associação que existe entre a `energia do leite` ($\frac{Kcal}{gramas}$), quão energético é o leite que chegam aos seus filhotes e `quão inteligente` ($\%$ *neocortex*) cada primata é, usando como particular método de metrificação de inteligência, qual o percentual do neocortex em relação a todo o cérebro).
@@ -1595,6 +1595,16 @@ plt.show()
 # 
 # A seguir vamos fazer a regressão entre essas duas variáveis.
 
+# 52:51
 # 
-# Parei no 52:51.
+# No próximo capítulo, iremos descrever apenas os códigos. 
 # 
+# Comecei a ler o livro do início e todas as explicações a seguir podem ser encontradas no próprio livro.
+# 
+# Como dito anteriormente, esse material irá fornecer todos os códigos em linguagem $Python3$ usando diretamente  a biblioteca $Stan$ em conjunto com a wrapper $PyStan$. 
+# 
+# Para usuários do $R$, exite um Wrapper para $RStan$ para uma possível codificação sem utilizar a biblioteca $Rethinking$ do próprio livro.
+# 
+# ---
+# 
+# Dúvidas ou sugestões acesse a parte inicial desse material para entrar em contato.

@@ -12,12 +12,11 @@
 # No capítulo anterior vimos como construir o nosso primeiro modelo de regressão linear, no qual estimamos a altura de uma pessoa usando a informação de seu próprio peso como um auxílio informativo. Temos, assim, como resultado do nosso modelo, a distribuição à posteriori dos parâmetros que foram estimados, $\alpha$, $\beta$ e o $\sigma$.
 # 
 # ```{admonition} Modelo Linear Simples
-# 
-# $$ altura_i = \alpha + \beta (peso_i - peso\_medio) $$
-# 
+# $$ altura_i = \alpha + \beta (peso_i - peso\_médio)$$
 # ```
 # 
-# Das distribuições à posteriori dos parâmetros podemos pegar apenas os valores `"precisos"` desses parâmetros, ou seja, geralmente nós tendemos `pensar apenas com os valores esperados` (*`valores médios`*) da distribuição do $\alpha$ e do $\beta$ e, com isso, traçar uma linha reta com esses valores.
+# 
+# Das distribuições à posteriori dos parâmetros podemos pegar apenas algum valor `"preciso"` desses parâmetros, ou seja, geralmente nós tendemos `pensar apenas com os valores esperados` (*`valores médios`*) da distribuição do $\alpha$ e do $\beta$ e, com isso, traçar uma linha reta com esses valores.
 # 
 # Olhando para os resultados das inferências dos parâmetros, quando o **peso** está em seu valor médio, temos que $\alpha$ significa o valor médio da altura! 
 # 
@@ -1792,14 +1791,21 @@ plt.grid(ls='--', color='white', alpha=0.6)
 plt.show()
 
 
-# In[50]:
+# In[54]:
 
 
+plt.figure(figsize=(17, 9))
 plt.plot(Bw_spline_3)
+
+plt.title('$B*w$ da B-Spline grau 3')
+plt.xlabel('Ano')
+plt.ylabel('$B*w$')
+plt.grid(ls='--', color='white', alpha=0.6)
+
 plt.show()
 
 
-# In[51]:
+# In[55]:
 
 
 # ==========================================================
@@ -1823,7 +1829,7 @@ HPDI_posteriori_spline_3 = np.array(HPDI_posteriori_spline_3)
 mean_posteriori_spline_3 = posteriori_spline_3.mean(axis=1)  # Média do HPDI por cada ano
 
 
-# In[52]:
+# In[56]:
 
 
 # ===============================================
@@ -1838,8 +1844,8 @@ plt.fill_between(cherry_not_na.year, HPDI_posteriori_spline_3[:, 0], HPDI_poster
 
 plt.plot(cherry_not_na.year, mean_posteriori_spline_3, color='black', label='Média da posteriori')  # Plot da Média
 
-plt.plot(cherry_not_na.year, alpha_spline_3[:, :n_plot] + Bw_spline_3[:, :n_plot],  # Plot do Intevalo da Média (Sem o HPDI)
-         color='red', linewidth=0.1, alpha=0.1) 
+# Plot do Intevalo da Média (Sem o HPDI)
+plt.plot(cherry_not_na.year, alpha_spline_3[:n_plot] + Bw_spline_3[:, :n_plot], color='red', linewidth=0.1, alpha=0.1) 
 
 plt.title('Posteriori da B-Spline \n HPDI de ' + str(intervalo_credibilidade) + '%')
 plt.xlabel('Ano')

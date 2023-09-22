@@ -9,4 +9,4 @@ These are my notes about the Statistical Rethinking course | Richard McElreath. 
 ```
 
 
-Bayesian statistics is a tool that allows us to reason, think and understand some strands of wisdom within the complexity of Nature.
+Bayesian statistics, or inverse probability, is a tool that allows us to reason, think and understand some strands of wisdom within the complexity of Nature.

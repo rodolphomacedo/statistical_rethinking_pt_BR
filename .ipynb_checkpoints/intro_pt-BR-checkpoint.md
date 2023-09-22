@@ -10,5 +10,5 @@ Estas são minhas notas sobre curso Statistical Rethinking | Richard McElreath. 
 
 
 ```{note}
-Estatística bayesiana é uma ferramenta que nos permite raciocinar, pensar e entender alguns fios de sabedoria dentro da complexidade da Natureza.
+Estatística bayesiana, ou probabilidade inversa, é uma ferramenta que nos permite raciocinar, pensar e entender alguns fios de sabedoria dentro da complexidade da Natureza.
 ```

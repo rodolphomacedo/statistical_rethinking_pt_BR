@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # coding: utf-8
 
-# ## 3- Modelos Geocêntricos
+# # 3- Modelos Geocêntricos
 # 
 
 # ## Distribuição Normal
@@ -69,8 +69,23 @@ from scipy import stats
 # In[3]:
 
 
-# Construindo um passeio conforme a distribuição Bernoulli(0.5) em +1 ou -1
+# Add fonts to matplotlib to run xkcd
 
+from matplotlib import font_manager
+
+font_dirs = ["fonts/"]  # The path to the custom font file.
+font_files = font_manager.findSystemFonts(fontpaths=font_dirs)
+
+for font_file in font_files:
+    font_manager.fontManager.addfont(font_file)
+    
+# plt.xkcd()   
+
+
+# In[4]:
+
+
+# Construindo um passeio conforme a distribuição Bernoulli(0.5) em +1 ou -1
 n_linhas = 500  # Quantas linhas iremos simular?
 n_passos = 30   # Quantidade de passos que iremos simular?
 
@@ -325,7 +340,7 @@ plt.show()
 
 # ## Estudo Descritivo da Base de Dados
 
-# In[4]:
+# In[5]:
 
 
 df = pd.read_csv('data/Howell1.csv', sep=';')  # Banco de dados do pacote Rethinking - Disponível no Github
@@ -363,7 +378,7 @@ print(df.describe())  # Resumo do banco de dados
 # 
 # - Gênero (*male*) - Definido $1$ para homens e $0$ para mulheres
 
-# In[5]:
+# In[6]:
 
 
 # Plotando os histogramas
@@ -429,7 +444,7 @@ plt.show()
 # 
 # $$ \sigma \sim Uniform(0, 50) $$
 
-# In[6]:
+# In[7]:
 
 
 # Plotando a distribuição à priori do mu e do sigma
@@ -471,7 +486,7 @@ plt.show()
 # Vamos simular!
 # 
 
-# In[7]:
+# In[8]:
 
 
 # ========================================================================
@@ -507,7 +522,7 @@ plt.show()
 # 
 # Imagine agora que colocaremos como à priori valores muito absurdos para o $\sigma$, vamos ver o que acontece:
 
-# In[8]:
+# In[9]:
 
 
 # ========================================================================
@@ -533,7 +548,7 @@ plt.ylabel('Probabilidade')
 plt.vlines(0, 0, 0.008, color='red', ls='--', linewidth=2)  # 0 cm de altura, ovo fertilizado.
 plt.vlines(272, 0, 0.008, color='red', ls='--', linewidth=2)  # 272 cm de altura, pessoa mais alta da história.
 
-plt.grid(color='white', linewidth='0.3', ls='--')
+plt.grid(color='white', linewidth='0.1', ls='--')
 
 plt.show()
 
@@ -556,7 +571,7 @@ plt.show()
 # 
 # $$ p\{(\mu, \sigma) | h_i\} ∝ p\{h_i | \mu, \sigma \} p\{ \mu \} p\{ \sigma \} $$
 
-# In[9]:
+# In[10]:
 
 
 # Para visualização das multiplicações vamos deixar o 𝜎 fixo, em 20, por exemplo, 
@@ -598,7 +613,7 @@ ax2.plot(np.arange(100, 301), curva_1, color='darkgreen', alpha=0.1)
 ax2.plot(np.arange(100, 301), curva_2, color='darkorange', alpha=0.1)
 ax2.plot(np.arange(100, 301), curva_3, color='red', alpha=0.1)
 
-ax2.set_title('Posteriori \n Usando os três valores da altura juntos ($h_i$): {147, 155, 180}')
+ax2.set_title('Posteriori \n Usando os três valores da altura juntos ($h_i$): \{147, 155, 180\}')
 ax2.set_xlabel('$\mu$')
 ax2.set_ylabel('Probabilidade')
 ax2.grid(color='white', linewidth='0.4', ls='--')
@@ -607,7 +622,7 @@ ax2.legend(['posteriori'])
 plt.show()
 
 
-# In[10]:
+# In[11]:
 
 
 # ================================
@@ -664,7 +679,7 @@ plt.grid(ls='--', color='white', linewidth=0.4)
 plt.show()
 
 
-# In[11]:
+# In[12]:
 
 
 # Explicação gráfica - Não faz parte do material original do curso.
@@ -704,7 +719,7 @@ ax4.grid(color='white', linewidth=0.4, ls='--')
 plt.show()
 
 
-# In[12]:
+# In[13]:
 
 
 # =================================================================
@@ -774,13 +789,13 @@ plt.show()
 
 # Obs2: a estimativa da posteriori feita pela Stan utiliza algumas técnicas mais robustas do que a aproximação quadrática, porém no curso, essas estimativas são realizadas internamente na biblioteca rethinking e é invisível para o usuário, assim, o conteúdo dessas notas serão intimamente paralelas com o curso, sendo que se ocorrer um distanciamento entre ambas trajetórias, notas extras serão inseridas para minimizar esse longor.
 
-# In[13]:
+# In[14]:
 
 
 import stan  # Importando a Stan - estamos usando a pystan
 
 
-# In[14]:
+# In[15]:
 
 
 # Essa estrutura está definida na página 77 - SR2
@@ -810,7 +825,7 @@ posteriori_model = stan.build(primeiro_codigo_stan, data=meus_dados)  # Constru�
 fit = posteriori_model.sample(num_chains=4, num_samples=1000)  # Fazendo a amostragem da posteriori 
 
 
-# In[15]:
+# In[16]:
 
 
 # Recuperando os parâmetros
@@ -845,7 +860,7 @@ plt.show()
 # 
 # De volta ao exemplo anterior, vamos estimar a altura $h$ usando um modelo escrito em Stan.
 
-# In[16]:
+# In[17]:
 
 
 modelo_altura = """
@@ -884,7 +899,7 @@ posteriori_model = stan.build(modelo_altura, data=dados)
 fit_altura = posteriori_model.sample(num_chains=4, num_samples=1000)
 
 
-# In[17]:
+# In[18]:
 
 
 # Compare o sigma usando duas priori diferentes para mu.
@@ -910,7 +925,7 @@ ax2.set_xlabel('Média do $\sigma$ da altura')
 plt.show()
 
 
-# In[18]:
+# In[19]:
 
 
 # =============================
@@ -982,7 +997,7 @@ plt.show()
 # 
 # *Obs: Iremos selecionar apenas as pessoas que tenham acima de 18 anos de idade para todos os estudo a seguir.*
 
-# In[19]:
+# In[20]:
 
 
 # Gráfico de dispersão - peso ajudar a identificar qual a altura.
@@ -1065,7 +1080,7 @@ plt.show()
 # Como, no exemplo anterior, vamos simular para entender e compreender as implicações do modelo.
 # 
 
-# In[20]:
+# In[21]:
 
 
 # ===========================
@@ -1160,7 +1175,7 @@ plt.show()
 # 
 # $$ X \sim lognormal $$
 
-# In[21]:
+# In[22]:
 
 
 # =====================================
@@ -1211,7 +1226,7 @@ plt.show()
 # 
 # Assim, como antes, vamos `simular para entender o novo comportamento da nossa priori`. 
 
-# In[22]:
+# In[23]:
 
 
 # ==========================================
@@ -1249,7 +1264,7 @@ plt.show()
 # 
 # Vamos fazer a aproximação da posteriori usando a *Stan* e verificar os resultados.
 
-# In[23]:
+# In[24]:
 
 
 # =================================================================
@@ -1301,7 +1316,7 @@ posteriori_model_2 = stan.build(modelo_altura_2, data=meus_dados_2)
 fit_altura_2 = posteriori_model_2.sample(num_chains=4, num_samples=1000)
 
 
-# In[24]:
+# In[25]:
 
 
 # =============================
